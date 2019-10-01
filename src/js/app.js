@@ -9,6 +9,7 @@ import '../scss/mydrop.scss';
 require('webpack-jquery-ui');
 require('webpack-jquery-ui/css');
 import { makeDraggable,makeDraggables} from './elements';
+
     (function () {
 
 // require('./elements/tools');

@@ -17,22 +17,37 @@ import {
   import {
     SetItems
   } from './clone-module';
+  import {
+    dispatch,addReducer
+  } from '../../../reducer';
+import { actionTypes } from "../../../reducer/const.js";
   const { DragSelect } = CloneSelectElement;
   const ORNEKJSON = {
       data: null
     };
+
     const INIT= function(_items, options) {
-        require("./../tool/index");
-        SetItems(_items[0].Tools);
+      //  require("./../tool/index");
       DragSelect.ELEMENT = options.dragclass ? options.dragclass: DragSelect.ELEMENT;
       UISELECT.ACCORDIONID = options.accordionid? options.accordionid: UISELECT.ACCORDIONID;
-      SetGroupItem();
-      $(".m-Tool").PanelGroup({
-        up: "fa-chevron-up",
-        down: "fa-chevron-down",
-        extclass: "h2",
-        activeClass: "active"
-      });
+        SetItems(_items[0].Tools);
+        addReducer.subscribe(actionTypes.INIT.FETCHED,(state,data)=>{
+          console.log(actionTypes.INIT.FETCHED,state,"DATA",data);
+        })
+        addReducer.subscribe(actionTypes.CLONE.SETGROUPITEM,(state,data)=>{
+          console.log(actionTypes.CLONE.SETGROUPITEM,state,"DATA",data);
+        })
+        dispatch({type:actionTypes.INIT.FETCHED});
+        
+        
+     
+     // SetGroupItem();
+      // $(".m-Tool").PanelGroup({
+      //   up: "fa-chevron-up",
+      //   down: "fa-chevron-down",
+      //   extclass: "h2",
+      //   activeClass: "active"
+      // });
     };
  //const UIDrop = {
   export const  UISELECT= {

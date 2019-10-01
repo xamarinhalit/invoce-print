@@ -1,5 +1,8 @@
 export const actionTypes={
     INIT:{
-        FETCHED:"FETCHED"
+        FETCHED:"FETCHED",
+    },
+    CLONE:{
+        SETGROUPITEM:"SETGROUPITEM"
     }
 }

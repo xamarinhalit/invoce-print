@@ -1,4 +1,10 @@
 const State ={
+    UI:{ //UISELECT
+        DRAGCLASS: "m-drag-ul",
+        ACCORDIONID: "#accordion",
+        DROPID: "",
+        $CONTENT: null
+    },
     Clone:{
         Type: {
             TEXT: {
