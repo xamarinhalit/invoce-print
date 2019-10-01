@@ -1,0 +1,3566 @@
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.main-nav .i-blue {
+    color: #0ebaff !important;
+}
+
+.main-nav .i-yellow {
+    color: #fff90e !important;
+}
+
+.main-nav .i-green {
+    color: #0eff44 !important;
+}
+
+#wrapper {
+    position: relative;
+    padding-bottom: 40px;
+}
+
+    #wrapper #top {
+        position: fixed;
+        z-index: 500;
+        top: 0;
+    }
+
+	#wrapper #sidebar {
+		position: fixed;
+		z-index: 500;
+		top: 55px;
+		overflow-x: scroll;
+		left: 0;
+		height: 100%;
+		background: #131c29;
+	}
+
+    #wrapper .content-up {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 5px;
+        background: #edeaf0;
+        -webkit-border-top-left-radius: 7px;
+        -webkit-border-top-right-radius: 7px;
+        -moz-border-radius-topleft: 7px;
+        -moz-border-radius-topright: 7px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+        margin: 51px 30px 0 230px;
+        width: calc(100% - 260px);
+        z-index: 600;
+    }
+
+    #wrapper .content {
+        padding-bottom: 10px;
+        position: relative;
+        min-height: 500px;
+        padding-top: 110px;
+    }
+
+        #wrapper .content .header {
+            position: fixed;
+            top: 55px;
+            z-index: 100;
+            width: calc(100% - 230px);
+            background: #edeaf0;
+            box-shadow: 0 1px 0 #fefefe,0 -1px 0 rgba(255,255,255,.45),inset 0 -1px 0 #d1d1d1;
+            padding: 5px;
+            padding-left: 20px;
+            padding-right: 10px;
+            overflow: inherit;
+        }
+
+            #wrapper .content .header .header-menu {
+                margin: 6px;
+                margin-right: 10px;
+            }
+
+                #wrapper .content .header .header-menu ul li {
+                    display: inline-block;
+                    margin-right: 5px;
+                }
+
+                    #wrapper .content .header .header-menu ul li .btn-header {
+                        font-size: 12px;
+                        padding: 8px 15px;
+                    }
+
+                    #wrapper .content .header .header-menu ul li.btn-group .dropdown-menu li {
+                        display: block;
+                        margin: 0;
+                        margin-bottom: 5px;
+                    }
+
+                        #wrapper .content .header .header-menu ul li.btn-group .dropdown-menu li a {
+                            font-size: 13px;
+                            line-height: 22px;
+                        }
+
+                            #wrapper .content .header .header-menu ul li.btn-group .dropdown-menu li a i {
+                                margin-right: 5px;
+                            }
+
+            #wrapper .content .header .breadcrumbs a {
+                color: #999593;
+            }
+
+            #wrapper .content .header .breadcrumbs i {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+        #wrapper .content .panel-iscompany label {
+            width: 49%;
+            display: inline-block;
+            cursor: pointer;
+            background: #fff;
+            border: 1px solid #ccc;
+            -webkit-box-shadow: inset 0 1px 10px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 10px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+
+            #wrapper .content .panel-iscompany label .radioarea {
+                display: inline-block;
+                background: #ececec;
+                border-right: 1px solid #ccc;
+                padding: 4px 8px;
+                margin: 0;
+                margin-right: 7px;
+            }
+
+            #wrapper .content .panel-iscompany label:first-child {
+                width: calc(50% - 5px);
+                margin-right: 4px;
+            }
+
+        #wrapper .content .new-group-btn {
+            margin-top: 5px;
+        }
+
+            #wrapper .content .new-group-btn a {
+                color: #262626;
+                text-decoration: none;
+                background-color: #f5f5f5;
+            }
+
+            #wrapper .content .new-group-btn i {
+                margin-right: 4px;
+            }
+
+        #wrapper .content .buyergroupSpan {
+            font-weight: bold;
+        }
+
+            #wrapper .content .buyergroupSpan.buyer {
+                color: #fd0000;
+            }
+
+            #wrapper .content .buyergroupSpan.seller {
+                color: #38a900;
+            }
+
+        #wrapper .content .btn-search {
+            padding: 6px 10px;
+            color: #fff;
+            border-radius: 3px;
+            background: #3276b1;
+            border: 0;
+            font-size: 12px;
+        }
+
+        #wrapper .content .btn-clear {
+            display: inline-block;
+            padding: 6px 10px;
+            color: #fff;
+            border-radius: 3px;
+            background: #ea0217;
+            border: 0;
+            font-size: 12px;
+        }
+
+        #wrapper .content .btn-table {
+            padding: 8px 8px;
+            margin-right: 5px;
+            color: #fff;
+            border-radius: 3px;
+        }
+
+            #wrapper .content .btn-table.btn-edit {
+                background: #3276b1;
+                padding-right: 7px;
+                font-size: 12px;
+            }
+
+            #wrapper .content .btn-table.btn-delete {
+                background: #e11837;
+                font-size: 12px;
+            }
+
+            #wrapper .content .btn-table.btn-action {
+                background: #ff8100;
+                font-size: 12px;
+            }
+
+        #wrapper .content .widget-efar {
+            border-radius: 0;
+            /*overflow: hidden;*/
+        }
+
+            #wrapper .content .widget-efar .widget-header {
+                border-radius: 0;
+                background: #454149;
+                box-shadow: none;
+                border-bottom: 0;
+            }
+
+                #wrapper .content .widget-efar .widget-header .widget-title {
+                    text-shadow: none;
+                    color: #fff;
+                }
+
+                    #wrapper .content .widget-efar .widget-header .widget-title .widget-header-buttons {
+                        position: absolute;
+                        right: 10px;
+                        top: -1px;
+                    }
+
+                        #wrapper .content .widget-efar .widget-header .widget-title .widget-header-buttons a {
+                            color: #fff;
+                            font-size: 12px;
+                            padding: 4px 10px;
+                            background: #e11837;
+                            border-radius: 2px;
+                        }
+
+                            #wrapper .content .widget-efar .widget-header .widget-title .widget-header-buttons a:hover {
+                                background: #bf0622;
+                            }
+
+        #wrapper .content .efar-status-place {
+            margin: 4px 12px;
+            color: #fff;
+            margin-right: 35px;
+        }
+
+            #wrapper .content .efar-status-place label {
+                margin: 0;
+            }
+
+        #wrapper .content .form-control {
+            border-radius: 0;
+        }
+
+        #wrapper .content .efar-validation-summary {
+            background: #fea695;
+            padding: 15px;
+            color: #b0432e;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+            #wrapper .content .efar-validation-summary span {
+                display: block;
+                margin-bottom: 10px;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            #wrapper .content .efar-validation-summary .validationClose {
+                color: #b0432e;
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                font-size: 20px;
+                border: 2px solid #b0432e;
+                padding: 5px 7px;
+                border-radius: 5px;
+            }
+
+        #wrapper .content .efar-form .input-validation-error, #wrapper .content .efar-form .efar-jvalidate-error {
+            border-color: #b6615f;
+            background-color: rgba(255,166,164,.2);
+        }
+
+        #wrapper .content .efar-form #CommercialTitle-error, #wrapper .content .efar-form #Address-error {
+            display: none;
+        }
+
+        #wrapper .content .efar-form .form-group .efar-exchange-rate {
+            margin-right: -20px;
+        }
+
+        #wrapper .content .efar-tabs {
+            background: #3d3a41;
+            padding-bottom: 0;
+            box-shadow: inset 0 1px 0 #3d3a41,0 1px 3px rgba(0,0,0,.1);
+        }
+
+            #wrapper .content .efar-tabs ul.tabs {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                position: relative;
+                z-index: 100;
+            }
+
+                #wrapper .content .efar-tabs ul.tabs li {
+                    background: none;
+                    color: #fff;
+                    display: block;
+                    float: left;
+                    font-size: 15px;
+                    padding: 10px 30px;
+                    cursor: pointer;
+                    border-right: 1px solid #211f22;
+                    border-bottom: 1px solid #211f22;
+                    border-top: 2px solid transparent;
+                    background: #3d3a41;
+                }
+
+                    #wrapper .content .efar-tabs ul.tabs li i {
+                        margin-right: 5px;
+                    }
+
+                    #wrapper .content .efar-tabs ul.tabs li.current {
+                        background: #fff;
+                        color: #222;
+                        border-bottom-color: #fff;
+                        border-top-color: #e11837;
+                        border-right: 0;
+                        margin-top: -3px;
+                        height: 46px;
+                    }
+
+                        #wrapper .content .efar-tabs ul.tabs li.current i {
+                            color: #e11837;
+                        }
+
+            #wrapper .content .efar-tabs .tab-content {
+                position: relative;
+                z-index: 99;
+                display: none;
+                background: #fff;
+                padding: 15px;
+                border-top: 1px solid #211f22;
+                margin-top: -1px;
+                min-height: 350px;
+                padding-top: 25px;
+            }
+
+                #wrapper .content .efar-tabs .tab-content.current {
+                    display: inherit;
+                }
+
+        #wrapper .content .efar-currency-dropdown, #wrapper .content .efar-code-dropdown, #wrapper .content .efar-discount-dropdown {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            z-index: 50;
+            border: 0;
+            background: none;
+            height: 34px;
+            border-left: 1px solid #ccc;
+            padding-left: 10px;
+        }
+
+        #wrapper .content .efar-discount-dropdown {
+            right: 0;
+        }
+
+        #wrapper .content .efar-code-dropdown {
+            background: #fff;
+            height: 32px;
+            margin: 1px;
+            right: 15px;
+            padding-right: 5px;
+        }
+
+        #wrapper .content .efar-currency-choose-paid .currencyValuePaid {
+            display: none;
+        }
+
+        #wrapper .content .efar-currency-choose:before {
+            background: #000;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        #wrapper .content .efar-currency-choose .selected {
+            cursor: pointer;
+            color: #676767;
+            position: relative;
+        }
+
+            #wrapper .content .efar-currency-choose .selected > span {
+                display: block;
+            }
+
+            #wrapper .content .efar-currency-choose .selected.active {
+                -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+                box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+                background-color: #d4d4d4 !important;
+                border-color: #8c8c8c !important;
+            }
+
+            #wrapper .content .efar-currency-choose .selected:hover {
+                background-color: #e6e6e6;
+                border-color: #adadad;
+            }
+
+            #wrapper .content .efar-currency-choose .selected:before {
+                content: "";
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+                font-size: 12px;
+                position: absolute;
+                right: 13px;
+                top: 8px;
+            }
+
+        #wrapper .content .efar-currency-choose i {
+            margin-right: 5px;
+        }
+
+        #wrapper .content .efar-currency-choose .efar-currency-choose-content {
+            display: none;
+            position: absolute;
+            right: 15px;
+            top: 0;
+            z-index: 51;
+            width: calc(100% - 30px);
+            line-height: 20px;
+            font-size: 15px;
+            border: 1px solid #c5c4c2;
+            background-color: #fdfdfd;
+            -webkit-box-shadow: 0 3px 6px #c5c4c2;
+            -moz-box-shadow: 0 3px 6px #c5c4c2;
+            box-shadow: 0 3px 6px #c5c4c2;
+            min-height: 150px;
+        }
+
+            #wrapper .content .efar-currency-choose .efar-currency-choose-content .efar-currency-choose-content-area {
+                padding-bottom: 10px;
+            }
+
+            #wrapper .content .efar-currency-choose .efar-currency-choose-content h2 {
+                padding: 10px;
+                background-color: #fff4bd;
+                color: #977639;
+                margin: 0;
+                font-size: 15px;
+                border-bottom: 1px solid #eadb8d;
+                margin-bottom: 15px;
+            }
+
+            #wrapper .content .efar-currency-choose .efar-currency-choose-content .currencyValue {
+                display: none;
+            }
+
+            #wrapper .content .efar-currency-choose .efar-currency-choose-content .form-group.row {
+                margin: 5px;
+            }
+
+            #wrapper .content .efar-currency-choose .efar-currency-choose-content .btn-efar-currency-save {
+                margin-right: 15px;
+                padding: 4px 12px;
+                font-size: 13px;
+                color: #fff;
+                border-radius: 3px;
+                border: 0;
+                background: #977639;
+            }
+
+        #wrapper .content .efar-currency-choose-paid:before {
+            background: #000;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        #wrapper .content .efar-currency-choose-paid .selected {
+            cursor: pointer;
+            color: #676767;
+            position: relative;
+        }
+
+            #wrapper .content .efar-currency-choose-paid .selected > span {
+                display: block;
+            }
+
+            #wrapper .content .efar-currency-choose-paid .selected.active {
+                -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+                box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+                background-color: #d4d4d4 !important;
+                border-color: #8c8c8c !important;
+            }
+
+            #wrapper .content .efar-currency-choose-paid .selected:hover {
+                background-color: #e6e6e6;
+                border-color: #adadad;
+            }
+
+            #wrapper .content .efar-currency-choose-paid .selected:before {
+                content: "";
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+                font-size: 12px;
+                position: absolute;
+                right: 13px;
+                top: 8px;
+            }
+
+        #wrapper .content .efar-currency-choose-paid i {
+            margin-right: 5px;
+        }
+
+        #wrapper .content .efar-currency-choose-paid .efar-currency-choose-paid-content {
+            display: none;
+            position: absolute;
+            right: 15px;
+            top: 0;
+            z-index: 13;
+            width: calc(100% - 30px);
+            line-height: 20px;
+            font-size: 15px;
+            border: 1px solid #c5c4c2;
+            background-color: #fdfdfd;
+            -webkit-box-shadow: 0 3px 6px #c5c4c2;
+            -moz-box-shadow: 0 3px 6px #c5c4c2;
+            box-shadow: 0 3px 6px #c5c4c2;
+            min-height: 150px;
+        }
+
+            #wrapper .content .efar-currency-choose-paid .efar-currency-choose-paid-content .efar-currency-choose-paid-content-area {
+                padding-bottom: 10px;
+            }
+
+            #wrapper .content .efar-currency-choose-paid .efar-currency-choose-paid-content h2 {
+                padding: 10px;
+                background-color: #fff4bd;
+                color: #977639;
+                margin: 0;
+                font-size: 15px;
+                border-bottom: 1px solid #eadb8d;
+                margin-bottom: 15px;
+            }
+
+            #wrapper .content .efar-currency-choose-paid .efar-currency-choose-paid-content .currencyValue {
+                display: none;
+            }
+
+            #wrapper .content .efar-currency-choose-paid .efar-currency-choose-paid-content .form-group.row {
+                margin: 5px;
+            }
+
+            #wrapper .content .efar-currency-choose-paid .efar-currency-choose-paid-content .btn-efar-currency-save {
+                margin-right: 15px;
+                padding: 4px 12px;
+                font-size: 13px;
+                color: #fff;
+                border-radius: 3px;
+                border: 0;
+                background: #977639;
+            }
+
+        #wrapper .content .efar-panel {
+            border: 1px solid #ccc;
+        }
+
+            #wrapper .content .efar-panel h2 {
+                margin: 0;
+                font-size: 15px;
+                background: #f7f7f7;
+                border-bottom: 1px solid #ccc;
+            }
+
+                #wrapper .content .efar-panel h2 i {
+                    border-right: 1px solid #ccc;
+                    padding: 10px 15px;
+                    margin-right: 10px;
+                    background: #f1f1f1;
+                }
+
+            #wrapper .content .efar-panel .efar-panel-content {
+                padding: 20px 10px;
+            }
+
+                #wrapper .content .efar-panel .efar-panel-content .form-group.row {
+                    margin: 0;
+                    margin-bottom: 10px;
+                }
+
+        #wrapper .content .counters .counter-item .counter-title {
+            line-height: 34px;
+        }
+
+        #wrapper .content .counters .counter-item .counter-check {
+            padding: 16px 5px 0 12px;
+            border-right: 1px solid #ddd;
+        }
+
+            #wrapper .content .counters .counter-item .counter-check label {
+                margin: 0;
+            }
+
+        #wrapper .content .counters .counter-item .counter-save .btn-counter-save {
+            width: 115px;
+            border: 0;
+            display: block;
+            padding: 0 10px 0 10px;
+            color: #fff;
+            font-size: 12px;
+            background: #454149;
+            line-height: 32px;
+            border-radius: 2px;
+            margin: 1px;
+        }
+
+            #wrapper .content .counters .counter-item .counter-save .btn-counter-save i {
+                margin-right: 5px;
+            }
+
+            #wrapper .content .counters .counter-item .counter-save .btn-counter-save.btn-active {
+                color: #fff;
+                background-color: #5cb85c;
+                border-color: #4cae4c;
+            }
+
+            #wrapper .content .counters .counter-item .counter-save .btn-counter-save.btn-danger {
+                color: #fff;
+                background-color: #c9302c;
+                border-color: #ac2925;
+            }
+
+        #wrapper .content .button-checkbox .btn-efar-check {
+            padding: 0;
+            border: 0;
+            background: none;
+            line-height: normal;
+        }
+
+            #wrapper .content .button-checkbox .btn-efar-check i {
+                font-size: 20px;
+            }
+
+        #wrapper .content .searchClose {
+            display: none;
+            position: absolute;
+            right: 16px;
+            top: 1px;
+            padding: 6px 8px;
+            font-size: 20px;
+            color: #c5c4c2;
+            cursor: pointer;
+            background: #eee;
+            border-left: 1px solid #ccc;
+        }
+
+            #wrapper .content .searchClose:hover {
+                background: #f7f7f7;
+            }
+
+        #wrapper .content .efar-invoice-product {
+            margin: 15px -30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+            #wrapper .content .efar-invoice-product .efar-invoice-product-table {
+                width: 100%;
+            }
+
+                #wrapper .content .efar-invoice-product .efar-invoice-product-table * {
+                    -moz-box-sizing: inherit;
+                    -webkit-box-sizing: inherit;
+                    box-sizing: inherit;
+                    -webkit-backface-visibility: initial;
+                }
+
+                #wrapper .content .efar-invoice-product .efar-invoice-product-table thead {
+                    background: #517e8e;
+                    border-bottom: 1px solid #e0e0e0;
+                    margin-bottom: 10px;
+                }
+
+                    #wrapper .content .efar-invoice-product .efar-invoice-product-table thead tr {
+                        vertical-align: bottom;
+                    }
+
+                    #wrapper .content .efar-invoice-product .efar-invoice-product-table thead th {
+                        font-size: 12px;
+                        padding: 7px 15px;
+                        color: #fff;
+                    }
+
+                #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr {
+                    border-bottom: 1px solid #e0e0e0;
+                }
+
+                    #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr:nth-child(2n) {
+                        background: #f5f5f5;
+                    }
+
+                    #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr.collapsed {
+                        height: 200px;
+                    }
+
+                    #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td {
+                        padding: 10px;
+                        vertical-align: top;
+                    }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td.plus {
+                            padding: 10px 0;
+                        }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .StockNameInput {
+                            position: relative;
+                        }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .StockNameInput .searchClose {
+                                right: 1px;
+                            }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .StockNameInput .VariantChange {
+                                position: absolute;
+                                right: 34px;
+                                top: 1px;
+                                padding: 6px 8px;
+                                font-size: 20px;
+                                color: #c5c4c2;
+                                cursor: pointer;
+                                background: #eee;
+                                border-left: 1px solid #ccc;
+                            }
+
+                                #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .StockNameInput .VariantChange:hover {
+                                    background: #f7f7f7;
+                                }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .StockNameInput #StockName {
+                                padding-right: 35px;
+                            }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .StockVariant {
+                            display: none;
+                        }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-unit-dropdown {
+                            position: absolute;
+                            right: 1px;
+                            top: 2px;
+                            font-size: 12px;
+                            border: 0;
+                            line-height: 35px;
+                            background: none;
+                        }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .discount-area {
+                            right: 220px;
+                            position: absolute;
+                            margin-top: 15px;
+                        }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .discount-area.oiv {
+                                right: 0;
+                            }
+
+                                #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .discount-area.oiv .discount {
+                                    width: 200px;
+                                }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .discount-area .discount {
+                                width: 220px;
+                                margin-bottom: 12px;
+                            }
+
+                                #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .discount-area .discount .dAmount {
+                                    display: none;
+                                }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-other {
+                            left: 0;
+                            position: absolute;
+                            margin-top: 25px;
+                            width: 270px;
+                        }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-other.other-right {
+                                left: 295px;
+                            }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-other ul {
+                                padding: 0;
+                            }
+
+                                #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-other ul li {
+                                    position: relative;
+                                    display: block;
+                                    float: left;
+                                    width: calc(100% - 15px);
+                                    font-size: 12px;
+                                    line-height: 22px;
+                                    margin-right: 15px;
+                                    border-bottom: 1px solid #e6e6e6;
+                                }
+
+                                    #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-other ul li label {
+                                        margin: 0;
+                                        padding: 5px 10px;
+                                    }
+
+                                    #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-other ul li span.money {
+                                        float: right;
+                                        text-align: right;
+                                        margin-right: 30px;
+                                        line-height: 32px;
+                                        font-size: 14px;
+                                    }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-table-plus {
+                            width: 32px;
+                            color: #a39f9d;
+                            background: 0 0;
+                            border: 2px solid #d2d0cf;
+                            line-height: 23px;
+                            border-radius: 5px;
+                        }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-table-plus i {
+                                font-size: 17px;
+                                margin-top: 4px;
+                            }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-table-plus:hover {
+                                color: #373636;
+                                background: 0 0;
+                                border-color: #a5a2a0;
+                            }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-sale-table-plus {
+                            width: 32px;
+                            color: #a39f9d;
+                            background: 0 0;
+                            border: 2px solid #d2d0cf;
+                            line-height: 23px;
+                            border-radius: 5px;
+                        }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-sale-table-plus i {
+                                font-size: 17px;
+                                margin-top: 4px;
+                            }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-sale-table-plus:hover {
+                                color: #373636;
+                                background: 0 0;
+                                border-color: #a5a2a0;
+                            }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-table-plus-area {
+                            display: none;
+                        }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-sale-table-plus-area {
+                            display: none;
+                        }
+
+                        #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-table-delete {
+                            display: block;
+                            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#fd6041),color-stop(100%,#fd4421)) #fd5939;
+                            background: -webkit-linear-gradient(top,#fd6041,#fd4421) #fd5939;
+                            background: -moz-linear-gradient(top,#fd6041,#fd4421) #fd5939;
+                            background: -ms-linear-gradient(top,#fd6041,#fd4421) #fd5939;
+                            background: -o-linear-gradient(top,#fd6041,#fd4421) #fd5939;
+                            background: linear-gradient(to bottom,#fd6041,#fd4421) #fd5939;
+                            border: 0;
+                            width: 32px;
+                            padding: 0;
+                            line-height: 32px;
+                            border-radius: 5px;
+                            color: #fff;
+                        }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-table-delete i {
+                                font-size: 17px;
+                            }
+
+                            #wrapper .content .efar-invoice-product .efar-invoice-product-table tbody tr td .efar-invoice-product-table-delete:hover {
+                                background: #fd5939;
+                            }
+
+            #wrapper .content .efar-invoice-product .newProductBtn {
+                color: #a39f9d;
+                line-height: 23px;
+                border-radius: 5px;
+                padding: 4px 10px;
+                margin: 20px 15px;
+                cursor: pointer;
+                background: #333;
+                color: #fff;
+            }
+
+                #wrapper .content .efar-invoice-product .newProductBtn i {
+                    margin-right: 3px;
+                }
+
+        #wrapper .content .efar-invoice-product-sale {
+            margin: 15px -30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table {
+                width: 100%;
+            }
+
+                #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table * {
+                    -moz-box-sizing: inherit;
+                    -webkit-box-sizing: inherit;
+                    box-sizing: inherit;
+                    -webkit-backface-visibility: initial;
+                }
+
+                #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table thead {
+                    background: #517e8e;
+                    border-bottom: 1px solid #e0e0e0;
+                    margin-bottom: 10px;
+                }
+
+                    #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table thead tr {
+                        vertical-align: bottom;
+                    }
+
+                    #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table thead th {
+                        font-size: 12px;
+                        padding: 7px 15px;
+                        color: #fff;
+                    }
+
+                #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr {
+                    border-bottom: 1px solid #e0e0e0;
+                }
+
+                    #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr:nth-child(2n) {
+                        background: #f5f5f5;
+                    }
+
+                    #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr.collapsed {
+                        height: 200px;
+                    }
+
+                    #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td {
+                        padding: 10px;
+                        vertical-align: top;
+                    }
+
+                        #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td.plus {
+                            padding: 10px 0;
+                        }
+
+                        #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .StockNameInput {
+                            position: relative;
+                        }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .StockNameInput .searchClose {
+                                right: 1px;
+                            }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .StockNameInput .VariantChange {
+                                position: absolute;
+                                right: 34px;
+                                top: 1px;
+                                padding: 6px 8px;
+                                font-size: 20px;
+                                color: #c5c4c2;
+                                cursor: pointer;
+                                background: #eee;
+                                border-left: 1px solid #ccc;
+                            }
+
+                                #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .StockNameInput .VariantChange:hover {
+                                    background: #f7f7f7;
+                                }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .StockNameInput #StockNameSale {
+                                padding-right: 35px;
+                            }
+
+                        #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .StockVariant {
+                            display: none;
+                        }
+
+                        #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-unit-dropdown {
+                            position: absolute;
+                            right: 1px;
+                            top: 2px;
+                            font-size: 12px;
+                            border: 0;
+                            line-height: 35px;
+                            background: none;
+                        }
+
+                        #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-unit-dropdown-sale {
+                            position: absolute;
+                            right: 1px;
+                            top: 2px;
+                            font-size: 12px;
+                            border: 0;
+                            line-height: 35px;
+                            background: none;
+                        }
+
+                        #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .discount-area {
+                            right: 220px;
+                            position: absolute;
+                            margin-top: 15px;
+                        }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .discount-area.oiv {
+                                right: 0;
+                            }
+
+                                #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .discount-area.oiv .discount {
+                                    width: 200px;
+                                }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .discount-area .discount {
+                                width: 220px;
+                                margin-bottom: 12px;
+                            }
+
+                                #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .discount-area .discount .dAmount {
+                                    display: none;
+                                }
+
+                        #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-other {
+                            left: 0;
+                            position: absolute;
+                            margin-top: 25px;
+                            width: 270px;
+                        }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-other.other-right {
+                                left: 295px;
+                            }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-other ul {
+                                padding: 0;
+                            }
+
+                                #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-other ul li {
+                                    position: relative;
+                                    display: block;
+                                    float: left;
+                                    width: calc(100% - 15px);
+                                    font-size: 12px;
+                                    line-height: 22px;
+                                    margin-right: 15px;
+                                    border-bottom: 1px solid #e6e6e6;
+                                }
+
+                                    #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-other ul li label {
+                                        margin: 0;
+                                        padding: 5px 10px;
+                                    }
+
+                                    #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-other ul li span.money {
+                                        float: right;
+                                        text-align: right;
+                                        margin-right: 30px;
+                                        line-height: 32px;
+                                        font-size: 14px;
+                                    }
+
+                        #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-table-plus {
+                            width: 32px;
+                            color: #a39f9d;
+                            background: 0 0;
+                            border: 2px solid #d2d0cf;
+                            line-height: 23px;
+                            border-radius: 5px;
+                        }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-table-plus i {
+                                font-size: 17px;
+                                margin-top: 4px;
+                            }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-table-plus:hover {
+                                color: #373636;
+                                background: 0 0;
+                                border-color: #a5a2a0;
+                            }
+
+                        #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-table-plus-area {
+                            display: none;
+                        }
+
+                        #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-table-delete {
+                            display: block;
+                            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#fd6041),color-stop(100%,#fd4421)) #fd5939;
+                            background: -webkit-linear-gradient(top,#fd6041,#fd4421) #fd5939;
+                            background: -moz-linear-gradient(top,#fd6041,#fd4421) #fd5939;
+                            background: -ms-linear-gradient(top,#fd6041,#fd4421) #fd5939;
+                            background: -o-linear-gradient(top,#fd6041,#fd4421) #fd5939;
+                            background: linear-gradient(to bottom,#fd6041,#fd4421) #fd5939;
+                            border: 0;
+                            width: 32px;
+                            padding: 0;
+                            line-height: 32px;
+                            border-radius: 5px;
+                            color: #fff;
+                        }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-table-delete i {
+                                font-size: 17px;
+                            }
+
+                            #wrapper .content .efar-invoice-product-sale .efar-invoice-product-sale-table tbody tr td .efar-invoice-product-sale-table-delete:hover {
+                                background: #fd5939;
+                            }
+
+            #wrapper .content .efar-invoice-product-sale .newProductBtn {
+                color: #a39f9d;
+                line-height: 23px;
+                border-radius: 5px;
+                padding: 4px 10px;
+                margin: 20px 15px;
+                cursor: pointer;
+                background: #333;
+                color: #fff;
+            }
+
+                #wrapper .content .efar-invoice-product-sale .newProductBtn i {
+                    margin-right: 3px;
+                }
+
+        #wrapper .content .efar-invoice-product-total-area {
+            margin-top: -71px;
+            margin-right: -15px;
+            border-left: 1px solid #e0e0e0;
+            padding: 30px 50px 30px 80px;
+            background: #fbfbfb;
+        }
+
+            #wrapper .content .efar-invoice-product-total-area .form-group {
+                font-size: 13px;
+                margin-bottom: 0;
+            }
+
+                #wrapper .content .efar-invoice-product-total-area .form-group label {
+                    margin-bottom: 0;
+                }
+
+                #wrapper .content .efar-invoice-product-total-area .form-group.line {
+                    border-top: 1px solid #e0e0e0;
+                    padding: 5px 0;
+                }
+
+                #wrapper .content .efar-invoice-product-total-area .form-group .label-title {
+                    font-weight: bold;
+                }
+
+                    #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .vat-withholding-list, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .withholding-list, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .vat-withholding-list, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .withholding-list {
+                        display: none;
+                        position: absolute;
+                        left: -35px;
+                        bottom: 35px;
+                        z-index: 1041;
+                        width: 200px;
+                        line-height: 20px;
+                        font-size: 13px;
+                        font-weight: normal;
+                        border: 1px solid #c5c4c2;
+                        background-color: #fdfdfd;
+                        -webkit-border-radius: 3px;
+                        -moz-border-radius: 3px;
+                        border-radius: 3px;
+                    }
+
+                        #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .withholding-list ul, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .vat-withholding-list ul, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .withholding-list ul {
+                            padding: 0;
+                            margin: 0;
+                        }
+
+                            #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .withholding-list ul li, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .vat-withholding-list ul li, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .withholding-list ul li {
+                                display: block;
+                                padding: 7px 15px;
+                                cursor: pointer;
+                            }
+
+                                #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li i, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .withholding-list ul li i, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .vat-withholding-list ul li i, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .withholding-list ul li i {
+                                    margin-right: 10px;
+                                }
+
+                                #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li:hover, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .withholding-list ul li:hover, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .vat-withholding-list ul li:hover, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .withholding-list ul li:hover {
+                                    background: #f6eeff;
+                                }
+
+                                    #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li:hover .other, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .withholding-list ul li:hover .other, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .vat-withholding-list ul li:hover .other, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .withholding-list ul li:hover .other {
+                                        display: block;
+                                    }
+
+                                #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li .other, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .withholding-list ul li .other, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .vat-withholding-list ul li .other, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .withholding-list ul li .other {
+                                    display: none;
+                                    cursor: default;
+                                    position: absolute;
+                                    left: -200px;
+                                    top: 0;
+                                    background: #f6eeff;
+                                    width: 200px;
+                                    padding: 15px;
+                                }
+
+                                    #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li .other h2, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .withholding-list ul li .other h2, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .vat-withholding-list ul li .other h2, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .withholding-list ul li .other h2 {
+                                        font-size: 12px;
+                                        margin: 0;
+                                        padding: 0;
+                                        margin-bottom: 10px;
+                                        padding-bottom: 5px;
+                                        border-bottom: 1px solid #ccc;
+                                        line-height: 18px;
+                                    }
+
+                                    #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li .other input[type=text], #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .withholding-list ul li .other input[type=text], #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .vat-withholding-list ul li .other input[type=text], #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .withholding-list ul li .other input[type=text] {
+                                        display: block;
+                                        float: left;
+                                        width: calc(100% - 90px);
+                                        height: 30px;
+                                    }
+
+                                    #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li .other button, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.vat-withholding .withholding-list ul li .other button, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .vat-withholding-list ul li .other button, #wrapper .content .efar-invoice-product-total-area .form-group .label-title.withholding .withholding-list ul li .other button {
+                                        display: inline-block;
+                                        display: block;
+                                        float: right;
+                                        width: 80px;
+                                        border: 0;
+                                        background: #e11837;
+                                        color: #fff;
+                                        padding: 5px;
+                                        line-height: 20px;
+                                        border-radius: 3px;
+                                    }
+
+                    #wrapper .content .efar-invoice-product-total-area .form-group .label-title span.plus {
+                        position: absolute;
+                        cursor: pointer;
+                        z-index: 50;
+                        width: 27px;
+                        color: #a39f9d;
+                        background: 0 0;
+                        border: 2px solid #d2d0cf;
+                        line-height: 19px;
+                        border-radius: 5px;
+                        text-align: center;
+                        left: -35px;
+                        top: 3px;
+                    }
+
+                        #wrapper .content .efar-invoice-product-total-area .form-group .label-title span.plus i {
+                            font-size: 15px;
+                            margin-top: 4px;
+                            margin-left: 1px;
+                        }
+
+                #wrapper .content .efar-invoice-product-total-area .form-group .money-total {
+                    text-align: right;
+                    padding: 6px;
+                    line-height: 19px;
+                }
+
+                    #wrapper .content .efar-invoice-product-total-area .form-group .money-total .money-main {
+                        font-weight: bold;
+                        color: #555;
+                        font-size: 17px;
+                        margin-right: -2px;
+                    }
+
+                    #wrapper .content .efar-invoice-product-total-area .form-group .money-total .money-float {
+                        color: #999;
+                        font-size: 15px;
+                    }
+
+            #wrapper .content .efar-invoice-product-total-area #TotalTurkishLira {
+                display: none;
+                border-bottom: 0;
+                color: #977639;
+                font-size: 12px;
+                margin-top: -8px;
+            }
+
+                #wrapper .content .efar-invoice-product-total-area #TotalTurkishLira .money-total .money-main {
+                    font-weight: normal;
+                    color: #977639;
+                    font-size: 16px;
+                }
+
+                #wrapper .content .efar-invoice-product-total-area #TotalTurkishLira .money-total .money-float {
+                    color: #977639;
+                    font-size: 15px;
+                }
+
+            #wrapper .content .efar-invoice-product-total-area #TotalTurkishLiraSale {
+                display: none;
+                border-bottom: 0;
+                color: #977639;
+                font-size: 12px;
+                margin-top: -8px;
+            }
+
+                #wrapper .content .efar-invoice-product-total-area #TotalTurkishLiraSale .money-total .money-main {
+                    font-weight: normal;
+                    color: #977639;
+                    font-size: 16px;
+                }
+
+                #wrapper .content .efar-invoice-product-total-area #TotalTurkishLiraSale .money-total .money-float {
+                    color: #977639;
+                    font-size: 15px;
+                }
+
+            #wrapper .content .efar-invoice-product-total-area #TaxRateList ul {
+                padding: 0;
+                margin: 0;
+            }
+
+                #wrapper .content .efar-invoice-product-total-area #TaxRateList ul li {
+                    display: block;
+                    font-size: 12px;
+                }
+
+                    #wrapper .content .efar-invoice-product-total-area #TaxRateList ul li .label-title, #wrapper .content .efar-invoice-product-total-area #TaxRateList ul li .money-total {
+                        padding: 0 7px;
+                    }
+
+                        #wrapper .content .efar-invoice-product-total-area #TaxRateList ul li .label-title .money-main, #wrapper .content .efar-invoice-product-total-area #TaxRateList ul li .money-total .money-main {
+                            font-size: 15px;
+                        }
+
+                        #wrapper .content .efar-invoice-product-total-area #TaxRateList ul li .label-title .money-float, #wrapper .content .efar-invoice-product-total-area #TaxRateList ul li .money-total .money-float {
+                            font-size: 14px;
+                        }
+
+        #wrapper .content .efar-invoice-product-sale-total-area {
+            margin-top: -71px;
+            margin-right: -15px;
+            border-left: 1px solid #e0e0e0;
+            padding: 30px 50px 30px 80px;
+            background: #fbfbfb;
+        }
+
+            #wrapper .content .efar-invoice-product-sale-total-area .form-group {
+                font-size: 13px;
+                margin-bottom: 0;
+            }
+
+                #wrapper .content .efar-invoice-product-sale-total-area .form-group label {
+                    margin-bottom: 0;
+                }
+
+                #wrapper .content .efar-invoice-product-sale-total-area .form-group.line {
+                    border-top: 1px solid #e0e0e0;
+                    padding: 5px 0;
+                }
+
+                #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title {
+                    font-weight: bold;
+                }
+
+                    #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .vat-withholding-list, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .withholding-list, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .vat-withholding-list, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .withholding-list {
+                        display: none;
+                        position: absolute;
+                        left: -35px;
+                        bottom: 35px;
+                        z-index: 1041;
+                        width: 200px;
+                        line-height: 20px;
+                        font-size: 13px;
+                        font-weight: normal;
+                        border: 1px solid #c5c4c2;
+                        background-color: #fdfdfd;
+                        -webkit-border-radius: 3px;
+                        -moz-border-radius: 3px;
+                        border-radius: 3px;
+                    }
+
+                        #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .withholding-list ul, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .vat-withholding-list ul, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .withholding-list ul {
+                            padding: 0;
+                            margin: 0;
+                        }
+
+                            #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .withholding-list ul li, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .vat-withholding-list ul li, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .withholding-list ul li {
+                                display: block;
+                                padding: 7px 15px;
+                                cursor: pointer;
+                            }
+
+                                #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li i, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .withholding-list ul li i, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .vat-withholding-list ul li i, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .withholding-list ul li i {
+                                    margin-right: 10px;
+                                }
+
+                                #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li:hover, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .withholding-list ul li:hover, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .vat-withholding-list ul li:hover, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .withholding-list ul li:hover {
+                                    background: #f6eeff;
+                                }
+
+                                    #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li:hover .other, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .withholding-list ul li:hover .other, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .vat-withholding-list ul li:hover .other, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .withholding-list ul li:hover .other {
+                                        display: block;
+                                    }
+
+                                #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li .other, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .withholding-list ul li .other, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .vat-withholding-list ul li .other, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .withholding-list ul li .other {
+                                    display: none;
+                                    cursor: default;
+                                    position: absolute;
+                                    left: -200px;
+                                    top: 0;
+                                    background: #f6eeff;
+                                    width: 200px;
+                                    padding: 15px;
+                                }
+
+                                    #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li .other h2, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .withholding-list ul li .other h2, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .vat-withholding-list ul li .other h2, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .withholding-list ul li .other h2 {
+                                        font-size: 12px;
+                                        margin: 0;
+                                        padding: 0;
+                                        margin-bottom: 10px;
+                                        padding-bottom: 5px;
+                                        border-bottom: 1px solid #ccc;
+                                        line-height: 18px;
+                                    }
+
+                                    #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li .other input[type=text], #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .withholding-list ul li .other input[type=text], #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .vat-withholding-list ul li .other input[type=text], #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .withholding-list ul li .other input[type=text] {
+                                        display: block;
+                                        float: left;
+                                        width: calc(100% - 90px);
+                                        height: 30px;
+                                    }
+
+                                    #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .vat-withholding-list ul li .other button, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.vat-withholding .withholding-list ul li .other button, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .vat-withholding-list ul li .other button, #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title.withholding .withholding-list ul li .other button {
+                                        display: inline-block;
+                                        display: block;
+                                        float: right;
+                                        width: 80px;
+                                        border: 0;
+                                        background: #e11837;
+                                        color: #fff;
+                                        padding: 5px;
+                                        line-height: 20px;
+                                        border-radius: 3px;
+                                    }
+
+                    #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title span.plus {
+                        position: absolute;
+                        cursor: pointer;
+                        z-index: 50;
+                        width: 27px;
+                        color: #a39f9d;
+                        background: 0 0;
+                        border: 2px solid #d2d0cf;
+                        line-height: 19px;
+                        border-radius: 5px;
+                        text-align: center;
+                        left: -35px;
+                        top: 3px;
+                    }
+
+                        #wrapper .content .efar-invoice-product-sale-total-area .form-group .label-title span.plus i {
+                            font-size: 15px;
+                            margin-top: 4px;
+                            margin-left: 1px;
+                        }
+
+                #wrapper .content .efar-invoice-product-sale-total-area .form-group .money-total {
+                    text-align: right;
+                    padding: 6px;
+                    line-height: 19px;
+                }
+
+                    #wrapper .content .efar-invoice-product-sale-total-area .form-group .money-total .money-main {
+                        font-weight: bold;
+                        color: #555;
+                        font-size: 17px;
+                        margin-right: -2px;
+                    }
+
+                    #wrapper .content .efar-invoice-product-sale-total-area .form-group .money-total .money-float {
+                        color: #999;
+                        font-size: 15px;
+                    }
+
+            #wrapper .content .efar-invoice-product-sale-total-area #TotalTurkishLira {
+                display: none;
+                border-bottom: 0;
+                color: #977639;
+                font-size: 12px;
+                margin-top: -8px;
+            }
+
+                #wrapper .content .efar-invoice-product-sale-total-area #TotalTurkishLira .money-total .money-main {
+                    font-weight: normal;
+                    color: #977639;
+                    font-size: 16px;
+                }
+
+                #wrapper .content .efar-invoice-product-sale-total-area #TotalTurkishLira .money-total .money-float {
+                    color: #977639;
+                    font-size: 15px;
+                }
+
+            #wrapper .content .efar-invoice-product-sale-total-area #TotalTurkishLiraSale {
+                display: none;
+                border-bottom: 0;
+                color: #977639;
+                font-size: 12px;
+                margin-top: -8px;
+            }
+
+                #wrapper .content .efar-invoice-product-sale-total-area #TotalTurkishLiraSale .money-total .money-main {
+                    font-weight: normal;
+                    color: #977639;
+                    font-size: 16px;
+                }
+
+                #wrapper .content .efar-invoice-product-sale-total-area #TotalTurkishLiraSale .money-total .money-float {
+                    color: #977639;
+                    font-size: 15px;
+                }
+
+            #wrapper .content .efar-invoice-product-sale-total-area #TaxRateList ul {
+                padding: 0;
+                margin: 0;
+            }
+
+                #wrapper .content .efar-invoice-product-sale-total-area #TaxRateList ul li {
+                    display: block;
+                    font-size: 12px;
+                }
+
+                    #wrapper .content .efar-invoice-product-sale-total-area #TaxRateList ul li .label-title, #wrapper .content .efar-invoice-product-sale-total-area #TaxRateList ul li .money-total {
+                        padding: 0 7px;
+                    }
+
+                        #wrapper .content .efar-invoice-product-sale-total-area #TaxRateList ul li .label-title .money-main, #wrapper .content .efar-invoice-product-sale-total-area #TaxRateList ul li .money-total .money-main {
+                            font-size: 15px;
+                        }
+
+                        #wrapper .content .efar-invoice-product-sale-total-area #TaxRateList ul li .label-title .money-float, #wrapper .content .efar-invoice-product-sale-total-area #TaxRateList ul li .money-total .money-float {
+                            font-size: 14px;
+                        }
+
+        #wrapper .content .efar-search-icon {
+            position: absolute;
+            right: 15px;
+            top: 0;
+            padding: 0 9px;
+            margin: 3px;
+            height: 28px;
+            line-height: 27px;
+            pointer-events: none;
+            color: #999593;
+        }
+
+            #wrapper .content .efar-search-icon.right-none {
+                right: 0;
+            }
+
+        #wrapper .content .efar-radio-buttons {
+            padding: 5px;
+        }
+
+            #wrapper .content .efar-radio-buttons .efar-radio-button {
+                margin-right: 10px;
+            }
+
+                #wrapper .content .efar-radio-buttons .efar-radio-button label {
+                    margin: 0;
+                }
+
+                #wrapper .content .efar-radio-buttons .efar-radio-button.inline {
+                    display: inline-block;
+                }
+
+        #wrapper .content .modal-content .modal-header {
+            background: #454149;
+            color: #fff;
+        }
+
+            #wrapper .content .modal-content .modal-header .modal-title {
+                font-size: 15px;
+            }
+
+            #wrapper .content .modal-content .modal-header .close {
+                color: #fff;
+                text-shadow: 0 1px 0 #fff;
+                opacity: .8;
+            }
+
+        #wrapper .content .modal-content .modal-footer {
+            background: #f9f9f9;
+        }
+
+        #wrapper .content .stockVariant {
+            display: none;
+            min-height: 400px;
+        }
+
+            #wrapper .content .stockVariant .btn-variant-save {
+                border: 0;
+                display: block;
+                float: left;
+                padding: 0 10px 0 10px;
+                color: #fff;
+                font-size: 12px;
+                background: #454149;
+                line-height: 32px;
+                border-radius: 2px;
+                margin: 1px;
+                width: 80px;
+                margin-left: 10px;
+            }
+
+                #wrapper .content .stockVariant .btn-variant-save i {
+                    margin-right: 5px;
+                }
+
+            #wrapper .content .stockVariant .VariantName {
+                float: left;
+                width: calc(100% - 100px);
+            }
+
+            #wrapper .content .stockVariant .btn-variant-remove {
+                display: none;
+                border: 0;
+                padding: 0 10px 0 10px;
+                color: #fff;
+                font-size: 15px;
+                background: #e60010;
+                line-height: 32px;
+                border-radius: 2px;
+                margin: 1px;
+                margin-left: 5px;
+            }
+
+                #wrapper .content .stockVariant .btn-variant-remove:hover {
+                    background: #fd4421;
+                }
+
+            #wrapper .content .stockVariant .variantErrorMessage {
+                display: none;
+                position: absolute;
+                top: -28px;
+                right: 100px;
+                background: #b6615f;
+                padding: 3px 15px;
+                border-radius: 2px;
+                color: #fff;
+                font-size: 12px;
+                cursor: pointer;
+            }
+
+                #wrapper .content .stockVariant .variantErrorMessage.error {
+                    display: block;
+                }
+
+            #wrapper .content .stockVariant .VariantKeys {
+                border-bottom: 1px solid #f6eeff;
+                padding: 15px 0;
+            }
+
+                #wrapper .content .stockVariant .VariantKeys ul {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                    #wrapper .content .stockVariant .VariantKeys ul li {
+                        display: inline-block;
+                        border: 1px solid #ccc;
+                        position: relative;
+                        cursor: pointer;
+                        line-height: 28px;
+                        padding-right: 15px;
+                        margin-right: 10px;
+                    }
+
+                        #wrapper .content .stockVariant .VariantKeys ul li span {
+                            display: block;
+                            float: left;
+                            border-right: 1px solid #ccc;
+                            height: 28px;
+                            width: 28px;
+                            margin-right: 8px;
+                            background: #f6eeff;
+                            font-size: 18px;
+                            padding-left: 6px;
+                            padding-top: 1px;
+                        }
+
+                            #wrapper .content .stockVariant .VariantKeys ul li span:before {
+                                content: "";
+                                font-family: FontAwesome;
+                                font-style: normal;
+                                font-weight: normal;
+                                text-decoration: inherit;
+                            }
+
+                        #wrapper .content .stockVariant .VariantKeys ul li.active span:before {
+                            content: "";
+                        }
+
+            #wrapper .content .stockVariant .VariantValues {
+                margin-left: -15px;
+            }
+
+                #wrapper .content .stockVariant .VariantValues .VariantValueBox {
+                    position: relative;
+                    display: block;
+                    float: left;
+                    width: calc(33.33% - 15px);
+                    border: 1px solid #ccc;
+                    margin-left: 15px;
+                    margin-bottom: 15px;
+                }
+
+                    #wrapper .content .stockVariant .VariantValues .VariantValueBox .variantValueInput {
+                        padding: 5px 10px;
+                        border-bottom: 1px solid #ccc;
+                        position: relative;
+                        background: #f6eeff;
+                    }
+
+                        #wrapper .content .stockVariant .VariantValues .VariantValueBox .variantValueInput label {
+                            width: 80px;
+                            margin: 0;
+                            line-height: 35px;
+                        }
+
+                        #wrapper .content .stockVariant .VariantValues .VariantValueBox .variantValueInput input {
+                            width: calc(100% - 110px);
+                        }
+
+                        #wrapper .content .stockVariant .VariantValues .VariantValueBox .variantValueInput .efar-variant-drop {
+                            position: absolute;
+                            width: 25px;
+                            height: 32px;
+                            right: 41px;
+                            top: 6px;
+                            cursor: pointer;
+                        }
+
+                            #wrapper .content .stockVariant .VariantValues .VariantValueBox .variantValueInput .efar-variant-drop:before {
+                                content: "";
+                                font-family: FontAwesome;
+                                font-style: normal;
+                                font-weight: normal;
+                                text-decoration: inherit;
+                                font-size: 12px;
+                                position: absolute;
+                                right: 10px;
+                                top: 7px;
+                            }
+
+                        #wrapper .content .stockVariant .VariantValues .VariantValueBox .variantValueInput button {
+                            border: 0;
+                            font-size: 15px;
+                            line-height: 32px;
+                            background: none;
+                            margin-left: 5px;
+                            color: #00af0f;
+                        }
+
+                    #wrapper .content .stockVariant .VariantValues .VariantValueBox .efar-variant-dropdown {
+                        position: absolute;
+                        display: none;
+                        z-index: 500;
+                        width: 169px;
+                        right: 40px;
+                        top: 43px;
+                        background: #fff;
+                        box-shadow: 0 4px 5px rgba(0,0,0,.15);
+                        border: 1px solid #ccc;
+                    }
+
+                        #wrapper .content .stockVariant .VariantValues .VariantValueBox .efar-variant-dropdown .efar-variant-drop-search {
+                            padding: 10px;
+                            font-size: 12px;
+                            border-bottom: 1px solid #ccc;
+                        }
+
+                            #wrapper .content .stockVariant .VariantValues .VariantValueBox .efar-variant-dropdown .efar-variant-drop-search:before {
+                                position: absolute;
+                                content: "";
+                                font-family: FontAwesome;
+                                font-style: normal;
+                                font-weight: normal;
+                                text-decoration: inherit;
+                                right: 20px;
+                                top: 14px;
+                            }
+
+                            #wrapper .content .stockVariant .VariantValues .VariantValueBox .efar-variant-dropdown .efar-variant-drop-search input {
+                                width: 100%;
+                                height: auto !important;
+                                min-height: 30px;
+                                padding: 0 28px 0 10px;
+                                margin: 0;
+                                outline: 0;
+                                font-size: 1em;
+                                border: 1px solid #ccc;
+                                box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                                border-radius: 0;
+                            }
+
+                        #wrapper .content .stockVariant .VariantValues .VariantValueBox .efar-variant-dropdown ul {
+                            margin: 0;
+                            padding: 0;
+                            max-height: 150px;
+                            overflow-x: auto;
+                        }
+
+                            #wrapper .content .stockVariant .VariantValues .VariantValueBox .efar-variant-dropdown ul li {
+                                display: block;
+                                position: relative;
+                                padding: 5px;
+                                border-bottom: 1px solid #ccc;
+                                cursor: pointer;
+                                padding-left: 30px;
+                            }
+
+                                #wrapper .content .stockVariant .VariantValues .VariantValueBox .efar-variant-dropdown ul li:before {
+                                    position: absolute;
+                                    content: "";
+                                    font-family: FontAwesome;
+                                    font-style: normal;
+                                    font-weight: normal;
+                                    text-decoration: inherit;
+                                    left: 8px;
+                                    top: 5px;
+                                    font-size: 14px;
+                                }
+
+                                #wrapper .content .stockVariant .VariantValues .VariantValueBox .efar-variant-dropdown ul li.active:before {
+                                    content: "" !important;
+                                }
+
+                    #wrapper .content .stockVariant .VariantValues .VariantValueBox .VariantValueList {
+                        height: 170px;
+                        overflow-x: auto;
+                        width: 100%;
+                    }
+
+                        #wrapper .content .stockVariant .VariantValues .VariantValueBox .VariantValueList ul {
+                            padding: 0;
+                        }
+
+                            #wrapper .content .stockVariant .VariantValues .VariantValueBox .VariantValueList ul li {
+                                display: block;
+                                margin: 0 10px;
+                                padding: 5px 5px;
+                                border-bottom: 1px solid #f6eeff;
+                            }
+
+                                #wrapper .content .stockVariant .VariantValues .VariantValueBox .VariantValueList ul li i {
+                                    float: right;
+                                    cursor: pointer;
+                                    font-size: 16px;
+                                }
+
+                                    #wrapper .content .stockVariant .VariantValues .VariantValueBox .VariantValueList ul li i:hover {
+                                        color: #e11837;
+                                    }
+
+            #wrapper .content .stockVariant .BtnCreateVariant {
+                display: none;
+                padding-top: 15px;
+                border-top: 1px solid #f6eeff;
+            }
+
+                #wrapper .content .stockVariant .BtnCreateVariant button {
+                    padding: 7px 15px;
+                    background: #fd4421;
+                    border-radius: 3px;
+                    color: #fff;
+                    border: 0;
+                }
+
+                    #wrapper .content .stockVariant .BtnCreateVariant button:hover {
+                        background: #fd5939;
+                    }
+
+                    #wrapper .content .stockVariant .BtnCreateVariant button.BtnAllUpdate {
+                        background: #0004b2;
+                    }
+
+                    #wrapper .content .stockVariant .BtnCreateVariant button.AddVariant {
+                        display: none;
+                    }
+
+                #wrapper .content .stockVariant .BtnCreateVariant .VariantAllUpdate {
+                    display: none;
+                }
+
+            #wrapper .content .stockVariant #VariantTable_wrapper {
+                border-top: 1px solid #ddd;
+            }
+
+                #wrapper .content .stockVariant #VariantTable_wrapper #VariantTable_filter {
+                    float: right;
+                    width: auto;
+                }
+
+                #wrapper .content .stockVariant #VariantTable_wrapper .crtVrnt {
+                    width: 165px;
+                    height: 10px;
+                    display: block;
+                    float: right;
+                }
+
+            #wrapper .content .stockVariant .VariantTable {
+                display: none;
+                margin-top: 15px;
+            }
+
+                #wrapper .content .stockVariant .VariantTable.show {
+                    display: block;
+                }
+
+                #wrapper .content .stockVariant .VariantTable .VariantCheckTd {
+                    padding: 4px 10px;
+                }
+
+                #wrapper .content .stockVariant .VariantTable .VariantImageTd {
+                    padding: 9px 10px;
+                    text-align: center;
+                }
+
+                    #wrapper .content .stockVariant .VariantTable .VariantImageTd i {
+                        font-size: 16px;
+                    }
+
+                #wrapper .content .stockVariant .VariantTable .BtnVariantImageUpload {
+                    border: 0;
+                    font-size: 15px;
+                    border: 1px solid #ccc;
+                    background: #f9f9f9;
+                    padding: 3px 8px;
+                }
+
+                    #wrapper .content .stockVariant .VariantTable .BtnVariantImageUpload:hover {
+                        background: #fff;
+                    }
+
+                    #wrapper .content .stockVariant .VariantTable .BtnVariantImageUpload img {
+                        display: block;
+                        width: 100%;
+                    }
+
+                    #wrapper .content .stockVariant .VariantTable .BtnVariantImageUpload.active {
+                        background: #c5ffd9;
+                    }
+
+                #wrapper .content .stockVariant .VariantTable .variantCheck {
+                    display: block;
+                    width: 18px;
+                    height: 25px;
+                    cursor: pointer;
+                }
+
+                    #wrapper .content .stockVariant .VariantTable .variantCheck:before {
+                        content: "";
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        text-decoration: inherit;
+                        font-size: 20px;
+                    }
+
+                    #wrapper .content .stockVariant .VariantTable .variantCheck.active:before {
+                        content: "";
+                    }
+
+                #wrapper .content .stockVariant .VariantTable input[type=text], #wrapper .content .stockVariant .VariantTable select {
+                    height: 30px;
+                    font-size: 12px;
+                }
+
+                #wrapper .content .stockVariant .VariantTable .VariantRemove {
+                    border: 0;
+                    border-radius: 3px;
+                    padding: 5px 8px;
+                    background: #e11837;
+                    color: #fff;
+                }
+
+                    #wrapper .content .stockVariant .VariantTable .VariantRemove:hover {
+                        background: #cb1732;
+                    }
+
+                #wrapper .content .stockVariant .VariantTable .VariantName {
+                    padding: 4px;
+                }
+
+        #wrapper .content #PopupNewVariant {
+            z-index: 5000;
+        }
+
+            #wrapper .content #PopupNewVariant .modal-dialog {
+                width: 400px;
+            }
+
+            #wrapper .content #PopupNewVariant .VariantValueArea {
+                border: 1px solid #ccc;
+                position: relative;
+            }
+
+                #wrapper .content #PopupNewVariant .VariantValueArea h2 {
+                    margin: 0;
+                    font-size: 15px;
+                    padding: 10px 13px;
+                    background: #f6eeff;
+                    color: #454149;
+                }
+
+                #wrapper .content #PopupNewVariant .VariantValueArea .variantValueInput {
+                    position: relative;
+                }
+
+                    #wrapper .content #PopupNewVariant .VariantValueArea .variantValueInput input {
+                        margin: -1px;
+                        width: calc(100% + 2px);
+                    }
+
+                    #wrapper .content #PopupNewVariant .VariantValueArea .variantValueInput #BtnValueAdd {
+                        position: absolute;
+                        right: 1px;
+                        top: 1px;
+                        border: 0;
+                        padding: 0 15px;
+                        border-left: 1px solid #ccc;
+                        background: #f5f5f5;
+                        color: #454149;
+                        font-size: 15px;
+                        line-height: 32px;
+                    }
+
+                        #wrapper .content #PopupNewVariant .VariantValueArea .variantValueInput #BtnValueAdd:hover {
+                            background: #caffec;
+                        }
+
+                #wrapper .content #PopupNewVariant .VariantValueArea .VariantValueList {
+                    height: 200px;
+                    overflow-y: auto;
+                }
+
+                    #wrapper .content #PopupNewVariant .VariantValueArea .VariantValueList ul {
+                        margin: 0;
+                        padding: 10px;
+                    }
+
+                        #wrapper .content #PopupNewVariant .VariantValueArea .VariantValueList ul li {
+                            display: block;
+                            float: left;
+                            width: calc(50% - 10px);
+                            padding: 5px 10px;
+                            margin: 5px;
+                            border: 1px solid #ccc;
+                            position: relative;
+                            border-radius: 2px;
+                        }
+
+                            #wrapper .content #PopupNewVariant .VariantValueArea .VariantValueList ul li .remove {
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+                                padding: 5px 10px;
+                                line-height: 20px;
+                                cursor: pointer;
+                            }
+
+                                #wrapper .content #PopupNewVariant .VariantValueArea .VariantValueList ul li .remove:hover {
+                                    color: #e11837;
+                                }
+
+        #wrapper .content #PopupNewTemplate {
+            z-index: 4000;
+        }
+
+            #wrapper .content #PopupNewTemplate .VariantArea {
+                border: 1px solid #ccc;
+                position: relative;
+            }
+
+                #wrapper .content #PopupNewTemplate .VariantArea h2 {
+                    margin: 0;
+                    font-size: 15px;
+                    padding: 10px 13px;
+                    background: #f6eeff;
+                    color: #454149;
+                    border-bottom: 1px solid #ccc;
+                }
+
+                    #wrapper .content #PopupNewTemplate .VariantArea h2 a {
+                        color: #fff;
+                        font-size: 12px;
+                        padding: 4px 10px;
+                        background: #e11837;
+                        border-radius: 2px;
+                        float: right;
+                        margin-top: -2px;
+                    }
+
+                        #wrapper .content #PopupNewTemplate .VariantArea h2 a i {
+                            margin-right: 4px;
+                        }
+
+                #wrapper .content #PopupNewTemplate .VariantArea .VariantList {
+                    height: 200px;
+                    overflow-y: auto;
+                }
+
+                    #wrapper .content #PopupNewTemplate .VariantArea .VariantList ul {
+                        margin: 0;
+                        padding: 10px;
+                    }
+
+                        #wrapper .content #PopupNewTemplate .VariantArea .VariantList ul li {
+                            display: block;
+                            float: left;
+                            width: calc(33.33% - 10px);
+                            margin: 5px;
+                            border: 1px solid #ccc;
+                            position: relative;
+                            cursor: pointer;
+                            line-height: 28px;
+                        }
+
+                            #wrapper .content #PopupNewTemplate .VariantArea .VariantList ul li span {
+                                display: block;
+                                float: left;
+                                border-right: 1px solid #ccc;
+                                height: 28px;
+                                width: 28px;
+                                margin-right: 8px;
+                                background: #f6eeff;
+                                font-size: 18px;
+                                padding-left: 6px;
+                                padding-top: 1px;
+                            }
+
+                                #wrapper .content #PopupNewTemplate .VariantArea .VariantList ul li span:before {
+                                    content: "";
+                                    font-family: FontAwesome;
+                                    font-style: normal;
+                                    font-weight: normal;
+                                    text-decoration: inherit;
+                                }
+
+                            #wrapper .content #PopupNewTemplate .VariantArea .VariantList ul li.active span:before {
+                                content: "";
+                            }
+
+        #wrapper .content #PopupVariantAdd .ValidError {
+            display: none;
+            float: right;
+            text-align: right;
+            font-size: 12px;
+            color: #e11837;
+        }
+
+        #wrapper .content #PopupVariantAdd .AddVariantDropDownList {
+            padding: 0 10px;
+        }
+
+            #wrapper .content #PopupVariantAdd .AddVariantDropDownList label.error {
+                display: none !important;
+            }
+
+            #wrapper .content #PopupVariantAdd .AddVariantDropDownList select {
+                margin-right: 5px;
+                margin-bottom: 10px;
+                float: left;
+                width: auto;
+            }
+
+        #wrapper .content #PopupVariantImage .modal-dialog {
+            width: 675px;
+        }
+
+        #wrapper .content #PopupVariantImage #variant-picture-view {
+            height: 365px;
+            width: 365px;
+            margin: 0 1%;
+            border: 2px dashed #3d3a41;
+            overflow-x: auto;
+        }
+
+        #wrapper .content #PopupVariantImage #variant-picture-upload {
+            width: 250px;
+        }
+
+            #wrapper .content #PopupVariantImage #variant-picture-upload .item {
+                display: block;
+                position: relative;
+                float: left;
+                width: 74px;
+                margin: 9px;
+                border: 2px solid #000;
+                overflow: hidden;
+                cursor: pointer;
+            }
+
+                #wrapper .content #PopupVariantImage #variant-picture-upload .item .itemPicture {
+                    width: 70px;
+                    height: 70px;
+                    opacity: .5;
+                    margin: 0;
+                }
+
+                #wrapper .content #PopupVariantImage #variant-picture-upload .item:hover .itemPicture {
+                    opacity: 1;
+                }
+
+                #wrapper .content #PopupVariantImage #variant-picture-upload .item.active:before {
+                    position: absolute;
+                    z-index: 500;
+                    content: "";
+                    font-family: FontAwesome;
+                    font-style: normal;
+                    font-weight: normal;
+                    text-decoration: inherit;
+                    font-size: 30px;
+                    left: calc(50% - 15px);
+                    top: calc(50% - 10px);
+                }
+
+                #wrapper .content #PopupVariantImage #variant-picture-upload .item.active .itemPicture {
+                    opacity: .2;
+                }
+
+        #wrapper .content #PopupVariantSelect #VariantList_wrapper {
+            border-top: 1px solid #ddd;
+        }
+
+        #wrapper .content #PopupVariantSelect #VariantList {
+            width: 100% !important;
+        }
+
+            #wrapper .content #PopupVariantSelect #VariantList thead td {
+                width: 100% !important;
+            }
+
+                #wrapper .content #PopupVariantSelect #VariantList thead td.input {
+                    width: 20%;
+                }
+
+            #wrapper .content #PopupVariantSelect #VariantList tbody td .form-control {
+                padding: 0 10px;
+                height: 26px;
+                font-size: 12px;
+            }
+
+        #wrapper .content #PopupSettings .efar-popup-panel h2 {
+            text-align: left;
+            font-size: 14px;
+            border-bottom: 1px solid #e5e5e5;
+            border-top: 1px solid #e5e5e5;
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 0;
+            margin: 0 -15px;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+            #wrapper .content #PopupSettings .efar-popup-panel h2 i {
+                margin-right: 10px;
+            }
+
+        #wrapper .content #PopupSettings .efar-popup-panel p {
+            font-size: 12px;
+            line-height: 20px;
+            padding: 5px;
+        }
+
+        #wrapper .content #PopupSettings .efar-popup-panel .prop-inner {
+            position: absolute;
+            right: 17px;
+            top: 2px;
+            padding: 0 9px;
+            height: 30px;
+            line-height: 30px;
+            pointer-events: none;
+            font-size: 12px;
+        }
+
+        #wrapper .content #PopupSettings .btn-efar-upload {
+            display: block;
+            width: 100%;
+            height: 34px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            -webkit-box-shadow: inset 0 1px 10px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 10px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            cursor: pointer;
+        }
+
+            #wrapper .content #PopupSettings .btn-efar-upload i {
+                border-right: 1px solid #ccc;
+                padding: 6px 12px;
+                line-height: 20px;
+                margin-right: 10px;
+                background: #f7f7f7;
+            }
+
+            #wrapper .content #PopupSettings .btn-efar-upload:hover {
+                background: #f7f7f7;
+            }
+
+            #wrapper .content #PopupSettings .btn-efar-upload.remove {
+                display: none;
+            }
+
+        #wrapper .content #PopupSettings #image-preview {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            background-color: #fff;
+            color: #ecf0f1;
+            cursor: pointer;
+            position: absolute;
+            z-index: 50;
+            opacity: .3;
+        }
+
+            #wrapper .content #PopupSettings #image-preview input {
+                position: absolute;
+                opacity: 0;
+                z-index: 10;
+                width: 100%;
+                height: 100%;
+            }
+
+            #wrapper .content #PopupSettings #image-preview label {
+                position: absolute;
+                z-index: 5;
+                cursor: pointer;
+                margin: auto;
+                line-height: 20px;
+                text-align: center;
+                top: -30px;
+            }
+
+        #wrapper .content #PopupSettings #PreviewCanvas {
+            position: absolute;
+            z-index: 60;
+        }
+
+        #wrapper .content #PopupPrint .PdfRule ul {
+            margin: 20px;
+            padding: 0;
+        }
+
+            #wrapper .content #PopupPrint .PdfRule ul li {
+                list-style: decimal;
+                font-size: 13px;
+                line-height: 25px;
+            }
+
+        #wrapper .content #PopupPrint .PdfRule p {
+            padding: 10px;
+        }
+
+        #wrapper .content #PopupPrint .PdfRuleNote {
+            padding: 10px;
+            background: #fff4bd;
+            color: #977639;
+            border-top: 1px solid #dedddc;
+            margin: -15px;
+            margin-top: 10px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+            #wrapper .content #PopupPrint .PdfRuleNote.NoteTop {
+                margin-top: 0;
+                border-top: 0;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #dedddc;
+            }
+
+        #wrapper .content #PopupPrint .TemplateList {
+            width: calc(100% - 180px);
+            margin-top: 10px;
+        }
+
+            #wrapper .content #PopupPrint .TemplateList h2 {
+                margin: 0;
+                padding: 0;
+                font-size: 14px;
+                background: #454149;
+                color: #fff;
+                padding: 8px;
+            }
+
+            #wrapper .content #PopupPrint .TemplateList ul {
+                margin: 0;
+                padding: 0;
+            }
+
+                #wrapper .content #PopupPrint .TemplateList ul li {
+                    display: block;
+                    position: relative;
+                    cursor: pointer;
+                    padding: 5px;
+                    padding-left: 30px;
+                }
+
+                    #wrapper .content #PopupPrint .TemplateList ul li:before {
+                        content: "";
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        text-decoration: inherit;
+                        position: absolute;
+                        left: 8px;
+                        top: calc(50% - 10px);
+                        font-size: 15px;
+                        line-height: 20px;
+                    }
+
+                    #wrapper .content #PopupPrint .TemplateList ul li div span {
+                        float: right;
+                        font-size: 11px;
+                    }
+
+                    #wrapper .content #PopupPrint .TemplateList ul li:hover {
+                        background: #f6eeff;
+                    }
+
+                    #wrapper .content #PopupPrint .TemplateList ul li.active {
+                        background: #f6eeff;
+                    }
+
+                        #wrapper .content #PopupPrint .TemplateList ul li.active:before {
+                            content: "";
+                        }
+
+        #wrapper .content #PopupPrint .Canvas {
+            width: 150px;
+            height: 150px;
+            margin: 0 10px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        #wrapper .content #PopupTool .modal-dialog, #wrapper .content #PopupItem .modal-dialog {
+            width: 400px;
+        }
+
+            #wrapper .content #PopupTool .modal-dialog .efar-jvalidate-error.error, #wrapper .content #PopupItem .modal-dialog .efar-jvalidate-error.error {
+                border-color: #b6615f;
+                background-color: rgba(255,166,164,.2);
+            }
+
+            #wrapper .content #PopupTool .modal-dialog .grid6, #wrapper .content #PopupItem .modal-dialog .grid6 {
+                display: inline-block;
+                width: 48%;
+            }
+
+            #wrapper .content #PopupTool .modal-dialog .grid10, #wrapper .content #PopupItem .modal-dialog .grid10 {
+                display: inline-block;
+                width: calc(100% - 40px);
+            }
+
+            #wrapper .content #PopupTool .modal-dialog span.grid2, #wrapper .content #PopupItem .modal-dialog span.grid2 {
+                float: right;
+                background: #f7f7f7;
+                padding: 6px 0;
+                text-align: center;
+                border: 1px solid #ccc;
+                width: 35px;
+                height: 34px;
+            }
+
+            #wrapper .content #PopupTool .modal-dialog .TemplateSelect, #wrapper .content #PopupItem .modal-dialog .TemplateSelect {
+                position: relative;
+                width: 100%;
+            }
+
+                #wrapper .content #PopupTool .modal-dialog .TemplateSelect > span, #wrapper .content #PopupItem .modal-dialog .TemplateSelect > span {
+                    display: block;
+                    width: 100%;
+                    height: 34px;
+                    padding: 6px 12px;
+                    font-size: 14px;
+                    line-height: 1.42857143;
+                    color: #555;
+                    background-color: #fff;
+                    background-image: none;
+                    border: 1px solid #ccc;
+                    -webkit-box-shadow: inset 0 1px 10px rgba(0,0,0,.075);
+                    box-shadow: inset 0 1px 10px rgba(0,0,0,.075);
+                    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+                    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                    cursor: pointer;
+                    color: #555;
+                }
+
+                    #wrapper .content #PopupTool .modal-dialog .TemplateSelect > span:after, #wrapper .content #PopupItem .modal-dialog .TemplateSelect > span:after {
+                        position: absolute;
+                        right: 15px;
+                        content: "";
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        text-decoration: inherit;
+                    }
+
+                #wrapper .content #PopupTool .modal-dialog .TemplateSelect > ul, #wrapper .content #PopupItem .modal-dialog .TemplateSelect > ul {
+                    display: none;
+                    padding: 0;
+                    margin: 0;
+                    position: absolute;
+                    width: 100%;
+                    max-height: 200px;
+                    overflow-x: hidden;
+                    overflow-y: scroll;
+                    z-index: 500;
+                    background: #fff;
+                    border: 1px solid #ccc;
+                    border-width: 0 1px 1px 1px;
+                }
+
+                    #wrapper .content #PopupTool .modal-dialog .TemplateSelect > ul li, #wrapper .content #PopupItem .modal-dialog .TemplateSelect > ul li {
+                        display: block;
+                        padding: 5px 10px;
+                        font-size: 13px;
+                        border-bottom: 1px solid #f7f7f7;
+                        cursor: pointer;
+                    }
+
+                        #wrapper .content #PopupTool .modal-dialog .TemplateSelect > ul li:hover, #wrapper .content #PopupItem .modal-dialog .TemplateSelect > ul li:hover {
+                            background: #f7f7f7;
+                        }
+
+                        #wrapper .content #PopupTool .modal-dialog .TemplateSelect > ul li span, #wrapper .content #PopupItem .modal-dialog .TemplateSelect > ul li span {
+                            font-size: 10px;
+                            padding: 0 5px;
+                            background: #454149;
+                            width: 55px;
+                            text-align: center;
+                            border-radius: 3px;
+                            color: #fff;
+                        }
+
+                            #wrapper .content #PopupTool .modal-dialog .TemplateSelect > ul li span.Model, #wrapper .content #PopupItem .modal-dialog .TemplateSelect > ul li span.Model {
+                                background: #1eb931;
+                            }
+
+                            #wrapper .content #PopupTool .modal-dialog .TemplateSelect > ul li span.Liste, #wrapper .content #PopupItem .modal-dialog .TemplateSelect > ul li span.Liste {
+                                background: #ad0c04;
+                            }
+
+                            #wrapper .content #PopupTool .modal-dialog .TemplateSelect > ul li span.Enum, #wrapper .content #PopupItem .modal-dialog .TemplateSelect > ul li span.Enum {
+                                background: #ada704;
+                            }
+
+                        #wrapper .content #PopupTool .modal-dialog .TemplateSelect > ul li:after, #wrapper .content #PopupItem .modal-dialog .TemplateSelect > ul li:after {
+                            content: '';
+                            clear: both;
+                            display: block;
+                        }
+
+        #wrapper .content .isVariant {
+            cursor: pointer;
+            line-height: 25px;
+        }
+
+            #wrapper .content .isVariant:hover {
+                background: #f1f1f1;
+            }
+
+            #wrapper .content .isVariant i:before {
+                content: "";
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+            }
+
+            #wrapper .content .isVariant.active i:before {
+                content: "";
+            }
+
+        #wrapper .content .Efar-Template {
+            position: relative;
+            width: calc(100% + 40px);
+            margin: -20px;
+            height: calc(100% + 40px);
+        }
+
+            #wrapper .content .Efar-Template .Efar-Template-Prop {
+                position: fixed;
+                top: 113px;
+                z-index: 500;
+                width: calc(100% - 230px);
+                background: #f7f7f7;
+                box-shadow: 0 1px 0 #fefefe,0 -1px 0 rgba(255,255,255,.45),inset 0 -1px 0 #d1d1d1;
+            }
+
+                #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area {
+                    border-right: 1px solid #ccc;
+                    border-bottom: 1px solid #ccc;
+                    position: relative;
+                    color: #999593;
+                    height: 45px;
+                }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .Title {
+                        width: 150px;
+                        padding: 10px 15px;
+                        line-height: 25px;
+                        font-size: 12px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .FontFamily {
+                        width: 162px;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .FontFamily:hover {
+                            background: #fdfdfd;
+                        }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .FontFamily span {
+                            display: block;
+                            cursor: pointer;
+                            padding: 7px 15px;
+                            padding-right: 30px;
+                            line-height: 30px;
+                        }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .FontFamily span:before {
+                                position: absolute;
+                                content: "";
+                                font-family: FontAwesome;
+                                font-style: normal;
+                                font-weight: normal;
+                                text-decoration: inherit;
+                                right: 10px;
+                            }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .FontFamily ul {
+                            display: none;
+                            padding: 0;
+                            position: relative;
+                            left: -1px;
+                            z-index: 13;
+                            width: calc(100% + 2px);
+                            padding: 10px 0;
+                            line-height: 20px;
+                            font-size: 15px;
+                            border: 1px solid #c5c4c2;
+                            border-top: 0;
+                            background-color: #fdfdfd;
+                        }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .FontFamily ul li {
+                                display: block;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .FontFamily ul li a {
+                                    display: block;
+                                    padding: 5px 15px;
+                                    color: #999593;
+                                }
+
+                                    #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .FontFamily ul li a:hover {
+                                        color: #e11837;
+                                        background-color: #f2f1f1;
+                                    }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .FontSize {
+                        position: relative;
+                        padding: 7px 15px;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .FontSize input[type=text] {
+                            width: 60px;
+                        }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area select {
+                        height: 30px;
+                    }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area input[type=text] {
+                        width: 80px;
+                        height: 30px;
+                        padding: 6px 8px;
+                    }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area .prop-inner {
+                        position: absolute;
+                        right: 15px;
+                        top: 7px;
+                        padding: 0 9px;
+                        height: 30px;
+                        line-height: 30px;
+                        pointer-events: none;
+                        font-size: 12px;
+                    }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area {
+                        display: none;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group {
+                            position: relative;
+                            padding: 7px 15px;
+                        }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group label {
+                                font-size: 12px;
+                                display: inline-block;
+                                margin-right: 5px;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group input {
+                                display: inline-block;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group:first-child {
+                                padding-right: 0;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group:first-child .prop-inner {
+                                    right: 0;
+                                }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group-Buttons {
+                            padding: 7px 15px;
+                        }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group-Buttons button {
+                                display: block;
+                                float: left;
+                                margin: 0;
+                                background: #fff;
+                                border: 1px solid #ccc;
+                                font-size: 14px;
+                                padding: 0 7px;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group-Buttons button i {
+                                    line-height: 26px;
+                                }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group-Buttons button:first-child {
+                                    border-right: 0;
+                                }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group-Buttons button:nth-child(3) {
+                                    border-left: 0;
+                                }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group-Buttons button:hover {
+                                    background: #f6eeff;
+                                }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Prop .Prop-Area.Prop-Group-Area .Prop-Group-Buttons button.active {
+                                    background: #f6eeff;
+                                    color: #e11837;
+                                }
+
+            #wrapper .content .Efar-Template .Efar-Template-Canvas {
+                position: fixed;
+                width: calc(100% - 560px);
+                height: calc(100% - 158px);
+                background: #d2d0cf;
+                overflow: auto;
+                border-right: 1px solid #ccc;
+                text-align: center;
+                overflow: auto;
+                overflow-y: scroll;
+                top: 158px;
+                left: 230px;
+            }
+
+                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Ruler-Top {
+                    position: absolute;
+                    z-index: 700;
+                    background: #edeaf0;
+                    border-bottom: 1px solid #a9a9a9;
+                    min-width: 788px;
+                    overflow: hidden;
+                    height: 18px;
+                }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Ruler-Top ul {
+                        padding: 0;
+                        margin: 0 auto;
+                        margin-left: 30px;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Ruler-Top ul li {
+                            display: block;
+                            float: left;
+                            width: 31.5px;
+                            font-size: 8px;
+                            border-left: 1px solid #a9a9a9;
+                            line-height: 17px;
+                        }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Ruler-Top ul li span {
+                                display: block;
+                            }
+
+                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Ruler-Left {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 20px;
+                    background: #edeaf0;
+                    border-right: 1px solid #a9a9a9;
+                    min-height: 500px;
+                }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Ruler-Left ul {
+                        padding: 0;
+                        margin: 0;
+                        margin-top: 30px;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Ruler-Left ul li {
+                            display: block;
+                            height: 31.6px;
+                            font-size: 8px;
+                            border-bottom: 1px solid #a9a9a9;
+                            line-height: 17px;
+                        }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Ruler-Left ul li:first-child {
+                                border-top: 1px solid #a9a9a9;
+                            }
+
+                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page {
+                    position: absolute;
+                    background: #fdfdfd;
+                    border: 1px solid #ccc;
+                    margin: 30px;
+                    left: 0;
+                }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Background {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 500;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Background img {
+                            width: 100%;
+                            height: 100%;
+                            opacity: .3;
+                        }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        background-color: transparent;
+                        z-index: 600;
+                        width: 100%;
+                        height: 100%;
+                        border: 1px solid transparent;
+                        font-size: 16px;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area.active {
+                            border-color: #ca4b53;
+                        }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field {
+                            position: absolute !important;
+                            overflow: hidden;
+                            border: 1px solid #e8e7e7;
+                            cursor: move;
+                            width: auto;
+                            text-align: start;
+                            color: #000;
+                            line-height: normal;
+                            z-index: 100;
+                        }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field.active {
+                                border-width: 2px;
+                                border-color: #ca4b53;
+                                background-color: transparent;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field:hover {
+                                border-color: #ca4b53;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field:hover i.Remove, #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field:hover i.Edit, #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field:hover i.Upload {
+                                    display: block;
+                                }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field:hover table tr td {
+                                    border-color: #f6eeff !important;
+                                }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field:hover .JColResizer {
+                                    border-color: #ca4b53 !important;
+                                }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field.ui-draggable-dragging {
+                                color: #000;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field i.Remove {
+                                display: none;
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                padding: 4px 5px 5px 6px;
+                                background-color: #e8e7e7;
+                                cursor: pointer;
+                                font-size: 16px;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field i.Remove:hover {
+                                    color: #ca4b53;
+                                }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field i.Edit {
+                                display: none;
+                                position: absolute;
+                                top: 0;
+                                right: 25px;
+                                padding: 4px 5px 5px 6px;
+                                background-color: #e8e7e7;
+                                cursor: pointer;
+                                font-size: 16px;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field i.Edit:hover {
+                                    color: #ca4b53;
+                                }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field i.Upload {
+                                display: none;
+                                position: absolute;
+                                top: 0;
+                                right: 25px;
+                                padding: 4px 5px 5px 6px;
+                                background-color: #e8e7e7;
+                                cursor: pointer;
+                                font-size: 16px;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field i.Upload:hover {
+                                    color: #ca4b53;
+                                }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field .JCLRgrips .JCLRgrip {
+                                width: 5px;
+                                position: absolute;
+                                margin-left: -5px;
+                                top: 0;
+                                height: 100%;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field .JCLRgrips .JCLRgrip .JColResizer {
+                                    width: 5px;
+                                    height: 100%;
+                                    margin: 0 auto;
+                                    background-color: transparent;
+                                    opacity: 1;
+                                    border-left: 1px solid transparent;
+                                }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field table.efar-table-stocks {
+                                width: 100%;
+                                border-collapse: initial;
+                                border: 0;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field table.efar-table-stocks thead tr th {
+                                    border: 0;
+                                    padding: 0;
+                                }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field table.efar-table-stocks tbody tr:first-child td {
+                                    border: 0;
+                                }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field table.efar-table-stocks tbody tr td {
+                                    border-color: transparent;
+                                    padding: 0;
+                                }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field .efar-field-textarea {
+                                display: none;
+                                width: 100%;
+                                height: 100%;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field .efar-field-image {
+                                width: 100%;
+                                height: 100%;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area .efar-field .field-file {
+                                display: none;
+                            }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Canvas .Efar-Template-Page .Efar-Template-Page-Area.ui-droppable-hover {
+                            border-color: #e11837 !important;
+                        }
+
+            #wrapper .content .Efar-Template .Efar-Template-Tools {
+                position: relative;
+                width: 325px;
+                float: right;
+                height: calc(100% - 115px);
+                padding-bottom: 15px;
+                top: 50px;
+            }
+
+                #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting {
+                    margin: 15px;
+                    background: #fff;
+                    box-shadow: 0 0 8px #d7d5d4;
+                }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting h2 {
+                        margin: 0;
+                        padding: 0;
+                        font-size: 17px;
+                        padding: 15px;
+                        line-height: 15px;
+                        background: #45424a;
+                        color: #fff;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting h2 i {
+                            float: right;
+                            font-size: 14px;
+                        }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting > ul {
+                        padding: 0;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting > ul > li {
+                            display: block;
+                            padding: 10px;
+                        }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting > ul > li .Settings {
+                                margin: -10px;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting > ul > li .Settings ul {
+                                    padding: 0;
+                                }
+
+                                    #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting > ul > li .Settings ul li {
+                                        display: block;
+                                        border-top: 1px solid #edeaf0;
+                                    }
+
+                                        #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting > ul > li .Settings ul li a {
+                                            display: block;
+                                            font-size: 14px;
+                                            color: #000;
+                                            padding: 10px;
+                                            padding-left: 15px;
+                                        }
+
+                                            #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting > ul > li .Settings ul li a i {
+                                                padding-right: 5px;
+                                            }
+
+                                            #wrapper .content .Efar-Template .Efar-Template-Tools .Tool-Setting > ul > li .Settings ul li a:hover {
+                                                background: #f7f7f7;
+                                                color: #e11837;
+                                            }
+
+                #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool {
+                    margin: 15px;
+                    background: #fff;
+                    box-shadow: 0 0 8px #d7d5d4;
+                }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool h2 {
+                        margin: 0;
+                        padding: 0;
+                        font-size: 17px;
+                        cursor: pointer;
+                        padding: 15px;
+                        line-height: 15px;
+                        background: #45424a;
+                        color: #fff;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool h2 i {
+                            float: right;
+                            font-size: 14px;
+                        }
+
+                    #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul {
+                        display: none;
+                        padding: 0;
+                    }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul li {
+                            display: block;
+                            cursor: -webkit-grab;
+                            padding: 10px 20px;
+                            border-top: 1px solid #dedddc;
+                        }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul li i.fa {
+                                display: inline-block;
+                                zoom: 1;
+                                width: 14px;
+                                margin-right: 10px;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul li:hover {
+                                background-color: #f7f7f7;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul li.ui-draggable-dragging {
+                                z-index: 6000;
+                                background-color: #f7f7f7;
+                                width: calc(100% - 30px);
+                                border: 0;
+                                box-shadow: 0 0 8px #d7d5d4;
+                            }
+
+                        #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul.sortable li[data-type='TableField'] {
+                            position: relative;
+                            display: none;
+                            cursor: pointer;
+                            padding-left: 35px;
+                        }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul.sortable li[data-type='TableField'].active span:before {
+                                content: "";
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul.sortable li[data-type='TableField'].select {
+                                background-color: #e8e7e7;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul.sortable li[data-type='TableField'] span {
+                                width: 15px;
+                                height: 17px;
+                                display: block;
+                                position: absolute;
+                                left: 12px;
+                            }
+
+                                #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul.sortable li[data-type='TableField'] span:before {
+                                    position: absolute;
+                                    left: 0;
+                                    font-size: 15px;
+                                    content: "";
+                                    font-family: FontAwesome;
+                                    font-style: normal;
+                                    font-weight: normal;
+                                    text-decoration: inherit;
+                                }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul.sortable li[data-type='TableField'] i {
+                                margin: 0;
+                                width: auto;
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+                                padding: 10px 15px;
+                                line-height: 20px;
+                                color: #ccc;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul.sortable li[data-type='TableField']:hover i {
+                                color: #000;
+                            }
+
+                            #wrapper .content .Efar-Template .Efar-Template-Tools .Efar-Tool ul.sortable li[data-type='TableField'].ui-sortable-helper {
+                                z-index: 6000;
+                                background-color: #f7f7f7;
+                                width: calc(100% - 30px);
+                                border: 0;
+                                box-shadow: 0 0 8px #d7d5d4;
+                            }
+
+        #wrapper .content .Efar-Template-Creator .BtncreateTool {
+            border: 1px solid #545258;
+            background: #454149;
+            color: #fff;
+            padding: 7px 15px;
+            border-radius: 5px;
+        }
+
+            #wrapper .content .Efar-Template-Creator .BtncreateTool i {
+                margin-right: 5px;
+            }
+
+        #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place {
+            display: none;
+        }
+
+            #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool {
+                background: #fff;
+                box-shadow: 0 0 8px #d7d5d4;
+                width: calc(33% - 10px);
+                display: block;
+                float: left;
+                margin: 10px;
+                margin-left: 0;
+            }
+
+                #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool:nth-child(3n) {
+                    margin-right: 0;
+                }
+
+                #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool h2 {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 16px;
+                    padding: 15px;
+                    padding-right: 10px;
+                    line-height: 15px;
+                    background: #45424a;
+                    color: #fff;
+                    cursor: move;
+                }
+
+                    #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool h2 button {
+                        background: #2d2c2d;
+                        color: #fff;
+                        border: 0;
+                        padding: 5px 8px;
+                        display: inline-block;
+                        margin-top: -5px;
+                        opacity: .5;
+                    }
+
+                        #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool h2 button:hover {
+                            opacity: 1;
+                        }
+
+                #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul {
+                    padding: 0;
+                }
+
+                    #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li {
+                        display: block;
+                        padding: 10px 20px;
+                        cursor: -webkit-grab;
+                        padding-right: 10px;
+                        border-top: 1px solid #dedddc;
+                    }
+
+                        #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li > i.fa {
+                            display: inline-block;
+                            zoom: 1;
+                            width: 14px;
+                            margin-right: 10px;
+                        }
+
+                        #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li button {
+                            background: #45424a;
+                            color: #fff;
+                            border: 0;
+                            padding: 2px 7px;
+                            display: inline-block;
+                            border-radius: 3px;
+                            margin-top: -5px;
+                            font-size: 13px;
+                        }
+
+                            #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li button.remove:hover {
+                                background-color: #e11837;
+                            }
+
+                            #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li button.edit:hover {
+                                background-color: #185ae1;
+                            }
+
+                        #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li:hover {
+                            background-color: #f7f7f7;
+                        }
+
+                        #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li ul {
+                            margin-left: -20px;
+                            margin-right: -10px;
+                            margin-bottom: -10px;
+                            padding: 0;
+                            margin-top: 10px;
+                        }
+
+                            #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li ul li {
+                                padding-left: 50px;
+                                position: relative;
+                            }
+
+                                #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li ul li span.check {
+                                    width: 15px;
+                                    height: 17px;
+                                    display: block;
+                                    position: absolute;
+                                    left: 20px;
+                                }
+
+                                    #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li ul li span.check:before {
+                                        position: absolute;
+                                        left: 0;
+                                        font-size: 15px;
+                                        content: "";
+                                        font-family: FontAwesome;
+                                        font-style: normal;
+                                        font-weight: normal;
+                                        text-decoration: inherit;
+                                    }
+
+                                    #wrapper .content .Efar-Template-Creator .Efar-Template-Creator-Place .Tools .Tool ul li ul li span.check.active:before {
+                                        content: "";
+                                    }
+
+    #wrapper .efar-exchange-rate {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0 9px;
+        margin: 3px;
+        height: 28px;
+        line-height: 29px;
+        pointer-events: none;
+        color: #999593;
+        z-index: 50;
+    }
+
+    #wrapper .efar-exchange-rate-paid {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0 20px;
+        margin: 3px;
+        height: 28px;
+        line-height: 29px;
+        pointer-events: none;
+        color: #999593;
+        z-index: 50;
+    }
+
+.c-login .form-control {
+    margin-bottom: 15px;
+}
+
+ul.ui-autocomplete {
+    max-height: 200px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    z-index: 99999999;
+}
+
+    ul.ui-autocomplete li.ui-menu-item {
+        display: block;
+        border-bottom: 1px solid #ccc;
+    }
+
+        ul.ui-autocomplete li.ui-menu-item div.item {
+            display: block;
+            font-size: 12px;
+            padding: 8px 10px;
+        }
+
+            ul.ui-autocomplete li.ui-menu-item div.item .Icon:before {
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+                font-size: 15px;
+                padding-right: 5px;
+            }
+
+            ul.ui-autocomplete li.ui-menu-item div.item .Icon.Icon1:before {
+                content: "";
+            }
+
+            ul.ui-autocomplete li.ui-menu-item div.item .Icon.Icon2:before {
+                content: "";
+            }
+
+            ul.ui-autocomplete li.ui-menu-item div.item .Icon.IconNone:before {
+                content: "";
+            }
+
+            ul.ui-autocomplete li.ui-menu-item div.item .Icon.Empty:before {
+                content: "";
+            }
+
+            ul.ui-autocomplete li.ui-menu-item div.item .StockIcon:before {
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+                font-size: 15px;
+                padding-right: 5px;
+            }
+
+            ul.ui-autocomplete li.ui-menu-item div.item .StockIcon.Icon1:before {
+                content: "";
+            }
+
+            ul.ui-autocomplete li.ui-menu-item div.item .StockIcon.Icon2:before {
+                content: "";
+            }
+
+            ul.ui-autocomplete li.ui-menu-item div.item .Info {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+#loading .efar-loading {
+    background: url(../img/favicon.png) no-repeat;
+    background-size: 26px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+    -webkit-animation: spin 2s linear infinite;
+    -moz-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.PdfPrintPage {
+    position: absolute;
+    z-index: 0;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: 'ubuntumono';
+    src: url(../fonts/Template/UbuntuMono-R.ttf);
+}
+
+@font-face {
+    font-family: 'ptserif';
+    src: url(../fonts/Template/PTF55F.ttf);
+}
+
+@font-face {
+    font-family: 'ptsans';
+    src: url(../fonts/Template/PTS55F.ttf);
+}
+
+@media(max-width:767px) {
+    #wrapper .content-up {
+        width: calc(100% - 94px);
+        margin: 51px 30px 0 64px;
+    }
+
+    #wrapper #content .content .header {
+        width: /*width: calc(100% - 94px);*/ 90%;
+        text-align: center;
+    }
+}
+
+.pay-tabs {
+    background: #fff;
+    border: 1px solid #bababa;
+}
+
+	.pay-tabs ul li a {
+		font-size: 13px;
+		color: black;
+		padding: 8px 11px;
+	}
+
+
+
+
+/*.pay-tabs ul .active:before {
+                content: "\f04b";
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+                color: #000;
+                font-size: 14px;
+                padding-right: 0.5em;
+                position: absolute;
+                top: 10px;
+                left: 7px;
+                z-index: 9;
+            }*/
+
+
