@@ -3,10 +3,6 @@ import {
   } from "./../tool/screen.js";
 
   import {
-    RemoveCloneItem
-  } from './clone-crud';
-
-  import {
     SetItems
   } from './clone-module';
   import {
@@ -81,7 +77,8 @@ import { actionTypes } from "../../../reducer/const.js";
                     $( cloneItem.element).find("i")
                     .click(function(e) {
                       const { cloneId } =  cloneItem.element.dataset;
-                      RemoveCloneItem(cloneId);
+                      dispatch({type:actionTypes.CLONE.REMOVE_CLONEITEM,payload:cloneId});
+                     // RemoveCloneItem(cloneId);
                     })
                   if ($( cloneItem.element).hasClass("ui-resizable")) {
                     $( cloneItem.element).find(".ui-resizable-e").remove();

@@ -1,6 +1,6 @@
 import InitialState from './state';
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem } from './actions';
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem } from './actions';
 
 const observers= [];
 
@@ -26,6 +26,11 @@ const dispatch = (action,state=InitialState)=>{
                 sendReducer(action.type,data,state);
             });
         break;
+        case actionTypes.CLONE.REMOVE_CLONEITEM:
+            RemoveCloneItem(action.payload,state,data=>{
+                sendReducer(action.type,data,state);
+            })
+            break;
         default:
             break;
     }
@@ -40,7 +45,8 @@ const sendReducer= (type,data,state)=> {// {type:actionTypes, payload:{}}
         }else{
             const item=observers[i];
             if(item.type==type){
-                item.fn(state,data);
+                if(item.fn!=undefined)
+                    item.fn(state,data);
                 addReducer.unSubscribe(item)
             }
         }

@@ -4,6 +4,7 @@ export const actionTypes={
     },
     CLONE:{
         SETGROUPITEM:"SETGROUPITEM",
-        ADD_CLONEITEM:"ADD-CLONEITEM"
+        ADD_CLONEITEM:"ADD-CLONEITEM",
+        REMOVE_CLONEITEM:"REMOVE-CLONEITEM"
     }
 }
