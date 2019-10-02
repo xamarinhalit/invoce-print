@@ -3,6 +3,7 @@ export const actionTypes={
         FETCHED:"FETCHED",
     },
     CLONE:{
-        SETGROUPITEM:"SETGROUPITEM"
+        SETGROUPITEM:"SETGROUPITEM",
+        ADD_CLONEITEM:"ADD-CLONEITEM"
     }
 }

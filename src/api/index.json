@@ -360,7 +360,7 @@
                 "Width": "80",
                 "Height": "20",
                 "Sort": 7,
-                "ItemType": "TableField",
+                "ItemType": "Field",
                 "SubItemKey": "",
                 "TableType": "Column",
                 "Status": "true",

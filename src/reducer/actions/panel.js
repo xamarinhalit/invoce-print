@@ -1,5 +1,6 @@
 require("../../plugins/panelgroup");
 const SetGroupItem=(state)=> {
+    
     const { TEXT, TABLE } = state.Clone.Type;
     let AddedGroup = {};
 

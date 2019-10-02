@@ -6,7 +6,7 @@ import {
   getCloneItems,
 } from './ui/clone-module';
 import {
-makeDraggable,makeDraggables,
+makeDraggable,
 Tools
 } from './ui/clone-drop';
 require("../plugins/printThis");
@@ -244,5 +244,4 @@ $.fn.extend({
     });
   }
 });
-//export { UIDrop };
-export{makeDraggable,makeDraggables};
+export{makeDraggable};

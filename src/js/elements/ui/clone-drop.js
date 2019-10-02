@@ -1,19 +1,11 @@
 import {
     fn
   } from "./../tool/screen.js";
-  import {
-    GetStItems,
-  } from './clone-module';
-  import {
-    RemoveCloneItem,AddCloneItem,
-  } from './clone-crud';
-  import {
-    CloneType,
-    CloneSelectElement,
-    GroupItems
-  } from './index';
 
-  import { fetched } from "./../fetch";
+  import {
+    RemoveCloneItem
+  } from './clone-crud';
+
   import {
     SetItems
   } from './clone-module';
@@ -21,119 +13,94 @@ import {
     dispatch,addReducer
   } from '../../../reducer';
 import { actionTypes } from "../../../reducer/const.js";
-  const { DragSelect } = CloneSelectElement;
-  const ORNEKJSON = {
-      data: null
-    };
-
-    const INIT= function(_items, options) {
-      //  require("./../tool/index");
-      DragSelect.ELEMENT = options.dragclass ? options.dragclass: DragSelect.ELEMENT;
-      UISELECT.ACCORDIONID = options.accordionid? options.accordionid: UISELECT.ACCORDIONID;
-        SetItems(_items[0].Tools);
-        addReducer.subscribe(actionTypes.INIT.FETCHED,(state,data)=>{
-          console.log(actionTypes.INIT.FETCHED,state,"DATA",data);
-        })
-        addReducer.subscribe(actionTypes.CLONE.SETGROUPITEM,(state,data)=>{
-          console.log(actionTypes.CLONE.SETGROUPITEM,state,"DATA",data);
-        })
-        dispatch({type:actionTypes.INIT.FETCHED});
-        
-        
-     
-     // SetGroupItem();
-      // $(".m-Tool").PanelGroup({
-      //   up: "fa-chevron-up",
-      //   down: "fa-chevron-down",
-      //   extclass: "h2",
-      //   activeClass: "active"
-      // });
-    };
- //const UIDrop = {
   export const  UISELECT= {
       DRAGCLASS: "m-drag-ul",
       ACCORDIONID: "#accordion",
       DROPID: "",
       $CONTENT: null
     };
-    export const    makeDraggable=function() {
-      if (ORNEKJSON.data == null) {
-        fetched(data => {
-          ORNEKJSON.data = data;
-          INIT(ORNEKJSON.data, {
-            dragclass: UISELECT.DRAGCLASS
-          });
-        });
-      } else {
-        INIT(ORNEKJSON.data, {
-          dragclass: UISELECT.DRAGCLASS
-        });
-      }
+    export const makeDraggable=function(target) {
+      UISELECT.DROPID = target;
+      UISELECT.$CONTENT = $(target);
+      addReducer.subscribe(actionTypes.INIT.FETCHED,(state,data)=>{
+        console.log(actionTypes.INIT.FETCHED,state,"DATA",data);
+        SetItems(state.Clone.Items.StaticItems);
+      })
+      addReducer.subscribe(actionTypes.CLONE.SETGROUPITEM,SetConfig);
+      dispatch({type:actionTypes.INIT.FETCHED,payload:target});
     };
-    export const OnDropDraggable= function(event, ui) {
-      const {EmtoPixel } = fn;
-      let data = $(ui.helper).clone();
-      const $this = $(this);
-      //// MY UI DROP
-      const { left: uleft, top: utop } = ui.offset;
-      const { left: mleft, top: mtop } = $(".m-Template-Page-Area").offset();
-      let left = uleft - mleft;
-      let top = utop - mtop;
-      if (top < 0) top = 0;
-      if (left < 0) left = 0;
-  
-      // var left = (ui.offset.left - $('.m-Template-Page-Area').offset().left);
-      // var top = (ui.offset.top - $('.m-Template-Page-Area').offset().top);
-      let cloneitem = AddCloneItem(data[0].dataset.ItemKey);
-      if (cloneitem != undefined) {
-        let clel = cloneitem.element;
-        let $clel = $(clel);
-        $clel.css({ position: "absolute" });
-        $this.append(clel);
-        let text = cloneitem.value.ItemValue;
-        let textlength = text ? text.length : 10;
-        let width = EmtoPixel(10) + "px",
-          height = "";
-        let tg = textlength / 30;
-        if (tg < 1) {
-          height = EmtoPixel(3) + "px";
-        } else {
-          height = EmtoPixel((textlength / 30) * 3) + "px";
-        }
-  
-        $clel
-          .width(width)
-          .height(height)
-          .offset({ left: left, top: top })
-          .draggable({
-            containment: "parent",
-            cursorAt: { top: clel.offsetY, left: clel.offsetX },
-            cursor: "move",
-            drag: function(el, ui) {
-              cloneitem.value.Style = ui.helper[0].style.cssText;
-            }
+    const SetConfig = (state,data)=>{
+        console.log(actionTypes.CLONE.SETGROUPITEM,state,"DATA",state);
+        const {EmtoPixel } = fn;
+        state.UI.$CONTENT.droppable({
+            accept: "." +state.UI.DRAGCLASS + ">li",
+            classes: {
+            "ui-droppable-active": "ui-state-active",
+            "ui-droppable-hover": "ui-state-hover"
+            },
+            drop: (event, ui)=> {
+              // var left = (ui.offset.left - $('.m-Template-Page-Area').offset().left);
+              // var top = (ui.offset.top - $('.m-Template-Page-Area').offset().top);
+              addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_state,cloneItem)=>{
+                if (cloneItem != undefined) {
+                  //// MY UI DROP
+                  const { left: uleft, top: utop } = ui.offset;
+                  const { left: mleft, top: mtop } = _state.UI.$CONTENT.offset();
+                  //let { left: mleft, top: mtop } = _state.UI.$CONTENT.offset();
+                  const left = uleft - mleft;
+                  const top = utop - mtop;
+                  if (top < 0) top = 0;
+                  if (left < 0) left = 0;
+                  _state.UI.$CONTENT.append($(cloneItem.element));
+                  $( cloneItem.element).css({ position: "absolute" });
+               //   $this.append(clel);
+                  const textlength = cloneItem.value.ItemValue ? cloneItem.value.ItemValue.length : 10;
+                  let width = EmtoPixel(10) + "px",
+                    height = "";
+                  const tg = textlength / 30;
+                  if (tg <= 0) {
+                    height = EmtoPixel(3) + "px";
+                  } else {
+                    height = EmtoPixel((textlength / 30) * 3) + "px";
+                  }
+            
+                  $( cloneItem.element)
+                    .width(width)
+                    .height(height)
+                    .offset({ left: left, top: top })
+                    .draggable({
+                      containment:_state.UI.DROPID,
+                      cursorAt: { top:  cloneItem.element.offsetY, left:  cloneItem.element.offsetX },
+                      cursor: "move",
+                      drag: function(el, ui2) {
+                        cloneItem.value.Style = ui2.helper[0].style.cssText;
+                      }
+                    })
+                    .css({ border: "none", left: left + "px", top: top + "px" })
+                    .disableSelection();
+                    $( cloneItem.element).find("i")
+                    .click(function(e) {
+                      const { cloneId } =  cloneItem.element.dataset;
+                      RemoveCloneItem(cloneId);
+                    })
+                  if ($( cloneItem.element).hasClass("ui-resizable")) {
+                    $( cloneItem.element).find(".ui-resizable-e").remove();
+                    $( cloneItem.element).find(".ui-resizable-e").remove();
+                    $( cloneItem.element).find(".ui-resizable-se").remove();
+                  }
+                  $( cloneItem.element).resizable({minHeight: width,minWidth: height});
+                  cloneItem.value.Style =  cloneItem.element.style.cssText;
+                }
+              });
+              dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:ui.helper[0].dataset.ItemKey});
+              //dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:_data[0].dataset.ItemKey});
+             }
           })
-          .css({ border: "none", left: left + "px", top: top + "px" })
-          .find("i")
-          .click(function(e) {
-            const { cloneId } = clel.dataset;
-            RemoveCloneItem(cloneId);
-          })
-          .disableSelection();
-        if ($clel.hasClass("ui-resizable")) {
-          $clel.find(".ui-resizable-e").remove();
-          $clel.find(".ui-resizable-e").remove();
-          $clel.find(".ui-resizable-se").remove();
-        }
-        $clel.resizable({
-          minHeight: width,
-          minWidth: height
-        });
-        cloneitem.value.Style = clel.style.cssText;
-      }
-      //// MY UI DROP
-    };
-    export const  Tools= {
+          .disableSelection()
+          .css({ margin: "2px" });
+      
+    }
+    export const  Tools= {  
       screen: {
         width: {
           big: 0,
@@ -211,97 +178,3 @@ import { actionTypes } from "../../../reducer/const.js";
         };
       }
     };
-    export const makeDraggables= function(target) {
-      UISELECT.DROPID = target;
-      UISELECT.$CONTENT = $(target);
-      $(target)
-        .droppable({
-          accept: "." + UISELECT.DRAGCLASS + ">li",
-          classes: {
-            "ui-droppable-active": "ui-state-active",
-            "ui-droppable-hover": "ui-state-hover"
-          },
-          drop: OnDropDraggable
-        })
-        .disableSelection()
-        .css({ margin: "2px" });
-    };
-    const SetGroupItem=()=> {
-        const { TEXT, TABLE } = CloneType;
-        let AddedGroup = {};
-    
-        GetStItems().forEach(function(item, index) {
-          if (item != undefined) {
-            const { Sort, ToolValue, Items: ItemList } = item;
-            if (ItemList != undefined) {
-              for (let iindex = 0; iindex < ItemList.length; iindex++) {
-                const element = ItemList[iindex];
-                if (element != undefined) {
-                  switch (element.ItemType) {
-                    case TEXT.FIELD:
-                      AddGroupTextFieldItem({
-                        name: element[TEXT.ITEMKEY],
-                        value: element[TEXT.ITEMTITLE],
-                        item_sort: Sort,
-                        ItemType: element.ItemType,
-                        groupName: ToolValue,
-                        icon: element.Icon
-                      });
-                      break;
-                    case TABLE.FIELD:
-                      AddedGroup[item.ItemType] = {
-                        group: AddGroupTextFieldItem({
-                          name: element[TEXT.ITEMKEY],
-                          value: element[TEXT.ITEMTITLE],
-                          item_sort: Sort,
-                          ItemType: element.ItemType,
-                          groupName: ToolValue,
-                          icon: element.Icon
-                        })
-                      };
-    
-                      break;
-                    default:
-                      break;
-                  }
-                }
-              }
-            }
-          }
-        });
-    
-        $("ul.m-drag-ul").disableSelection();
-        $("ul.m-drag-ul>li")
-          .draggable({
-            helper: "clone",
-            revert: "invalid",
-            cursor: "move",
-            cancel: null,
-            cursorAt: { top: 50, left: 50 }
-          })
-          .disableSelection();
-        let keys = Object.keys(AddedGroup);
-        for (let i = 0; i < keys.length; i++) {
-          const element = AddedGroup[keys[i]];
-          let $element = $("ul.m-drag-ul." + element.group + ">li");
-          $element.draggable("option", "disabled", true);
-          $element.TableCreate();
-        }
-      };
-      const AddGroupTextFieldItem= function(options) {
-        const { name, value, item_sort, ItemType, groupName, icon } = options;
-        let groupNameId = "group-drop-text-" + item_sort;
-        if (GroupItems[groupNameId] == undefined) {
-          GroupItems[groupNameId] = item_sort;
-          $(".m-Template-Tools").append(`
-                    <div class="m-Tool">
-                        <h2> ${groupName} <i class="fa fa-chevron-up"></i> </h2>
-                        <ul class="m-drag-ul ${groupNameId}" style='display:block'>
-                        </ul>
-                    </div>`);
-        }
-        $("ul.m-drag-ul." + groupNameId)
-          .append(`<li class="" data--item-key="${name}" >
-                                <i class="${icon}"></i>${value}</li>`);
-        return groupNameId;
-      };
