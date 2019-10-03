@@ -20,36 +20,64 @@ const RemoveCloneItem=(cloneId,state,success) =>{
         ""
       );
       if (removeItem.id == tablename) {
-        CITABLE.CloneId = -1;
-        let groupName = "#group-drop-text-" + tablename;
-        $(groupName)
-          .find(".active")
-          .each(function(ind, ele) {
-            if (ele != undefined) {
-              ele.classList.remove("active");
-              let ItemKey = ele.dataset.ItemKey;
-              let _removeItem = null;
-              _Clons.Items.Clons = _Clons.Items.Clons.filter(function(value, index) {
-                if (value != undefined && value != null) {
-                  if (value.value.ItemKey != ItemKey) {
-                    return true;
-                  } else {
-                    _removeItem = value.element;
-                    return false;
-                  }
+        _Clons.Index.Table={
+              RowGroup: {},
+              $RowGroup: {},
+              CloneId: -1
+        };
+        $(removeItem,"table>tbody>tr>td").each((ind, ele)=> {
+          if (ele != undefined) {
+            const { cloneId} = ele.dataset;
+            _Clons.Items.Clons = _Clons.Items.Clons.filter(function(value, index) {
+              if (value != undefined && value != null) {
+                if (value.Index != cloneId) {
+                  $(".m-Tool>ul>li.active").each((_ind,_ele)=>{
+                    if(_ele!=undefined){
+                      const { ItemKey} =_ele.dataset;
+                      if(ItemKey==value.value.ItemKey)
+                        _ele.classList.toggle("active");
+                        $(_ele).find("input").first().prop("checked",false);
+                    }
+                  })
+                  return true;
+                } else {
+                  return false;
                 }
-              });
-              if (_removeItem != null) {
-                $(_removeItem).fadeOut("slow", function() {
-                  $(this).remove();
-                });
               }
-            }
-          });
+            });
+          }
+        })
+        
+        // let groupName = "#group-drop-text-" + tablename;
+        // $(groupName)
+        //   .find(".active")
+        //   .each(function(ind, ele) {
+        //     if (ele != undefined) {
+        //       ele.classList.remove("active");
+        //       let ItemKey = ele.dataset.ItemKey;
+        //       let _removeItem = null;
+        //       _Clons.Items.Clons = _Clons.Items.Clons.filter(function(value, index) {
+        //         if (value != undefined && value != null) {
+        //           if (value.value.ItemKey != ItemKey) {
+        //             return true;
+        //           } else {
+        //             _removeItem = value.element;
+        //             return false;
+        //           }
+        //         }
+        //       });
+        //       if (_removeItem != null) {
+        //         $(_removeItem).fadeOut("slow", function() {
+        //           $(this).remove();
+        //         });
+        //       }
+        //     }
+        //   });
       }
-      $(removeItem).fadeOut("slow", function() {
-        $(this).remove();
-      });
+        var $r =$(removeItem);
+        $r.fadeOut("slow", function() {
+          $r.remove();
+        });
     }
     success(null,state);
   };

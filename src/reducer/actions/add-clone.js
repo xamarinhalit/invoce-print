@@ -1,78 +1,87 @@
-const CreateTable= (state) =>{
-    const CTTABLE = state.Clone.Type.TABLE;
-    const CITABLE = state.Clone.Index.Table;
-    const CSTABLE = state.Clone.SelectElement.TABLE;
-    const { DROPID } = state.UI;
-    let $UI = $(DROPID + " " + CSTABLE);
-    let isDiv = $UI.is("div");
-    if (isDiv == false) {
-      let element = AddCloneItem(CTTABLE.DEFAULT);
-      $UI = element.element;
-      // $(TABLE.ELEMENT).clone();
-      $(DROPID).append($UI);
-      $($UI)
-        .offset({ top: 500, left: 0 })
-        .draggable({
-          containment: DROPID,
-          cursor: "move",
-          drag: function(el, ui) {
-              let item = null;
-            if (CITABLE.CloneId) {
-                state.Clone.Items.Clons.forEach(function(element, i) {
-                  if (element != undefined) {
-                    if (element.index == CITABLE.CloneId) {
-                      item = element;
+import { dispatch, addReducer } from "..";
+import { actionTypes } from "../const";
+
+export const CreateTable= (state) =>{
+    return new Promise((resolve,eject)=>{
+        const CTTABLE = state.Clone.Type.TABLE;
+        const CITABLE = state.Clone.Index.Table;
+        const CSTABLE = state.Clone.SelectElement.TABLE;
+        const { DROPID } = state.UI;
+        let $UI = $(DROPID + " " + CSTABLE);
+        let isDiv = $UI.is("div");
+        if (isDiv == false) {
+          AddCloneItem(CTTABLE.DEFAULT,state,(element)=>{
+            $UI = element.element;
+            // $(TABLE.ELEMENT).clone();
+            $(DROPID).append($UI);
+            $($UI)
+              .offset({ top: 500, left: 0 })
+              .draggable({
+                containment: DROPID,
+                cursor: "move",
+                drag: function(el, ui) {
+                    let item = null;
+                  if (CITABLE.CloneId) {
+                      state.Clone.Items.Clons.forEach(function(element, i) {
+                        if (element != undefined) {
+                          if (element.index == CITABLE.CloneId) {
+                            item = element;
+                          }
+                        }
+                      });
+                      if (item != undefined && item != null) {
+                        return item;
+                      }
                     }
-                  }
-                });
-                if (item != undefined && item != null) {
-                  return item;
+                  item.value.Style = ui.helper[0].style.cssText;
                 }
-              }
-            item.value.Style = ui.helper[0].style.cssText;
-          }
-        })
-        .find(".close")
-        .click(function(e) {
-          let cloneId = $UI.dataset.cloneId;
-          RemoveCloneItem(cloneId);
-        });
-      if ($($UI).hasClass("ui-resizable")) {
-        $($UI)
-          .find(".ui-resizable-e")
-          .remove();
-        $($UI)
-          .find(".ui-resizable-e")
-          .remove();
-        $($UI)
-          .find(".ui-resizable-se")
-          .remove();
-      }
-      $($UI)
-        .resizable({
-          minHeight: 30,
-          minWidth: 75
-        })
-        .on("resize", function(e) {
-            let item = null;
-            if (CITABLE.CloneId) {
-                state.Clone.Items.Clons.forEach(function(element, i) {
-                  if (element != undefined) {
-                    if (element.index == CITABLE.CloneId) {
-                      item = element;
+              })
+              .find(".close")
+              .click(function(e) {
+                let cloneId = $UI.dataset.cloneId;
+                dispatch({type:actionTypes.CLONE.REMOVE_CLONEITEM,payload:cloneId});
+              });
+            if ($($UI).hasClass("ui-resizable")) {
+              $($UI)
+                .find(".ui-resizable-e")
+                .remove();
+              $($UI)
+                .find(".ui-resizable-e")
+                .remove();
+              $($UI)
+                .find(".ui-resizable-se")
+                .remove();
+            }
+            $($UI)
+              .resizable({
+                minHeight: 30,
+                minWidth: 75
+              })
+              .on("resize", function(e) {
+                  let item = null;
+                  if (CITABLE.CloneId) {
+                      state.Clone.Items.Clons.forEach(function(element, i) {
+                        if (element != undefined) {
+                          if (element.index == CITABLE.CloneId) {
+                            item = element;
+                          }
+                        }
+                      });
+                      if (item != undefined && item != null) {
+                        return item;
+                      }
                     }
-                  }
-                });
-                if (item != undefined && item != null) {
-                  return item;
-                }
-              }
-              item.value.Style = item.element.style.cssText;
-        });
-    }
-    return $UI;
+                    item.value.Style = item.element.style.cssText;
+              });
+          });
+          resolve($UI);
+        }else{
+          resolve($UI);
+        }
+    });
+  
 };
-const UIInstance= (uitype, item,state)=> {
+const UIInstance=async (uitype, item,state)=> {
     const CTTABLE = state.Clone.Type.TABLE;
     const CTTEXT = state.Clone.Type.TEXT;
     const CSTEXT = state.Clone.SelectElement.TEXT;
@@ -93,9 +102,9 @@ const UIInstance= (uitype, item,state)=> {
           );
         return textfield[0];
       case CTTABLE.FIELD:
-        const $table = CreateTable(state);
+        const $table = await CreateTable(state);
         var $tr, item_sort;
-        const rindex = CTRowGroup[item[CTTABLE.ITEMCOLUM]];
+        let rindex = CTRowGroup[item[CTTABLE.ITEMCOLUM]];
         if (rindex == undefined) {
           rindex = -1;
           $tr = document.createElement("tr");
@@ -149,30 +158,103 @@ const AddCloneItem= (ItemKey,state,success) =>{
     const { item } = _xitem;
     if (item != null && item != undefined) {
       _Index.Index++;
-      const _element = UIInstance(item.ItemType, item,state);
-      _element.dataset.cloneId = _Index.Index;
-      const elements = {
-        index: _Index.Index,
-        element: _element,
-        value: item
-      };
-      state.Clone.Items.Clons.push(elements);
-      success(elements);
+     UIInstance(item.ItemType, item,state).then(
+        _element=>{
+          _element.dataset.cloneId = _Index.Index;
+          const elements = {
+            index: _Index.Index,
+            element: _element,
+            value: item
+          };
+          state.Clone.Items.Clons.push(elements);
+          success(elements);
+        });
+      
     } else {
       _Index.Index++;
-      const _element = UIInstance(CTTABLE.DEFAULT, null,state);
-      _element[0].dataset.cloneId = _Index.Index;
-      _Index.Table.CloneId = _Index.Index;
-       const elements = {
-        index: _Index.Index,
-        element: _element[0],
-        value: {
-          ItemType: ItemKey
-        }
-      };
-      state.Clone.Items.Clons.push(elements);
-      success(elements);
+      UIInstance(CTTABLE.DEFAULT, null,state).then(
+        _element=>{
+          _element[0].dataset.cloneId = _Index.Index;
+          _Index.Table.CloneId = _Index.Index;
+           const elements = {
+            index: _Index.Index,
+            element: _element[0],
+            value: {
+              ItemType: ItemKey
+            }
+          };
+          state.Clone.Items.Clons.push(elements);
+          success(elements);
+        }  
+      )
+     
     }
 
   };
+  $.fn.extend({
+
+    TableItemClick:function(cb){
+      let $item = $(this);
+      let itemdata = $item.data("-item-key");
+      $item.toggleClass("active");
+      addReducer.subscribe(actionTypes.CLONE.CREATE_TABLE,(state,$UIable)=>{
+        let cloneitem ;
+        if ($item.hasClass("active")) {
+          cb(true);
+          addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_state,cloneitem)=>{
+            $item.data("cloneId", cloneitem.index);
+          });
+          dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:itemdata});
+
+        } else {
+          let cloneId = $item.data("cloneId");
+          cb(false);
+          addReducer.subscribe(actionTypes.CLONE.REMOVE_CLONEITEM,(_state,_xdata)=>{
+            $UIable.find("tbody" + " ." + itemdata).remove();
+          });
+          dispatch({type:actionTypes.CLONE.REMOVE_CLONEITEM,payload:cloneId});
+        }
+        $($UIable[0])
+          .find("tbody>tr")
+          .sortable()
+          .on("sortstop", function(event, ui) {
+            const _items= state.Clone.Items.Clons;
+            $(ui.item[0]).parent("tr").find("td").each(function(iv,iy){
+              if(iy!=undefined){
+                state.forEach((newitem,index)=>{
+                  if(newitem!=undefined && newitem !=null && newitem.value.Index==iy.dataset.cloneId) {
+                    newitem.element.dataset.Sort=JSON.stringify(iv);
+                    newitem.value.Sort=iv;
+                  }
+                })
+                  
+              }
+            });
+          });
+      });
+      dispatch({type:actionTypes.CLONE.CREATE_TABLE});
+      
+    },
+    TableCreate: function() {
+      let $this = $(this);
+      for (let ii = 0; ii < $this.length; ii++) {
+        const $el = $($this[ii]);
+        if ($el != undefined && $el.length>0) {
+          let elinput = document.createElement("input");
+          $(elinput).attr("type", "checkbox");
+          let $elinput = $(elinput);
+          $el.prepend($elinput);
+          $el.click( function(e) {
+            $(e.currentTarget).TableItemClick(cb=>{
+              $elinput.prop("checked", cb);
+            });
+          });
+        }
+      }
+    }
+});
   export default AddCloneItem;
+
+
+  
+  

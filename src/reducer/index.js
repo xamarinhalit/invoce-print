@@ -1,6 +1,7 @@
 import InitialState from './state';
 import { actionTypes } from './const'
 import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem } from './actions';
+import { CreateTable } from './actions/add-clone';
 
 const observers= [];
 
@@ -31,6 +32,11 @@ const dispatch = (action,state=InitialState)=>{
                 sendReducer(action.type,data,state);
             })
             break;
+        case actionTypes.CLONE.CREATE_TABLE:
+            CreateTable(state).then((_data)=>{
+                sendReducer(action.type,_data,state);
+            })
+        break;
         default:
             break;
     }
