@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-require('../../plugins/panelgroup')
+require('../plugins/panelgroup')
 const SetGroupItem=(state)=> {
     
     const { TEXT, TABLE } = state.Clone.Type
