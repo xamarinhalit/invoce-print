@@ -3,7 +3,7 @@ import InitialState from './state'
 import { actionTypes } from './const'
 import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem } from './actions'
 import { CreateTable } from './actions/add-clone'
-import { GetInitCalc,CalcW80To100,CalcH70To100 } from './actions/screen-tool'
+import { GetInitCalc,CalcW80To100,CalcH70To100,EmtoPixel } from './actions/screen-tool'
 
 const observers= []
 
@@ -12,7 +12,7 @@ const dispatch = (action,state=InitialState)=>{
     switch (action.type) {
     case actionTypes.CLONE.SETGROUPITEM:
         SetGroupItem(state)
-        sendReducer(action.type,null,state)
+        sendReducer(action.type,{Tools:{EmtoPixel}},state)
         break
     case actionTypes.INIT.FETCHED:
         fetchData(data=>{
@@ -43,7 +43,7 @@ const dispatch = (action,state=InitialState)=>{
         sendReducer(action.type,state.Clone.Items.Clons,state)
         break
     case actionTypes.UI.UI_GETINITCALC:
-        GetInitCalc().then(()=>{
+        GetInitCalc(state).then(()=>{
             sendReducer(action.type,{Tools:{ CalcW80To100,CalcH70To100}},state)
         })
         break
@@ -81,4 +81,11 @@ const addReducer ={
         }
     }
 }
-export { addReducer,dispatch}
+const reducer_pipe=(c,...ops)=>{
+    ops.forEach((v)=>{
+        if(v!=undefined){
+            v(c)
+        }
+    })
+}
+export { addReducer,dispatch,reducer_pipe}

@@ -85,3 +85,15 @@ export const GetInitCalc = (state)=> {
         resolve()
     })
 }
+
+export const EmtoPixel=(point)=> {
+    let size = getComputedStyle(document.documentElement).fontSize
+    if (size != undefined) {
+        size = size.replace('px', '')
+        size = parseFloat(size)
+        if (size < 11) size = 16
+    } else {
+        size = 16
+    }
+    return (parseFloat(point) * size).toFixed(0)
+}

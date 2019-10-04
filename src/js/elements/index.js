@@ -4,106 +4,123 @@
 import {
     makeDraggable,
 } from './ui/clone-drop'
-import { addReducer, dispatch } from '../../reducer'
+import { addReducer, dispatch ,reducer_pipe} from '../../reducer'
 import { actionTypes } from '../../reducer/const'
 require('../plugins/printThis')
 require('../plugins/bootstrap.min.js')
-
 $.fn.extend({
     makePrint: function() {
-        addReducer(actionTypes.UI.UI_GETINITCALC,(state,_data)=>{
+        addReducer.subscribe(actionTypes.UI.UI_GETINITCALC,(state,_data)=>{
             const { screen } = state.UI
             const {  CalcW80To100, CalcH70To100 } = _data.Tools
-            let printdiv = $('#dragui').clone()
-            let i = printdiv[0].classList.length
-            for (let index = 0; index < i; index++) {
-                printdiv[0].classList.remove(printdiv[0].classList[index])
-            }
-            let $pri = $(printdiv[0])
-            $pri.find('.close').remove()
-            $pri.find('.ui-resizable-handle.ui-resizable-e').remove()
-            $pri.find('.ui-resizable-handle.ui-resizable-s').remove()
-            $pri.find('.ui-resizable-handle.ui-resizable-se').remove()
-            $(printdiv)
-                .find('.TextField')
-                .each(function(i, item) {
-                    if (item != undefined) {
-                        //GetInitCalc()
-                        let { left, width } = CalcW80To100(item.style.left, item.style.width,screen)
-                        let { top, height } = CalcH70To100(item.style.top, item.style.height,screen)
-                        if (left <= 0) left = 0
-                        item.style.left = JSON.stringify(left) + 'vw'
-                        item.style.width = JSON.stringify(width) + 'vw'
-                        item.style.top = JSON.stringify(top) + 'vh'
-                        item.style.height = JSON.stringify(height) + 'vh'
-                        $(item).text(
-                            $(item)
-                                .text()
-                                .trim()
-                        )
+            const _pr =$(state.UI.DROPID).clone();
+            reducer_pipe(
+                _pr,
+                (t)=>{
+                    let i = t[0].classList.length
+                    for (let index = 0; index < i; index++) {
+                        t[0].classList.remove( t[0].classList[index])
                     }
-                })
-            let tablefield = $(printdiv).find('#TableField')
-            let $tablefield = tablefield[0]
-            let $style=$tablefield.style
-            if ($tablefield != undefined) {
-                let { left, width } = CalcW80To100(
-                    $style.left,
-                    $style.width,
-                    screen
-                )
-                let { top, height } = CalcH70To100(
-                    $style.top,
-                    $style.height,
-                    screen
-                )
-                if (left <= 0) left = 0
-                $style.left = JSON.stringify(left) + 'vw'
-                $style.width = JSON.stringify(width) + 'vw'
-                $style.top = JSON.stringify(top) + 'vh'
-                $style.height = JSON.stringify(height) + 'vh'
-            }
-            var newwin = window.open('')
-            // newwin.document.head.innerHTML=`
-            // <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-            // <link rel="stylesheet" href="src/css/mycss.css">
-            // <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> <link href="https://content.hesap365.com/static/css/jquery-ui.min.css" rel="stylesheet">
-            // <link rel="stylesheet" href="src/css/print-css.css"><link rel="stylesheet" href="src/css/jq-ui.css">`;
-            newwin.document.write(`<html><head>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-            <link rel="stylesheet" href="src/css/mycss.css">
-            <link rel="stylesheet" href="src/css/jq-ui.css">
-            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> <link href="https://content.hesap365.com/static/css/jquery-ui.min.css" rel="stylesheet">
-            <link rel="stylesheet" href="src/css/print-css.css">
-            </head><body>
-                    <div style="display: block;width:99vw;height:99vh">
-                        <div style="margin-top: 1em">
-                            ${printdiv[0].innerHTML}
-                        </div>
-                    </div></body></html>`)
-    
-            newwin.focus()
-            $(newwin.document.body).printThis({
-                debug: false, // show the iframe for debugging
-                importCSS: true, // import parent page css
-                importStyle: true, // import style tags
-                printContainer: true, // print outer container/$.selector
-                pageTitle: '', // add title to print page
-                removeInline: false, // remove inline styles from print elements
-                removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
-                printDelay: 333, // variable print delay
-                header: '', // prefix to html
-                footer: null, // postfix to html
-                base: false, // preserve the BASE tag or accept a string for the URL
-                formValues: true, // preserve input/form values
-                canvas: false, // copy canvas content
-                removeScripts: false, // remove script tags from print content
-                copyTagClasses: true, // copy classes from the html & body tag
-                beforePrintEvent: null, // function for printEvent in iframe
-                beforePrint: null, // function called before iframe is filled
-                afterPrint: null // function called before iframe is removed
-            })
-        // newwin.close();
+                },
+                (t)=>t.find('.close').remove(),
+                (t)=>t.find('.ui-resizable-handle.ui-resizable-e').remove(),
+                (t)=>t.find('.ui-resizable-handle.ui-resizable-s').remove(),
+                (t)=>t.find('.ui-resizable-handle.ui-resizable-se').remove(),
+                (t)=>{
+                    t
+                        .find('.TextField')
+                        .each(function(i, item) {
+                            if (item != undefined) {
+                            //GetInitCalc()
+                                let { left, width } = CalcW80To100(item.style.left, item.style.width,screen)
+                                let { top, height } = CalcH70To100(item.style.top, item.style.height,screen)
+                                if (left <= 0) left = 0
+                                item.style.left = JSON.stringify(left) + 'vw'
+                                item.style.width = JSON.stringify(width) + 'vw'
+                                item.style.top = JSON.stringify(top) + 'vh'
+                                item.style.height = JSON.stringify(height) + 'vh'
+                                $(item).text(
+                                    $(item)
+                                        .text()
+                                        .trim()
+                                )
+                            }
+                        })
+                },
+                (t)=>{
+                    let tablefield = t.find('#TableField')
+                    let $tablefield = tablefield[0]
+                    let $style=$tablefield.style
+                    if ($tablefield != undefined) {
+                        let { left, width } = CalcW80To100(
+                            $style.left,
+                            $style.width,
+                            screen
+                        )
+                        let { top, height } = CalcH70To100(
+                            $style.top,
+                            $style.height,
+                            screen
+                        )
+                        if (left <= 0) left = 0
+                        $style.left = JSON.stringify(left) + 'vw'
+                        $style.width = JSON.stringify(width) + 'vw'
+                        $style.top = JSON.stringify(top) + 'vh'
+                        $style.height = JSON.stringify(height) + 'vh'
+                    }
+                },
+                (t)=>{
+                    var newwin = window.open('')
+                    // newwin.document.head.innerHTML=`
+                    // <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                    // <link rel="stylesheet" href="src/css/mycss.css">
+                    // <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> <link href="https://content.hesap365.com/static/css/jquery-ui.min.css" rel="stylesheet">
+                    // <link rel="stylesheet" href="src/css/print-css.css"><link rel="stylesheet" href="src/css/jq-ui.css">`;
+                    newwin.document.write(`<html><head>
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                    <link rel="stylesheet" href="src/css/mycss.css">
+                    <link rel="stylesheet" href="src/css/jq-ui.css">
+                    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> <link href="https://content.hesap365.com/static/css/jquery-ui.min.css" rel="stylesheet">
+                    <link rel="stylesheet" href="src/css/print-css.css">
+                    </head><body>
+                            <div style="display: block;width:99vw;height:99vh">
+                                <div style="margin-top: 1em">
+                                    ${t[0].innerHTML}
+                                </div>
+                            </div></body></html>`)
+            
+                    newwin.focus()
+                    $(newwin.document.body).printThis({
+                        debug: false, // show the iframe for debugging
+                        importCSS: true, // import parent page css
+                        importStyle: true, // import style tags
+                        printContainer: true, // print outer container/$.selector
+                        pageTitle: '', // add title to print page
+                        removeInline: false, // remove inline styles from print elements
+                        removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
+                        printDelay: 333, // variable print delay
+                        header: '', // prefix to html
+                        footer: null, // postfix to html
+                        base: false, // preserve the BASE tag or accept a string for the URL
+                        formValues: true, // preserve input/form values
+                        canvas: false, // copy canvas content
+                        removeScripts: false, // remove script tags from print content
+                        copyTagClasses: true, // copy classes from the html & body tag
+                        beforePrintEvent: null, // function for printEvent in iframe
+                        beforePrint: null, // function called before iframe is filled
+                        afterPrint: null // function called before iframe is removed
+                    })
+                    newwin.close()
+                }
+            )
+            // let $pri = $(printdiv[0])
+            // $pri.find('.close').remove()
+            // $pri.find('.ui-resizable-handle.ui-resizable-e').remove()
+            // $pri.find('.ui-resizable-handle.ui-resizable-s').remove()
+            // $pri.find('.ui-resizable-handle.ui-resizable-se').remove()
+
+            
+
         })
         dispatch({type:actionTypes.UI.UI_GETINITCALC})
        
@@ -111,8 +128,7 @@ $.fn.extend({
     //@ts-check
     loadPrint: function() {
         // eslint-disable-next-line no-unused-vars
-        addReducer(actionTypes.UI.UI_GETINITCALC,(state,_data)=>{
-            
+        addReducer.subscribe(actionTypes.UI.UI_GETINITCALC,(state,_data)=>{
             const Clons =state.Clone.Items.Clons
             const CloneType = state.Clone.Type
             const { width, height } = state.UI.screen
@@ -126,7 +142,6 @@ $.fn.extend({
                 let top = $(element).css('top')
                 top = top.replace('px', '')
                 left = left.replace('px', '')
-              
                 let leftx = left / width.medium
                 if(leftx>-1)
                     leftx=0
@@ -195,7 +210,6 @@ $.fn.extend({
                         }
                     }
                     div += `<div style="${table.Style}"><table class="table-style" border="0">
-                <!--<thead><tr>${rowhead}</tr></thead>-->
                 <tbody>${rowbody}</tbody>
                 </table>
                 </div>
