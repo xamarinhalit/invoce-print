@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable no-unused-vars */
-import '../css/bootstrap.min.css'
-import '../css/mycss.css'
-import '../css/jq-ui.css'
-import '../css/font-awesome.min.css'
-import '../css/jquery-ui.min.css'
+import '../_plugin/css/bootstrap.min.css'
+import '../_plugin/css/mycss.css'
+import '../_plugin/css/jq-ui.css'
+import '../_plugin/css/font-awesome.min.css'
+import '../_plugin/css/jquery-ui.min.css'
 // import '../scss/efar.scss';
 import '../scss/mydrop.scss'
 
@@ -13,8 +13,8 @@ import { addReducer, dispatch ,reducer_pipe} from './reducer'
 import { actionTypes } from './reducer/const'
 
 (function () {
-    require('./_plugin/printThis')
-    require('./_plugin/bootstrap.min.js')
+    require('../_plugin/js/used/printThis')
+    require('../_plugin/js/used/bootstrap.min')
     require('webpack-jquery-ui')
     //require('webpack-jquery-ui/css');
     $(document).ready(function () {
