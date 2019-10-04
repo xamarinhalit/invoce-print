@@ -81,11 +81,19 @@ const addReducer ={
         }
     }
 }
+const reducer_ListFn={
+    index:-1,
+    objects:{}
+}
 const reducer_pipe=(c,...ops)=>{
-    ops.forEach((v)=>{
+    const _ob={ arg:ops,obj:c}
+    reducer_ListFn.index++;
+    reducer_ListFn.objects[reducer_ListFn.index]= _ob
+    _ob.arg.forEach((v)=>{
         if(v!=undefined){
-            v(c)
+            v(_ob.obj);
         }
     })
+    delete reducer_ListFn.objects[reducer_ListFn.index]
 }
 export { addReducer,dispatch,reducer_pipe}
