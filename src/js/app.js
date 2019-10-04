@@ -16,22 +16,13 @@ import { actionTypes } from './reducer/const'
     require('../_plugin/js/used/printThis.js')
     require('../_plugin/js/used/bootstrap.min.js')
     require('webpack-jquery-ui')
+    const { subscribe } =addReducer
     //require('webpack-jquery-ui/css');
     $(document).ready(function () {
-        const InitDragable = function (target,...pargs) {
-            for (let i = 0; i < pargs.length; i++) {
-                const value = pargs[i]
-                switch (i) {
-                case 0:
-                    $(value).click(()=>$(this).makePrint())
-                    break
-                default:
-                    $(value).click(()=>$(this).loadPrint())
-                    break
-                }
-            }
-            addReducer.subscribe(actionTypes.INIT.FETCHED, (state, data) => { })
-            addReducer.subscribe(actionTypes.CLONE.SETGROUPITEM, SetConfig)
+        const InitDragable = function (target,...args) {
+            for (let i = 0; i < args.length; i++) $(args[i].id).click(()=>$(this)[args[i].fn]())
+            subscribe(actionTypes.INIT.FETCHED, (state, data) => { })
+            subscribe(actionTypes.CLONE.SETGROUPITEM, SetConfig)
             dispatch({ type: actionTypes.INIT.FETCHED, payload: target })
         }
         const SetConfig = (state, _data) => {
@@ -46,7 +37,7 @@ import { actionTypes } from './reducer/const'
                     drop: (event, ui) => {
                         // var left = (ui.offset.left - $('.m-Template-Page-Area').offset().left);
                         // var top = (ui.offset.top - $('.m-Template-Page-Area').offset().top);
-                        addReducer.subscribe(
+                        subscribe(
                             actionTypes.CLONE.ADD_CLONEITEM,
                             (_state, cloneItem) => {
                                 if (cloneItem != undefined) {
@@ -131,7 +122,7 @@ import { actionTypes } from './reducer/const'
         }
         $.fn.extend({
             makePrint: function() {
-                addReducer.subscribe(actionTypes.UI.UI_GETINITCALC,(state,_data)=>{
+                subscribe(actionTypes.UI.UI_GETINITCALC,(state,_data)=>{
                     const { screen } = state.UI
                     const {  CalcW80To100, CalcH70To100 } = _data.Tools
                     const _pr =$(state.UI.DROPID).clone()
@@ -231,7 +222,7 @@ import { actionTypes } from './reducer/const'
             //@ts-check
             loadPrint: function() {
                 // eslint-disable-next-line no-unused-vars
-                addReducer.subscribe(actionTypes.UI.UI_GETINITCALC,(state,_data)=>
+                subscribe(actionTypes.UI.UI_GETINITCALC,(state,_data)=>
                 {
                     const Clons =state.Clone.Items.Clons
                     const CloneType = state.Clone.Type
@@ -401,6 +392,6 @@ import { actionTypes } from './reducer/const'
                 dispatch({type:actionTypes.UI.UI_GETINITCALC})
             }
         })
-        InitDragable('.m-Template-Page-Area','#print','#loadprint')
+        InitDragable('.m-Template-Page-Area',{id:'#print',fn:'makePrint'},{id:'#loadprint',fn:'loadPrint'})
     })
 })()
