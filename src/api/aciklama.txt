@@ -1,0 +1,39 @@
+ "ItemType": 
+    "Field"
+    "TableField"
+    "Table"
+Field{
+    TableKey
+    ItemTitle
+    ItemValue
+    ItemKey
+        uniq,
+    Icon
+    Format
+    Style
+    width /default
+    height /default
+
+}
+
+
+TableField
+{
+    TableKey
+    Sort
+        -> table column sıralaması..
+    ItemTitle
+    ItemKey
+        uniq,
+    Icon
+    Format
+    Style
+    width /default
+    height /default
+
+}
+Table{---------------------- KALDIRILMALI
+    ItemTitle,
+    ItemKey,
+    Icon
+}

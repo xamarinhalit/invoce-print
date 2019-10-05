@@ -33,7 +33,10 @@ const State ={
                 GROUPNAME: 'Field',
                 VALUE: 'ItemValue',
                 ITEMKEY: 'ItemKey',
-                ITEMTITLE: 'ItemTitle'
+                ITEMTITLE: 'ItemTitle',
+                TABLEKEY:'TableKey',
+                ITEMTYPE:'ItemType',
+                ICON:'Icon'
             },
             TABLE: {
                 DEFAULT: 'Table',
@@ -42,7 +45,10 @@ const State ={
                 ITEMKEY: 'ItemKey',
                 ITEMTITLE: 'ItemTitle',
                 SUBITEMKEY: 'SubItemKey',
-                ITEMCOLUM: 'RowGroup'
+                ITEMCOLUM: 'RowGroup',
+                TABLEKEY:'TableKey',
+                ITEMTYPE:'ItemType',
+                ICON:'Icon'
             }
         },
         SelectElement: {

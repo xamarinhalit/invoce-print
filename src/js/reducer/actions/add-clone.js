@@ -154,7 +154,7 @@ const AddCloneItem= (ItemKey,state,success) =>{
         if (_xitem.item != null && _xitem.item!=undefined) break
     }
     const { item } = _xitem
-    if (item != null && item != undefined) {
+    if (item != null && item != undefined) { // İTEMTYPE = TABLEFIELD,FIELD
         _Index.Index++
         UIInstance(item.ItemType, item,state).then(
             _element=>{
@@ -168,7 +168,7 @@ const AddCloneItem= (ItemKey,state,success) =>{
                 success(elements)
             })
       
-    } else {
+    } else {// ITEMTYPE = "TABLE"
         _Index.Index++
         UIInstance(CTTABLE.DEFAULT, null,state).then(
             _element=>{

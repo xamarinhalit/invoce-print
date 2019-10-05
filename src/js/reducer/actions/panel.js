@@ -3,7 +3,7 @@ require('../plugins/panelgroup')
 const SetGroupItem=(state)=> {
     
     const { TEXT, TABLE } = state.Clone.Type
-    let AddedGroup = {}
+    const TableGroup=[]
 
     state.Clone.Items.StaticItems.forEach(function(item) {
         if (item != undefined) {
@@ -12,40 +12,31 @@ const SetGroupItem=(state)=> {
                 for (let iindex = 0; iindex < ItemList.length; iindex++) {
                     const element = ItemList[iindex]
                     if (element != undefined) {
-                        switch (element.ItemType) {
+                        switch (element[TEXT.ITEMTYPE]) {
                         case TEXT.FIELD:
-                            AddGroupTextFieldItem({
-                                name: element[TEXT.ITEMKEY],
-                                value: element[TEXT.ITEMTITLE],
-                                item_sort: Sort,
-                                ItemType: element.ItemType,
-                                groupName: ToolValue,
-                                icon: element.Icon
-                            },state)
+                            AddGroupForPanel(element,TEXT,{Sort,ToolValue},state)
                             break
                         case TABLE.FIELD:
-                            AddedGroup[item.ItemType] = {
-                                group: AddGroupTextFieldItem({
-                                    name: element[TEXT.ITEMKEY],
-                                    value: element[TEXT.ITEMTITLE],
-                                    item_sort: Sort,
-                                    ItemType: element.ItemType,
-                                    groupName: ToolValue,
-                                    icon: element.Icon
-                                },state)
+                            if(state.Clone.GroupItems[Sort]==undefined){
+                                state.Clone.GroupItems[Sort]=
+                                '.'+ AddGroupForPanel(element,TABLE,{Sort,ToolValue},state)
+                                TableGroup.push(state.Clone.GroupItems[Sort])
+                            }else{
+                                AddGroupForPanel(element,TABLE,{Sort,ToolValue},state)
                             }
-
+                           
                             break
                         default:
                             break
                         }
                     }
                 }
+               
             }
         }
     })
 
-    $('ul.m-drag-ul').disableSelection()
+    //$('ul.m-drag-ul').disableSelection()
     $('ul.m-drag-ul>li')
         .draggable({
             helper: 'clone',
@@ -55,10 +46,9 @@ const SetGroupItem=(state)=> {
             cursorAt: { top: 50, left: 50 }
         })
         .disableSelection()
-    let keys = Object.keys(AddedGroup)
-    for (let i = 0; i < keys.length; i++) {
-        const element = AddedGroup[keys[i]]
-        let $element = $('ul.m-drag-ul.' + element.group + '>li')
+    for (let i = 0; i < TableGroup.length; i++) {
+        const element = TableGroup[i]
+        let $element = $('ul.m-drag-ul' + element + '>li')
         $element.draggable('option', 'disabled', true)
         $element.TableCreate()
     }
@@ -69,22 +59,38 @@ const SetGroupItem=(state)=> {
         activeClass: 'active'
     })
 }
-const AddGroupTextFieldItem= function(options,state) {
+const AddGroupForPanel= function(element ,o,s,state) {
     const { GroupItems}  = state.Clone
-    const { name, value, item_sort, groupName, icon } = options
-    let groupNameId = 'group-drop-text-' + item_sort
-    if (GroupItems[groupNameId] == undefined) {
-        GroupItems[groupNameId] = item_sort
-        $('.m-Template-Tools').append(`
-                <div class="m-Tool">
-                    <h2> ${groupName} <i class="fa fa-chevron-up"></i> </h2>
-                    <ul class="m-drag-ul ${groupNameId}" style='display:block'>
-                    </ul>
-                </div>`)
+    let groupNameId = 'group-drop-text-' + element[o.TABLEKEY]
+    const li = document.createElement('li')
+    li.dataset.ItemKey= element[o.ITEMKEY]
+    li.dataset.TableKey=element[o.TABLEKEY]
+    li.onmousedown=(e)=>false
+    li.style.cursor='pointer'
+    const lii=document.createElement('i')
+    lii.className=element[o.ICON]
+    li.appendChild(lii)
+    li.innerHTML+=element[o.ITEMTITLE]
+    if (GroupItems[s.Sort] == undefined) {
+        const div = document.createElement('div')
+        div.className='m-Tool'
+        const h2 = document.createElement('h2')
+        h2.innerText=s.ToolValue
+        const upi = document.createElement('i')
+        h2.appendChild(upi)
+        div.appendChild(h2)
+        const ul = document.createElement('ul')
+        ul.onmousedown=(e)=>false
+        ul.className='m-drag-ul '+groupNameId
+        ul.style.display='block'
+        upi.className='fa fa-chevron-up'
+        ul.appendChild(li)
+        div.appendChild(ul)
+        document.querySelector('.m-Template-Tools').appendChild(div)
+        GroupItems[s.Sort]='.'+groupNameId
+    }else {
+        document.querySelector(GroupItems[s.Sort]).appendChild(li)
     }
-    $('ul.m-drag-ul.' + groupNameId)
-        .append(`<li class="" data--item-key="${name}" >
-                            <i class="${icon}"></i>${value}</li>`)
     return groupNameId
 }
 export default SetGroupItem

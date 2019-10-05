@@ -9,7 +9,8 @@
         "Tools": [{
             "ToolValue": "Fatura Bilgileri",
             "Sort": 0,
-            "Items": [{
+            "Items": [
+                {
                 "TableKey": "InvoiceType",
                 "ItemKey": "InvoiceType",
                 "ItemTitle": "Fatura Tipi",
@@ -100,7 +101,8 @@
                 "Format": "HH:mm",
                 "Style": ""
             }]
-        }, {
+        }, 
+        {
             "ToolValue": "Müşteri Bilgileri",
             "Sort": 1,
             "Items": [{
@@ -209,7 +211,8 @@
                 "Format": "",
                 "Style": ""
             }]
-        }, {
+        },
+         {
             "ToolValue": "Diğer Alanlar",
             "Sort": 3,
             "Items": [{
@@ -243,7 +246,8 @@
                 "Format": "",
                 "Style": ""
             }]
-        }, {
+        }, 
+        {
             "ToolValue": "Alt Toplamlar",
             "Sort": 3,
             "Items": [{
@@ -382,7 +386,8 @@
                 "Format": "",
                 "Style": ""
             }]
-        }, {
+        }, 
+        {
             "ToolValue": "Ürün bilgisi",
             "Sort": 4,
             "Items": [{
