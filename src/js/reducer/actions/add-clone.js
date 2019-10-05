@@ -9,11 +9,11 @@ export const CreateTable= (state) =>{
         const CITABLE = state.Clone.Index.Table
         const CSTABLE = state.Clone.SelectElement.TABLE
         const { DROPID } = state.UI
-        let $UI = $(DROPID + ' ' + CSTABLE)
-        let isDiv = $UI.is('div')
-        if (isDiv == false) {
+///  $UI = $(DROPID + ' ' + CSTABLE)
+        let ui2=document.querySelector(DROPID + ' ' + CSTABLE)
+        if (ui2 == null) {
             AddCloneItem(CTTABLE.DEFAULT,state,(element)=>{
-                $UI = element.element
+                let $UI = element.element
                 // $(TABLE.ELEMENT).clone();
                 $(DROPID).append($UI)
                 $($UI)
@@ -77,13 +77,12 @@ export const CreateTable= (state) =>{
                         }
                         item.value.Style = item.element.style.cssText
                     })
+                resolve($UI)
             })
-            resolve($UI)
         }else{
-            resolve($UI)
+            resolve($(DROPID + ' ' + CSTABLE))
         }
     })
-  
 }
 const UIInstance=async (uitype, item,state)=> {
     const CTTABLE = state.Clone.Type.TABLE
@@ -94,17 +93,13 @@ const UIInstance=async (uitype, item,state)=> {
     const { RowGroup:CTRowGroup, $RowGroup:$CTRowGroup } = CITABLE
     switch (uitype) {
     case CTTEXT.FIELD:
-        const textfield = $(CSTEXT).clone()
-        const removeid = $(textfield[0]).attr('id')
-        $(textfield[0])
-            .removeProp('id')
-            .removeAttr('id')
-        $(textfield[0])
-            .addClass(removeid)
-            .html(
-                `${item[CTTEXT.VALUE]}<i class="fa fa-times Remove"></i>`
-            )
-        return textfield[0]
+        const text1= document.querySelector(CSTEXT)
+        const textclone= text1.cloneNode(false)
+        const textid=text1.getAttribute("id")
+        textclone.removeAttribute("id")
+        textclone.classList.add(textid)
+        textclone.innerHTML= `${item[CTTEXT.VALUE]}<i class="fa fa-times Remove"></i>`;
+        return textclone
     case CTTABLE.FIELD:
         const $table = await CreateTable(state)
         var $tr, item_sort
@@ -143,8 +138,7 @@ const AddCloneItem= (ItemKey,state,success) =>{
     const _Items = state.Clone.Items.StaticItems
     const _Index = state.Clone.Index
     const CTTABLE = state.Clone.Type.TABLE
-    const _xitem = {
-    }
+    const _xitem = {}
     for (var ii = 0; ii < _Items.length; ii++) {
         const value = _Items[ii]
         if (value != undefined) {
@@ -218,23 +212,25 @@ $.fn.extend({
                 })
                 dispatch({type:actionTypes.CLONE.REMOVE_CLONEITEM,payload:cloneId})
             }
-            $($UIable[0])
-                .find('tbody>tr')
-                .sortable()
-                .on('sortstop', function(event, ui) {
-                    const _items= state.Clone.Items.Clons
-                    $(ui.item[0]).parent('tr').find('td').each(function(iv,iy){
-                        if(iy!=undefined){
-                            _items.forEach((newitem)=>{
-                                if(newitem!=undefined && newitem !=null && newitem.value.Index==iy.dataset.cloneId) {
-                                    newitem.element.dataset.Sort=JSON.stringify(iv)
-                                    newitem.value.Sort=iv
-                                }
-                            })
+            /// SORTABLE TABLE
+            /// SİLİNECEN
+            // $($UIable[0])
+            //     .find('tbody>tr')
+            //     .sortable()
+            //     .on('sortstop', function(event, ui) {
+            //         const _items= state.Clone.Items.Clons
+            //         $(ui.item[0]).parent('tr').find('td').each(function(iv,iy){
+            //             if(iy!=undefined){
+            //                 _items.forEach((newitem)=>{
+            //                     if(newitem!=undefined && newitem !=null && newitem.value.Index==iy.dataset.cloneId) {
+            //                         newitem.element.dataset.Sort=JSON.stringify(iv)
+            //                         newitem.value.Sort=iv
+            //                     }
+            //                 })
                   
-                        }
-                    })
-                })
+            //             }
+            //         })
+            //     })
         })
         dispatch({type:actionTypes.CLONE.CREATE_TABLE})
       

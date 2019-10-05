@@ -241,7 +241,7 @@ import { actionTypes } from './reducer/const'
                         if(leftx>-1)
                             leftx=0
                         let topx = top / height.medium
-                        let elementclone = $(element).clone()
+                        const elementclone = $(element).clone()
                         elementclone.css({ left: leftx + 'vw', top: topx + 'vh', margin: '0px' })
                         elementclone.offset({ left: leftx + 'vw', top: topx + 'vh' })
                         let xstyle
@@ -265,7 +265,6 @@ import { actionTypes } from './reducer/const'
                     }
                     for (let i = 0; i < elementrow.length; i++) {
                         const row = elementrow[i]
-                        let rowhead = ''
                         let rowbody = ''
                         let rowbodygroup = {}
                         let rowCountObj = {}
@@ -275,11 +274,6 @@ import { actionTypes } from './reducer/const'
                                 for (const key in tablerow) {
                                     if (tablerow.hasOwnProperty(key)) {
                                         const element = tablerow[key]
-                                        // if (
-                                        //   rowhead.indexOf(`data-itemtitle="${element.ItemTitle}`) == -1
-                                        // ) {
-                                        //   rowhead += `<th data-itemtitle="${element.ItemTitle}">${element.ItemTitle}</th>`;
-                                        // }
                                         if (
                                             rowCountObj[element.SubItemKey + element.ItemKey] == undefined
                                         ) {
@@ -390,8 +384,17 @@ import { actionTypes } from './reducer/const'
 
                 })
                 dispatch({type:actionTypes.UI.UI_GETINITCALC})
+            },
+            newPrint: function(){
+                subscribe(actionTypes.UI.UI_GETINITCALC,(state,_tools)=>{
+                    const { } = _tools.Tools
+                })
+                dispatch({type:actionTypes.UI.UI_GETNEWCLAC})
             }
         })
-        InitDragable('.m-Template-Page-Area',{id:'#print',fn:'makePrint'},{id:'#loadprint',fn:'loadPrint'})
+        InitDragable('.m-Template-Page-Area',
+        {id:'#print',fn:'makePrint'}
+        ,{id:'#loadprint',fn:'loadPrint'}
+        ,{id:'#newPrint',fn:'newPrint'})
     })
 })()

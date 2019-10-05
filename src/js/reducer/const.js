@@ -11,6 +11,7 @@ export const actionTypes={
         GET_CLONEITEMS:'GET-CLONEITEMS'
     },
     UI:{
-        UI_GETINITCALC:'UI-GETINITCALC'
+        UI_GETINITCALC:'UI-GETINITCALC',
+        UI_GETNEWCLAC:"UI-GETNEWCLAC"
     }
 }

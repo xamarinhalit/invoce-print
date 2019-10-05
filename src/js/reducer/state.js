@@ -21,6 +21,11 @@ const State ={
             }
         }
     },
+    Print:{
+        screen:{
+
+        }
+    },
     Clone:{
         Type: {
             TEXT: {

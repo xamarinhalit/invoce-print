@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem } from './actions'
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem, GetPrintInit } from './actions'
 import { CreateTable } from './actions/add-clone'
 import { GetInitCalc,CalcW80To100,CalcH70To100,EmtoPixel } from './actions/screen-tool'
 
@@ -45,6 +45,11 @@ const dispatch = (action,state=InitialState)=>{
     case actionTypes.UI.UI_GETINITCALC:
         GetInitCalc(state).then(()=>{
             sendReducer(action.type,{Tools:{ CalcW80To100,CalcH70To100}},state)
+        })
+        break
+    case actionTypes.UI.UI_GETNEWCLAC:
+        GetPrintInit(state).then(()=>{
+            sendReducer(action.type,{Tools:{}},state)
         })
         break
     default:
