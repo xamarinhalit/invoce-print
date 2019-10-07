@@ -1,10 +1,8 @@
 /* eslint-disable no-undef */
 require('../plugins/panelgroup')
 const SetGroupItem=(state)=> {
-    
     const { TEXT, TABLE } = state.Clone.Type
-    const TableGroup=[]
-
+    const liClassName='m-Tool'
     state.Clone.Items.StaticItems.forEach(function(item) {
         if (item != undefined) {
             const { Sort, ToolValue, Items: ItemList } = item
@@ -17,14 +15,11 @@ const SetGroupItem=(state)=> {
                             AddGroupForPanel(element,TEXT,{Sort,ToolValue},state)
                             break
                         case TABLE.FIELD:
-                            if(state.Clone.GroupItems[Sort]==undefined){
-                                state.Clone.GroupItems[Sort]=
-                                '.'+ AddGroupForPanel(element,TABLE,{Sort,ToolValue},state)
-                                TableGroup.push(state.Clone.GroupItems[Sort])
-                            }else{
-                                AddGroupForPanel(element,TABLE,{Sort,ToolValue},state)
-                            }
-                           
+                            const { li ,className}= AddGroupForPanel(element,TABLE,{Sort,ToolValue},state)
+                            if(state.Clone.GroupItems[Sort]==undefined)
+                                state.Clone.GroupItems[Sort]='.'+className
+                            $(li).draggable('option', 'disabled', true)
+                                .TableCreate()
                             break
                         default:
                             break
@@ -35,62 +30,60 @@ const SetGroupItem=(state)=> {
             }
         }
     })
-
-    //$('ul.m-drag-ul').disableSelection()
-    $('ul.m-drag-ul>li')
-        .draggable({
-            helper: 'clone',
-            revert: 'invalid',
-            cursor: 'move',
-            cancel: null,
-            cursorAt: { top: 50, left: 50 }
-        })
-        .disableSelection()
-    for (let i = 0; i < TableGroup.length; i++) {
-        const element = TableGroup[i]
-        let $element = $('ul.m-drag-ul' + element + '>li')
-        $element.draggable('option', 'disabled', true)
-        $element.TableCreate()
-    }
-    $('.m-Tool').PanelGroup({
-        up: 'fa-chevron-up',
-        down: 'fa-chevron-down',
-        extclass: 'h2',
-        activeClass: 'active'
-    })
+    $('.'+liClassName).PanelGroup(state.UI.PANEL.config,state)
 }
 const AddGroupForPanel= function(element ,o,s,state) {
-    const { GroupItems}  = state.Clone
-    let groupNameId = 'group-drop-text-' + element[o.TABLEKEY]
+    const { Clone}  = state
+    state.UI.PANEL.Index++
+    const liClassName='m-Tool'
+    const panelupClassName='fa fa-chevron-up'
+    const panelContainer='.m-Template-Tools'
+    let groupNameId = 'menu-panel-' + state.UI.PANEL.Index
     const li = document.createElement('li')
-    li.dataset.ItemKey= element[o.ITEMKEY]
-    li.dataset.TableKey=element[o.TABLEKEY]
-    li.onmousedown=(e)=>false
+    // li.classList.add(state.UI.DRAGCLASS)
+    // li.dataset.ItemKey= element[o.ITEMKEY]
+    // li.dataset.TableKey=element[o.TABLEKEY]
+    li.dataset.Index=state.UI.PANEL.Index
     li.style.cursor='pointer'
     const lii=document.createElement('i')
     lii.className=element[o.ICON]
     li.appendChild(lii)
     li.innerHTML+=element[o.ITEMTITLE]
-    if (GroupItems[s.Sort] == undefined) {
+    if (Clone.GroupItems[s.Sort] == undefined) {
         const div = document.createElement('div')
-        div.className='m-Tool'
+        div.className=liClassName
         const h2 = document.createElement('h2')
         h2.innerText=s.ToolValue
         const upi = document.createElement('i')
         h2.appendChild(upi)
         div.appendChild(h2)
         const ul = document.createElement('ul')
-        ul.onmousedown=(e)=>false
-        ul.className='m-drag-ul '+groupNameId
+        ul.onmousedown=()=>false
         ul.style.display='block'
-        upi.className='fa fa-chevron-up'
+        ul.classList.add(groupNameId)
+        ul.classList.add(state.UI.DRAGCLASS)
+        upi.className=panelupClassName
         ul.appendChild(li)
         div.appendChild(ul)
-        document.querySelector('.m-Template-Tools').appendChild(div)
-        GroupItems[s.Sort]='.'+groupNameId
+        document.querySelector(panelContainer).appendChild(div)
+        Clone.GroupItems[s.Sort]='.'+groupNameId
     }else {
-        document.querySelector(GroupItems[s.Sort]).appendChild(li)
+        document.querySelector( Clone.GroupItems[s.Sort]).appendChild(li)
     }
-    return groupNameId
+    $(li).draggable({
+        helper: 'clone',
+        revert: 'invalid',
+        cursor: 'move',
+        cancel: null,
+        cursorAt: { top: 50, left: 50 }
+    }).disableSelection()
+    state.UI.PANEL.Menu.push({
+        Index:state.UI.PANEL.Index,
+        element:li,
+        value:element,
+        Sort:s.Sort,
+        ToolValue:s.ToolValue
+    })
+    return { li, className:groupNameId}
 }
 export default SetGroupItem

@@ -19,6 +19,16 @@ const State ={
                 bigpercent: 0,
                 smallpercent: 0
             }
+        },
+        PANEL:{
+            config:{
+                up: 'fa-chevron-up',
+                down: 'fa-chevron-down',
+                extclass: 'h2',
+                activeClass: 'active'
+            },
+            Index:-1,
+            Menu:[]
         }
     },
     Print:{
@@ -65,6 +75,7 @@ const State ={
             }
         },
         Items: {
+            Tables:[],
             Clons:[],
             StaticItems:[]
         },

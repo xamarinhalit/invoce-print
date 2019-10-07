@@ -1,8 +1,8 @@
 import SetGroupItem from './panel'
 import fetchData from './fetch'
-import AddCloneItem from './add-clone'
-import RemoveCloneItem from './remove-clone'
+import AddCloneItem, { SetConfig } from './add-clone'
+import RemoveCloneItem, { RemoveTable } from './remove-clone'
 import GetPrintInit  from './screen-new-tools'
+import { GetInitCalc, CalcW80To100, CalcH70To100 } from './screen-tool'
 
-
-export { SetGroupItem,fetchData,AddCloneItem,RemoveCloneItem,GetPrintInit }
+export { SetGroupItem,fetchData,AddCloneItem,RemoveCloneItem,GetPrintInit,RemoveTable,SetConfig, GetInitCalc, CalcW80To100, CalcH70To100 }

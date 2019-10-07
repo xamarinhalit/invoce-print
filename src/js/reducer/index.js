@@ -1,31 +1,25 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem, GetPrintInit } from './actions'
-import { CreateTable } from './actions/add-clone'
-import { GetInitCalc,CalcW80To100,CalcH70To100,EmtoPixel } from './actions/screen-tool'
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem, GetPrintInit,RemoveTable ,SetConfig,GetInitCalc,CalcW80To100,CalcH70To100 } from './actions'
 
 const observers= []
 
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
-    case actionTypes.CLONE.SETGROUPITEM:
-        SetGroupItem(state)
-        sendReducer(action.type,{Tools:{EmtoPixel}},state)
-        break
     case actionTypes.INIT.FETCHED:
         fetchData(data=>{
             state.Clone.Items.StaticItems=data
             state.UI.DROPID=action.payload
             state.UI.$CONTENT = $(action.payload)
+            SetGroupItem(state)
+            SetConfig(state)
             sendReducer(action.type,data,state)
-            dispatch({type:actionTypes.CLONE.SETGROUPITEM})
         })
         break
     case actionTypes.CLONE.ADD_CLONEITEM:
         AddCloneItem(action.payload,state,data=>{
-            console.log('addcloneitem',state)
             sendReducer(action.type,data,state)
         })
         break
@@ -34,13 +28,15 @@ const dispatch = (action,state=InitialState)=>{
             sendReducer(action.type,data,state)
         })
         break
-    case actionTypes.CLONE.CREATE_TABLE:
-        CreateTable(state).then((_data)=>{
-            sendReducer(action.type,_data,state)
+    case actionTypes.CLONE.REMOVE_TABLE:
+        RemoveTable(action.payload,state,_data =>{
+            sendReducer(action.type,data,state)
         })
         break
-    case actionTypes.CLONE.GET_CLONEITEMS:
-        sendReducer(action.type,state.Clone.Items.Clons,state)
+    case actionTypes.CLONE.REMOVE_TABLEITEM:
+        RemoveTableItem(action.payload,state,_data =>{
+            sendReducer(action.type,data,state)
+        })
         break
     case actionTypes.UI.UI_GETINITCALC:
         GetInitCalc(state).then(()=>{
@@ -92,11 +88,11 @@ const reducer_ListFn={
 }
 const reducer_pipe=(c,...ops)=>{
     const _ob={ arg:ops,obj:c}
-    reducer_ListFn.index++;
+    reducer_ListFn.index++
     reducer_ListFn.objects[reducer_ListFn.index]= _ob
     _ob.arg.forEach((v)=>{
         if(v!=undefined){
-            v(_ob.obj);
+            v(_ob.obj)
         }
     })
     delete reducer_ListFn.objects[reducer_ListFn.index]
