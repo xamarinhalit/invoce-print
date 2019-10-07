@@ -129,6 +129,7 @@ const AddTables = (state,tablekey)=>{
             key:tablekey,
             element:table,
             children:[],
+            childIndex:[],
             value:{},
             ColumIndex:-1,
             RowIndex:-1
@@ -281,10 +282,12 @@ const UICreateTable= (state,tablekey)=>{
 const UICloneTable = (state,menuitem)=>{
     return new Promise((resolve,_reject)=>{
         const {value,element,ToolValue,Index,Sort } =menuitem
-        UICreateTable(state,value.TableKey).then((_table)=>{
+        UICreateTable(state,menuitem.value.TableKey).then((_table)=>{
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
             let _tr = null
+            _table.ColumIndex++
+            _Clone_Index.Index++
             if(_table.RowIndex==-1){
                 _table.RowIndex++   
                 _tr= document.createElement('tr')
@@ -293,13 +296,13 @@ const UICloneTable = (state,menuitem)=>{
             }else{
                 _tr= _table.element[0].querySelector('tr[data--sort=\''+_table.RowIndex+'\']')
             }
-            _table.ColumIndex++
-            _Clone_Index.Index++
+          
             const _column = _table.ColumIndex
             const _td = document.createElement('td')
             _td.classList.add(value[TYPE_TABLE.ITEMKEY])
             _td.dataset.Sort = _column
             _td.dataset.cloneId=_Clone_Index.Index
+           
             _td.innerHTML=value[TYPE_TABLE.VALUE]
             _tr.appendChild(_td)
             const elements = {
@@ -311,7 +314,8 @@ const UICloneTable = (state,menuitem)=>{
                 menuindex:Index,
                 menuelement:element
             }
-            state.Clone.Items.Clons.push(elements)
+            _table.children.push(elements)
+            _table.childIndex.push(elements.Index)
             resolve(elements)
         })
     })
@@ -356,12 +360,12 @@ const TableItemClick=(e)=>{
         })
         dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{ItemKey,TableKey,Index}})
     } else {
-        let cloneId = $item.data('cloneId')
+       
         // eslint-disable-next-line no-unused-vars
         addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
             $($item[0].querySelector('input')).prop('checked',false)
         })
-        dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:cloneId})
+        dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
     }
 }
 $.fn.extend({

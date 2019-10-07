@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem, GetPrintInit,RemoveTable ,SetConfig,GetInitCalc,CalcW80To100,CalcH70To100 } from './actions'
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,GetInitCalc,CalcW80To100,CalcH70To100 } from './actions'
 
 const observers= []
 
@@ -30,12 +30,12 @@ const dispatch = (action,state=InitialState)=>{
         break
     case actionTypes.CLONE.REMOVE_TABLE:
         RemoveTable(action.payload,state,_data =>{
-            sendReducer(action.type,data,state)
+            sendReducer(action.type,_data,state)
         })
         break
     case actionTypes.CLONE.REMOVE_TABLEITEM:
         RemoveTableItem(action.payload,state,_data =>{
-            sendReducer(action.type,data,state)
+            sendReducer(action.type,_data,state)
         })
         break
     case actionTypes.UI.UI_GETINITCALC:

@@ -66,22 +66,88 @@ const RemoveTables = (state,index)=>{
     return _table
 }
 
-export const RemoveTable = (table,state,succes)=>{
-    
+export const RemoveTable = (table,state,success)=>{
+    const { Clone:_Clons }=state
+    const _Remove = (item)=>{
+        if (item != null) {
+            for (let i = 0; i < item.children.length; i++) {
+                const element = item.children[i];
+                if(element!=undefined){
+                    element.menuelement.children[0].checked=false
+                }
+            }
+            var $rt =$(item.element)
+            $rt.fadeOut('slow', function() {
+                $rt.remove()
+            })
+        }   
+    }
+    // eslint-disable-next-line no-unused-vars
+    _Clons.Items.Tables = _Clons.Items.Tables.filter(function(value) {
+        if (value != undefined && value != null) {
+            if (value.Index !==table.table.Index) {
+                return true
+            } else {
+                _Remove(value)
+                return false
+            }
+        }
+    })
+    success(null,state)
 }
-export const RemoveTableItem = (table,state,succes)=>{
-    
+export const RemoveTableItem = (table,state,success)=>{
+    const { Clone:_Clons }=state
+    const _Remove = (item)=>{
+        const element = item.child
+        if(element!=undefined){
+            element.menuelement.children[0].checked=false
+            var $rt =$(element.element)
+            $rt.fadeOut('slow', function() {
+                $rt.remove()
+                _Clons.Items.Tables[item.tindex].children.splice(item.index,1)
+                _Clons.Items.Tables[item.tindex].childIndex.splice(item.index,1)
+                if(_Clons.Items.Tables[item.tindex].children.length==0){
+                    var $rt1 =_Clons.Items.Tables[item.tindex].element
+                    $rt1.fadeOut('slow', function() {
+                        $rt1.remove()
+                        _Clons.Items.Tables.splice(item.tindex,1)
+                    })
+                }
+                    
+            })
+
+        }
+    }
+    // eslint-disable-next-line no-unused-vars
+    const _removeitem= {}
+    for (let i = 0; i <  _Clons.Items.Tables.length; i++) {
+        const _t =  _Clons.Items.Tables[i];
+        if(_t && _t.childIndex){
+            for (let j = 0; j < _t.childIndex.length; j++) {
+                const element = _t.childIndex[j];
+                if(element && table.table.Index){
+                    _removeitem.table=_t
+                    _removeitem.child=_t.children[j]
+                    _removeitem.index=j
+                    _removeitem.tindex=i
+                }
+            }
+        }
+        
+    }
+    if(_removeitem.table!=undefined){
+        _Remove(_removeitem)
+    }
+    success(null,state)
 }
 
 const RemoveCloneItem=(cloneId,state,success) =>{
     const { Clone:_Clons }=state
-  //  const CSTABLE = _Clons.SelectElement.TABLE
-    //const CITABLE = _Clons.Index.Table
     let removeItem = null
     // eslint-disable-next-line no-unused-vars
     _Clons.Items.Clons = _Clons.Items.Clons.filter(function(value) {
         if (value != undefined && value != null) {
-            if (value.index != cloneId) {
+            if (value.Index != cloneId) {
                 return true
             } else {
                 removeItem = value.element
@@ -91,14 +157,11 @@ const RemoveCloneItem=(cloneId,state,success) =>{
     })
    
     if (removeItem != null) {
-       
         var $r =$(removeItem)
         $r.fadeOut('slow', function() {
             $r.remove()
+            success(null,state)
         })
-    }else if(cloneId!=undefined || cloneId !=null){
-        RemoveTables(state,cloneId)
     }
-    success(null,state)
 }
 export default RemoveCloneItem
