@@ -1,6 +1,9 @@
 export const actionTypes={
     INIT:{
-        FETCHED:'FETCHED',
+        FETCHED:'FETCHED'
+    },
+    HTTP:{
+        POST:'POST'
     },
     CLONE:{
         CREATE_TABLE:'CREATE-TABLE',

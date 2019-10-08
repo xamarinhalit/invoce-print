@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,GetInitCalc,CalcW80To100,CalcH70To100 } from './actions'
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,GetInitCalc,CalcW80To100,CalcH70To100, postData } from './actions'
 
 const observers= []
 
@@ -46,6 +46,15 @@ const dispatch = (action,state=InitialState)=>{
     case actionTypes.UI.UI_GETNEWCLAC:
         GetPrintInit(state).then(()=>{
             sendReducer(action.type,{Tools:{}},state)
+        })
+        break
+    case actionTypes.HTTP.POST:
+        postData({data:{
+            Tables:state.Clone.Items.Tables,
+            Clons:state.Clone.Items.Clons,
+            Menu:state.UI.PANEL.Menu
+        }}).then((_data)=>{
+            // sendReducer(action.type,null,state)
         })
         break
     default:
