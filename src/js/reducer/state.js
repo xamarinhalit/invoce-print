@@ -68,11 +68,6 @@ const State ={
         },
         Index: {
             Index: 0,
-            Table: {
-                RowGroup: {},
-                $RowGroup: {},
-                CloneId: -1
-            }
         },
         Items: {
             Tables:[],

@@ -25,6 +25,44 @@ const postData =async ({url = '', data = {}})=> {
     if(url == '')
         url='http://localhost:3000/print'
     // Default options are marked with *
+    data.Tables =data.Tables.map(x=>{
+        return {
+            Index:x.Index,
+            key:x.key,
+            children:x.children.map(y=>{
+                return {
+                    Index:y.Index,
+                    value:y.value,
+                    Sort:y.Sort,
+                    ToolValue:y.ToolValue,
+                    menuindex:y.menuindex
+                }
+            }),
+            childIndex:x.childIndex,
+            ColumIndex:x.ColumIndex,
+            RowIndex:x.RowIndex,
+            value:x.value,
+            Sort:x.Sort
+        }
+    })
+    data.Menu =data.Menu.map(x=>{
+        return {
+            Index:x.Index,
+            ToolValue:x.ToolValue,
+            value:x.value,
+            Sort:x.Sort
+        }
+    })
+    data.Clons =data.Clons.map(x=>{
+        return {
+            Index:x.Index,
+            ToolValue:x.ToolValue,
+            value:x.value,
+            Sort:x.Sort,
+            menuindex:x.menuindex
+        }
+    })
+    data = JSON.stringify(data, getCircularReplacer())
     const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
@@ -36,7 +74,7 @@ const postData =async ({url = '', data = {}})=> {
         },
         redirect: 'follow', // manual, *follow, error
         referrer: 'no-referrer', // no-referrer, *client
-        body:JSON.stringify(data, getCircularReplacer()) // body data type must match "Content-Type" header
+        body:data // body data type must match "Content-Type" header
     })
     return await response.json() // parses JSON response into native JavaScript objects
 }
