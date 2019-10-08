@@ -98,23 +98,26 @@ export const RemoveTable = (table,state,success)=>{
 export const RemoveTableItem = (table,state,success)=>{
     const { Clone:_Clons }=state
     const _Remove = (item)=>{
-        const element = item.child
-        if(element!=undefined){
-            element.menuelement.children[0].checked=false
-            var $rt =$(element.element)
-            $rt.fadeOut('slow', function() {
-                $rt.remove()
-                _Clons.Items.Tables[item.tindex].children.splice(item.index,1)
-                _Clons.Items.Tables[item.tindex].childIndex.splice(item.index,1)
-                if(_Clons.Items.Tables[item.tindex].children.length==0){
-                    var $rt1 =_Clons.Items.Tables[item.tindex].element
-                    $rt1.remove()
-                    _Clons.Items.Tables.splice(item.tindex,1)
-                }
-                    
-            })
-
-        }
+            return new Promise((resolve)=>{
+            const element = item.child
+            if(element!=undefined){
+                element.menuelement.children[0].checked=false
+                var $rt =$(element.element)
+                $rt.fadeOut('slow', function() {
+                    $rt.remove()
+                    _Clons.Items.Tables[item.tindex].children.splice(item.index,1)
+                    _Clons.Items.Tables[item.tindex].childIndex.splice(item.index,1)
+                    if(_Clons.Items.Tables[item.tindex].children.length==0){
+                        var $rt1 =_Clons.Items.Tables[item.tindex].element
+                        $rt1.remove()
+                        _Clons.Items.Tables.splice(item.tindex,1)
+                    }
+                    resolve()
+                })
+            }else{
+                resolve()
+            }
+        })
     }
     // eslint-disable-next-line no-unused-vars
     const _removeitem= {}
@@ -134,9 +137,12 @@ export const RemoveTableItem = (table,state,success)=>{
         
     }
     if(_removeitem.table!=undefined){
-        _Remove(_removeitem)
+        _Remove(_removeitem).then(()=>{
+            success(null,state)
+        })
+    }else{
+        success(null,state)
     }
-    success(null,state)
 }
 
 const RemoveCloneItem=(cloneId,state,success) =>{
