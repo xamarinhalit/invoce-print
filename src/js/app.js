@@ -261,13 +261,15 @@ import { actionTypes } from './reducer/const'
                 dispatch({type:actionTypes.UI.UI_GETINITCALC})
             },
             newPrint: function(){
-                dispatch({type:actionTypes.HTTP.POST})
+                dispatch({type: actionTypes.UI.UI_GETNEWCLAC})
+                //dispatch({type:actionTypes.HTTP.POST})
                 // subscribe(actionTypes.UI.UI_GETINITCALC,(state,_tools)=>{
                 //     // eslint-disable-next-line no-empty-pattern
                 //     const { } = _tools.Tools
                   
                 // })
                 // dispatch({type:actionTypes.UI.UI_GETNEWCLAC})
+
             }
         })
         InitDragable('.m-Template-Page-Area',
