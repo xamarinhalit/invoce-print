@@ -108,10 +108,8 @@ export const RemoveTableItem = (table,state,success)=>{
                 _Clons.Items.Tables[item.tindex].childIndex.splice(item.index,1)
                 if(_Clons.Items.Tables[item.tindex].children.length==0){
                     var $rt1 =_Clons.Items.Tables[item.tindex].element
-                    $rt1.fadeOut('slow', function() {
-                        $rt1.remove()
-                        _Clons.Items.Tables.splice(item.tindex,1)
-                    })
+                    $rt1.remove()
+                    _Clons.Items.Tables.splice(item.tindex,1)
                 }
                     
             })
