@@ -124,6 +124,18 @@ const AddTables = (state,tablekey)=>{
         table.offset({ top: 500, left: 0 })
         // table[0].classList.remove('table-style')
         $(DROPID).append(table)
+
+        if (table.hasClass('ui-resizable')) {
+            table
+                .find('.ui-resizable-s')
+                .remove()
+            table
+                .find('.ui-resizable-e')
+                .remove()
+            table
+                .find('.ui-resizable-se')
+                .remove()
+        }
         _table={
             Index:Index.Index,
             key:tablekey,
@@ -134,18 +146,7 @@ const AddTables = (state,tablekey)=>{
             ColumIndex:-1,
             RowIndex:-1
         }
-        if (_table.element.hasClass('ui-resizable')) {
-            _table.element
-                .find('.ui-resizable-s')
-                .remove()
-            _table.element
-                .find('.ui-resizable-e')
-                .remove()
-            _table.element
-                .find('.ui-resizable-se')
-                .remove()
-        }
-        _table.element
+        table
             .resizable({
                 minHeight: 30,
                 minWidth: 75
@@ -162,10 +163,10 @@ const AddTables = (state,tablekey)=>{
             })
          
 
-        $(_table.element,'.close')
-            .click(function(_e) {
-                dispatch({type:actionTypes.CLONE.REMOVE_TABLE,payload:{table:_table}})
-            })
+        table[0].querySelector('button.close').onclick=_e=> {
+            dispatch({type:actionTypes.CLONE.REMOVE_TABLE,payload:{table:_table}})
+        }
+     
         Items.Tables.push(_table)
     }
     return _table
@@ -302,7 +303,6 @@ const UICloneTable = (state,menuitem)=>{
             _td.classList.add(value[TYPE_TABLE.ITEMKEY])
             _td.dataset.Sort = _column
             _td.dataset.cloneId=_Clone_Index.Index
-           
             _td.innerHTML=value[TYPE_TABLE.VALUE]
             _tr.appendChild(_td)
             const elements = {
@@ -351,20 +351,16 @@ const AddCloneItem= (payload,state,success) =>{
 }
 const TableItemClick=(e)=>{
     const $item = $(e.currentTarget)
-    let { ItemKey,TableKey, Index} = e.currentTarget.dataset
+    let { Index} = e.currentTarget.dataset
     $item.toggleClass('active')
+    const $input = $($item[0].querySelector('input'))
     if ($item.hasClass('active')) {
-        $($item[0].querySelector('input')).prop('checked',true)
         // eslint-disable-next-line no-unused-vars
-        addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(__state,_cloneitem)=>{
-        })
-        dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{ItemKey,TableKey,Index}})
+        addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(__state,_cloneitem)=>{$input.prop('checked',true)})
+        dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index}})
     } else {
-       
         // eslint-disable-next-line no-unused-vars
-        addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
-            $($item[0].querySelector('input')).prop('checked',false)
-        })
+        addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{ $input.prop('checked',false)})
         dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
     }
 }
