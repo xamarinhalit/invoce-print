@@ -35,7 +35,7 @@ export const SetConfig = (state, _data) => {
             }
         })
         .disableSelection()
-        .css({ margin: '2px' })
+        //.css({ margin: '2px' })
 }
 
 const UICloneText = (state,menuitem,payload)=>{
