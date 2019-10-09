@@ -4,15 +4,12 @@ export const RemoveTable = (table,state,success)=>{
     const _Remove = (item)=>{
         if (item != null) {
             for (let i = 0; i < item.children.length; i++) {
-                const element = item.children[i];
+                const element = item.children[i]
                 if(element!=undefined){
                     element.menuelement.children[0].checked=false
                 }
             }
-            var $rt =$(item.element)
-            $rt.fadeOut('slow', function() {
-                $rt.remove()
-            })
+            item.element.parentNode.removeChild(item.element)
         }   
     }
     // eslint-disable-next-line no-unused-vars
@@ -31,22 +28,17 @@ export const RemoveTable = (table,state,success)=>{
 export const RemoveTableItem = (table,state,success)=>{
     const { Clone:_Clons }=state
     const _Remove = (item)=>{
-            return new Promise((resolve)=>{
+        return new Promise((resolve)=>{
             const element = item.child
             if(element!=undefined){
-                element.menuelement.children[0].checked=false
-                var $rt =$(element.element)
-                $rt.fadeOut('slow', function() {
-                    $rt.remove()
-                    _Clons.Items.Tables[item.tindex].children.splice(item.index,1)
-                    _Clons.Items.Tables[item.tindex].childIndex.splice(item.index,1)
-                    if(_Clons.Items.Tables[item.tindex].children.length==0){
-                        var $rt1 =_Clons.Items.Tables[item.tindex].element
-                        $rt1.remove()
-                        _Clons.Items.Tables.splice(item.tindex,1)
-                    }
-                    resolve()
-                })
+                $(element.element).remove()
+                _Clons.Items.Tables[item.tindex].children.splice(item.index,1)
+                _Clons.Items.Tables[item.tindex].childIndex.splice(item.index,1)
+                if(_Clons.Items.Tables[item.tindex].children.length==0){
+                    _Clons.Items.Tables[item.tindex].element[0].parentNode.removeChild(_Clons.Items.Tables[item.tindex].element[0])
+                    _Clons.Items.Tables.splice(item.tindex,1)
+                }
+                resolve()
             }else{
                 resolve()
             }
@@ -55,10 +47,10 @@ export const RemoveTableItem = (table,state,success)=>{
     // eslint-disable-next-line no-unused-vars
     const _removeitem= {}
     for (let i = 0; i <  _Clons.Items.Tables.length; i++) {
-        const _t =  _Clons.Items.Tables[i];
+        const _t =  _Clons.Items.Tables[i]
         if(_t && _t.childIndex){
             for (let j = 0; j < _t.childIndex.length; j++) {
-                const element = _t.childIndex[j];
+                const element = _t.childIndex[j]
                 if(element && table.table.Index){
                     _removeitem.table=_t
                     _removeitem.child=_t.children[j]
@@ -93,10 +85,6 @@ export const RemoveCloneItem=(cloneId,state,success) =>{
     })
    
     if (removeItem != null) {
-        var $r =$(removeItem)
-        $r.fadeOut('slow', function() {
-            $r.remove()
-            success(null,state)
-        })
+        removeItem.parentNode.removeChild(removeItem)
     }
 }

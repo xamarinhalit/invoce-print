@@ -2,7 +2,6 @@ export const styleToObject = (element,$root)=>{
     return new Promise((resolve)=>{
         const out={}
         const elementStyle = element.style
-        let IsWrong = true
         for (const prop of elementStyle) {
             if(prop!=undefined){
                 const el =elementStyle[prop]
@@ -18,24 +17,20 @@ export const styleToObject = (element,$root)=>{
                     break
                 case 'left' :
                     out[prop]=PixelTo($root,el,'vw')
-                    
                     break
                 default:
                     out[prop]=el
                     break
                 }
-                IsWrong = (out[prop].indexOf('-')>-1)
             }
         }
-        if(IsWrong)
-            resolve(null)
-        else
-            resolve(out)
+        resolve(out)
     })
 }
 
 const PixelTo = ($root,pixel,types)=>{
     let pix  = pixel.replace('px','')
+    let size
     if(pix==0)
         return 0 + types
     switch (types) {
@@ -44,7 +39,7 @@ const PixelTo = ($root,pixel,types)=>{
     case 'vw':
         return (pix/$root.clientWidth*100).toFixed(4) + 'vw'
     case 'em':
-        let size = getComputedStyle($root).fontSize
+        size = getComputedStyle($root).fontSize
         if (size != undefined) {
             size = size.replace('px', '')
             size = parseFloat(size)
@@ -61,6 +56,7 @@ const PixelTo = ($root,pixel,types)=>{
 
 const ToPixel = ($root,pixel,types)=>{
     let pix  = pixel.replace(types,'')
+    let size
     if(pix==0)
         return 0 + 'px'
     switch (types) {
@@ -69,7 +65,7 @@ const ToPixel = ($root,pixel,types)=>{
     case 'vw':
         return (pix*$root.clientWidth/100).toFixed(2) + 'px'
     case 'em':
-        let size = getComputedStyle($root).fontSize
+        size = getComputedStyle($root).fontSize
         if (size != undefined) {
             size = size.replace('px', '')
             size = parseFloat(size)

@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+import copyObject from './copy-object'
 const EmtoPixel=(point)=> {
     let size = getComputedStyle(document.documentElement).fontSize
     if (size != undefined) {
@@ -27,50 +29,56 @@ const pxToVw=($root,pixel)=>{
 const pxToVh=($root,pixel)=>{
     return ($root.clientHeight/100)*pixel
 }
-const getCircularReplacer = () => {
-    const seen = new WeakSet()
-    return (key, value) => {
-        if (typeof value === 'object' && value !== null) {
-            if (seen.has(value)) {
-                return
-            }
-            seen.add(value)
-        }
-        return value
-    }
-}
-function copyObject(src) {
-    return JSON.parse(JSON.stringify(src, getCircularReplacer()))
-}
+
+
 const GetPrintInit = (state)=> {
     return new Promise((resolve)=>{
-     //   const  Items =copyObject(state)
-        let Items =state
+        //   const  Items =copyObject(state)
+        let Items =copyObject(state,true)
         // CloneType=> 'Field','Table','TableField,
-        const body = document.createElement('div')
+        let body = document.createElement('div')
 
-        for (let i = 0; i < Items.Clone.Items.Tables.length; i++) {
-            const item = Items.Clone.Items.Tables[i]
-            const table = document.createElement('table')
-            const $table =$(table)
-            $table.css( item.value.Style)
-            $table.css('position','absolute')
+        // for (let i = 0; i < Items.Clone.Items.Tables.length; i++) {
+        //     let item = Items.Clone.Items.Tables[i]
+        //     let table = document.createElement('table')
+        //     let $table =$(table)
+        //     $table.css( item.value.Style)
+        //     $table.css('position','absolute')
            
-            const tbody = document.createElement('tbody')
-            const tr =document.createElement('tr')
+        //     let tbody = document.createElement('tbody')
+        //     let tr =document.createElement('tr')
+        //     for (let j = 0; j < item.children.length; j++) {
+        //         let tritem = item.children[j]
+        //         if(tritem.value!=undefined){
+        //             let td = document.createElement('td')
+        //             td.innerHTML=tritem.value.ItemValue
+        //             tr.appendChild(td)
+        //         }
+        //     }
+        //     tbody.appendChild(tr)
+        //     table.appendChild(tbody)
+        //     body.appendChild(table)
+        // }
+        for (let i = 0; i < Items.Clone.Items.Tables.length; i++) {
+            let item = Items.Clone.Items.Tables[i]
+            let divmain = document.createElement('div')
+            let $divmain =$(divmain)
+            $divmain.css( item.value.Style)
+            $divmain.css('position','absolute')
+            let divrow =document.createElement('div')
+            divrow.style.display='flex'
             for (let j = 0; j < item.children.length; j++) {
-                const tritem = item.children[j]
-                if(tritem.value!=undefined){
-                    const td = document.createElement('td')
-                    td.innerHTML=tritem.value.ItemValue
-                    tr.appendChild(td)
+                let _item = item.children[j]
+                if(_item.value!=undefined){
+                    let divcolumn = document.createElement('div')
+                    divcolumn.innerHTML=_item.value.ItemValue
+                    divrow.appendChild(divcolumn)
                 }
             }
-            tbody.appendChild(tr)
-            table.appendChild(tbody)
-            body.appendChild(table)
+          
+            divmain.appendChild(divrow)
+            body.appendChild(divmain)
         }
-
 
 
         Items.Clone.Items.Tables =Items.Clone.Items.Tables.map(x=>{
@@ -112,7 +120,7 @@ const GetPrintInit = (state)=> {
         })
         let _html = document.createElement('html')
         _html.appendChild(body)
-        const wi = window.open("")
+        const wi = window.open('')
         wi.document.body.appendChild(body)
         $(body.innerHTML).printThis({
             debug: false, // show the iframe for debugging

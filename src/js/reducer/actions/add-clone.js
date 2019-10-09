@@ -1,11 +1,21 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-undef */
 import { dispatch, addReducer } from '..'
 import { actionTypes } from '../const'
-import { EmtoPixel } from './screen-tool'
 import { styleToObject } from './convert'
+const CalcLeftTop = (uioffset ,mainoffset)=>{
+    const { left: uleft, top: utop } =uioffset
+    const { left: mleft, top: mtop } = mainoffset
+    let left = uleft - mleft
+    let top = utop - mtop
+    if (top < 0) top = 0
+    if (left < 0) left = 0
+    return {
+        left,top
+    }
+}
 export const SetConfig = (state, _data) => {
-    const { subscribe } =addReducer
     state.UI.$CONTENT
         .droppable({
             accept: '.' + state.UI.DRAGCLASS + '>li',
@@ -14,94 +24,12 @@ export const SetConfig = (state, _data) => {
                 'ui-droppable-hover': 'ui-state-hover'
             },
             drop: (event, ui) => {
-                subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_state, cs) => {
-                    const cloneItem =cs
-                    if (cloneItem != undefined) {
-                        // var left = (ui.offset.left - $('.m-Template-Page-Area').offset().left);
-                        // var top = (ui.offset.top - $('.m-Template-Page-Area').offset().top);
-                        const { left: uleft, top: utop } = ui.offset
-                        const { left: mleft, top: mtop } = _state.UI.$CONTENT.offset()
-                        let left = uleft - mleft
-                        let top = utop - mtop
-                        if (top < 0) top = 0
-                        if (left < 0) left = 0
-                        _state.UI.$CONTENT.append($(cloneItem.element))
-                        $(cloneItem.element).css({ position: 'absolute' })
-                        const textlength = cloneItem.value.ItemValue
-                            ? cloneItem.value.ItemValue.length
-                            : 10
-                        let width = EmtoPixel(10) + 'px',
-                            height = ''
-                        const tg = textlength / 30
-                        if (tg <= 0) {
-                            height = EmtoPixel(3) + 'px'
-                        } else {
-                            height = EmtoPixel((textlength / 30) * 3) + 'px'
-                        }
-                        if (cloneItem.element.classList.contains('ui-resizable')) {
-                            $(cloneItem.element)
-                                .find('.ui-resizable-s')
-                                .remove()
-                            $(cloneItem.element)
-                                .find('.ui-resizable-e')
-                                .remove()
-                            $(cloneItem.element)
-                                .find('.ui-resizable-se')
-                                .remove()
-                        }
-                        $(cloneItem.element)
-                            .width(width)
-                            .height(height)
-                            .offset({ left: left, top: top })
-                            .draggable({
-                                containment: _state.UI.DROPID,
-                                cursorAt: {
-                                    top: cloneItem.element.offsetY,
-                                    left: cloneItem.element.offsetX
-                                },
-                                cursor: 'move',
-                                drag: async function (el, ui2) {
-                                    const style =await styleToObject (cloneItem.element,state.UI.$CONTENT[0])
-                                    if(style ==null)
-                                        return false
-                                    cloneItem.value.Style = style
-                                }
-                            })
-                            .resizable({
-                                minHeight: width,
-                                minWidth: height
-                            })
-                            .on('resize', async function(_e) {
-                                let style =await styleToObject (cloneItem.element,state.UI.$CONTENT[0])
-                                if(style ==null)
-                                    return false
-                                cloneItem.value.Style = style
-                            })
-                            .css({ border: 'none', left: left + 'px', top: top + 'px' })
-                            .disableSelection()
-                        $(cloneItem.element)
-                            .find('i')
-                            .click(function (e) {
-                                const { cloneId } = cloneItem.element.dataset
-                                dispatch({
-                                    type: actionTypes.CLONE.REMOVE_CLONEITEM,
-                                    payload: cloneId
-                                })
-                            })
-                            
-                            styleToObject (cloneItem.element,state.UI.$CONTENT[0]).then((style)=>{
-                                cloneItem.value.Style = style || {}
-                            })
-                    }
-                }
-                )
+                const {left,top } =CalcLeftTop(ui.offset,state.UI.$CONTENT.offset())
                 dispatch({
                     type: actionTypes.CLONE.ADD_CLONEITEM,
                     payload:{
-                        ItemKey:ui.helper[0].dataset.ItemKey,
-                        TableKey:ui.helper[0].dataset.TableKey,
                         Index:ui.helper[0].dataset.Index,
-
+                        left,top
                     }
                 })
             }
@@ -109,84 +37,8 @@ export const SetConfig = (state, _data) => {
         .disableSelection()
         .css({ margin: '2px' })
 }
-const AddTables = (state,tablekey)=>{
-    const Items = state.Clone.Items
-    const { DROPID } = state.UI
-    const { Index } = state.Clone
-    const CSTABLE = state.Clone.SelectElement.TABLE
-    let _table = null
-    for (let i = 0; i < Items.Tables.length; i++) {
-        const el = Items.Tables[i]
-        if(el.key==tablekey){
-            _table=el
-        }
-    }
-    if(_table==null){
-        Index.Index++
-        const table=  $(CSTABLE).clone()
-        table.prop('id','table-'+tablekey)
-        table.data('cloneId',Index.Index)
-        table.offset({ top: 500, left: 0 })
-        // table[0].classList.remove('table-style')
-        $(DROPID).append(table)
 
-        if (table.hasClass('ui-resizable')) {
-            table
-                .find('.ui-resizable-s')
-                .remove()
-            table
-                .find('.ui-resizable-e')
-                .remove()
-            table
-                .find('.ui-resizable-se')
-                .remove()
-        }
-
-        _table={
-            Index:Index.Index,
-            key:tablekey,
-            element:table,
-            children:[],
-            childIndex:[],
-            value:{},
-            ColumIndex:-1,
-            RowIndex:-1
-        }
-        styleToObject (table[0],state.UI.$CONTENT[0]).then((style)=>{
-            _table.value.Style= style || ''
-        })
-        table
-            .resizable({
-                minHeight: 30,
-                minWidth: 75
-            })
-            .on('resize', async function(_e) {
-                let style =await styleToObject (table[0],state.UI.$CONTENT[0])
-                if(style ==null)
-                    return false
-                _table.value.Style= style
-            })
-            .draggable({
-                containment: DROPID,
-                cursor: 'move',
-                drag: async function(el, ui) {
-                    let style =await styleToObject (table[0],state.UI.$CONTENT[0])
-                    if(style ==null)
-                        return false
-                    _table.value.Style= style
-                }
-            })
-         
-
-        table[0].querySelector('button.close').onclick=_e=> {
-            dispatch({type:actionTypes.CLONE.REMOVE_TABLE,payload:{table:_table}})
-        }
-       
-        Items.Tables.push(_table)
-    }
-    return _table
-}
-const UICloneText = (state,menuitem)=>{
+const UICloneText = (state,menuitem,payload)=>{
     return new Promise((resolve,reject)=>{
         const {value,element,ToolValue,Index,Sort } =menuitem
         const SELECT_TEXT = state.Clone.SelectElement.TEXT
@@ -200,8 +52,7 @@ const UICloneText = (state,menuitem)=>{
         textclone.classList.add(textid)
         textclone.innerHTML= `${value[TYPE_TEXT.VALUE]}<i class="fa fa-times Remove"></i>`
         textclone.dataset.cloneId = _Clone_Index.Index
-  
-        const elements = {
+        const cloneItem = {
             Index: _Clone_Index.Index,
             element: textclone,
             value,
@@ -210,20 +61,142 @@ const UICloneText = (state,menuitem)=>{
             menuindex:Index,
             menuelement:element
         }
-        state.Clone.Items.Clons.push(elements)
-        resolve(elements)
+        state.Clone.Items.Clons.push(cloneItem)
+
+        const extractCss=(style)=>{
+            cloneItem.value.Style = style
+        }
+        let { left,top} = payload
+        state.UI.$CONTENT.append(cloneItem.element)
+        $(cloneItem.element)
+            .css({ position: 'absolute' })
+            .width(cloneItem.value.Width)
+            .height(cloneItem.value.Height)
+            .offset({ left: left, top: top })
+            .draggable({
+                containment: state.UI.DROPID,
+                cursorAt: {
+                    top: cloneItem.element.offsetY,
+                    left: cloneItem.element.offsetX
+                },
+                cursor: 'move',
+                drag: async function (el, ui2) {
+                    const style =await styleToObject (cloneItem.element,state.UI.$CONTENT[0])
+                    if(style ==null)
+                        return false
+                    extractCss(style)
+                }
+            })
+            .resizable({
+                minHeight: cloneItem.value.Height,
+                minWidth:cloneItem.value.Width
+            })
+            .on('resize', async function(_e) {
+                const style =await styleToObject (cloneItem.element,state.UI.$CONTENT[0])
+                if(style ==null)
+                    return false
+                else
+                    extractCss(style)
+            })
+            .css({ border: 'none', left: left + 'px', top: top + 'px' })
+            .disableSelection()
+        $(cloneItem.element)
+            .find('i')
+            .click(function (e) {
+                const { cloneId } = cloneItem.element.dataset
+                dispatch({
+                    type: actionTypes.CLONE.REMOVE_CLONEITEM,
+                    payload: cloneId
+                })
+            })
+            
+        styleToObject (cloneItem.element,state.UI.$CONTENT[0]).then((style)=>{
+            extractCss(style || {})
+        })
+        resolve(cloneItem)
     })
 }
-const UICreateTable= (state,tablekey)=>{
+
+const UICloneCreateTable = (state,tablekey)=>{
     return new Promise((resolve)=>{
-        const $e = AddTables(state, tablekey)
-        resolve($e)
+        const Items = state.Clone.Items
+        const { DROPID } = state.UI
+        const { Index } = state.Clone
+        let _table = null
+        for (let i = 0; i < Items.Tables.length; i++) {
+            const el = Items.Tables[i]
+            if(el.key==tablekey){
+                _table=el
+            }
+        }
+        if(_table==null){
+            Index.Index++
+            const _div = document.createElement('div')
+            _div.classList.add('p-main')
+            _div.style.position='absolute'
+            const $div =$(_div)
+            $div.prop('id','table-'+tablekey)
+            $div.data('cloneId',Index.Index)
+            $div.offset({ top: 500, left: 0 })
+            const button = document.createElement('i')
+            button.className='fa fa-times Remove'
+            button.onclick=_e=> {
+                dispatch({type:actionTypes.CLONE.REMOVE_TABLE,payload:{table:_table}})
+            }
+            $div.prepend(button)
+            $(DROPID).append($div)
+            _table={
+                Index:Index.Index,
+                key:tablekey,
+                element:$div,
+                children:[],
+                childIndex:[],
+                value:{},
+                ColumIndex:-1,
+                RowIndex:-1
+            }
+            styleToObject ( $div[0],state.UI.$CONTENT[0]).then((style)=>{
+                _table.value.Style= style || ''
+            })
+            $div
+                .on('resize', async function(_e) {
+                    let style =await styleToObject ( $div[0],state.UI.$CONTENT[0])
+                    if(style ==null)
+                        return false
+                    _table.value.Style= style
+                })
+                .draggable({
+                    containment: DROPID,
+                    cursor: 'move',
+                    addClasses: false,
+                    drag: async function(el, ui) {
+                        let style =await styleToObject ( $div[0],state.UI.$CONTENT[0])
+                        if(style ==null)
+                            return false
+                        _table.value.Style= style
+                    },
+                })
+            Items.Tables.push(_table)
+        }
+        resolve(_table)
     })
 }
 const UICloneTable = (state,menuitem)=>{
     return new Promise((resolve,_reject)=>{
         const {value,element,ToolValue,Index,Sort } =menuitem
-        UICreateTable(state,menuitem.value.TableKey).then((_table)=>{
+        UICloneCreateTable(state,menuitem.value.TableKey).then((_table)=>{
+            const CalC_Table = ()=>{
+                let x_width = 0
+                let leng = _table.children.length
+                if(leng>0){
+                    const _el = _table.children[0]
+                    x_width=_el.element.parentNode.offsetWidth
+                }
+                if(x_width!=0){
+                    _table.element.width(x_width+(leng*7))
+                }
+    
+            }
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
             let _tr = null
@@ -231,20 +204,29 @@ const UICloneTable = (state,menuitem)=>{
             _Clone_Index.Index++
             if(_table.RowIndex==-1){
                 _table.RowIndex++   
-                _tr= document.createElement('tr')
+                _tr= document.createElement('div')
+                _tr.classList.add('p-row')
                 _tr.dataset.Sort=_table.RowIndex
-                _table.element[0].querySelector('table>tbody').appendChild(_tr)
+                _table.element[0].appendChild(_tr)
             }else{
-                _tr= _table.element[0].querySelector('tr[data--sort=\''+_table.RowIndex+'\']')
+                _tr= _table.element[0].querySelector('div[data--sort=\''+_table.RowIndex+'\']')
             }
           
             const _column = _table.ColumIndex
-            const _td = document.createElement('td')
+            const _td = document.createElement('div')
+            _td.classList.add('p-column')
             _td.classList.add(value[TYPE_TABLE.ITEMKEY])
             _td.dataset.Sort = _column
             _td.dataset.cloneId=_Clone_Index.Index
+            $(_td).width(value.Width).height(value.Height)
             _td.innerHTML=value[TYPE_TABLE.VALUE]
             _tr.appendChild(_td)
+            const $colres=$(_td)
+            $colres.resizable({
+                grid: [1, state.UI.$CONTENT.width()]
+            })
+            _td.removeChild(_td.querySelector('.ui-resizable-s'))
+            _td.removeChild(_td.querySelector('.ui-resizable-se'))
             const elements = {
                 Index: _Clone_Index.Index,
                 element: _td,
@@ -254,8 +236,18 @@ const UICloneTable = (state,menuitem)=>{
                 menuindex:Index,
                 menuelement:element
             }
+            $colres.on('resize', async function(_e) {
+                let style =await styleToObject ( $colres[0],state.UI.$CONTENT[0])
+                if(style ==null)
+                    return false
+                if(style.width!=undefined){
+                    CalC_Table()
+                }
+                elements.value.Style= style
+            })
             _table.children.push(elements)
             _table.childIndex.push(elements.Index)
+            CalC_Table()
             resolve(elements)
         })
     })
@@ -273,7 +265,7 @@ const AddCloneItem= (payload,state,success) =>{
     if (item && payload.Index) {
         switch (item.value.ItemType) {
         case state.Clone.Type.TEXT.FIELD:
-            UICloneText(state,item).then((_data)=>{
+            UICloneText(state,item,payload).then((_data)=>{
                 success(_data)
             })
             break
@@ -288,30 +280,9 @@ const AddCloneItem= (payload,state,success) =>{
        
     }
 }
-const TableItemClick=(e)=>{
-    const $item = $(e.currentTarget)
-    let { Index} = e.currentTarget.dataset
-    $item.toggleClass('active')
-    const $input = $($item[0].querySelector('input'))
-    if ($item.hasClass('active')) {
-        // eslint-disable-next-line no-unused-vars
-        addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(__state,_cloneitem)=>{$input.prop('checked',true)})
-        dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index}})
-    } else {
-        // eslint-disable-next-line no-unused-vars
-        addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{ $input.prop('checked',false)})
-        dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
-    }
-}
-$.fn.extend({
-    TableCreate: function() {
-        let $el =$(this)
-        if ($el != undefined && $el.length>0) {
-            let elinput = document.createElement('input')
-            elinput.setAttribute('type','checkbox')
-            $el[0].prepend(elinput)
-            $el.click(TableItemClick)
-        }
-    }
-})
+// $.fn.extend({
+//     TableCreate: function() {
+
+//     }
+// })
 export default AddCloneItem

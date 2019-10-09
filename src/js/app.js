@@ -7,6 +7,7 @@ import '../_plugin/css/jquery-ui.min.css'
 // import '../scss/efar.scss';
 //import '../scss/mydrop.scss'
 import '../scss/mycss.scss'
+import '../scss/print.scss'
 // import '../_plugin/css/jq-ui.css'
 
 import { addReducer, dispatch ,reducer_pipe} from './reducer'
@@ -279,3 +280,10 @@ import { actionTypes } from './reducer/const'
         )
     })
 })()
+
+const $colres=$('.p-main>.p-row>.p-column')
+$colres.resizable({
+    grid: [1, 10000]
+})
+$colres.find('.ui-resizable-s').remove()
+$colres.find('.ui-resizable-se').remove()
