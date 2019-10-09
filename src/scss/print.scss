@@ -8,6 +8,23 @@
         border-right-width: 1px
     }
 }
+@mixin mRemove {
+    @media print{
+        i.Remove{
+            display: none;
+        }
+        #dragui:parent{
+            margin: 0;
+            padding: 0;
+        }
+    }
+    @media screen {
+        border-right-color: black;
+        border-right-style: solid;
+        border-right-width: 1px
+    }
+}
+@include mRemove();
 .p-main{
     width: 100vw;
     i.Remove{
