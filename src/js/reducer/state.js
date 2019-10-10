@@ -32,9 +32,15 @@ const State ={
         }
     },
     Print:{
-        screen:{
-
-        }
+        Printer: 'Laser',
+        PageCopy: 1,
+        PageProduct: 1,
+        PageSize: 'A4',
+        PageType: 'Dikey',
+        CopyDirection: 'Yanyana',
+        PageWidth: '21,00',
+        PageHeight: '29,70',
+        ImageUrl: ''
     },
     Clone:{
         Type: {

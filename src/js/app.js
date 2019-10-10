@@ -4,7 +4,7 @@
 import '../_plugin/css/bootstrap.min.css'
 import '../_plugin/css/font-awesome.min.css'
 import '../_plugin/css/jquery-ui.min.css'
-// import '../scss/efar.scss';
+import '../_plugin/css/efar.css'
 //import '../scss/mydrop.scss'
 import '../scss/mycss.scss'
 import '../scss/print.scss'
@@ -278,6 +278,27 @@ import { actionTypes } from './reducer/const'
             {id:'#loadprint',fn:'loadPrint'},
             {id:'#newPrint',fn:'newPrint'}
         )
+        $('#PopupSettings').modal('show')
+        $('[name="BtnSettingSave"]').click((e)=>{
+            e.preventDefault()
+            const forms =  document.forms.PanelPaperSetting
+            let message = ''
+            let Print ={}
+            for (let i = 0; i < forms.length; i++) {
+                const element = forms[i]
+                const {name,value,type} =element
+                if(name != '' && type!='button')
+                    Print[name]=value
+                if (!element.checkValidity()) {
+                    message+=element.validationMessage + ' , '
+                }
+            }
+            if(message!=''){
+                alert(message)
+            }else{
+                dispatch({type:actionTypes.INIT.PRINT,payload:Print})
+            }
+        })
     })
 })()
 

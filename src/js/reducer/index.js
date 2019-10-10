@@ -1,13 +1,18 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,GetInitCalc,CalcW80To100,CalcH70To100, postData } from './actions'
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,GetInitCalc,CalcW80To100,CalcH70To100, postData, PrintSetting } from './actions'
 
 const observers= []
 
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
+    case actionTypes.INIT.PRINT:
+        PrintSetting(state,action.payload,(_data)=>{
+            sendReducer(action.type,_data,state)
+        })
+        break
     case actionTypes.INIT.FETCHED:
         fetchData(data=>{
             state.Clone.Items.StaticItems=data

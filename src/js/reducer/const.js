@@ -1,6 +1,7 @@
 export const actionTypes={
     INIT:{
-        FETCHED:'FETCHED'
+        FETCHED:'FETCHED',
+        PRINT:'PRINT'
     },
     HTTP:{
         POST:'POST'

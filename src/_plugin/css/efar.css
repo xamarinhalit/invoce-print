@@ -3225,18 +3225,3 @@
       padding: 8px 11px;
     }
   }
-  
-  /*.pay-tabs ul .active:before {
-                  content: "\f04b";
-                  font-family: FontAwesome;
-                  font-style: normal;
-                  font-weight: normal;
-                  text-decoration: inherit;
-                  color: #000;
-                  font-size: 14px;
-                  padding-right: 0.5em;
-                  position: absolute;
-                  top: 10px;
-                  left: 7px;
-                  z-index: 9;
-              }*/

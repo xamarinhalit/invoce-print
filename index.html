@@ -1,36 +1,285 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
 </head>
+
 <body>
-    <div >
+    <div>
         <ul style="display:flex;justify-content: start;align-items: space-between;list-style:none">
             <li style="width:5vw;"><button id="print">Print</button></li>
             <li><button id="loadprint">Load </button></li>
             <li><button id="newPrint">newPrint</button></li>
         </ul>
-        
-        
+        <div id="PopupSettings" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form name="PanelPaperSetting">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Şablon Ayarları</h4>
+                        </div>
+                        <div class="modal-body" style="padding-top:0;">
+                            <div class="container-fluid" style="margin:0; padding:0;">
+                                <div class="efar-popup-panel" name="PanelPrintType">
+                                    <h2> <i class="fa fa-print"></i> Yazıcı Türü </h2>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-md-4 label-title"> Yazıcının Türünü Seçiniz </label>
+                                            <div class="col-md-8">
+                                                <div class="efar-radio-buttons">
+                                                    <div class="efar-radio-button inline">
+                                                        <input type="radio" name="Printer" checked="checked"
+                                                            data-value="Laser" value="Laser"> <label>Lazer Yazıcı</label>
+                                                    </div>
+                                                    <div class="efar-radio-button inline">
+                                                        <input type="radio" name="Printer" data-value="Dotted" value="Dotted">
+                                                        <label>Nokta
+                                                            Vuruşlu Yazıcı</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="efar-popup-panel" id="PanelPaperSetting" style="min-height: 300px;">
+                                    <h2><i class="fa fa-file-text-o"></i>Kağıt Özellikleri </h2>
+                                    <p>Tek sayfada birden fazla fatura kopyanız varsa, aşağıdan kopya adedini seçiniz.
+                                        Faturanızın tek bir kopyasının boyutunu Genişlik ve Yükseklik olarak giriniz.
+                                    </p>
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-group row">
+                                            <label class="col-md-5 label-title"> Kopya / Sayfa </label>
+                                            <div class="col-md-7">
+                                                <select class="form-control" name="PageCopy">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-5 label-title"> Kağıt Ebatı </label>
+                                            <div class="col-md-7">
+                                                <select class="form-control" name="PageSize">
+                                                    <option value="A4">A4</option>
+                                                    <option value="A5">A5</option>
+                                                    <option value="Özel">Özel</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" style="display: none;">
+                                            <label class="col-md-5 label-title"> Kopya Yönü</label>
+                                            <div class="col-md-7">
+                                                <select class="form-control" name="CopyDirection">
+                                                    <option value="Yanyana">Yanyana</option>
+                                                    <option value="Altalta">Altalta</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-5 label-title"> Dikey/ Yatay </label>
+                                            <div class="col-md-7">
+                                                <select class="form-control" name="PageType">
+                                                    <option value="Dikey">Dikey</option>
+                                                    <option value="Yatay">Yatay</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" style="display: none;">
+                                            <label class="col-md-5 label-title"> Genişlik </label>
+                                            <div class="col-md-7">
+                                                <input type="text" class="form-control efar-money" name="PageWidth">
+                                                <div class="prop-inner">cm</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" style="display: none;">
+                                            <label class="col-md-5 label-title"> Yükseklik </label>
+                                            <div class="col-md-7">
+                                                <input type="text" class="form-control efar-money" name="PageHeight">
+                                                <div class="prop-inner">cm</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-5 label-title"> Görsel </label>
+                                            <div class="col-md-7">
+                                                <label for="image-upload" name="image-label" class="btn-efar-upload"
+                                                    style="display: none;">
+                                                    <i class="fa fa-upload"></i> Yükle
+                                                </label>
+                                                <label for="image-remove" class="btn-efar-upload remove"
+                                                    style="display: inline-block;">
+                                                    <i class="fa fa-remove"></i> Kaldır
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-5 label-title"> Ürün Adedi</label>
+                                            <div class="col-md-7">
+                                                <select class="form-control" name="PageProduct">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="20">20</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div name="image-preview" class="efar-image-preview"
+                                            style="width: 106.06px; height: 150px; background-image: url(&quot;https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg&quot;); background-size: cover; background-position: center center;">
+                                            <input type="file" name="image" name="image-upload">
+                                        </div>
+                                        <canvas name="PreviewCanvas" width="150" height="150">
+                                            https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage#fallback_content
+
+                                            An alternative text describing what your canvas displays.
+                                        </canvas>
+                                    </div>
+
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="popup_alert left"> </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
+                            <button type="button" class="btn btn-black" name="BtnSettingSave">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="PopupPrint" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Yazdırma şablonunuzu test etmek için </h4>
+                    </div>
+                    <div class="modal-body" style="padding-top:0;">
+                        <div class="container-fluid" style="margin:0; padding:0;">
+                            <div class="PdfRule">
+                                <ul>
+                                    <li>Aşağıdaki butonu kullanarak test bilgileri içeren PDF dosyasını açın.
+                                    </li>
+                                    <li>Matbu fatura veya irsaliyenizle aynı büyüklükte boş bir kağıda PDF
+                                        dosyasını yazdırın.</li>
+                                    <li>Yazdırdığınız test bilgilerini matbu fatura veya irsaliyenizin tam
+                                        üzerine yerleştirin.</li>
+                                    <li>Test çıktısını ve fatura veya irsaliyeyi ışığa doğru kaldırarak
+                                        bilgilerin doğru yere denk geldiğini kontrol edin.</li>
+                                    <li>Bilgiler doğru yere denk gelene kadar şablonu düzenleyip tekrar test
+                                        çıktısı yazdırın.</li>
+                                </ul>
+                            </div>
+                            <div class="PdfRuleNote">
+                                Dikkat! Dosyayı yazdırırken Sayfaya Sığdır (Fit to Page) şeçeneğinin <b>seçili
+                                    olmadığından</b> emin olun.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="popup_alert left"> </div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
+                        <button type="button" class="btn btn-black" id="BtnPdfOpen">PDF Dosyasını Aç</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
     <div class="m-content">
         <form class="m-form">
-                <div class="m-Template">
-                    
+            <div class="m-Template">
+
                 <div class="m-Template-Canvas">
                     <div class="m-Ruler-Top" style="width: 672px;">
-                        <ul style="width: 672px;"><li><span>0</span></li><li><span>1</span></li><li><span>2</span></li><li><span>3</span></li><li><span>4</span></li><li><span>5</span></li><li><span>6</span></li><li><span>7</span></li><li><span>8</span></li><li><span>9</span></li><li><span>10</span></li><li><span>11</span></li><li><span>12</span></li><li><span>13</span></li><li><span>14</span></li><li><span>15</span></li><li><span>16</span></li><li><span>17</span></li><li><span>18</span></li><li><span>19</span></li><li><span>20</span></li><div class="clear"></div></ul>
+                        <ul style="width: 672px;">
+                            <li><span>0</span></li>
+                            <li><span>1</span></li>
+                            <li><span>2</span></li>
+                            <li><span>3</span></li>
+                            <li><span>4</span></li>
+                            <li><span>5</span></li>
+                            <li><span>6</span></li>
+                            <li><span>7</span></li>
+                            <li><span>8</span></li>
+                            <li><span>9</span></li>
+                            <li><span>10</span></li>
+                            <li><span>11</span></li>
+                            <li><span>12</span></li>
+                            <li><span>13</span></li>
+                            <li><span>14</span></li>
+                            <li><span>15</span></li>
+                            <li><span>16</span></li>
+                            <li><span>17</span></li>
+                            <li><span>18</span></li>
+                            <li><span>19</span></li>
+                            <li><span>20</span></li>
+                            <div class="clear"></div>
+                        </ul>
                     </div>
                     <div class="m-Ruler-Left">
-                        <ul style="height: 1000.4px;"><li><span>0</span></li><li><span>1</span></li><li><span>2</span></li><li><span>3</span></li><li><span>4</span></li><li><span>5</span></li><li><span>6</span></li><li><span>7</span></li><li><span>8</span></li><li><span>9</span></li><li><span>10</span></li><li><span>11</span></li><li><span>12</span></li><li><span>13</span></li><li><span>14</span></li><li><span>15</span></li><li><span>16</span></li><li><span>17</span></li><li><span>18</span></li><li><span>19</span></li><li><span>20</span></li><li><span>21</span></li><li><span>22</span></li><li><span>23</span></li><li><span>24</span></li><li><span>25</span></li><li><span>26</span></li><li><span>27</span></li><li><span>28</span></li><li><span>29</span></li></ul>
+                        <ul style="height: 1000.4px;">
+                            <li><span>0</span></li>
+                            <li><span>1</span></li>
+                            <li><span>2</span></li>
+                            <li><span>3</span></li>
+                            <li><span>4</span></li>
+                            <li><span>5</span></li>
+                            <li><span>6</span></li>
+                            <li><span>7</span></li>
+                            <li><span>8</span></li>
+                            <li><span>9</span></li>
+                            <li><span>10</span></li>
+                            <li><span>11</span></li>
+                            <li><span>12</span></li>
+                            <li><span>13</span></li>
+                            <li><span>14</span></li>
+                            <li><span>15</span></li>
+                            <li><span>16</span></li>
+                            <li><span>17</span></li>
+                            <li><span>18</span></li>
+                            <li><span>19</span></li>
+                            <li><span>20</span></li>
+                            <li><span>21</span></li>
+                            <li><span>22</span></li>
+                            <li><span>23</span></li>
+                            <li><span>24</span></li>
+                            <li><span>25</span></li>
+                            <li><span>26</span></li>
+                            <li><span>27</span></li>
+                            <li><span>28</span></li>
+                            <li><span>29</span></li>
+                        </ul>
                     </div>
                     <div class="m-Template-Page ui-widget-content" style="width: 672px; height: 950.4px;">
-                            <div class="m-Template-Page-Area active ui-droppable"  id="dragui">
+                        <div class="m-Template-Page-Area active ui-droppable" id="dragui">
 
-                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="m-Template-Tools">
@@ -39,17 +288,18 @@
     </div>
     <div style="display:none">
         <div id="TextField" class="efar-field">
-                <i class="fa fa-times Remove"></i>
+            <i class="fa fa-times Remove"></i>
         </div>
-        <div id="TableField" >
-        <button type="button" class="close pull-right" style="margin-right:-0.3em;margin-top:-0.6em" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <table class="table-style">
-          <thead>
-          </thead>
-          <tbody>
+        <div id="TableField">
+            <button type="button" class="close pull-right" style="margin-right:-0.3em;margin-top:-0.6em"
+                data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <table class="table-style">
+                <thead>
+                </thead>
+                <tbody>
 
-          </tbody>
-        </table>
+                </tbody>
+            </table>
         </div>
     </div>
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
@@ -59,4 +309,5 @@
     <!-- <script type="text/javascript" src="https://content.magenty.com/static/scripts/printThis.js"></script> -->
     <script src="dist/index.js"></script>
 </body>
+
 </html>
