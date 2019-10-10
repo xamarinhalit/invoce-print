@@ -23,7 +23,9 @@ import { actionTypes } from './reducer/const'
     $(document).ready(function () {
         const InitDragable = function (target,...args) {
             for (let i = 0; i < args.length; i++) $(args[i].id).click(()=>$(this)[args[i].fn]())
-            subscribe(actionTypes.INIT.FETCHED, (state, data) => { })
+            subscribe(actionTypes.INIT.FETCHED, (state, data) => { 
+              
+            })
             dispatch({ type: actionTypes.INIT.FETCHED, payload: target })
         }
         $.fn.extend({
@@ -278,7 +280,8 @@ import { actionTypes } from './reducer/const'
             {id:'#loadprint',fn:'loadPrint'},
             {id:'#newPrint',fn:'newPrint'}
         )
-        $('#PopupSettings').modal('show')
+      //  $('#PopupSettings').modal('show')
+        
         $('[name="BtnSettingSave"]').click((e)=>{
             e.preventDefault()
             const forms =  document.forms.PanelPaperSetting

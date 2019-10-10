@@ -1,64 +1,76 @@
 @mixin mprint {
-    @media print{
-        border: none;
-    }
-    @media screen {
-        border-right-color: black;
-        border-right-style: solid;
-        border-right-width: 1px
-    }
+  @media print {
+    border: none;
+  }
+  @media screen {
+    border-right-color: black;
+    border-right-style: solid;
+    border-right-width: 1px;
+  }
 }
 @mixin mRemove {
-    @media print{
-        i.Remove{
-            display: none;
-        }
-        #dragui:parent{
-            margin: 0;
-            padding: 0;
-        }
+  @media print {
+    i.Remove {
+      display: none;
     }
-    @media screen {
-        border-right-color: black;
-        border-right-style: solid;
-        border-right-width: 1px
+    #dragui:parent {
+      margin: 0;
+      padding: 0;
     }
+  }
+  @media screen {
+    border-right-color: black;
+    border-right-style: solid;
+    border-right-width: 1px;
+  }
 }
 @include mRemove();
-.p-main{
-    width: 100vw;
-    i.Remove{
-        display: none;
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 4px 5px 5px 6px;
-        background-color:
-        #e8e7e7;
-        cursor: pointer;
-        font-size: 16px;
+.p-main {
+  width: 100vw;
+  i.Remove {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px 5px 5px 6px;
+    background-color: #e8e7e7;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  &:hover {
+    i.Remove {
+      display: block;
+      color: black;
     }
-    &:hover{
-        i.Remove {
-            display: block;
-           color: black;
-        }
+  }
+  &:hover {
+    i.Remove:hover {
+      color: #ca4b53;
+      display: block;
     }
-    &:hover{
-        i.Remove:hover{
-        color: #ca4b53;
-        display: block;
-        }
+  }
+  .p-row {
+    display: inline-flex;
+    margin-right: 20px;
+    .p-column {
+      width: 20vw;
+      margin-right: 5px;
+      @include mprint();
     }
-    .p-row{
-        display: inline-flex;
-        margin-right: 20px;
-        .p-column{
-            width: 20vw;
-            margin-right: 5px;
-            @include mprint();
-           
-        }
-        
+  }
+}
+.p-text-content{
+    position: fixed;
+    width: calc(100% - 560px);
+    // background:    #d2d0cf;
+    border-right: 1px solid
+    #ccc;
+    text-align: center;
+    top: 1em;
+    left: 5em;
+    .p-text-fontsize {
+      margin: 15px;
+      background: #fff;
+      box-shadow: 0 0 8px #d7d5d4;
     }
 }

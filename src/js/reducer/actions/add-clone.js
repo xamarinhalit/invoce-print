@@ -4,6 +4,7 @@
 import { dispatch, addReducer } from '..'
 import { actionTypes } from '../const'
 import { styleToObject } from './convert'
+import { PixelToPoint } from './print-settings'
 const CalcLeftTop = (uioffset ,mainoffset)=>{
     const { left: uleft, top: utop } =uioffset
     const { left: mleft, top: mtop } = mainoffset
@@ -36,6 +37,56 @@ export const SetConfig = (state, _data) => {
         })
         .disableSelection()
         //.css({ margin: '2px' })
+    state.UI.$FONTWEIGHT=document.querySelector('select[name="fontweight"]')
+    state.UI.$FONTWEIGHT.addEventListener('change',(e)=>{
+        const _target =e.currentTarget
+        if(_target !=undefined && _target.value!=''){
+            state.UI.SELECT.$font.style.fontWeight=_target.value
+            $( state.UI.SELECT.$font).trigger('change')
+        }
+    })
+    state.UI.$FONTWEIGHT.addEventListener('blur',(e)=>{
+    })
+    state.UI.$FONTSTYLE=document.querySelector('select[name="fontstyle"]')
+    state.UI.$FONTSTYLE.addEventListener('change',(e)=>{
+        const _target =e.currentTarget
+        if(_target !=undefined && _target.value!=''){
+            state.UI.SELECT.$font.style.fontStyle=_target.value
+            $( state.UI.SELECT.$font).trigger('change')
+        }
+    })
+    state.UI.$FONTSTYLE.addEventListener('blur',(e)=>{
+    })
+
+    state.UI.$FONTSIZE= document.querySelector('input[name="fontsize"]')
+    state.UI.$FONTSIZE.addEventListener('keyup',(e)=>{
+        const _target =e.currentTarget
+        if(_target !=undefined && _target.value!=''){
+            state.UI.SELECT.$font.style.fontSize=_target.value+'pt'
+            $( state.UI.SELECT.$font).trigger('change')
+        }
+    })
+    // state.UI.$FONTSIZE.addEventListener('blur',(e)=>{
+    //    // state.UI.SELECT.$font=null
+    //   //  state.UI.$FONTSIZE.parentNode.style.display='none'
+    // })
+    state.UI.$FONTSIZE.parentNode.style.display='none'
+}
+const ChangeFontSize=(state,e)=>{
+    state.UI.SELECT.$font=e.currentTarget
+    const fsize=state.UI.SELECT.$font.style.fontSize
+    if(fsize!=''){
+        if(fsize.indexOf('pt')>-1){
+            state.UI.$FONTSIZE.value=fsize.replace('pt','')
+        }else if(fsize.indexOf('px')){
+            state.UI.$FONTSIZE.value=PixelToPoint(fsize.replace('px',''))
+        }
+    }else{
+        state.UI.$FONTSIZE.value=''
+    }
+    state.UI.$FONTSIZE.parentNode.style.display='block'
+    state.UI.$FONTSTYLE.value=state.UI.SELECT.$font.style.fontStyle
+    state.UI.$FONTWEIGHT.value=state.UI.SELECT.$font.style.fontWeight
 }
 
 const UICloneText = (state,menuitem,payload)=>{
@@ -52,6 +103,7 @@ const UICloneText = (state,menuitem,payload)=>{
         textclone.classList.add(textid)
         textclone.innerHTML= `${value[TYPE_TEXT.VALUE]}<i class="fa fa-times Remove"></i>`
         textclone.dataset.cloneId = _Clone_Index.Index
+        textclone.onclick=(e)=>ChangeFontSize(state,e)
         const cloneItem = {
             Index: _Clone_Index.Index,
             element: textclone,
@@ -220,6 +272,7 @@ const UICloneTable = (state,menuitem)=>{
             _td.dataset.cloneId=_Clone_Index.Index
             $(_td).width(value.Width).height(value.Height)
             _td.innerHTML=value[TYPE_TABLE.VALUE]
+            _td.onclick=(e)=>ChangeFontSize(state,e)
             _tr.appendChild(_td)
             const $colres=$(_td)
             $colres.resizable({

@@ -9,11 +9,6 @@
 
 <body>
     <div>
-        <ul style="display:flex;justify-content: start;align-items: space-between;list-style:none">
-            <li style="width:5vw;"><button id="print">Print</button></li>
-            <li><button id="loadprint">Load </button></li>
-            <li><button id="newPrint">newPrint</button></li>
-        </ul>
         <div id="PopupSettings" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -209,12 +204,47 @@
 
             </div>
         </div>
-
+        <div class="m-Template">
+                
+        </div>
     </div>
     <div class="m-content">
         <form class="m-form">
             <div class="m-Template">
-
+                <div class="p-text-content">
+                    <div class="p-text-fontsize">
+                        <ul style="display:flex;justify-content:space-around;list-style:none;width:20em;float: right;">
+                            <li><button id="print">Print</button></li>
+                            <li><button id="loadprint">Load </button></li>
+                            <li><button id="newPrint">newPrint</button></li>
+                        </ul>
+                        <span>Yazı Boyutu</h2>
+                        <input type="text" name="fontsize">
+                        <span>Yazı Stili</h2>
+                        <select name="fontstyle">
+                                <option value="normal">Normal</option>
+                            <option value="italic">Italic</option>
+                            <option value="oblique">Oblique</option>
+                        </select>
+                        <span>Yazı Kalınlığı</h2>
+                        <select name="fontweight">
+                                normal|bold|bolder|lighter|number|initial|inherit;
+                            <option value="normal">Normal</option>
+                            <option value="bold">Bold</option>
+                            <option value="bolder">bolder</option>
+                            <option value="lighter">lighter</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="200">200</option>
+                            <option value="400">400</option>
+                            <option value="500">500</option>
+                            <option value="600">600</option>
+                            <option value="700">700</option>
+                            <option value="800">800</option>
+                            <option value="900">900</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="m-Template-Canvas">
                     <div class="m-Ruler-Top" style="width: 672px;">
                         <ul style="width: 672px;">
@@ -284,6 +314,7 @@
                 </div>
                 <div class="m-Template-Tools">
                 </div>
+            </div>
         </form>
     </div>
     <div style="display:none">

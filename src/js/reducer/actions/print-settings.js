@@ -4,6 +4,12 @@ const cmToPixel = (cm)=>{
 const pixelToCm = (pixel)=>{
     return pixel / 37.7952755906
 }
+export const PixelToPoint =(pixel)=>{
+    return pixel*0.75
+}
+export const PointToPixel= (pt)=>{
+    return pt*1.3333333333
+}
 /** 72 ppi */
 const setPageSize = (size,land,_w=0,_h=0) => {
     let width,height,_width,_height

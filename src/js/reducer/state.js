@@ -4,6 +4,14 @@ const State ={
         ACCORDIONID: '#accordion',
         DROPID: '',
         $CONTENT: null,
+        $FONTSIZE:null,
+        $FONTSTYLE:null,
+        $FONTWEIGHT:'null',
+        SELECT:{
+            $font:null,
+            $fontweight:null,
+            $fontstyle:null
+        },
         screen: {
             width: {
                 big: 0,
