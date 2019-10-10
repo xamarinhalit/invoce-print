@@ -84,6 +84,8 @@ const PrintSetting= (state,payload,success)=>{
     state.Print={...payload}
     const {PageSize,PageType,PageWidth,PageHeight,PageProduct,CopyDirection} =state.Print
     const {width,height} =setPageSize(PageSize,PageType,PageWidth,PageHeight)
+    state.Print.Width=width
+    state.Print.Height=height
     $(state.UI.$CONTENT[0].parentNode).width(width).height(height)
     success(null)
 }

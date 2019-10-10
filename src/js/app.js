@@ -22,14 +22,15 @@ import { actionTypes } from './reducer/const'
     //require('webpack-jquery-ui/css');
     $(document).ready(function () {
         const InitDragable = function (target,...args) {
-            for (let i = 0; i < args.length; i++) $(args[i].id).click(()=>$(this)[args[i].fn]())
+            for (let i = 0; i < args.length; i++) $(args[i].id).click((e)=>$(this)[args[i].fn](e))
             subscribe(actionTypes.INIT.FETCHED, (state, data) => { 
               
             })
             dispatch({ type: actionTypes.INIT.FETCHED, payload: target })
         }
         $.fn.extend({
-            makePrint: function() {
+            makePrint: function(e) {
+                e.preventDefault()
                 subscribe(actionTypes.UI.UI_GETINITCALC,(state,_data)=>{
                     const { screen } = state.UI
                     const {  CalcW80To100, CalcH70To100 } = _data.Tools
@@ -122,7 +123,8 @@ import { actionTypes } from './reducer/const'
                 dispatch({type:actionTypes.UI.UI_GETINITCALC})
             
             }, 
-            loadPrint: function() {
+            loadPrint: function(e) {
+                e.preventDefault()
                 // eslint-disable-next-line no-unused-vars
                 subscribe(actionTypes.UI.UI_GETINITCALC,(state,_data)=>
                 {
@@ -263,7 +265,8 @@ import { actionTypes } from './reducer/const'
                 })
                 dispatch({type:actionTypes.UI.UI_GETINITCALC})
             },
-            newPrint: function(){
+            newPrint: function(e){
+                e.preventDefault();
                 subscribe(actionTypes.UI.UI_GETNEWCLAC,(state,_tools)=>{
                     // eslint-disable-next-line no-empty-pattern
                     const { } = _tools.Tools
@@ -273,12 +276,17 @@ import { actionTypes } from './reducer/const'
                 //dispatch({type:actionTypes.HTTP.POST})
                 // dispatch({type:actionTypes.UI.UI_GETNEWCLAC})
 
+            },
+            PrintSettings:(e)=>{
+                e.preventDefault()
+                $('#PopupSettings').modal('show')
             }
         })
         InitDragable('.m-Template-Page-Area',
             {id:'#print',fn:'makePrint'},
             {id:'#loadprint',fn:'loadPrint'},
-            {id:'#newPrint',fn:'newPrint'}
+            {id:'#newPrint',fn:'newPrint'},
+            {id:'#PrintSettings',fn:'PrintSettings'}
         )
       //  $('#PopupSettings').modal('show')
         

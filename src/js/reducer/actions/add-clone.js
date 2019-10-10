@@ -211,8 +211,9 @@ const UICloneCreateTable = (state,tablekey)=>{
                 _table.value.Style= style || ''
             })
             $div
+                .resizable()
                 .on('resize', async function(_e) {
-                    let style =await styleToObject ( $div[0],state.UI.$CONTENT[0])
+                    let style =await styleToObject ( $div[0],state.UI.$CONTENT[0].parentNode)
                     if(style ==null)
                         return false
                     _table.value.Style= style
@@ -222,7 +223,7 @@ const UICloneCreateTable = (state,tablekey)=>{
                     cursor: 'move',
                     addClasses: false,
                     drag: async function(el, ui) {
-                        let style =await styleToObject ( $div[0],state.UI.$CONTENT[0])
+                        let style =await styleToObject ( $div[0],state.UI.$CONTENT[0].parentNode)
                         if(style ==null)
                             return false
                         _table.value.Style= style

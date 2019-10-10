@@ -9,7 +9,7 @@ export const RemoveTable = (table,state,success)=>{
                     element.menuelement.children[0].checked=false
                 }
             }
-            item.element.parentNode.removeChild(item.element)
+            item.element[0].parentNode.removeChild(item.element[0])
         }   
     }
     // eslint-disable-next-line no-unused-vars
