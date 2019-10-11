@@ -11,9 +11,9 @@ export const PointToPixel= (pt)=>{
     return pt*1.3333333333
 }
 /** 72 ppi */
-const setPageSize = (size,land,_w=0,_h=0) => {
+const setPageSize = (_print) => {
     let width,height,_width,_height
-    switch (size) {
+    switch (_print.PageSize) {
         case 'A4':
             _width=21.0
             _height=29.7
@@ -29,14 +29,16 @@ const setPageSize = (size,land,_w=0,_h=0) => {
     }
     width=cmToPixel(_width)
     height=cmToPixel(_height)
-    if(land == 'Yatay')
+    _print.PageHeight=_height
+    _print.PageWidth=_width
+    if(_print.PageType == 'Yatay'){
         return SetRuler({
             width:height,
             height:width,
             _width : _height,
             _height : _width
         })
-    else{
+    }else{
        return SetRuler({
             width,
             height,
@@ -80,13 +82,37 @@ const SetRuler = ({ width,height,_width, _height})=>{
         width,height
     }
 }
+const SetPageCopy = (pcopy,copyd)=>{
+    let width=1
+    let height=1
+    if(pcopy>1){
+       if(copyd=='Yanyana'){
+            width=parseInt(pcopy)
+       }else{
+            height=parseInt(pcopy)
+       }
+    }
+    return {
+        height,width
+    }
+}
 const PrintSetting= (state,payload,success)=>{
     state.Print={...payload}
-    const {PageSize,PageType,PageWidth,PageHeight,PageProduct,CopyDirection} =state.Print
-    const {width,height} =setPageSize(PageSize,PageType,PageWidth,PageHeight)
-    state.Print.Width=width
-    state.Print.Height=height
-    $(state.UI.$CONTENT[0].parentNode).width(width).height(height)
+    const $imagecopy = document.querySelector('div[name="image-preview"]')
+    $imagecopy.style.backgroundImage='url('+state.Print.ImageUrl+')'
+    const $imageurl = document.querySelector('input[name="ImageUrl"]')
+    $imageurl.value=state.Print.ImageUrl
+    document.querySelector('.m-Ruler-Top').style.display='block'
+    document.querySelector('.m-Ruler-Left').style.display='block'
+    const {width,height} =setPageSize(state.Print)
+    const pcopy =SetPageCopy(state.Print.PageCopy,state.Print.CopyDirection)
+
+    const _width=width/pcopy.width
+    const _height =height/pcopy.height
+    state.Cache.Print.width=_width
+    state.Cache.Print.height=_height
+    $(state.UI.$CONTENT[0]).width(_width).height(_height)
+    state.UI.$CONTENT[0].style.backgroundImage='url('+state.Print.ImageUrl+')'
     success(null)
 }
 export default PrintSetting

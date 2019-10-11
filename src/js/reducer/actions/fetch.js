@@ -1,11 +1,11 @@
-const fetchData = (cb)=>{
-    fetch('http://localhost:3000/tools', {
+const fetchData = (url ,cb)=>{
+    fetch(url, {
         method: 'GET', // or 'PUT'
         headers:{
             'Content-Type': 'application/json'
         }
     }).then(function(res){ return res.json()}).then(function(data){
-        cb(data[0].Tools)
+        cb(data)
     })
 }
 

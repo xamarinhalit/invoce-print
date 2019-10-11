@@ -1,4 +1,10 @@
 const State ={
+    Cache:{
+        Print:{
+            width:0,
+            height:0
+        }
+    },
     UI:{ //UISELECT
         DRAGCLASS: 'm-drag-ul',
         ACCORDIONID: '#accordion',
@@ -8,9 +14,7 @@ const State ={
         $FONTSTYLE:null,
         $FONTWEIGHT:'null',
         SELECT:{
-            $font:null,
-            $fontweight:null,
-            $fontstyle:null
+            $font:null
         },
         screen: {
             width: {

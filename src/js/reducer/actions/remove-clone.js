@@ -1,4 +1,11 @@
 /* eslint-disable no-undef */
+const RemoveReset = (state)=>{
+    state.UI.SELECT.$font =null
+    setTimeout(()=>{
+        $('.p-font-block').removeClass('p-active')
+    },300)
+}
+
 export const RemoveTable = (table,state,success)=>{
     const { Clone:_Clons }=state
     const _Remove = (item)=>{
@@ -23,6 +30,7 @@ export const RemoveTable = (table,state,success)=>{
             }
         }
     })
+    RemoveReset(state)
     success(null,state)
 }
 export const RemoveTableItem = (table,state,success)=>{
@@ -63,9 +71,11 @@ export const RemoveTableItem = (table,state,success)=>{
     }
     if(_removeitem.table!=undefined){
         _Remove(_removeitem).then(()=>{
+            RemoveReset(state)
             success(null,state)
         })
     }else{
+        RemoveReset(state)
         success(null,state)
     }
 }
@@ -87,4 +97,6 @@ export const RemoveCloneItem=(cloneId,state,success) =>{
     if (removeItem != null) {
         removeItem.parentNode.removeChild(removeItem)
     }
+    RemoveReset(state)
+    success(null,state)
 }

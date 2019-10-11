@@ -78,3 +78,15 @@
       box-shadow: 0 0 8px #d7d5d4;
     }
 }
+.p-font-block{
+  &{
+    display: flex;
+    opacity:0;
+    transition: opacity 0.1s ease-in-out;
+    pointer-events:none;
+  } 
+  &.p-active{
+    opacity: 1;
+    pointer-events:all;
+  }
+}

@@ -1,4 +1,15 @@
-export const styleToObject = (element,$root)=>{
+export const styleToObject = (element,_root=null)=>{
+    const out={}
+    const elementStyle = element.style
+    for (const prop of elementStyle) {
+        if(prop!=undefined){
+            const el =elementStyle[prop]
+            out[prop]=el
+        }
+    }
+    return out
+}
+export const stylePxToViewPortObject = (element,$root)=>{
     return new Promise((resolve)=>{
         const out={}
         const elementStyle = element.style

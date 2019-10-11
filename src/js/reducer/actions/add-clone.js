@@ -45,8 +45,6 @@ export const SetConfig = (state, _data) => {
             $( state.UI.SELECT.$font).trigger('change')
         }
     })
-    state.UI.$FONTWEIGHT.addEventListener('blur',(e)=>{
-    })
     state.UI.$FONTSTYLE=document.querySelector('select[name="fontstyle"]')
     state.UI.$FONTSTYLE.addEventListener('change',(e)=>{
         const _target =e.currentTarget
@@ -55,9 +53,6 @@ export const SetConfig = (state, _data) => {
             $( state.UI.SELECT.$font).trigger('change')
         }
     })
-    state.UI.$FONTSTYLE.addEventListener('blur',(e)=>{
-    })
-
     state.UI.$FONTSIZE= document.querySelector('input[name="fontsize"]')
     state.UI.$FONTSIZE.addEventListener('keyup',(e)=>{
         const _target =e.currentTarget
@@ -66,11 +61,30 @@ export const SetConfig = (state, _data) => {
             $( state.UI.SELECT.$font).trigger('change')
         }
     })
-    // state.UI.$FONTSIZE.addEventListener('blur',(e)=>{
-    //    // state.UI.SELECT.$font=null
-    //   //  state.UI.$FONTSIZE.parentNode.style.display='none'
-    // })
-    state.UI.$FONTSIZE.parentNode.style.display='none'
+    const $pcopy = document.querySelector('select[name="PageCopy"]')
+    const $dcopy = document.querySelector('select[name="CopyDirection"]')
+    $pcopy.onchange=(e)=>{
+        const $t = e.currentTarget
+        if($t.value=='1'){
+            $dcopy.parentNode.parentNode.style.display='none'
+        }else{
+            $dcopy.parentNode.parentNode.style.display='block'
+        }
+    }
+    const $hcopy = document.querySelector('input[name="PageWidth"]')
+    const $pscopy = document.querySelector('select[name="PageSize"]')
+    const $wcopy = document.querySelector('input[name="PageHeight"]')
+    $pscopy.onchange=(e)=>{
+        const $t = e.currentTarget
+        if($t.value!='Özel'){
+            $wcopy.parentNode.parentNode.style.display='none'
+            $hcopy.parentNode.parentNode.style.display='none'
+        }else{
+            $wcopy.parentNode.parentNode.style.display='block'
+            $hcopy.parentNode.parentNode.style.display='block'
+        }
+    }
+  
 }
 const ChangeFontSize=(state,e)=>{
     state.UI.SELECT.$font=e.currentTarget
@@ -82,27 +96,36 @@ const ChangeFontSize=(state,e)=>{
             state.UI.$FONTSIZE.value=PixelToPoint(fsize.replace('px',''))
         }
     }else{
-        state.UI.$FONTSIZE.value=''
+        state.UI.$FONTSIZE.value='' 
     }
-    state.UI.$FONTSIZE.parentNode.style.display='block'
+    const $ffsize =$('.p-font-block')
+    if(!$ffsize.hasClass('p-active')){
+        $ffsize.addClass('p-active')
+    }
     state.UI.$FONTSTYLE.value=state.UI.SELECT.$font.style.fontStyle
     state.UI.$FONTWEIGHT.value=state.UI.SELECT.$font.style.fontWeight
+}
+const DefaultFontSize= (element,style)=>{
+    if(style==''){
+        element.style.fontSize='10pt'
+        element.style.fontStyle='normal'
+        element.style.fontWeight='normal'
+    }
+
 }
 
 const UICloneText = (state,menuitem,payload)=>{
     return new Promise((resolve,reject)=>{
         const {value,element,ToolValue,Index,Sort } =menuitem
-        const SELECT_TEXT = state.Clone.SelectElement.TEXT
         const TYPE_TEXT = state.Clone.Type.TEXT
         const _Clone_Index = state.Clone.Index
         _Clone_Index.Index++
-        const text= document.querySelector(SELECT_TEXT)
-        const textclone= text.cloneNode(false)
-        const textid=text.getAttribute('id')
-        textclone.removeAttribute('id')
-        textclone.classList.add(textid)
+        const textclone= document.createElement('div')
+        textclone.classList.add(TYPE_TEXT.FIELD)
+        textclone.classList.add('efar-field')
         textclone.innerHTML= `${value[TYPE_TEXT.VALUE]}<i class="fa fa-times Remove"></i>`
         textclone.dataset.cloneId = _Clone_Index.Index
+        DefaultFontSize(textclone,value.Style)
         textclone.onclick=(e)=>ChangeFontSize(state,e)
         const cloneItem = {
             Index: _Clone_Index.Index,
@@ -115,7 +138,9 @@ const UICloneText = (state,menuitem,payload)=>{
         }
         state.Clone.Items.Clons.push(cloneItem)
 
-        const extractCss=(style)=>{
+        const extractCss=()=>{
+            const style =styleToObject(cloneItem.element,state.UI.$CONTENT[0])
+            // eslint-disable-next-line require-atomic-updates
             cloneItem.value.Style = style
         }
         let { left,top} = payload
@@ -132,24 +157,13 @@ const UICloneText = (state,menuitem,payload)=>{
                     left: cloneItem.element.offsetX
                 },
                 cursor: 'move',
-                drag: async function (el, ui2) {
-                    const style =await styleToObject (cloneItem.element,state.UI.$CONTENT[0])
-                    if(style ==null)
-                        return false
-                    extractCss(style)
-                }
+                drag: extractCss
             })
             .resizable({
                 minHeight: cloneItem.value.Height,
                 minWidth:cloneItem.value.Width
             })
-            .on('resize', async function(_e) {
-                const style =await styleToObject (cloneItem.element,state.UI.$CONTENT[0])
-                if(style ==null)
-                    return false
-                else
-                    extractCss(style)
-            })
+            .on('resize', extractCss)
             .css({ border: 'none', left: left + 'px', top: top + 'px' })
             .disableSelection()
         $(cloneItem.element)
@@ -162,18 +176,20 @@ const UICloneText = (state,menuitem,payload)=>{
                 })
             })
             
-        styleToObject (cloneItem.element,state.UI.$CONTENT[0]).then((style)=>{
-            extractCss(style || {})
-        })
+        extractCss()
         resolve(cloneItem)
     })
 }
 
 const UICloneCreateTable = (state,tablekey)=>{
     return new Promise((resolve)=>{
+        const extractCss=(_$div)=>{
+            return styleToObject ( _$div[0],state.UI.$CONTENT[0].parentNode)
+        }
         const Items = state.Clone.Items
         const { DROPID } = state.UI
         const { Index } = state.Clone
+
         let _table = null
         for (let i = 0; i < Items.Tables.length; i++) {
             const el = Items.Tables[i]
@@ -207,28 +223,21 @@ const UICloneCreateTable = (state,tablekey)=>{
                 ColumIndex:-1,
                 RowIndex:-1
             }
-            styleToObject ( $div[0],state.UI.$CONTENT[0]).then((style)=>{
-                _table.value.Style= style || ''
-            })
+           
             $div
                 .resizable()
                 .on('resize', async function(_e) {
-                    let style =await styleToObject ( $div[0],state.UI.$CONTENT[0].parentNode)
-                    if(style ==null)
-                        return false
-                    _table.value.Style= style
+                    _table.value.Style=extractCss($div)
                 })
                 .draggable({
                     containment: DROPID,
                     cursor: 'move',
                     addClasses: false,
-                    drag: async function(el, ui) {
-                        let style =await styleToObject ( $div[0],state.UI.$CONTENT[0].parentNode)
-                        if(style ==null)
-                            return false
-                        _table.value.Style= style
+                    drag: function(el, ui) {
+                        _table.value.Style=extractCss($div)
                     },
                 })
+            _table.value.Style=extractCss($div)
             Items.Tables.push(_table)
         }
         resolve(_table)
@@ -271,6 +280,7 @@ const UICloneTable = (state,menuitem)=>{
             _td.classList.add(value[TYPE_TABLE.ITEMKEY])
             _td.dataset.Sort = _column
             _td.dataset.cloneId=_Clone_Index.Index
+            DefaultFontSize(_td,value.Style)
             $(_td).width(value.Width).height(value.Height)
             _td.innerHTML=value[TYPE_TABLE.VALUE]
             _td.onclick=(e)=>ChangeFontSize(state,e)

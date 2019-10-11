@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import copyObject from './copy-object'
+import { styleToObject } from './convert'
 const EmtoPixel=(point)=> {
     let size = getComputedStyle(document.documentElement).fontSize
     if (size != undefined) {
@@ -120,36 +121,86 @@ const GetPrintInit = (state)=> {
         // })
         // let _html = document.createElement('html')
         // _html.appendChild(body)
-        const cl = $(state.UI.DROPID)[0].cloneNode(true)
-        cl.style.margin=0
-        // cl.style.width=state.Print.Width+'px'
-        // cl.style.height=state.Print.Height+'px'
-        const wi = window.open('')
-        wi.document.body.appendChild(cl)
-        wi.focus()
-        $(cl).printThis({
-            debug: false, // show the iframe for debugging
-            importCSS: true, // import parent page css
-            importStyle: true, // import style tags
-            printContainer: true, // print outer container/$.selector
-            pageTitle: '', // add title to print page
-            removeInline: false, // remove inline styles from print elements
-            removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
-            printDelay: 0, // variable print delay
-            header:`<style>@page{ size:${state.Print.PageSize} ${state.Print.PageType=='Dikey'?'portrait':'landscape'} ; padding:0; 
-                margin: 0;
+        let hstyle= '<style>'
+        hstyle+='@page {'
+        hstyle+='size: '+state.Print.PageSize+ ' '
+        hstyle+=state.Print.PageType=='Dikey'?'landscape':'portrait' +';'
+        hstyle+='padding:0;margin:0cm;}</style>'
+        const cxx=$(state.UI.DROPID)
+        let clnode = $(state.UI.DROPID)[0].cloneNode(true)
+        clnode.removeAttribute('id')
+        let _div = null
+        let cl =null
+        if(state.Print.PageCopy>1){
+            _div=document.createElement('div')
+            _div.style.display='flex'
+            if(state.Print.CopyDirection=='Yanyana'){
+                _div.style.flexDirection='row'
+            }else{
+                _div.style.flexDirection='column'
+            }
+            for (let i = 0; i < parseInt(state.Print.PageCopy); i++) {
+                const cl2 =clnode.cloneNode(true)
+                cl2.style.position='absolute'
+                if(state.Print.CopyDirection=='Yanyana'){
+                    let cw = state.Cache.Print.width
+                    cl2.style.width=state.Cache.Print.width + 'px'
+                    cl2.style.left=cw*i +'px'
+                }else{
+                    let cw = state.Cache.Print.height
+                    cl2.style.height=state.Cache.Print.height + 'px'
+                    cl2.style.top=cw*i +'px'
                 }
-            </style>`, // prefix to html
-            footer: null, // postfix to html
-            base: false, // preserve the BASE tag or accept a string for the URL
-            formValues: true, // preserve input/form values
-            canvas: false, // copy canvas content
-            removeScripts: false, // remove script tags from print content
-            copyTagClasses: true, // copy classes from the html & body tag
-            beforePrintEvent: null, // function for printEvent in iframe
-            beforePrint: null, // function called before iframe is filled
-            afterPrint: null // function called before iframe is removed
-        })
+                _div.appendChild(cl2)
+            }
+          
+            var myWindow = window.open("", "MsgWindow")
+            myWindow.document.write(_div.innerHTML)
+            $(_div).printThis({
+                debug: false, // show the iframe for debugging
+                importCSS: true, // import parent page css
+                importStyle: true, // import style tags
+                printContainer: true, // print outer container/$.selector
+                pageTitle: '', // add title to print page
+                removeInline: false, // remove inline styles from print elements
+                removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
+                printDelay: 0, // variable print delay
+                header:hstyle, // prefix to html
+                footer: null, // postfix to html
+                base: false, // preserve the BASE tag or accept a string for the URL
+                formValues: true, // preserve input/form values
+                canvas: false, // copy canvas content
+                removeScripts: false, // remove script tags from print content
+                copyTagClasses: true, // copy classes from the html & body tag
+                beforePrintEvent: null, // function for printEvent in iframe
+                beforePrint: null, // function called before iframe is filled
+                afterPrint: null // function called before iframe is removed
+            })
+        }else{
+            $(clnode).printThis({
+                debug: false, // show the iframe for debugging
+                importCSS: true, // import parent page css
+                importStyle: true, // import style tags
+                printContainer: true, // print outer container/$.selector
+                pageTitle: '', // add title to print page
+                removeInline: false, // remove inline styles from print elements
+                removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
+                printDelay: 0, // variable print delay
+                header:hstyle, // prefix to html
+                footer: null, // postfix to html
+                base: false, // preserve the BASE tag or accept a string for the URL
+                formValues: true, // preserve input/form values
+                canvas: false, // copy canvas content
+                removeScripts: false, // remove script tags from print content
+                copyTagClasses: true, // copy classes from the html & body tag
+                beforePrintEvent: null, // function for printEvent in iframe
+                beforePrint: null, // function called before iframe is filled
+                afterPrint: null // function called before iframe is removed
+            })
+        }
+      
+
+        
    
       //  resolve()
     })

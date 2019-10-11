@@ -69,7 +69,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group row" style="display: none;">
+                                        <div class="form-group row" >
                                             <label class="col-md-5 label-title"> Kopya Yönü</label>
                                             <div class="col-md-7">
                                                 <select class="form-control" name="CopyDirection">
@@ -140,8 +140,9 @@
 
                                     </div>
                                     <div class="col-md-4">
+                                        <input type="hidden" name="ImageUrl">
                                         <div name="image-preview" class="efar-image-preview"
-                                            style="width: 106.06px; height: 150px; background-image: url(&quot;https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg&quot;); background-size: cover; background-position: center center;">
+                                            style="width: 106.06px; height: 150px; background-size: cover; background-position: center center;">
                                             <input type="file" name="image" name="image-upload">
                                         </div>
                                         <canvas name="PreviewCanvas" width="150" height="150">
@@ -213,101 +214,51 @@
             <div class="m-Template">
                 <div class="p-text-content">
                     <div class="p-text-fontsize">
-                        <ul style="display:flex;justify-content:space-around;list-style:none;width:20em;float: right;">
-                            <li><button id="print">Print</button></li>
-                            <li><button id="loadprint">Load </button></li>
-                            <li><button id="newPrint">newPrint</button></li>
-                            <li><button id="PrintSettings">PrintSettings</button></li>
+                        <ul style="display:flex;position: absolute;right: 1em; justify-content:space-around;list-style:none;">
+                            <li style="margin-top: 0.5em;margin-right: 1em;"><button id="print">Print</button></li>
+                            <li style="margin-top: 0.5em;margin-right: 1em;"><button id="loadprint">Load </button></li>
+                            <li style="margin-top: 0.5em;margin-right: 1em;"><button id="newPrint">newPrint</button></li>
+                            <li style="margin-top: 0.5em;margin-right: 1em;"><button id="PrintSettings">PrintSettings</button></li>
                         </ul>
-                        <span>Yazı Boyutu</h2>
-                        <input type="text" name="fontsize">
-                        <span>Yazı Stili</h2>
-                        <select name="fontstyle">
-                                <option value="normal">Normal</option>
-                            <option value="italic">Italic</option>
-                            <option value="oblique">Oblique</option>
-                        </select>
-                        <span>Yazı Kalınlığı</h2>
-                        <select name="fontweight">
-                                normal|bold|bolder|lighter|number|initial|inherit;
-                            <option value="normal">Normal</option>
-                            <option value="bold">Bold</option>
-                            <option value="bolder">bolder</option>
-                            <option value="lighter">lighter</option>
-                            <option value="100">100</option>
-                            <option value="200">200</option>
-                            <option value="200">200</option>
-                            <option value="400">400</option>
-                            <option value="500">500</option>
-                            <option value="600">600</option>
-                            <option value="700">700</option>
-                            <option value="800">800</option>
-                            <option value="900">900</option>
-                        </select>
+                        <div class="p-font-block">
+                           <p >Yazı boyutunu
+                                        <input type="text" name="fontsize">
+                            </p>
+                            <p >Yazı Stili
+                                    <select name="fontstyle">
+                                        <option value="normal">Normal</option>
+                                        <option value="italic">Italic</option>
+                                        <option value="oblique">Oblique</option>
+                                    </select>
+                                </p>
+                                <p >Yazı Kalınlığı
+                                 <select name="fontweight">
+                                            <option value="normal">Normal</option>
+                                            <option value="bold">Bold</option>
+                                            <option value="bolder">bolder</option>
+                                            <option value="lighter">lighter</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="200">200</option>
+                                    <option value="400">400</option>
+                                    <option value="500">500</option>
+                                    <option value="600">600</option>
+                                    <option value="700">700</option>
+                                    <option value="800">800</option>
+                                    <option value="900">900</option>
+                                </select>
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="m-Template-Canvas">
-                    <div class="m-Ruler-Top" style="width: 672px;">
-                        <ul style="width: 672px;">
-                            <li><span>0</span></li>
-                            <li><span>1</span></li>
-                            <li><span>2</span></li>
-                            <li><span>3</span></li>
-                            <li><span>4</span></li>
-                            <li><span>5</span></li>
-                            <li><span>6</span></li>
-                            <li><span>7</span></li>
-                            <li><span>8</span></li>
-                            <li><span>9</span></li>
-                            <li><span>10</span></li>
-                            <li><span>11</span></li>
-                            <li><span>12</span></li>
-                            <li><span>13</span></li>
-                            <li><span>14</span></li>
-                            <li><span>15</span></li>
-                            <li><span>16</span></li>
-                            <li><span>17</span></li>
-                            <li><span>18</span></li>
-                            <li><span>19</span></li>
-                            <li><span>20</span></li>
-                            <div class="clear"></div>
-                        </ul>
+                    <div class="m-Ruler-Top" style="display: none">
+                       
                     </div>
-                    <div class="m-Ruler-Left">
-                        <ul style="height: 1000.4px;">
-                            <li><span>0</span></li>
-                            <li><span>1</span></li>
-                            <li><span>2</span></li>
-                            <li><span>3</span></li>
-                            <li><span>4</span></li>
-                            <li><span>5</span></li>
-                            <li><span>6</span></li>
-                            <li><span>7</span></li>
-                            <li><span>8</span></li>
-                            <li><span>9</span></li>
-                            <li><span>10</span></li>
-                            <li><span>11</span></li>
-                            <li><span>12</span></li>
-                            <li><span>13</span></li>
-                            <li><span>14</span></li>
-                            <li><span>15</span></li>
-                            <li><span>16</span></li>
-                            <li><span>17</span></li>
-                            <li><span>18</span></li>
-                            <li><span>19</span></li>
-                            <li><span>20</span></li>
-                            <li><span>21</span></li>
-                            <li><span>22</span></li>
-                            <li><span>23</span></li>
-                            <li><span>24</span></li>
-                            <li><span>25</span></li>
-                            <li><span>26</span></li>
-                            <li><span>27</span></li>
-                            <li><span>28</span></li>
-                            <li><span>29</span></li>
-                        </ul>
+                    <div class="m-Ruler-Left"  style="display: none">
+                     
                     </div>
-                    <div class="m-Template-Page ui-widget-content" style="width: 672px; height: 950.4px;">
+                    <div class="m-Template-Page ui-widget-content" >
                         <div class="m-Template-Page-Area active ui-droppable" id="dragui">
 
                         </div>
@@ -318,11 +269,11 @@
             </div>
         </form>
     </div>
-    <div style="display:none">
+    <!-- <div style="display:none">
         <div id="TextField" class="efar-field">
             <i class="fa fa-times Remove"></i>
         </div>
-        <div id="TableField">
+        <!-- <div id="TableField">
             <button type="button" class="close pull-right" style="margin-right:-0.3em;margin-top:-0.6em"
                 data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <table class="table-style">
@@ -332,8 +283,8 @@
 
                 </tbody>
             </table>
-        </div>
-    </div>
+        </div> -->
+    </div> -->
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
     <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
 

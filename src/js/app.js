@@ -279,6 +279,14 @@ import { actionTypes } from './reducer/const'
             },
             PrintSettings:(e)=>{
                 e.preventDefault()
+                const $ps =$('select[name="PageSize"]')
+                let v1 = $ps.val()
+                $ps.val('A4')
+                $ps.val(v1)
+                const $pc =$('select[name="PageCopy"]')
+                let v2 = $pc.val()
+                $pc.val('1')
+                $pc.val(v2)
                 $('#PopupSettings').modal('show')
             }
         })
@@ -313,9 +321,9 @@ import { actionTypes } from './reducer/const'
     })
 })()
 
-const $colres=$('.p-main>.p-row>.p-column')
-$colres.resizable({
-    grid: [1, 10000]
-})
-$colres.find('.ui-resizable-s').remove()
-$colres.find('.ui-resizable-se').remove()
+// const $colres=$('.p-main>.p-row>.p-column')
+// $colres.resizable({
+//     grid: [1, 10000]
+// })
+// $colres.find('.ui-resizable-s').remove()
+// $colres.find('.ui-resizable-se').remove()

@@ -14,14 +14,22 @@ const dispatch = (action,state=InitialState)=>{
         })
         break
     case actionTypes.INIT.FETCHED:
-        fetchData(data=>{
-            state.Clone.Items.StaticItems=data
+       
+        fetchData('http://localhost:3000/tools',data=>{
+            state.Clone.Items.StaticItems=data[0].Tools
             state.UI.DROPID=action.payload
             state.UI.$CONTENT = $(action.payload)
             SetGroupItem(state)
+            fetchData('http://localhost:3000/PrintSetting',_print=>{
+                if(_print!=undefined && _print!=null){
+                    PrintSetting(state,_print[0].Print,(_print)=>{
+                    })
+                }
+            })
             SetConfig(state)
-            sendReducer(action.type,data,state)
+            sendReducer(action.type,data[0].Tools,state)
         })
+        
         break
     case actionTypes.CLONE.ADD_CLONEITEM:
         AddCloneItem(action.payload,state,data=>{
