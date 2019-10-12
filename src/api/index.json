@@ -239,7 +239,7 @@
               "border-image-source": "none",
               "border-image-width": "1"
             }
-          },
+          }
         },
         {
           "Index": 1,
@@ -255,7 +255,7 @@
             "ItemType": "Field",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 2,
@@ -271,7 +271,7 @@
             "ItemType": "Field",
             "Format": "N2",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 3,
@@ -287,7 +287,7 @@
             "ItemType": "Field",
             "Format": "dd.MM.yyyy",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 4,
@@ -303,7 +303,7 @@
             "ItemType": "Field",
             "Format": "dd.MM.yyyy HH:mm",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 5,
@@ -345,7 +345,7 @@
               "border-image-source": "none",
               "border-image-width": "1"
             }
-          },
+          }
         },
         {
           "Index": 6,
@@ -361,7 +361,7 @@
             "ItemType": "Field",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 7,
@@ -377,7 +377,7 @@
             "ItemType": "Field",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 8,
@@ -393,7 +393,7 @@
             "ItemType": "Field",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 9,
@@ -409,7 +409,7 @@
             "ItemType": "Field",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 10,
@@ -425,7 +425,7 @@
             "ItemType": "Field",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 11,
@@ -441,7 +441,7 @@
             "ItemType": "Field",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 12,
@@ -457,7 +457,7 @@
             "ItemType": "Field",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 13,
@@ -473,7 +473,7 @@
             "ItemType": "Field",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 14,
@@ -489,7 +489,7 @@
             "ItemType": "Field",
             "Format": "0,00",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 15,
@@ -505,7 +505,7 @@
             "ItemType": "Field",
             "Format": "0,00",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 16,
@@ -521,7 +521,7 @@
             "ItemType": "Field",
             "Format": "0,00",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 17,
@@ -543,7 +543,7 @@
               "width": "69.5667px",
               "height": "20px"
             }
-          },
+          }
         },
         {
           "Index": 18,
@@ -565,7 +565,7 @@
               "width": "104.567px",
               "height": "20px"
             }
-          },
+          }
         },
         {
           "Index": 19,
@@ -581,7 +581,7 @@
             "ItemType": "Field",
             "Format": "0,00",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 20,
@@ -603,7 +603,7 @@
               "width": "82.5667px",
               "height": "20px"
             }
-          },
+          }
         },
         {
           "Index": 21,
@@ -619,7 +619,7 @@
             "ItemType": "TableField",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 22,
@@ -635,7 +635,7 @@
             "ItemType": "TableField",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 23,
@@ -651,7 +651,7 @@
             "ItemType": "TableField",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 24,
@@ -667,7 +667,7 @@
             "ItemType": "TableField",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 25,
@@ -683,7 +683,7 @@
             "ItemType": "TableField",
             "Format": "0,00",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 26,
@@ -705,7 +705,7 @@
               "width": "75.5667px",
               "height": "20px"
             }
-          },
+          }
         },
         {
           "Index": 27,
@@ -721,7 +721,7 @@
             "ItemType": "TableField",
             "Format": "0,00",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 28,
@@ -737,7 +737,7 @@
             "ItemType": "TableField",
             "Format": "",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 29,
@@ -753,7 +753,7 @@
             "ItemType": "TableField",
             "Format": "Adet",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 30,
@@ -769,7 +769,7 @@
             "ItemType": "TableField",
             "Format": "0,00",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 31,
@@ -785,7 +785,7 @@
             "ItemType": "TableField",
             "Format": "0,00",
             "Style": ""
-          },
+          }
         },
         {
           "Index": 32,
@@ -801,7 +801,7 @@
             "ItemType": "TableField",
             "Format": "0,00",
             "Style": ""
-          },
+          }
         }
       ],
       "Clons": [
@@ -1083,7 +1083,7 @@
               "TableKey": "CustomImage",
               "ItemKey": "CustomImage",
               "ItemTitle": "Resim",
-              "ItemValue": "<img src=''demo.hesap365.com/Content/img/logomain.png\" />",
+              "ItemValue": "<img src=\"https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg\"  style=\"width: 100px; height:100px; background-size: cover; background-position: center center;\" />",
               "Icon": "fa fa-image",
               "Width": "100",
               "Height": "100",

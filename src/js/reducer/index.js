@@ -2,7 +2,18 @@
 import InitialState from './state'
 import { actionTypes } from './const'
 import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData } from './actions'
-
+const SetInit = (state,payload)=>{
+    const {tools,PrintSetting,PrintLoad,PrintSave,target,dragclass,accordion,tablerowclass,tablecolumnclass} = payload
+    state.Cache.Http.Tools=tools
+    state.Cache.Http.PrintSetting =PrintSetting
+    state.Cache.Http.PrintLoad =PrintLoad
+    state.Cache.Http.PrintSave =PrintSave
+    state.UI.DROPID=target
+    state.UI.DRAGCLASS=dragclass
+    state.UI.ACCORDIONID=accordion
+    state.UI.TABLEROWCLASS=tablerowclass
+    state.UI.TABLECOLUMNCLASS=tablecolumnclass
+}
 const observers= []
 
 const dispatch = (action,state=InitialState)=>{
@@ -14,13 +25,7 @@ const dispatch = (action,state=InitialState)=>{
         })
         break
     case actionTypes.INIT.FETCHED:
-        state.Cache.Http.Tools=action.payload.tools
-        state.Cache.Http.PrintSetting =action.payload.PrintSetting
-        state.Cache.Http.PrintLoad =action.payload.PrintLoad
-        state.Cache.Http.PrintSave =action.payload.PrintSave
-        state.UI.DROPID=action.payload.target
-        state.UI.DRAGCLASS=action.payload.dragclass
-        state.UI.ACCORDIONID=action.payload.accordion
+        SetInit(state,action.payload)
         fetchData(state.Cache.Http.Tools,data=>{
             state.Clone.Items.StaticItems=data[0].Tools
             state.UI.$CONTENT = $(action.payload.target)

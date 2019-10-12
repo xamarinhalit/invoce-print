@@ -15,10 +15,15 @@ const State ={
         DRAGCLASS: null,
         ACCORDIONID:null ,
         DROPID: null,
+        TABLEROWCLASS:null,
+        TABLECOLUMNCLASS:null,
         $CONTENT: null,
         $FONTSIZE:null,
         $FONTSTYLE:null,
         $FONTWEIGHT:null,
+        TABLE:{
+            CLASSNAME:'m-Tool'
+        },
         SELECT:{
             $font:null
         },
@@ -26,9 +31,13 @@ const State ={
             config:{
                 up: 'fa-chevron-up',
                 down: 'fa-chevron-down',
-                extclass: 'h2',
-                activeClass: 'active'
+                extclass: 'h2',//Kullanımda deği
+                activeClass: 'active',//Kullanımda deği
+                container:'.m-Template-Tools',
+                panelupclass:'fa fa-chevron-up',
+                panelclass:'m-Tool'
             },
+            
             Index:-1,
             Menu:[]
         }
@@ -48,6 +57,8 @@ const State ={
         Type: {
             TEXT: {
                 FIELD: 'Field',
+                CUSTOMTEXT:'CustomText',
+                CUSTOMIMAGE:'CustomImage',
                 GROUPNAME: 'Field',
                 VALUE: 'ItemValue',
                 ITEMKEY: 'ItemKey',

@@ -116,7 +116,7 @@ const DefaultFontSize= (element,style)=>{
 
 const UICloneText = (state,menuitem,payload)=>{
     return new Promise((resolve,reject)=>{
-        const {value,element,ToolValue,Index,Sort } =menuitem
+        const {value,element,ToolValue,Index } =menuitem
         const TYPE_TEXT = state.Clone.Type.TEXT
         const _Clone_Index = state.Clone.Index
         _Clone_Index.Index++
@@ -133,7 +133,10 @@ const UICloneText = (state,menuitem,payload)=>{
                 payload: cloneId
             })
         }
-        textclone.innerText= value[TYPE_TEXT.VALUE]
+        if(value.ItemType==TYPE_TEXT.CUSTOMTEXT || value.ItemType==TYPE_TEXT.CUSTOMIMAGE)
+            textclone.innerHTML= value[TYPE_TEXT.VALUE]
+        else
+            textclone.innerText= value[TYPE_TEXT.VALUE]
         textclone.appendChild(textremove)
         DefaultFontSize(textclone,value.Style)
         textclone.onclick=(e)=>ChangeFontSize(state,e)
@@ -248,54 +251,54 @@ const UICloneCreateTable = (state,tablekey)=>{
 const UICloneTable = (state,menuitem)=>{
     return new Promise((resolve,_reject)=>{
         const {value,element,ToolValue,Index } =menuitem
-        UICloneCreateTable(state,menuitem.value.TableKey).then((_table)=>{
+        UICloneCreateTable(state,menuitem.value.TableKey).then((_divtable)=>{
             const CalC_Table = ()=>{
                 let x_width = 0
-                let leng = _table.children.length
+                let leng = _divtable.children.length
                 if(leng>0){
-                    const _el = _table.children[0]
+                    const _el = _divtable.children[0]
                     x_width=_el.element.parentNode.offsetWidth
                 }
                 if(x_width!=0){
-                    _table.element.width(x_width+(leng*7))
+                    _divtable.element.width(x_width+(leng*7))
                 }
     
             }
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
-            let _tr = null
-            _table.ColumIndex++
+            let _divrow = null
+            _divtable.ColumIndex++
             _Clone_Index.Index++
-            if(_table.RowIndex==-1){
-                _table.RowIndex++   
-                _tr= document.createElement('div')
-                _tr.classList.add('p-row')
-                _tr.dataset.RowIndex=_table.RowIndex
-                _table.element[0].appendChild(_tr)
+            if(_divtable.RowIndex==-1){
+                _divtable.RowIndex++   
+                _divrow= document.createElement('div')
+                _divrow.classList.add(state.UI.TABLEROWCLASS)
+                _divrow.dataset.RowIndex=_divtable.RowIndex
+                _divtable.element[0].appendChild(_divrow)
             }else{
-                _tr= _table.element[0].querySelector('div[data--row-index=\''+_table.RowIndex+'\']')
+                _divrow= _divtable.element[0].querySelector('div[data--row-index=\''+_divtable.RowIndex+'\']')
             }
           
-            const _column = _table.ColumIndex
-            const _td = document.createElement('div')
-            _td.classList.add('p-column')
-            _td.classList.add(value[TYPE_TABLE.ITEMKEY])
-            _td.dataset.ColumIndex = _column
-            _td.dataset.cloneId=_Clone_Index.Index
-            DefaultFontSize(_td,value.Style)
-            $(_td).width(value.Width).height(value.Height)
-            _td.innerHTML=value[TYPE_TABLE.VALUE]
-            _td.onclick=(e)=>ChangeFontSize(state,e)
-            _tr.appendChild(_td)
-            const $colres=$(_td)
+            const _column = _divtable.ColumIndex
+            const _divcolumn = document.createElement('div')
+            _divcolumn.classList.add(state.UI.TABLECOLUMNCLASS)
+            _divcolumn.classList.add(value[TYPE_TABLE.ITEMKEY])
+            _divcolumn.dataset.ColumIndex = _column
+            _divcolumn.dataset.cloneId=_Clone_Index.Index
+            DefaultFontSize(_divcolumn,value.Style)
+            $(_divcolumn).width(value.Width).height(value.Height)
+            _divcolumn.innerHTML=value[TYPE_TABLE.VALUE]
+            _divcolumn.onclick=(e)=>ChangeFontSize(state,e)
+            _divrow.appendChild(_divcolumn)
+            const $colres=$(_divcolumn)
             $colres.resizable({
                 grid: [1, state.UI.$CONTENT.width()]
             })
-            _td.removeChild(_td.querySelector('.ui-resizable-s'))
-            _td.removeChild(_td.querySelector('.ui-resizable-se'))
+            _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-s'))
+            _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
             const elements = {
                 Index: _Clone_Index.Index,
-                element: _td,
+                element: _divcolumn,
                 value,
                 ColumIndex:_column,
                 RowIndex:_tr.dataset.RowIndex,
@@ -312,8 +315,8 @@ const UICloneTable = (state,menuitem)=>{
                 }
                 elements.value.Style= style
             })
-            _table.children.push(elements)
-            _table.childIndex.push(elements.Index)
+            _divtable.children.push(elements)
+            _divtable.childIndex.push(elements.Index)
             CalC_Table()
             resolve(elements)
         })
@@ -338,6 +341,16 @@ const AddCloneItem= (payload,state,success) =>{
             break
         case state.Clone.Type.TABLE.FIELD:
             UICloneTable(state,item).then((_data)=>{
+                success(_data)
+            })
+            break
+        case state.Clone.Type.TEXT.CUSTOMTEXT:
+            UICloneText(state,item,payload).then((_data)=>{
+                success(_data)
+            })
+            break
+        case state.Clone.Type.TEXT.CUSTOMIMAGE:
+            UICloneText(state,item,payload).then((_data)=>{
                 success(_data)
             })
             break

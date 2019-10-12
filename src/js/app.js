@@ -24,6 +24,8 @@ import '../scss/print.scss'
             { target:'.m-Template-Page-Area',
                 dragclass:'m-drag-ul',
                 accordion:'#accordion',
+                tablerowclass:'p-row',
+                tablecolumnclass:'p-column',
                 tools:'http://localhost:3000/tools',
                 PrintSetting:'http://localhost:3000/PrintSetting',
                 PrintLoad:'http://localhost:3000/SaveLoad',

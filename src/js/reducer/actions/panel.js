@@ -14,7 +14,7 @@ const TableCreate = (litarget)=>{
             $el.classList.toggle('active')
             if ($el.classList.contains('active')) {
                 // eslint-disable-next-line no-unused-vars
-                addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(__state,_cloneitem)=>{
+                addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
                     $el.querySelector('input').checked=true
                 })
                 dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index}})
@@ -30,27 +30,30 @@ const TableCreate = (litarget)=>{
 }
 const SetGroupItem=(state)=> {
     const { TEXT, TABLE } = state.Clone.Type
-    const liClassName='m-Tool'
+    let toolindex= -1
     state.Clone.Items.StaticItems.forEach(function(item) {
         if (item != undefined) {
             const { Sort, ToolValue, Items: ItemList } = item
+            toolindex =Sort ==undefined ?toolindex+1:Sort
             if (ItemList != undefined) {
                 for (let iindex = 0; iindex < ItemList.length; iindex++) {
                     const element = ItemList[iindex]
                     if (element != undefined) {
                         switch (element[TEXT.ITEMTYPE]) {
                         case TEXT.FIELD:
-                            AddGroupForPanel(element,TEXT,{Sort,ToolValue},state)
+                            AddGroupForPanel(element,TEXT,{Sort:toolindex,ToolValue},state)
                             break
                         case TABLE.FIELD:
-                            const { li ,className}= AddGroupForPanel(element,TABLE,{Sort,ToolValue},state)
-                            if(state.Clone.GroupItems[Sort]==undefined)
-                                state.Clone.GroupItems[Sort]='.'+className
+                            // eslint-disable-next-line no-case-declarations
+                            const { li ,className}= AddGroupForPanel(element,TABLE,{Sort:toolindex,ToolValue},state)
+                            if(state.Clone.GroupItems[toolindex]==undefined)
+                                state.Clone.GroupItems[toolindex]='.'+className
                             TableCreate(li)
                             $(li).draggable('option', 'disabled', true)
                                 
                             break
                         default:
+                            AddGroupForPanel(element,TEXT,{Sort:toolindex,ToolValue},state)
                             break
                         }
                     }
@@ -59,14 +62,11 @@ const SetGroupItem=(state)=> {
             }
         }
     })
-    $('.'+liClassName).PanelGroup(state.UI.PANEL.config,state)
+    $('.'+state.UI.TABLE.CLASSNAME).PanelGroup(state.UI.PANEL.config,state)
 }
 const AddGroupForPanel= function(element ,o,s,state) {
     const { Clone}  = state
     state.UI.PANEL.Index++
-    const liClassName='m-Tool'
-    const panelupClassName='fa fa-chevron-up'
-    const panelContainer='.m-Template-Tools'
     let groupNameId = 'menu-panel-' + state.UI.PANEL.Index
     const li = document.createElement('li')
     li.dataset.Index=state.UI.PANEL.Index
@@ -77,7 +77,7 @@ const AddGroupForPanel= function(element ,o,s,state) {
     li.innerHTML+=element[o.ITEMTITLE]
     if (Clone.GroupItems[s.Sort] == undefined) {
         const div = document.createElement('div')
-        div.className=liClassName
+        div.className=state.UI.TABLE.CLASSNAME
         const h2 = document.createElement('h2')
         h2.innerText=s.ToolValue
         const upi = document.createElement('i')
@@ -88,10 +88,10 @@ const AddGroupForPanel= function(element ,o,s,state) {
         ul.style.display='block'
         ul.classList.add(groupNameId)
         ul.classList.add(state.UI.DRAGCLASS)
-        upi.className=panelupClassName
+        upi.className=state.UI.PANEL.config.panelupclass
         ul.appendChild(li)
         div.appendChild(ul)
-        document.querySelector(panelContainer).appendChild(div)
+        document.querySelector(state.UI.PANEL.config.container).appendChild(div)
         Clone.GroupItems[s.Sort]='.'+groupNameId
     }else {
         document.querySelector( Clone.GroupItems[s.Sort]).appendChild(li)
@@ -172,7 +172,7 @@ $.fn.extend({
         $t.ReloadPanel(options,null,state)
         $t.find('h2').click(function(e) {
             let $el=$(e.currentTarget)
-            let $ed=$el.parents('div.m-Tool')
+            let $ed=$el.parents('div.'+state.UI.PANEL.config.panelclass)
             $t.ReloadPanel(options,$ed[0],state)
         })
     }
