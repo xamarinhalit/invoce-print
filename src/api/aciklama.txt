@@ -20,8 +20,8 @@ Field{
 TableField
 {
     TableKey
-    Sort
-        -> table column sıralaması..
+    RowIndex
+    ColumnIndex
     ItemTitle
     ItemKey
         uniq,

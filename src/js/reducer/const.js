@@ -4,7 +4,9 @@ export const actionTypes={
         PRINT:'PRINT'
     },
     HTTP:{
-        POST:'POST'
+        POST:'POST',
+        JSON_CONFIG_SAVE:'JSON-CONFIG-SAVE',
+        JSON_CONFIG_LOAD:'JSON-CONFIG-LOAD'
     },
     CLONE:{
         CREATE_TABLE:'CREATE-TABLE',
@@ -14,7 +16,6 @@ export const actionTypes={
         REMOVE_TABLEITEM:'REMOVE-TABLEITEM'
     },
     UI:{
-        UI_GETINITCALC:'UI-GETINITCALC',
-        UI_GETNEWCLAC:'UI-GETNEWCLAC'
+        UI_PRINT:'UI-PRINT'
     }
 }

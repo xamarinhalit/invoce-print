@@ -3,34 +3,24 @@ const State ={
         Print:{
             width:0,
             height:0
+        },
+        Http:{
+            Tools:'',
+            PrintLoad:'',
+            PrintSave:'',
+            PrintSetting:''
         }
     },
     UI:{ //UISELECT
-        DRAGCLASS: 'm-drag-ul',
-        ACCORDIONID: '#accordion',
-        DROPID: '',
+        DRAGCLASS: null,
+        ACCORDIONID:null ,
+        DROPID: null,
         $CONTENT: null,
         $FONTSIZE:null,
         $FONTSTYLE:null,
-        $FONTWEIGHT:'null',
+        $FONTWEIGHT:null,
         SELECT:{
             $font:null
-        },
-        screen: {
-            width: {
-                big: 0,
-                medium: 0.0,
-                smal: 0,
-                bigpercent: 0,
-                smallpercent: 0
-            },
-            height: {
-                big: 0,
-                medium: 0.0,
-                smal: 0,
-                bigpercent: 0,
-                smallpercent: 0
-            }
         },
         PANEL:{
             config:{

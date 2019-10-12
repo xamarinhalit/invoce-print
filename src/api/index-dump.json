@@ -1,5 +1,5 @@
 {
-  "SaveLoad": [
+  "Print": [
     {
       "Tables": [
         {
@@ -16,7 +16,11 @@
                 "Icon": "fa fa-arrows-v",
                 "Width": "120",
                 "Height": "20",
+                "Sort": 3,
                 "ItemType": "TableField",
+                "SubItemKey": "InvoiceMovements",
+                "TableType": "Column",
+                "Status": "true",
                 "Format": "",
                 "Style": ""
               },
@@ -35,7 +39,11 @@
                 "Icon": "fa fa-arrows-v",
                 "Width": "40",
                 "Height": "20",
+                "Sort": 6,
                 "ItemType": "TableField",
+                "SubItemKey": "InvoiceMovements",
+                "TableType": "Column",
+                "Status": "true",
                 "Format": "0,00",
                 "Style": {
                   "font-size": "10pt",
@@ -60,7 +68,11 @@
                 "Icon": "fa fa-arrows-v",
                 "Width": "100",
                 "Height": "50",
+                "Sort": 12,
                 "ItemType": "TableField",
+                "SubItemKey": "InvoiceMovements",
+                "TableType": "Column",
+                "Status": "true",
                 "Format": "0,00",
                 "Style": ""
               },
@@ -99,7 +111,11 @@
                 "Icon": "fa fa-arrows-v",
                 "Width": "20",
                 "Height": "20",
+                "Sort": 5,
                 "ItemType": "TableField",
+                "SubItemKey": "InvoiceTaxRates",
+                "TableType": "Column",
+                "Status": "true",
                 "Format": "fa fa-money",
                 "Style": {
                   "font-size": "10pt",
@@ -124,7 +140,11 @@
                 "Icon": "fa fa-arrows-v",
                 "Width": "20",
                 "Height": "20",
+                "Sort": 8,
                 "ItemType": "TableField",
+                "SubItemKey": "InvoiceTaxRates",
+                "TableType": "Column",
+                "Status": "true",
                 "Format": "",
                 "Style": {
                   "font-size": "10pt",
@@ -168,7 +188,11 @@
                 "Icon": "fa fa-money",
                 "Width": "80",
                 "Height": "20",
+                "Sort": 6,
                 "ItemType": "TableField",
+                "SubItemKey": "",
+                "TableType": "Column",
+                "Status": "true",
                 "Format": "0,00",
                 "Style": {
                   "font-size": "10pt",
@@ -210,7 +234,11 @@
             "Icon": "fa fa-user",
             "Width": "120",
             "Height": "50",
+            "Sort": 0,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": {
               "font-size": "10pt",
@@ -240,6 +268,7 @@
               "border-image-width": "1"
             }
           },
+          "Sort": 0
         },
         {
           "Index": 1,
@@ -252,10 +281,15 @@
             "Icon": "fa fa-code",
             "Width": "120",
             "Height": "35",
+            "Sort": 1,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": 0,
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 0
         },
         {
           "Index": 2,
@@ -268,10 +302,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "120",
             "Height": "25",
+            "Sort": 2,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "N2",
             "Style": ""
           },
+          "Sort": 0
         },
         {
           "Index": 3,
@@ -284,10 +323,15 @@
             "Icon": "fa fa-calendar",
             "Width": "150",
             "Height": "35",
+            "Sort": 3,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": 0,
+            "Status": "true",
             "Format": "dd.MM.yyyy",
             "Style": ""
           },
+          "Sort": 0
         },
         {
           "Index": 4,
@@ -300,10 +344,15 @@
             "Icon": "fa fa-calendar",
             "Width": "150",
             "Height": "30",
+            "Sort": 4,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": 0,
+            "Status": "true",
             "Format": "dd.MM.yyyy HH:mm",
             "Style": ""
           },
+          "Sort": 0
         },
         {
           "Index": 5,
@@ -316,7 +365,11 @@
             "Icon": "fa fa-clock-o",
             "Width": "100",
             "Height": "35",
+            "Sort": 5,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "HH:mm",
             "Style": {
               "font-size": "10pt",
@@ -346,6 +399,7 @@
               "border-image-width": "1"
             }
           },
+          "Sort": 0
         },
         {
           "Index": 6,
@@ -358,10 +412,15 @@
             "Icon": "fa fa-phone",
             "Width": "150",
             "Height": "30",
+            "Sort": 0,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": 0,
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 1
         },
         {
           "Index": 7,
@@ -374,10 +433,15 @@
             "Icon": "fa fa-building",
             "Width": "250",
             "Height": "50",
+            "Sort": 1,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": 0,
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 1
         },
         {
           "Index": 8,
@@ -390,10 +454,15 @@
             "Icon": "fa fa-legal",
             "Width": "150",
             "Height": "35",
+            "Sort": 2,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": 0,
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 1
         },
         {
           "Index": 9,
@@ -406,10 +475,15 @@
             "Icon": "fa fa-legal",
             "Width": "150",
             "Height": "35",
+            "Sort": 3,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": 0,
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 1
         },
         {
           "Index": 10,
@@ -422,10 +496,15 @@
             "Icon": "fa fa-address-card-o",
             "Width": "100",
             "Height": "50",
+            "Sort": 4,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 1
         },
         {
           "Index": 11,
@@ -438,10 +517,15 @@
             "Icon": "fa fa-building",
             "Width": "100",
             "Height": "50",
+            "Sort": 5,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 1
         },
         {
           "Index": 12,
@@ -454,10 +538,15 @@
             "Icon": "fa fa-building",
             "Width": "100",
             "Height": "50",
+            "Sort": 6,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 1
         },
         {
           "Index": 13,
@@ -470,10 +559,15 @@
             "Icon": "fa fa-money",
             "Width": "150",
             "Height": "50",
+            "Sort": 1,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 3
         },
         {
           "Index": 14,
@@ -486,10 +580,15 @@
             "Icon": "fa fa-money",
             "Width": "80",
             "Height": "20",
+            "Sort": 2,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": ""
           },
+          "Sort": 3
         },
         {
           "Index": 15,
@@ -502,10 +601,15 @@
             "Icon": "fa fa-money",
             "Width": "100",
             "Height": "100",
+            "Sort": 3,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": ""
           },
+          "Sort": 3
         },
         {
           "Index": 16,
@@ -518,10 +622,15 @@
             "Icon": "fa fa-money",
             "Width": "80",
             "Height": "20",
+            "Sort": 4,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": ""
           },
+          "Sort": 3
         },
         {
           "Index": 17,
@@ -534,7 +643,11 @@
             "Icon": "fa fa-arrows-v",
             "Width": "20",
             "Height": "20",
+            "Sort": 5,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceTaxRates",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "fa fa-money",
             "Style": {
               "font-size": "10pt",
@@ -544,6 +657,7 @@
               "height": "20px"
             }
           },
+          "Sort": 3
         },
         {
           "Index": 18,
@@ -556,7 +670,11 @@
             "Icon": "fa fa-money",
             "Width": "80",
             "Height": "20",
+            "Sort": 6,
             "ItemType": "TableField",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": {
               "font-size": "10pt",
@@ -566,6 +684,7 @@
               "height": "20px"
             }
           },
+          "Sort": 3
         },
         {
           "Index": 19,
@@ -578,10 +697,15 @@
             "Icon": "fa fa-money",
             "Width": "80",
             "Height": "20",
+            "Sort": 7,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": ""
           },
+          "Sort": 3
         },
         {
           "Index": 20,
@@ -594,7 +718,11 @@
             "Icon": "fa fa-arrows-v",
             "Width": "20",
             "Height": "20",
+            "Sort": 8,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceTaxRates",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": {
               "font-size": "10pt",
@@ -604,6 +732,7 @@
               "height": "20px"
             }
           },
+          "Sort": 3
         },
         {
           "Index": 21,
@@ -616,10 +745,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "100",
             "Height": "20",
+            "Sort": 1,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 4
         },
         {
           "Index": 22,
@@ -632,10 +766,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "120",
             "Height": "20",
+            "Sort": 2,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 4
         },
         {
           "Index": 23,
@@ -648,10 +787,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "120",
             "Height": "20",
+            "Sort": 3,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 4
         },
         {
           "Index": 24,
@@ -664,10 +808,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "30",
             "Height": "20",
+            "Sort": 4,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 4
         },
         {
           "Index": 25,
@@ -680,10 +829,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "30",
             "Height": "20",
+            "Sort": 5,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": ""
           },
+          "Sort": 4
         },
         {
           "Index": 26,
@@ -696,7 +850,11 @@
             "Icon": "fa fa-arrows-v",
             "Width": "40",
             "Height": "20",
+            "Sort": 6,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": {
               "font-size": "10pt",
@@ -706,6 +864,7 @@
               "height": "20px"
             }
           },
+          "Sort": 4
         },
         {
           "Index": 27,
@@ -718,10 +877,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "30",
             "Height": "20",
+            "Sort": 7,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": ""
           },
+          "Sort": 4
         },
         {
           "Index": 28,
@@ -734,10 +898,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "30",
             "Height": "20",
+            "Sort": 8,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": ""
           },
+          "Sort": 4
         },
         {
           "Index": 29,
@@ -750,10 +919,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "100",
             "Height": "50",
+            "Sort": 9,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "Adet",
             "Style": ""
           },
+          "Sort": 4
         },
         {
           "Index": 30,
@@ -766,10 +940,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "100",
             "Height": "50",
+            "Sort": 10,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": ""
           },
+          "Sort": 4
         },
         {
           "Index": 31,
@@ -782,10 +961,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "100",
             "Height": "50",
+            "Sort": 11,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": ""
           },
+          "Sort": 4
         },
         {
           "Index": 32,
@@ -798,10 +982,15 @@
             "Icon": "fa fa-arrows-v",
             "Width": "100",
             "Height": "50",
+            "Sort": 12,
             "ItemType": "TableField",
+            "SubItemKey": "InvoiceMovements",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "0,00",
             "Style": ""
           },
+          "Sort": 4
         }
       ],
       "Clons": [
@@ -816,7 +1005,11 @@
             "Icon": "fa fa-user",
             "Width": "120",
             "Height": "50",
+            "Sort": 0,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "",
             "Style": {
               "font-size": "10pt",
@@ -859,7 +1052,11 @@
             "Icon": "fa fa-clock-o",
             "Width": "100",
             "Height": "35",
+            "Sort": 5,
             "ItemType": "Field",
+            "SubItemKey": "",
+            "TableType": "Column",
+            "Status": "true",
             "Format": "HH:mm",
             "Style": {
               "font-size": "10pt",
@@ -897,9 +1094,16 @@
   ],
   "Tools": [
     {
+      "TemplateId": 0,
+      "TemplateKey": "1",
+      "TemplateValue": "",
+      "JsonData": "",
+      "JsonSettings": "",
+      "JsonQuery": "",
       "Tools": [
         {
           "ToolValue": "Fatura Bilgileri",
+          "Sort": 0,
           "Items": [
             {
               "TableKey": "InvoiceType",
@@ -909,7 +1113,11 @@
               "Icon": "fa fa-user",
               "Width": "120",
               "Height": "50",
+              "Sort": 0,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -921,7 +1129,11 @@
               "Icon": "fa fa-code",
               "Width": "120",
               "Height": "35",
+              "Sort": 1,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": 0,
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -933,7 +1145,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "120",
               "Height": "25",
+              "Sort": 2,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "N2",
               "Style": ""
             },
@@ -945,7 +1161,11 @@
               "Icon": "fa fa-calendar",
               "Width": "150",
               "Height": "35",
+              "Sort": 3,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": 0,
+              "Status": "true",
               "Format": "dd.MM.yyyy",
               "Style": ""
             },
@@ -957,7 +1177,11 @@
               "Icon": "fa fa-calendar",
               "Width": "150",
               "Height": "30",
+              "Sort": 4,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": 0,
+              "Status": "true",
               "Format": "dd.MM.yyyy HH:mm",
               "Style": ""
             },
@@ -969,7 +1193,11 @@
               "Icon": "fa fa-clock-o",
               "Width": "100",
               "Height": "35",
+              "Sort": 5,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "HH:mm",
               "Style": ""
             }
@@ -977,6 +1205,7 @@
         },
         {
           "ToolValue": "Müşteri Bilgileri",
+          "Sort": 1,
           "Items": [
             {
               "TableKey": "Phone",
@@ -986,7 +1215,11 @@
               "Icon": "fa fa-phone",
               "Width": "150",
               "Height": "30",
+              "Sort": 0,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": 0,
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -998,7 +1231,11 @@
               "Icon": "fa fa-building",
               "Width": "250",
               "Height": "50",
+              "Sort": 1,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": 0,
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1010,7 +1247,11 @@
               "Icon": "fa fa-legal",
               "Width": "150",
               "Height": "35",
+              "Sort": 2,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": 0,
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1022,7 +1263,11 @@
               "Icon": "fa fa-legal",
               "Width": "150",
               "Height": "35",
+              "Sort": 3,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": 0,
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1034,7 +1279,11 @@
               "Icon": "fa fa-address-card-o",
               "Width": "100",
               "Height": "50",
+              "Sort": 4,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1046,7 +1295,11 @@
               "Icon": "fa fa-building",
               "Width": "100",
               "Height": "50",
+              "Sort": 5,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1058,7 +1311,11 @@
               "Icon": "fa fa-building",
               "Width": "100",
               "Height": "50",
+              "Sort": 6,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             }
@@ -1066,6 +1323,7 @@
         },
         {
           "ToolValue": "Diğer Alanlar",
+          "Sort": 3,
           "Items": [
             {
               "TableKey": "CustomText",
@@ -1075,7 +1333,11 @@
               "Icon": "fa fa-file-text-o",
               "Width": "300",
               "Height": "100",
+              "Sort": 0,
               "ItemType": "CustomText",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1087,7 +1349,11 @@
               "Icon": "fa fa-image",
               "Width": "100",
               "Height": "100",
+              "Sort": 1,
               "ItemType": "CustomImage",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             }
@@ -1095,6 +1361,7 @@
         },
         {
           "ToolValue": "Alt Toplamlar",
+          "Sort": 3,
           "Items": [
             {
               "TableKey": "InvoiceTaxRates",
@@ -1104,7 +1371,11 @@
               "Icon": "fa fa-money",
               "Width": "120",
               "Height": "20",
+              "Sort": 0,
               "ItemType": "Table",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1116,7 +1387,11 @@
               "Icon": "fa fa-money",
               "Width": "150",
               "Height": "50",
+              "Sort": 1,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1128,7 +1403,11 @@
               "Icon": "fa fa-money",
               "Width": "80",
               "Height": "20",
+              "Sort": 2,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             },
@@ -1140,7 +1419,11 @@
               "Icon": "fa fa-money",
               "Width": "100",
               "Height": "100",
+              "Sort": 3,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             },
@@ -1152,7 +1435,11 @@
               "Icon": "fa fa-money",
               "Width": "80",
               "Height": "20",
+              "Sort": 4,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             },
@@ -1164,7 +1451,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "20",
               "Height": "20",
+              "Sort": 5,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceTaxRates",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "fa fa-money",
               "Style": ""
             },
@@ -1176,7 +1467,11 @@
               "Icon": "fa fa-money",
               "Width": "80",
               "Height": "20",
+              "Sort": 6,
               "ItemType": "TableField",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             },
@@ -1188,7 +1483,11 @@
               "Icon": "fa fa-money",
               "Width": "80",
               "Height": "20",
+              "Sort": 7,
               "ItemType": "Field",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             },
@@ -1200,7 +1499,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "20",
               "Height": "20",
+              "Sort": 8,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceTaxRates",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             }
@@ -1208,6 +1511,7 @@
         },
         {
           "ToolValue": "Ürün bilgisi",
+          "Sort": 4,
           "Items": [
             {
               "TableKey": "InvoiceMovements",
@@ -1217,7 +1521,11 @@
               "Icon": "fa fa-code",
               "Width": "300",
               "Height": "50",
+              "Sort": 0,
               "ItemType": "Table",
+              "SubItemKey": "",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1229,7 +1537,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "100",
               "Height": "20",
+              "Sort": 1,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1241,7 +1553,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "120",
               "Height": "20",
+              "Sort": 2,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1253,7 +1569,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "120",
               "Height": "20",
+              "Sort": 3,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1265,7 +1585,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "30",
               "Height": "20",
+              "Sort": 4,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1277,7 +1601,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "30",
               "Height": "20",
+              "Sort": 5,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             },
@@ -1289,7 +1617,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "40",
               "Height": "20",
+              "Sort": 6,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             },
@@ -1301,7 +1633,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "30",
               "Height": "20",
+              "Sort": 7,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             },
@@ -1313,7 +1649,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "30",
               "Height": "20",
+              "Sort": 8,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "",
               "Style": ""
             },
@@ -1325,7 +1665,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "100",
               "Height": "50",
+              "Sort": 9,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "Adet",
               "Style": ""
             },
@@ -1337,7 +1681,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "100",
               "Height": "50",
+              "Sort": 10,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             },
@@ -1349,7 +1697,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "100",
               "Height": "50",
+              "Sort": 11,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             },
@@ -1361,7 +1713,11 @@
               "Icon": "fa fa-arrows-v",
               "Width": "100",
               "Height": "50",
+              "Sort": 12,
               "ItemType": "TableField",
+              "SubItemKey": "InvoiceMovements",
+              "TableType": "Column",
+              "Status": "true",
               "Format": "0,00",
               "Style": ""
             }

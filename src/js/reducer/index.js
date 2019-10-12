@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,GetInitCalc,CalcW80To100,CalcH70To100, postData, PrintSetting } from './actions'
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData } from './actions'
 
 const observers= []
 
@@ -14,13 +14,18 @@ const dispatch = (action,state=InitialState)=>{
         })
         break
     case actionTypes.INIT.FETCHED:
-       
-        fetchData('http://localhost:3000/tools',data=>{
+        state.Cache.Http.Tools=action.payload.tools
+        state.Cache.Http.PrintSetting =action.payload.PrintSetting
+        state.Cache.Http.PrintLoad =action.payload.PrintLoad
+        state.Cache.Http.PrintSave =action.payload.PrintSave
+        state.UI.DROPID=action.payload.target
+        state.UI.DRAGCLASS=action.payload.dragclass
+        state.UI.ACCORDIONID=action.payload.accordion
+        fetchData(state.Cache.Http.Tools,data=>{
             state.Clone.Items.StaticItems=data[0].Tools
-            state.UI.DROPID=action.payload
-            state.UI.$CONTENT = $(action.payload)
+            state.UI.$CONTENT = $(action.payload.target)
             SetGroupItem(state)
-            fetchData('http://localhost:3000/PrintSetting',_print=>{
+            fetchData(state.Cache.Http.PrintSetting,_print=>{
                 if(_print!=undefined && _print!=null){
                     PrintSetting(state,_print[0].Print,(_print)=>{
                     })
@@ -51,12 +56,7 @@ const dispatch = (action,state=InitialState)=>{
             sendReducer(action.type,_data,state)
         })
         break
-    case actionTypes.UI.UI_GETINITCALC:
-        GetInitCalc(state).then(()=>{
-            sendReducer(action.type,{Tools:{ CalcW80To100,CalcH70To100}},state)
-        })
-        break
-    case actionTypes.UI.UI_GETNEWCLAC:
+    case actionTypes.UI.UI_PRINT:
         GetPrintInit(state).then(()=>{
             sendReducer(action.type,{Tools:{}},state)
         })
@@ -70,6 +70,22 @@ const dispatch = (action,state=InitialState)=>{
             // sendReducer(action.type,null,state)
         })
         break
+    case actionTypes.HTTP.JSON_CONFIG_SAVE:
+        SetJsonData(state,(_data)=>{
+            sendReducer(action.type,{data:_data},state)
+            postData({url:state.Cache.Http.PrintSave,data:_data}).then((_sonuc)=>{
+                // sendReducer(action.type,null,state)
+            })
+        })
+        break
+    case actionTypes.HTTP.JSON_CONFIG_LOAD:
+            SetJsonData(state,(_data)=>{
+                sendReducer(action.type,{data:_data},state)
+                postData({url:state.Cache.Http.PrintSave,data:_data}).then((_sonuc)=>{
+                    // sendReducer(action.type,null,state)
+                })
+            })
+            break
     default:
         break
     }

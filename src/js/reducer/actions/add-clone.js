@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-undef */
-import { dispatch, addReducer } from '..'
+import { dispatch } from '..'
 import { actionTypes } from '../const'
 import { styleToObject } from './convert'
 import { PixelToPoint } from './print-settings'
@@ -123,15 +123,25 @@ const UICloneText = (state,menuitem,payload)=>{
         const textclone= document.createElement('div')
         textclone.classList.add(TYPE_TEXT.FIELD)
         textclone.classList.add('efar-field')
-        textclone.innerHTML= `${value[TYPE_TEXT.VALUE]}<i class="fa fa-times Remove"></i>`
         textclone.dataset.cloneId = _Clone_Index.Index
+        const textremove = document.createElement('i')
+        textremove.className='fa fa-times Remove'
+        textremove.onclick=(e)=>{
+            const { cloneId } = textclone.dataset
+            dispatch({
+                type: actionTypes.CLONE.REMOVE_CLONEITEM,
+                payload: cloneId
+            })
+        }
+        textclone.innerText= value[TYPE_TEXT.VALUE]
+        textclone.appendChild(textremove)
         DefaultFontSize(textclone,value.Style)
         textclone.onclick=(e)=>ChangeFontSize(state,e)
+
         const cloneItem = {
             Index: _Clone_Index.Index,
             element: textclone,
             value,
-            Sort,
             ToolValue,
             menuindex:Index,
             menuelement:element
@@ -145,6 +155,8 @@ const UICloneText = (state,menuitem,payload)=>{
         }
         let { left,top} = payload
         state.UI.$CONTENT.append(cloneItem.element)
+        if(cloneItem.value.Style!='')
+            $(cloneItem.element).css(cloneItem.value.Style)
         $(cloneItem.element)
             .css({ position: 'absolute' })
             .width(cloneItem.value.Width)
@@ -166,16 +178,6 @@ const UICloneText = (state,menuitem,payload)=>{
             .on('resize', extractCss)
             .css({ border: 'none', left: left + 'px', top: top + 'px' })
             .disableSelection()
-        $(cloneItem.element)
-            .find('i')
-            .click(function (e) {
-                const { cloneId } = cloneItem.element.dataset
-                dispatch({
-                    type: actionTypes.CLONE.REMOVE_CLONEITEM,
-                    payload: cloneId
-                })
-            })
-            
         extractCss()
         resolve(cloneItem)
     })
@@ -219,25 +221,25 @@ const UICloneCreateTable = (state,tablekey)=>{
                 element:$div,
                 children:[],
                 childIndex:[],
-                value:{},
+                Style:'',
                 ColumIndex:-1,
                 RowIndex:-1
             }
-           
+            
             $div
                 .resizable()
-                .on('resize', async function(_e) {
-                    _table.value.Style=extractCss($div)
+                .on('resize',  function(_e) {
+                    _table.Style=extractCss($div)
                 })
                 .draggable({
                     containment: DROPID,
                     cursor: 'move',
                     addClasses: false,
                     drag: function(el, ui) {
-                        _table.value.Style=extractCss($div)
+                        _table.Style=extractCss($div)
                     },
                 })
-            _table.value.Style=extractCss($div)
+            _table.Style=extractCss($div)
             Items.Tables.push(_table)
         }
         resolve(_table)
@@ -245,7 +247,7 @@ const UICloneCreateTable = (state,tablekey)=>{
 }
 const UICloneTable = (state,menuitem)=>{
     return new Promise((resolve,_reject)=>{
-        const {value,element,ToolValue,Index,Sort } =menuitem
+        const {value,element,ToolValue,Index } =menuitem
         UICloneCreateTable(state,menuitem.value.TableKey).then((_table)=>{
             const CalC_Table = ()=>{
                 let x_width = 0
@@ -268,17 +270,17 @@ const UICloneTable = (state,menuitem)=>{
                 _table.RowIndex++   
                 _tr= document.createElement('div')
                 _tr.classList.add('p-row')
-                _tr.dataset.Sort=_table.RowIndex
+                _tr.dataset.RowIndex=_table.RowIndex
                 _table.element[0].appendChild(_tr)
             }else{
-                _tr= _table.element[0].querySelector('div[data--sort=\''+_table.RowIndex+'\']')
+                _tr= _table.element[0].querySelector('div[data--row-index=\''+_table.RowIndex+'\']')
             }
           
             const _column = _table.ColumIndex
             const _td = document.createElement('div')
             _td.classList.add('p-column')
             _td.classList.add(value[TYPE_TABLE.ITEMKEY])
-            _td.dataset.Sort = _column
+            _td.dataset.ColumIndex = _column
             _td.dataset.cloneId=_Clone_Index.Index
             DefaultFontSize(_td,value.Style)
             $(_td).width(value.Width).height(value.Height)
@@ -295,13 +297,14 @@ const UICloneTable = (state,menuitem)=>{
                 Index: _Clone_Index.Index,
                 element: _td,
                 value,
-                Sort,
+                ColumIndex:_column,
+                RowIndex:_tr.dataset.RowIndex,
                 ToolValue,
                 menuindex:Index,
                 menuelement:element
             }
-            $colres.on('resize', async function(_e) {
-                let style =await styleToObject ( $colres[0],state.UI.$CONTENT[0])
+            $colres.on('resize',  function(_e) {
+                let style = styleToObject ( $colres[0],state.UI.$CONTENT[0])
                 if(style ==null)
                     return false
                 if(style.width!=undefined){
@@ -344,9 +347,37 @@ const AddCloneItem= (payload,state,success) =>{
        
     }
 }
-// $.fn.extend({
-//     TableCreate: function() {
-
-//     }
-// })
+const AddCloneItemWithLoad= (payload,state,success) =>{
+    const _xitem = {}
+    for (let ii = 0; ii < state.UI.PANEL.Menu.length; ii++) {
+        const element = state.UI.PANEL.Menu[ii]
+        if(element.Index==parseInt(payload.Index)){
+            _xitem.item = element
+            break
+        }
+    }
+    const { item } = _xitem
+    if (item && payload.Index) {
+        switch (item.value.ItemType) {
+        case state.Clone.Type.TEXT.FIELD:
+            UICloneText(state,item,payload).then((_data)=>{
+                success(_data)
+            })
+            break
+        case state.Clone.Type.TABLE.FIELD:
+            UICloneTable(state,item).then((_data)=>{
+                success(_data)
+            })
+            break
+        case state.Clone.Type.TABLE.DEFAULT:
+            UICloneTable(state,item,item.value.Style).then((_data)=>{
+                success(_data)
+            })
+            break
+        default:
+            break
+        }
+       
+    }
+}
 export default AddCloneItem

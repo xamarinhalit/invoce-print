@@ -2,8 +2,7 @@ import SetGroupItem from './panel'
 import {fetchData,postData} from './fetch'
 import AddCloneItem, { SetConfig } from './add-clone'
 import {RemoveTable,RemoveTableItem,RemoveCloneItem} from './remove-clone'
-import GetPrintInit  from './screen-new-tools'
-import { GetInitCalc, CalcW80To100, CalcH70To100 } from './screen-tool'
+import GetPrintInit, { SetJsonData }  from './screen-new-tools'
 import PrintSetting from './print-settings'
 
-export { SetGroupItem,fetchData,postData,AddCloneItem,GetPrintInit,SetConfig, GetInitCalc,CalcW80To100, CalcH70To100,RemoveTable,RemoveTableItem,RemoveCloneItem,PrintSetting }
+export { SetGroupItem,fetchData,postData,AddCloneItem,GetPrintInit,SetConfig, RemoveTable,RemoveTableItem,RemoveCloneItem,PrintSetting ,SetJsonData}

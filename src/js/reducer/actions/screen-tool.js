@@ -64,23 +64,23 @@ const vhTOpx = (value) => {
     var result = (y * value) / 100
     return result
 }
-export const GetInitCalc = (state)=> {
-    return new Promise((resolve)=>{
-        const { height, width } = state.UI.screen
-        let { width: medwidth,height: medheight} = state.UI.$CONTENT[0].getClientRects()[0]
-        width.big = vwTOpx('98')
-        width.medium = medwidth / 100
-        width.smal = vwTOpx('80')
-        width.smallpercent = width.smal / 100
-        width.bigpercent = width.big / 100
-        height.big = vhTOpx('98')
-        height.medium = medheight / 100
-        height.smal = vhTOpx('70')
-        height.smallpercent = height.smal / 100
-        height.bigpercent = height.big / 100
-        resolve()
-    })
-}
+// export const GetInitCalc = (state)=> {
+//     return new Promise((resolve)=>{
+//         const { height, width } = state.UI.screen
+//         let { width: medwidth,height: medheight} = state.UI.$CONTENT[0].getClientRects()[0]
+//         width.big = vwTOpx('98')
+//         width.medium = medwidth / 100
+//         width.smal = vwTOpx('80')
+//         width.smallpercent = width.smal / 100
+//         width.bigpercent = width.big / 100
+//         height.big = vhTOpx('98')
+//         height.medium = medheight / 100
+//         height.smal = vhTOpx('70')
+//         height.smallpercent = height.smal / 100
+//         height.bigpercent = height.big / 100
+//         resolve()
+//     })
+// }
 
 export const EmtoPixel=(point)=> {
     let size = getComputedStyle(document.documentElement).fontSize

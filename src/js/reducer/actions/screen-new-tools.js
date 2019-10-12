@@ -30,97 +30,98 @@ const pxToVw=($root,pixel)=>{
 const pxToVh=($root,pixel)=>{
     return ($root.clientHeight/100)*pixel
 }
-
+//    CloneType=> 'Field','Table','TableField,
+//  let body = document.createElement('div')
+      
+//  for (let i = 0; i < Items.Clone.Items.Tables.length; i++) {
+//      let item = Items.Clone.Items.Tables[i]
+//      let table = document.createElement('table')
+//      let $table =$(table)
+//      $table.css( item.value.Style)
+//      $table.css('position','absolute')
+          
+//      let tbody = document.createElement('tbody')
+//      let tr =document.createElement('tr')
+//      for (let j = 0; j < item.children.length; j++) {
+//          let tritem = item.children[j]
+//          if(tritem.value!=undefined){
+//              let td = document.createElement('td')
+//              td.innerHTML=tritem.value.ItemValue
+//              tr.appendChild(td)
+//          }
+//      }
+//      tbody.appendChild(tr)
+//      table.appendChild(tbody)
+//      body.appendChild(table)
+//  }
+// for (let i = 0; i < Items.Clone.Items.Tables.length; i++) {
+//     let item = Items.Clone.Items.Tables[i]
+//     let divmain = document.createElement('div')
+//     let $divmain =$(divmain)
+//     $divmain.css( item.value.Style)
+//     $divmain.css('position','absolute')
+//     let divrow =document.createElement('div')
+//     divrow.style.display='flex'
+//     for (let j = 0; j < item.children.length; j++) {
+//         let _item = item.children[j]
+//         if(_item.value!=undefined){
+//             let divcolumn = document.createElement('div')
+//             divcolumn.innerHTML=_item.value.ItemValue
+//             divrow.appendChild(divcolumn)
+//         }
+//     }
+        
+//     divmain.appendChild(divrow)
+//     body.appendChild(divmain)
+// }
+export const SetJsonData = (state,success)=>{
+    let Items =copyObject(state,true)
+    let JsonData = {}
+    JsonData.Tables =Items.Clone.Items.Tables.map(x=>{
+        return {
+            Index:x.Index,
+            key:x.key,
+            children:x.children.map(y=>{
+                return {
+                    Index:y.Index,
+                    value:y.value,
+                    ColumIndex:y.ColumIndex,
+                    RowIndex:y.RowIndex,
+                    ToolValue:y.ToolValue,
+                    menuindex:y.menuindex,
+                }
+            }),
+            childIndex:x.childIndex,
+            ColumIndex:x.ColumIndex,
+            RowIndex:x.RowIndex,
+            value:x.value,
+            Style:x.Style
+        }
+    })
+    JsonData.Menu =Items.UI.PANEL.Menu.map(x=>{
+        return {
+            Index:x.Index,
+            ToolValue:x.ToolValue,
+            value:x.value,
+            Sort:x.Sort
+        }
+    })
+    JsonData.Clons =Items.Clone.Items.Clons.map(x=>{
+        return {
+            Index:x.Index,
+            ToolValue:x.ToolValue,
+            value:x.value,
+            menuindex:x.menuindex
+        }
+    })
+    let _data = JSON.stringify(JsonData)
+    let _parsed =JSON.parse(_data)
+    success(JsonData)
+}
 
 const GetPrintInit = (state)=> {
     return new Promise((resolve)=>{
-        //   const  Items =copyObject(state)
-        let Items =copyObject(state,true)
-        // CloneType=> 'Field','Table','TableField,
-       // let body = document.createElement('div')
-      
-        // for (let i = 0; i < Items.Clone.Items.Tables.length; i++) {
-        //     let item = Items.Clone.Items.Tables[i]
-        //     let table = document.createElement('table')
-        //     let $table =$(table)
-        //     $table.css( item.value.Style)
-        //     $table.css('position','absolute')
-                 
-        //     let tbody = document.createElement('tbody')
-        //     let tr =document.createElement('tr')
-        //     for (let j = 0; j < item.children.length; j++) {
-        //         let tritem = item.children[j]
-        //         if(tritem.value!=undefined){
-        //             let td = document.createElement('td')
-        //             td.innerHTML=tritem.value.ItemValue
-        //             tr.appendChild(td)
-        //         }
-        //     }
-        //     tbody.appendChild(tr)
-        //     table.appendChild(tbody)
-        //     body.appendChild(table)
-        // }
-        // for (let i = 0; i < Items.Clone.Items.Tables.length; i++) {
-        //     let item = Items.Clone.Items.Tables[i]
-        //     let divmain = document.createElement('div')
-        //     let $divmain =$(divmain)
-        //     $divmain.css( item.value.Style)
-        //     $divmain.css('position','absolute')
-        //     let divrow =document.createElement('div')
-        //     divrow.style.display='flex'
-        //     for (let j = 0; j < item.children.length; j++) {
-        //         let _item = item.children[j]
-        //         if(_item.value!=undefined){
-        //             let divcolumn = document.createElement('div')
-        //             divcolumn.innerHTML=_item.value.ItemValue
-        //             divrow.appendChild(divcolumn)
-        //         }
-        //     }
-                
-        //     divmain.appendChild(divrow)
-        //     body.appendChild(divmain)
-        // }
-      
-      
-        // Items.Clone.Items.Tables =Items.Clone.Items.Tables.map(x=>{
-        //     return {
-        //         Index:x.Index,
-        //         key:x.key,
-        //         children:x.children.map(y=>{
-        //             return {
-        //                 Index:y.Index,
-        //                 value:y.value,
-        //                 Sort:y.Sort,
-        //                 ToolValue:y.ToolValue,
-        //                 menuindex:y.menuindex
-        //             }
-        //         }),
-        //         childIndex:x.childIndex,
-        //         ColumIndex:x.ColumIndex,
-        //         RowIndex:x.RowIndex,
-        //         value:x.value,
-        //         Sort:x.Sort
-        //     }
-        // })
-        // Items.UI.PANEL.Menu =Items.UI.PANEL.Menu.map(x=>{
-        //     return {
-        //         Index:x.Index,
-        //         ToolValue:x.ToolValue,
-        //         value:x.value,
-        //         Sort:x.Sort
-        //     }
-        // })
-        // Items.Clone.Items.Clons =Items.Clone.Items.Clons.map(x=>{
-        //     return {
-        //         Index:x.Index,
-        //         ToolValue:x.ToolValue,
-        //         value:x.value,
-        //         Sort:x.Sort,
-        //         menuindex:x.menuindex
-        //     }
-        // })
-        // let _html = document.createElement('html')
-        // _html.appendChild(body)
+    
         let hstyle= '<style>'
         hstyle+='@page {'
         hstyle+='size: '+state.Print.PageSize+ ' '
@@ -154,8 +155,8 @@ const GetPrintInit = (state)=> {
                 _div.appendChild(cl2)
             }
           
-            var myWindow = window.open("", "MsgWindow")
-            myWindow.document.write(_div.innerHTML)
+            // var myWindow = window.open("", "MsgWindow")
+            // myWindow.document.write(_div.innerHTML)
             $(_div).printThis({
                 debug: false, // show the iframe for debugging
                 importCSS: true, // import parent page css
@@ -202,7 +203,7 @@ const GetPrintInit = (state)=> {
 
         
    
-      //  resolve()
+        //  resolve()
     })
 }
 export default GetPrintInit

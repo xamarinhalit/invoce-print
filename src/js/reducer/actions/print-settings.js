@@ -1,30 +1,30 @@
 const cmToPixel = (cm)=>{
     return cm * 37.7952755906
 }
-const pixelToCm = (pixel)=>{
-    return pixel / 37.7952755906
-}
+// const pixelToCm = (pixel)=>{
+//     return pixel / 37.7952755906
+// }
 export const PixelToPoint =(pixel)=>{
     return pixel*0.75
 }
-export const PointToPixel= (pt)=>{
-    return pt*1.3333333333
-}
+// const PointToPixel= (pt)=>{
+//     return pt*1.3333333333
+// }
 /** 72 ppi */
 const setPageSize = (_print) => {
     let width,height,_width,_height
     switch (_print.PageSize) {
-        case 'A4':
-            _width=21.0
-            _height=29.7
+    case 'A4':
+        _width=21.0
+        _height=29.7
         break
-        case 'A5':
-            _width=14.85
-            _height=21.0
+    case 'A5':
+        _width=14.85
+        _height=21.0
         break
-        default: // ÖZEL
-            _width=_w
-            _height=_h
+    default: // ÖZEL
+        _width=_w
+        _height=_h
         break
     }
     width=cmToPixel(_width)
@@ -39,7 +39,7 @@ const setPageSize = (_print) => {
             _height : _width
         })
     }else{
-       return SetRuler({
+        return SetRuler({
             width,
             height,
             _width ,
@@ -86,11 +86,11 @@ const SetPageCopy = (pcopy,copyd)=>{
     let width=1
     let height=1
     if(pcopy>1){
-       if(copyd=='Yanyana'){
+        if(copyd=='Yanyana'){
             width=parseInt(pcopy)
-       }else{
+        }else{
             height=parseInt(pcopy)
-       }
+        }
     }
     return {
         height,width
