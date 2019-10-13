@@ -1,3 +1,123 @@
+const f =[
+    {
+        'TableKey': 'VatWithholdingRate',
+        'ItemKey': 'VatWithholdingRate',
+        'ItemTitle': 'Tevkifat Oranı',
+        'ItemValue': '3',
+        'Icon': 'fa fa-arrows-v',
+        'Width': '120',
+        'Height': '25',
+        'ItemType': 'Field',
+        'Format': 'N2',
+        'Style': ''
+    },
+    {
+        'Index': 3,
+        'ToolValue': 'Fatura Bilgileri',
+        'value': {
+            'TableKey': 'InvoiceDate',
+            'ItemKey': 'InvoiceDate',
+            'ItemTitle': 'Fatura Tarihi',
+            'ItemValue': '22.01.2017',
+            'Icon': 'fa fa-calendar',
+            'Width': '150',
+            'Height': '35',
+            'ItemType': 'Field',
+            'Format': 'dd.MM.yyyy',
+            'Style': ''
+        }
+    },
+    {
+        'Index': 4,
+        'ToolValue': 'Fatura Bilgileri',
+        'value': {
+            'TableKey': 'PaymentDate',
+            'ItemKey': 'PaymentDate',
+            'ItemTitle': 'Ödeme Tarihi',
+            'ItemValue': '22.07.2017 17:45',
+            'Icon': 'fa fa-calendar',
+            'Width': '150',
+            'Height': '30',
+            'ItemType': 'Field',
+            'Format': 'dd.MM.yyyy HH:mm',
+            'Style': ''
+        }
+    },
+    {
+        'Index': 5,
+        'ToolValue': 'Fatura Bilgileri',
+        'value': {
+            'TableKey': 'InvoiceTime',
+            'ItemKey': 'InvoiceTime',
+            'ItemTitle': 'Fatura Saati',
+            'ItemValue': '12:30',
+            'Icon': 'fa fa-clock-o',
+            'Width': '100',
+            'Height': '35',
+            'ItemType': 'Field',
+            'Format': 'HH:mm'
+
+        }
+    },
+    {
+        'Index': 14,
+        'ToolValue': 'Alt Toplamlar',
+        'value': {
+            'TableKey': 'GrossTotal',
+            'ItemKey': 'GrossTotal',
+            'ItemTitle': 'Alt Toplam',
+            'ItemValue': '100,00',
+            'Icon': 'fa fa-money',
+            'Width': '80',
+            'Height': '20',
+            'ItemType': 'Field',
+            'Format': '0,00',
+            'Style': ''
+        }
+    },
+    {
+        'Index': 17,
+        'ToolValue': 'Alt Toplamlar',
+        'value': {
+            'TableKey': 'InvoiceTaxRates',
+            'ItemKey': 'TaxRate',
+            'ItemTitle': 'Kdv Oranı',
+            'ItemValue': '%18',
+            'Icon': 'fa fa-arrows-v',
+            'Width': '20',
+            'Height': '20',
+            'ItemType': 'TableField',
+            'Format': 'fa fa-money',
+            'Style': {
+                'font-size': '10pt',
+                'font-style': 'normal',
+                'font-weight': 'normal',
+                'width': '69.5667px',
+                'height': '20px'
+            }
+        }
+    },
+    {
+        'Index': 29,
+        'ToolValue': 'Ürün bilgisi',
+        'value': {
+            'TableKey': 'InvoiceMovements',
+            'ItemKey': 'UnitName',
+            'ItemTitle': 'Birim',
+            'ItemValue': 'Adet',
+            'Icon': 'fa fa-arrows-v',
+            'Width': '100',
+            'Height': '50',
+            'ItemType': 'TableField',
+            'Format': 'Adet',
+            'Style': ''
+        }
+    },
+]
+
+
+
+
 
 export const GetFormat =( value,format)=>{
 
