@@ -1,3 +1,8 @@
+
+export const GetFormat =( value,format)=>{
+
+}
+
 export const styleToObject = (element,_root=null)=>{
     const out={}
     const elementStyle = element.style

@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import { dispatch } from '..'
 import { actionTypes } from '../const'
-import { styleToObject } from './convert'
+import { styleToObject, GetFormat } from './convert'
 import { PixelToPoint } from './print-settings'
 const CalcLeftTop = (uioffset ,mainoffset)=>{
     const { left: uleft, top: utop } =uioffset
@@ -141,10 +141,17 @@ const UICloneText = (state,menuitem,payload)=>{
                 payload: cloneId
             })
         }
-        if(value.ItemType==TYPE_TEXT.CUSTOMTEXT || value.ItemType==TYPE_TEXT.CUSTOMIMAGE)
+        if(value.ItemType==TYPE_TEXT.CUSTOMTEXT || value.ItemType==TYPE_TEXT.CUSTOMIMAGE){
             textclone.innerHTML= value[TYPE_TEXT.VALUE]
-        else
-            textclone.innerText= value[TYPE_TEXT.VALUE]
+        }
+        else{
+            if(value.Format!=''){
+                textclone.innerText=GetFormat(value[TYPE_TEXT.VALUE],value.Format)
+            }else{
+                textclone.innerText=value[TYPE_TEXT.VALUE]
+            }
+
+        }
         textclone.appendChild(textremove)
         DefaultFontSize(textclone,value.Style)
        
@@ -313,7 +320,11 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divcolumn.style.transition='order 1s'
             DefaultFontSize(_divcolumn,value.Style)
             $(_divcolumn).width(value.Width).height(value.Height)
-            _divcolumn.innerHTML=value[TYPE_TABLE.VALUE]
+            if(value.Format!=''){
+                _divcolumn.innerHTML= GetFormat(value[TYPE_TABLE.VALUE])
+            }else{
+                _divcolumn.innerHTML= value[TYPE_TABLE.VALUE]
+            }
             _divcolumn.onclick=(e)=>ChangeFontSize(state,e)
             _divrow.appendChild(_divcolumn)
             const $colres=$(_divcolumn)
