@@ -120,7 +120,7 @@ const f =[
 
 
 export const GetFormat =( value,format)=>{
-
+    return value
 }
 
 export const styleToObject = (element,_root=null)=>{
