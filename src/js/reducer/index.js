@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData } from './actions'
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData,SwapTableItem } from './actions'
 const SetInit = (state,payload)=>{
     const {tools,PrintSetting,PrintLoad,PrintSave,target,dragclass,accordion,tablerowclass,tablecolumnclass} = payload
     state.Cache.Http.Tools=tools
@@ -41,6 +41,11 @@ const dispatch = (action,state=InitialState)=>{
         })
         
         break
+    case actionTypes.CLONE.SWAP_TABLEITEM:
+        SwapTableItem(state,action.payload,data=>{
+            sendReducer(action.type,data,state)
+        })
+        break
     case actionTypes.CLONE.ADD_CLONEITEM:
         AddCloneItem(action.payload,state,data=>{
             sendReducer(action.type,data,state)
@@ -65,6 +70,12 @@ const dispatch = (action,state=InitialState)=>{
         GetPrintInit(state).then(()=>{
             sendReducer(action.type,{Tools:{}},state)
         })
+        break
+    case actionTypes.CLONE.DRAG_START:
+        sendReducers(action.type,{status:action.payload},state)
+        break
+    case actionTypes.CLONE.DRAG_STOP:
+        sendReducers(action.type,{status:action.payload},state)
         break
     case actionTypes.HTTP.POST:
         postData({data:{
@@ -113,6 +124,23 @@ const sendReducer= (type,data,state)=> {// {type:actionTypes, payload:{}}
         
     }
 }
+const sendReducers= (type,data,state)=> {// {type:actionTypes, payload:{}}
+    for (let i = observers.length - 1; i >= 0; i--) {
+        if(!type){
+            observers[i].fn()
+            //addReducer.unSubscribe(observers[i])
+        }else{
+            const item=observers[i]
+            if(item.type==type){
+                if(item.fn!=undefined)
+                    item.fn(state,data)
+                //addReducer.unSubscribe(item)
+            }
+        }
+        
+    }
+}
+
 const addReducer ={
     subscribe: function(type,fn) {
         observers.push({type,fn})
@@ -140,4 +168,4 @@ const reducer_pipe=(c,...ops)=>{
     })
     delete reducer_ListFn.objects[reducer_ListFn.index]
 }
-export { addReducer,dispatch,reducer_pipe}
+export { addReducer,dispatch,reducer_pipe ,sendReducers}

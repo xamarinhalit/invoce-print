@@ -8,23 +8,32 @@ const TableCreate = (litarget)=>{
         const elinput = document.createElement('input')
         elinput.setAttribute('type','checkbox')
         $el.prepend(elinput)
-        $el.onclick=(e)=>{
-            // const $item = $($el)
-            let { Index} = $el.dataset
-            $el.classList.toggle('active')
-            if ($el.classList.contains('active')) {
-                // eslint-disable-next-line no-unused-vars
-                addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
-                    $el.querySelector('input').checked=true
-                })
-                dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index}})
-            } else {
-                // eslint-disable-next-line no-unused-vars
-                addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
-                    $el.querySelector('input').checked=false
-                })
-                dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
+        const status={status:true}
+        $el.onclick=(_e)=>{
+            addReducer.subscribe(actionTypes.CLONE.DRAG_START,()=>{
+                status.status=false
+            })
+            addReducer.subscribe(actionTypes.CLONE.DRAG_STOP,()=>{
+                status.status=true
+            })
+            if(status.status==true){
+                let { Index} = $el.dataset
+                $el.classList.toggle('active')
+                if ($el.classList.contains('active')) {
+                    // eslint-disable-next-line no-unused-vars
+                    addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
+                        $el.querySelector('input').checked=true
+                    })
+                    dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index}})
+                } else {
+                    // eslint-disable-next-line no-unused-vars
+                    addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
+                        $el.querySelector('input').checked=false
+                    })
+                    dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
+                }
             }
+            
         }
     }
 }
@@ -32,28 +41,34 @@ const SetGroupItem=(state)=> {
     const { TEXT, TABLE } = state.Clone.Type
     let toolindex= -1
     state.Clone.Items.StaticItems.forEach(function(item) {
-        if (item != undefined) {
+        if (item != undefined && item!=null) {
             const { Sort, ToolValue, Items: ItemList } = item
             toolindex =Sort ==undefined ?toolindex+1:Sort
-            if (ItemList != undefined) {
-                for (let iindex = 0; iindex < ItemList.length; iindex++) {
-                    const element = ItemList[iindex]
-                    if (element != undefined) {
-                        switch (element[TEXT.ITEMTYPE]) {
+            if (ItemList != undefined && ItemList!=null) {
+                const menulength =ItemList.length
+                for (let iindex = 0; iindex < menulength; iindex++) {
+                    const menuitem = ItemList[iindex]
+                    if (menuitem != undefined && menuitem!=null) {
+                        switch (menuitem[TEXT.ITEMTYPE]) {
                         case TEXT.FIELD:
-                            AddGroupForPanel(element,TEXT,{Sort:toolindex,ToolValue},state)
+                            AddGroupForPanel(menuitem,TEXT,{Sort:toolindex,ToolValue},state)
                             break
                         case TABLE.FIELD:
                             // eslint-disable-next-line no-case-declarations
-                            const { li ,className}= AddGroupForPanel(element,TABLE,{Sort:toolindex,ToolValue},state)
+                            const { li ,className}= AddGroupForPanel(menuitem,TABLE,{Sort:toolindex,ToolValue,menulength},state)
                             if(state.Clone.GroupItems[toolindex]==undefined)
                                 state.Clone.GroupItems[toolindex]='.'+className
                             TableCreate(li)
-                            $(li).draggable('option', 'disabled', true)
-                                
+
+                            //.draggable('option', 'disabled', true)
+                            break
+                        case TEXT.CUSTOMTEXT:
+                            AddGroupForPanel(menuitem,TEXT,{Sort:toolindex,ToolValue},state)
+                            break
+                        case TEXT.CUSTOMIMAGE:
+                            AddGroupForPanel(menuitem,TEXT,{Sort:toolindex,ToolValue},state)
                             break
                         default:
-                            AddGroupForPanel(element,TEXT,{Sort:toolindex,ToolValue},state)
                             break
                         }
                     }
@@ -64,7 +79,7 @@ const SetGroupItem=(state)=> {
     })
     $('.'+state.UI.TABLE.CLASSNAME).PanelGroup(state.UI.PANEL.config,state)
 }
-const AddGroupForPanel= function(element ,o,s,state) {
+const AddGroupForPanel= function(value ,o,s,state) {
     const { Clone}  = state
     state.UI.PANEL.Index++
     let groupNameId = 'menu-panel-' + state.UI.PANEL.Index
@@ -72,9 +87,9 @@ const AddGroupForPanel= function(element ,o,s,state) {
     li.dataset.Index=state.UI.PANEL.Index
     li.style.cursor='pointer'
     const lii=document.createElement('i')
-    lii.className=element[o.ICON]
+    lii.className=value[o.ICON]
     li.appendChild(lii)
-    li.innerHTML+=element[o.ITEMTITLE]
+    li.innerHTML+=value[o.ITEMTITLE]
     if (Clone.GroupItems[s.Sort] == undefined) {
         const div = document.createElement('div')
         div.className=state.UI.TABLE.CLASSNAME
@@ -93,20 +108,68 @@ const AddGroupForPanel= function(element ,o,s,state) {
         div.appendChild(ul)
         document.querySelector(state.UI.PANEL.config.container).appendChild(div)
         Clone.GroupItems[s.Sort]='.'+groupNameId
+       
     }else {
         document.querySelector( Clone.GroupItems[s.Sort]).appendChild(li)
     }
-    $(li).draggable({
-        helper: 'clone',
-        revert: 'invalid',
-        cursor: 'move',
-        cancel: null,
-        cursorAt: { top: 50, left: 50 }
-    }).disableSelection()
+    if(value.ItemType!=state.Clone.Type.TABLE.FIELD){
+        li.dataset.columnIndex=value.ColumnIndex
+        $(li).draggable({
+            helper: 'clone',
+            revert: 'invalid',
+            cursor: 'move',
+            cancel: null,
+            cursorAt: { top: 50, left: 50 }
+        }).disableSelection()
+    }else{
+    
+        $('.'+groupNameId).sortable({
+            containment:'.'+groupNameId,
+            start:(event,ui)=>{
+                dispatch({type:actionTypes.CLONE.DRAG_START})
+            },
+            stop:( event, ui )=>{
+                let parents =ui.item[0].parentNode
+                let dropel = ui.item
+                let prevel = ui.item.prev()
+                let nextel =ui.item.next()
+                const droped=dropel[0].dataset
+                for (let j = 0; j < parents.children.length; j++) {
+                    const $el = parents.children[j]
+                    $el.dataset.columnIndex=j
+                    let { Index} = $el.dataset
+                    if ($el.classList.contains('active')) {
+                        addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
+                            addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
+                                // eslint-disable-next-line no-unused-vars
+                                
+                            })
+                            dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index,column:{style:_xdata.style}}})
+                        })
+                        dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
+                        // eslint-disable-next-line no-unused-vars
+                    } 
+                }
+                setTimeout(()=>{
+                    dispatch({type:actionTypes.CLONE.DRAG_STOP})
+                  
+                },1000)
+                // if(prevel.length==0){
+                //     const changed = nextel[0].dataset
+                //     dispatch({type:actionTypes.CLONE.SWAP_TABLEITEM,payload:{drop:droped,swap:changed}})
+                // }else{
+                //     const changed = prevel[0].dataset
+                //     dispatch({type:actionTypes.CLONE.SWAP_TABLEITEM,payload:{drop:droped,swap:changed}})
+                // }
+               
+            }
+        })
+    }
+       
     state.UI.PANEL.Menu.push({
         Index:state.UI.PANEL.Index,
         element:li,
-        value:element,
+        value:value,
         Sort:s.Sort,
         ToolValue:s.ToolValue
     })

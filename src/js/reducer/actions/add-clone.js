@@ -111,9 +111,17 @@ const DefaultFontSize= (element,style)=>{
         element.style.fontStyle='normal'
         element.style.fontWeight='normal'
     }
-
 }
-
+export const SwapTableItem = (state,payload,success)=>{
+    const { drop,swap} = payload
+    const {item:dropitem}= SearchMenuItem(state.UI.PANEL.Menu,drop.Index)
+    let dleft = dropitem.element.style.left
+    const {item:swapitem}= SearchMenuItem(state.UI.PANEL.Menu,swap.Index)
+    let sleft = swapitem.element.style.left
+    dropitem.element.style.left=sleft
+    swapitem.element.style.left=dleft
+    success(null)
+}
 const UICloneText = (state,menuitem,payload)=>{
     return new Promise((resolve,reject)=>{
         const {value,element,ToolValue,Index } =menuitem
@@ -139,6 +147,7 @@ const UICloneText = (state,menuitem,payload)=>{
             textclone.innerText= value[TYPE_TEXT.VALUE]
         textclone.appendChild(textremove)
         DefaultFontSize(textclone,value.Style)
+       
         textclone.onclick=(e)=>ChangeFontSize(state,e)
 
         const cloneItem = {
@@ -158,8 +167,13 @@ const UICloneText = (state,menuitem,payload)=>{
         }
         let { left,top} = payload
         state.UI.$CONTENT.append(cloneItem.element)
-        if(cloneItem.value.Style!='')
-            $(cloneItem.element).css(cloneItem.value.Style)
+        
+        if(payload.text!=undefined && payload.text!=null && payload.text.style!=undefined &&  payload.text.style!=''){
+            $(cloneItem.element).css(payload.text.style)
+        }else{
+            if(cloneItem.value.Style!='')
+                cloneItem.element.style.cssText=cloneItem.value.Style
+        }
         $(cloneItem.element)
             .css({ position: 'absolute' })
             .width(cloneItem.value.Width)
@@ -186,7 +200,7 @@ const UICloneText = (state,menuitem,payload)=>{
     })
 }
 
-const UICloneCreateTable = (state,tablekey)=>{
+const UICloneCreateTable = (state,tablekey,payload)=>{
     return new Promise((resolve)=>{
         const extractCss=(_$div)=>{
             return styleToObject ( _$div[0],state.UI.$CONTENT[0].parentNode)
@@ -210,7 +224,11 @@ const UICloneCreateTable = (state,tablekey)=>{
             const $div =$(_div)
             $div.prop('id','table-'+tablekey)
             $div.data('cloneId',Index.Index)
-            $div.offset({ top: 500, left: 0 })
+            if(payload.table!= undefined && payload.table!=null && payload.table.style!=undefined && payload.table.style!= ''){
+                $div.css(payload.table.style)
+            }else{
+                $div.offset({ top: 500, left: 0 })
+            }
             const button = document.createElement('i')
             button.className='fa fa-times Remove'
             button.onclick=_e=> {
@@ -248,10 +266,10 @@ const UICloneCreateTable = (state,tablekey)=>{
         resolve(_table)
     })
 }
-const UICloneTable = (state,menuitem)=>{
+const UICloneTable = (state,menuitem,payload)=>{
     return new Promise((resolve,_reject)=>{
         const {value,element,ToolValue,Index } =menuitem
-        UICloneCreateTable(state,menuitem.value.TableKey).then((_divtable)=>{
+        UICloneCreateTable(state,menuitem.value.TableKey,payload).then((_divtable)=>{
             const CalC_Table = ()=>{
                 let x_width = 0
                 let leng = _divtable.children.length
@@ -267,7 +285,6 @@ const UICloneTable = (state,menuitem)=>{
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
             let _divrow = null
-            _divtable.ColumIndex++
             _Clone_Index.Index++
             if(_divtable.RowIndex==-1){
                 _divtable.RowIndex++   
@@ -278,13 +295,22 @@ const UICloneTable = (state,menuitem)=>{
             }else{
                 _divrow= _divtable.element[0].querySelector('div[data--row-index=\''+_divtable.RowIndex+'\']')
             }
-          
-            const _column = _divtable.ColumIndex
+            if(payload.row!=undefined && payload.row!=null && payload.row.style!=undefined &&  payload.row.style!=''){
+                $(_divrow).css(payload.row.style)
+            }
             const _divcolumn = document.createElement('div')
             _divcolumn.classList.add(state.UI.TABLECOLUMNCLASS)
             _divcolumn.classList.add(value[TYPE_TABLE.ITEMKEY])
-            _divcolumn.dataset.ColumIndex = _column
+            _divcolumn.dataset.columnIndex =menuitem.element.dataset.columnIndex
             _divcolumn.dataset.cloneId=_Clone_Index.Index
+            if(payload.column!=undefined && payload.column!=null && 
+                 payload.column.style!=undefined && payload.column.style!=null){
+                $(_divcolumn).css(payload.column.style)
+            }else if (value.Style!=undefined && value.Style!=null && value.Style!=''){
+                $(_divcolumn).css(value.Style)
+            }
+            _divcolumn.style.order=menuitem.element.dataset.columnIndex
+            _divcolumn.style.transition='order 1s'
             DefaultFontSize(_divcolumn,value.Style)
             $(_divcolumn).width(value.Width).height(value.Height)
             _divcolumn.innerHTML=value[TYPE_TABLE.VALUE]
@@ -300,8 +326,7 @@ const UICloneTable = (state,menuitem)=>{
                 Index: _Clone_Index.Index,
                 element: _divcolumn,
                 value,
-                ColumIndex:_column,
-                RowIndex:_tr.dataset.RowIndex,
+                RowIndex:_divrow.dataset.RowIndex,
                 ToolValue,
                 menuindex:Index,
                 menuelement:element
@@ -322,15 +347,22 @@ const UICloneTable = (state,menuitem)=>{
         })
     })
 }
-const AddCloneItem= (payload,state,success) =>{
-    const _xitem = {}
-    for (let ii = 0; ii < state.UI.PANEL.Menu.length; ii++) {
-        const element = state.UI.PANEL.Menu[ii]
-        if(element.Index==parseInt(payload.Index)){
-            _xitem.item = element
+const SearchMenuItem = (Menu,Index)=>{
+    const _xitem ={
+
+    }
+    for (let ii = 0; ii < Menu.length; ii++) {
+        const item = Menu[ii]
+        if(item.Index==parseInt(Index)){
+            _xitem.item = item
             break
         }
     }
+    return _xitem
+}
+const AddCloneItem= (payload,state,success) =>{
+    const _xitem = SearchMenuItem(state.UI.PANEL.Menu,payload.Index)
+    
     const { item } = _xitem
     if (item && payload.Index) {
         switch (item.value.ItemType) {
@@ -340,7 +372,7 @@ const AddCloneItem= (payload,state,success) =>{
             })
             break
         case state.Clone.Type.TABLE.FIELD:
-            UICloneTable(state,item).then((_data)=>{
+            UICloneTable(state,item,payload).then((_data)=>{
                 success(_data)
             })
             break
