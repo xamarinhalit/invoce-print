@@ -131,7 +131,6 @@ const GetPrintInit = (state)=> {
         hstyle+='size: '+state.Print.PageSize+ ' '
         hstyle+=state.Print.PageType=='Dikey'?'landscape':'portrait' +';'
         hstyle+='padding:0;margin:0cm;}</style>'
-        const cxx=$(state.UI.DROPID)
         let clnode = $(state.UI.DROPID)[0].cloneNode(true)
         clnode.removeAttribute('id')
         let _div = null

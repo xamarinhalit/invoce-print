@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import { dispatch } from '..'
 import { actionTypes } from '../const'
-import { styleToObject, GetFormat } from './convert'
+import { styleToObject, GetFormat, CalcLeftTop } from './convert'
 export const StyleParamClick = ({selector,readselector,defaultvalue})=>{
     $('li[data-'+selector+']').click((e)=>{
         $('li[data-'+selector+']').each((i,ele)=>{
@@ -18,17 +18,7 @@ export const StyleParamClick = ({selector,readselector,defaultvalue})=>{
         dispatch({type:actionTypes.CLONE.FONT_CHANGE,payload:{ font:selector,style:e.currentTarget.dataset[readselector],status:elactive,defaultvalue}})
     })
 }
-const CalcLeftTop = (uioffset ,mainoffset)=>{
-    const { left: uleft, top: utop } =uioffset
-    const { left: mleft, top: mtop } = mainoffset
-    let left = uleft - mleft
-    let top = utop - mtop
-    if (top < 0) top = 0
-    if (left < 0) left = 0
-    return {
-        left,top
-    }
-}
+
 export const SetConfig = (state, _data) => {
     state.UI.$CONTENT
         .droppable({
@@ -138,7 +128,7 @@ const UICloneText = (state,menuitem,payload)=>{
         }
         textclone.appendChild(textremove)
         DefaultFontSize(textclone,value.Style)
-       
+        
         textclone.onclick=(e)=>ChangeFontSize(state,e)
 
         const cloneItem = {
@@ -150,21 +140,16 @@ const UICloneText = (state,menuitem,payload)=>{
             menuelement:element
         }
         state.Clone.Items.Clons.push(cloneItem)
-
+       
         const extractCss=()=>{
             const style =styleToObject(cloneItem.element,state.UI.$CONTENT[0])
             // eslint-disable-next-line require-atomic-updates
             cloneItem.value.Style = style
         }
-        let { left,top} = payload
+        const { left,top} = payload
+       
         state.UI.$CONTENT.append(cloneItem.element)
         
-        if(payload.text!=undefined && payload.text!=null && payload.text.style!=undefined &&  payload.text.style!=''){
-            $(cloneItem.element).css(payload.text.style)
-        }else{
-            if(cloneItem.value.Style!='')
-                cloneItem.element.style.cssText=cloneItem.value.Style
-        }
         $(cloneItem.element)
             .css({ position: 'absolute' })
             .width(cloneItem.value.Width)
@@ -186,6 +171,15 @@ const UICloneText = (state,menuitem,payload)=>{
             .on('resize', extractCss)
             .css({ border: 'none', left: left + 'px', top: top + 'px' })
             .disableSelection()
+        if(payload.text!=undefined && payload.text!=null && payload.text.style!=undefined &&  payload.text.style!=''){
+            $(cloneItem.element).css(payload.text.style)
+        }else{
+            if(cloneItem.value.Style!='')
+                cloneItem.element.style.cssText=cloneItem.value.Style
+        }
+        if(payload.Style!=undefined && payload.Style!=null){
+            $(cloneItem.element).css(payload.Style)
+        }
         extractCss()
         resolve(cloneItem)
     })
@@ -359,7 +353,7 @@ const AddCloneItem= (payload,state,success) =>{
     const _xitem = SearchMenuItem(state.UI.PANEL.Menu,payload.Index)
     
     const { item } = _xitem
-    if (item && payload.Index) {
+    if (item!=undefined && payload.Index!=undefined) {
         switch (item.value.ItemType) {
         case state.Clone.Type.TEXT.FIELD:
             UICloneText(state,item,payload).then((_data)=>{

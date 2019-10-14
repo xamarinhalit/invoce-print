@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick } from './actions'
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
 const SetInit = (state,payload)=>{
     const {tools,PrintSetting,PrintLoad,PrintSave,target,dragclass,accordion,tablerowclass,tablecolumnclass} = payload
     state.Cache.Http.Tools=tools
@@ -20,6 +20,7 @@ const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
     case actionTypes.CLONE.LOAD_JSON_CONTAINER:
+        state.UI.$CONTENT.html('')
         fetchData(state.Cache.Http.PrintSetting,_print=>{
             if(_print!=undefined && _print!=null){
                 PrintSetting(state,_print[0].Print,(_print)=>{
@@ -98,13 +99,13 @@ const dispatch = (action,state=InitialState)=>{
         })
         break
     case actionTypes.HTTP.JSON_CONFIG_LOAD:
-            SetJsonData(state,(_data)=>{
-                sendReducer(action.type,{data:_data},state)
-                postData({url:state.Cache.Http.PrintSave,data:_data}).then((_sonuc)=>{
-                    // sendReducer(action.type,null,state)
-                })
+        postData({url:state.Cache.Http.PrintLoad,data:action.payload,type:'GET'}).then((_sonuc)=>{
+            LoadJson(state,_sonuc,(_data)=>{
+                sendReducer(action.type,{data:_sonuc},state)
             })
-            break
+        })
+       
+        break
     default:
         break
     }

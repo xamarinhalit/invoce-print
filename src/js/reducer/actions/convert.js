@@ -119,7 +119,17 @@ const f =[
 
 
 
-
+export const CalcLeftTop = (uioffset ,mainoffset)=>{
+    const { left: uleft, top: utop } =uioffset
+    const { left: mleft, top: mtop } = mainoffset
+    let left = uleft - mleft
+    let top = utop - mtop
+    if (top < 0) top = 0
+    if (left < 0) left = 0
+    return {
+        left,top
+    }
+}
 
 export const GetFormat =(value,format,isTest =true)=>{
     if(isTest==false){
