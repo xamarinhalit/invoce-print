@@ -31,6 +31,31 @@ import '../_plugin/js/used/bootstrap.min.js'
             PrintSave:'http://localhost:3000/SaveLoad',
         }
         Init(InitConfig ,fontSelects)
+        const $FONTSIZE= document.querySelector('input[name="fontsize"]')
+        $FONTSIZE.addEventListener('keyup',(e)=>{
+            const _target =e.currentTarget
+            if(_target !=undefined && _target!=null && _target.value!=''){
+                dispatch(
+                    {type:actionTypes.CLONE.FONT_CHANGE,
+                        payload:{ font:'font-size',style:null,defaultvalue:'10pt',input:_target.value}})
+            }
+        })
+        subscribe(actionTypes.CLONE.FONT_ITEM_SELECT,(state,data)=>{
+            const selectedelemet = data.element
+            const fsize=selectedelemet.style.fontSize
+            if(fsize!=''){
+                if(fsize.indexOf('pt')>-1){
+                    $FONTSIZE.value=fsize.replace('pt','')
+                }
+            }else{
+                $FONTSIZE.value='' 
+            }
+            const $ffsize =$('.p-font-block')
+            if(!$ffsize.hasClass('p-active')){
+                $ffsize.addClass('p-active')
+            }
+            $( state.UI.SELECT.$font).trigger('change')
+        })
         $('#JsonConfig').click(function(e) {
             e.preventDefault()
             subscribe(actionTypes.UI.JSON_CONFIG_SAVE,(state,_data)=>{
@@ -56,10 +81,12 @@ import '../_plugin/js/used/bootstrap.min.js'
             let v1 = $ps.val()
             $ps.val('A4')
             $ps.val(v1)
+            $ps.trigger('change')
             const $pc =$('select[name="PageCopy"]')
             let v2 = $pc.val()
             $pc.val('1')
             $pc.val(v2)
+            $pc.trigger('change')
             $('#PopupSettings').modal({ backdrop: 'static', keyboard: false })
         })
 
@@ -83,6 +110,5 @@ import '../_plugin/js/used/bootstrap.min.js'
                 dispatch({type:actionTypes.INIT.PRINT,payload:Print})
             }
         })
-       
     })
 })()

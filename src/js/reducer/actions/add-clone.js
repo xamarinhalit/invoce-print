@@ -4,7 +4,6 @@
 import { dispatch } from '..'
 import { actionTypes } from '../const'
 import { styleToObject, GetFormat } from './convert'
-import { PixelToPoint } from './print-settings'
 export const StyleParamClick = ({selector,readselector,defaultvalue})=>{
     $('li[data-'+selector+']').click((e)=>{
         $('li[data-'+selector+']').each((i,ele)=>{
@@ -51,58 +50,45 @@ export const SetConfig = (state, _data) => {
         })
         .disableSelection()
         //.css({ margin: '2px' })
-    state.UI.$FONTWEIGHT=document.querySelector('select[name="fontweight"]')
-    state.UI.$FONTWEIGHT.addEventListener('change',(e)=>{
-        const _target =e.currentTarget
-        if(_target !=undefined && _target.value!=''){
-            state.UI.SELECT.$font.style.fontWeight=_target.value
-            $( state.UI.SELECT.$font).trigger('change')
-        }
-    })
-    state.UI.$FONTSTYLE=document.querySelector('select[name="fontstyle"]')
-    state.UI.$FONTSTYLE.addEventListener('change',(e)=>{
-        const _target =e.currentTarget
-        if(_target !=undefined && _target.value!=''){
-            state.UI.SELECT.$font.style.fontStyle=_target.value
-            $( state.UI.SELECT.$font).trigger('change')
-        }
-    })
-    state.UI.$FONTSIZE= document.querySelector('input[name="fontsize"]')
-    state.UI.$FONTSIZE.addEventListener('keyup',(e)=>{
-        const _target =e.currentTarget
-        if(_target !=undefined && _target.value!=''){
-            state.UI.SELECT.$font.style.fontSize=_target.value+'pt'
-            $( state.UI.SELECT.$font).trigger('change')
-        }
-    })
+  
     const $pcopy = document.querySelector('select[name="PageCopy"]')
     const $dcopy = document.querySelector('select[name="CopyDirection"]')
     $pcopy.onchange=(e)=>{
-        const $t = e.currentTarget
-        if($t.value=='1'){
-            $dcopy.parentNode.parentNode.style.display='none'
+        if($pcopy!=undefined && $pcopy!=null){
+            if($pcopy.value=='1'){
+                $dcopy.parentNode.parentNode.style.display='none'
+            }else{
+                $dcopy.parentNode.parentNode.style.display='block'
+            }
         }else{
-            $dcopy.parentNode.parentNode.style.display='block'
+            $dcopy.parentNode.parentNode.style.display='none'
         }
     }
     const $hcopy = document.querySelector('input[name="PageWidth"]')
     const $pscopy = document.querySelector('select[name="PageSize"]')
     const $wcopy = document.querySelector('input[name="PageHeight"]')
     $pscopy.onchange=(e)=>{
-        const $t = e.currentTarget
-        if($t.value!='Özel'){
+        if( $pscopy!=undefined && $pscopy!=null){
+            if( $pscopy.value!='Özel'){
+                $wcopy.parentNode.parentNode.style.display='none'
+                $hcopy.parentNode.parentNode.style.display='none'
+            }else{
+                $wcopy.parentNode.parentNode.style.display='block'
+                $hcopy.parentNode.parentNode.style.display='block'
+            }
+        }else{
             $wcopy.parentNode.parentNode.style.display='none'
             $hcopy.parentNode.parentNode.style.display='none'
-        }else{
-            $wcopy.parentNode.parentNode.style.display='block'
-            $hcopy.parentNode.parentNode.style.display='block'
         }
     }
   
 }
 export const ChangeFontEvent = (state,payload)=>{
     if(payload.font!=undefined){
-        if(payload.status==true)
+        if(payload.status==undefined){
+            const hasPixel =payload.input.indexOf('px')!=-1
+            state.UI.SELECT.$font.style[payload.font]=hasPixel?payload.input:payload.input+'pt'
+        }else if(payload.status==true)
             state.UI.SELECT.$font.style[payload.font]=payload.style
         else 
             state.UI.SELECT.$font.style[payload.font]=payload.defaultvalue
@@ -110,22 +96,8 @@ export const ChangeFontEvent = (state,payload)=>{
 }
 const ChangeFontSize=(state,e)=>{
     state.UI.SELECT.$font=e.currentTarget
-    const fsize=state.UI.SELECT.$font.style.fontSize
-    if(fsize!=''){
-        if(fsize.indexOf('pt')>-1){
-            state.UI.$FONTSIZE.value=fsize.replace('pt','')
-        }else if(fsize.indexOf('px')){
-            state.UI.$FONTSIZE.value=PixelToPoint(fsize.replace('px',''))
-        }
-    }else{
-        state.UI.$FONTSIZE.value='' 
-    }
-    const $ffsize =$('.p-font-block')
-    if(!$ffsize.hasClass('p-active')){
-        $ffsize.addClass('p-active')
-    }
-    state.UI.$FONTSTYLE.value=state.UI.SELECT.$font.style.fontStyle
-    state.UI.$FONTWEIGHT.value=state.UI.SELECT.$font.style.fontWeight
+   
+    dispatch({type:actionTypes.CLONE.FONT_ITEM_SELECT,payload:{element:state.UI.SELECT.$font}})
 }
 const DefaultFontSize= (element,style)=>{
     if(style==''){
@@ -133,16 +105,6 @@ const DefaultFontSize= (element,style)=>{
         element.style.fontStyle='normal'
         element.style.fontWeight='normal'
     }
-}
-export const SwapTableItem = (state,payload,success)=>{
-    const { drop,swap} = payload
-    const {item:dropitem}= SearchMenuItem(state.UI.PANEL.Menu,drop.Index)
-    let dleft = dropitem.element.style.left
-    const {item:swapitem}= SearchMenuItem(state.UI.PANEL.Menu,swap.Index)
-    let sleft = swapitem.element.style.left
-    dropitem.element.style.left=sleft
-    swapitem.element.style.left=dleft
-    success(null)
 }
 const UICloneText = (state,menuitem,payload)=>{
     return new Promise((resolve,reject)=>{

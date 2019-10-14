@@ -59,8 +59,6 @@ const SetGroupItem=(state)=> {
                             if(state.Clone.GroupItems[toolindex]==undefined)
                                 state.Clone.GroupItems[toolindex]='.'+className
                             TableCreate(li)
-
-                            //.draggable('option', 'disabled', true)
                             break
                         case TEXT.CUSTOMTEXT:
                             AddGroupForPanel(menuitem,TEXT,{Sort:toolindex,ToolValue},state)
@@ -130,10 +128,6 @@ const AddGroupForPanel= function(value ,o,s,state) {
             },
             stop:( event, ui )=>{
                 let parents =ui.item[0].parentNode
-                let dropel = ui.item
-                let prevel = ui.item.prev()
-                let nextel =ui.item.next()
-                const droped=dropel[0].dataset
                 for (let j = 0; j < parents.children.length; j++) {
                     const $el = parents.children[j]
                     $el.dataset.columnIndex=j
@@ -142,7 +136,6 @@ const AddGroupForPanel= function(value ,o,s,state) {
                         addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
                             addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
                                 // eslint-disable-next-line no-unused-vars
-                                
                             })
                             dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index,column:{style:_xdata.style}}})
                         })
@@ -154,14 +147,6 @@ const AddGroupForPanel= function(value ,o,s,state) {
                     dispatch({type:actionTypes.CLONE.DRAG_STOP})
                   
                 },1000)
-                // if(prevel.length==0){
-                //     const changed = nextel[0].dataset
-                //     dispatch({type:actionTypes.CLONE.SWAP_TABLEITEM,payload:{drop:droped,swap:changed}})
-                // }else{
-                //     const changed = prevel[0].dataset
-                //     dispatch({type:actionTypes.CLONE.SWAP_TABLEITEM,payload:{drop:droped,swap:changed}})
-                // }
-               
             }
         })
     }
@@ -178,7 +163,6 @@ const AddGroupForPanel= function(value ,o,s,state) {
 /* eslint-disable no-undef */
 $.fn.extend({
     ReloadPanel: function(options, e,state) {
-        // const { up, down, extclass, activeClass } = options
         const { up, down } = options
         let $children = $(this)
         const ilist = []

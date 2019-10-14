@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData,SwapTableItem,ChangeFontEvent,StyleParamClick } from './actions'
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick } from './actions'
 const SetInit = (state,payload)=>{
     const {tools,PrintSetting,PrintLoad,PrintSave,target,dragclass,accordion,tablerowclass,tablecolumnclass} = payload
     state.Cache.Http.Tools=tools
@@ -19,6 +19,14 @@ const observers= []
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
+    case actionTypes.CLONE.LOAD_JSON_CONTAINER:
+        fetchData(state.Cache.Http.PrintSetting,_print=>{
+            if(_print!=undefined && _print!=null){
+                PrintSetting(state,_print[0].Print,(_print)=>{
+                })
+            }
+        })
+        break
     case actionTypes.INIT.PRINT:
         PrintSetting(state,action.payload,(_data)=>{
             sendReducer(action.type,_data,state)
@@ -30,21 +38,10 @@ const dispatch = (action,state=InitialState)=>{
             state.Clone.Items.StaticItems=data[0].Tools
             state.UI.$CONTENT = $(action.payload.target)
             SetGroupItem(state)
-            fetchData(state.Cache.Http.PrintSetting,_print=>{
-                if(_print!=undefined && _print!=null){
-                    PrintSetting(state,_print[0].Print,(_print)=>{
-                    })
-                }
-            })
             SetConfig(state)
             sendReducer(action.type,data[0].Tools,state)
         })
         
-        break
-    case actionTypes.CLONE.SWAP_TABLEITEM:
-        SwapTableItem(state,action.payload,data=>{
-            sendReducer(action.type,data,state)
-        })
         break
     case actionTypes.CLONE.ADD_CLONEITEM:
         AddCloneItem(action.payload,state,data=>{
@@ -79,6 +76,9 @@ const dispatch = (action,state=InitialState)=>{
         break
     case actionTypes.CLONE.FONT_CHANGE:
         ChangeFontEvent(state,action.payload)
+        break
+    case actionTypes.CLONE.FONT_ITEM_SELECT:
+        sendReducers(action.type,action.payload,state)
         break
     case actionTypes.HTTP.POST:
         postData({data:{

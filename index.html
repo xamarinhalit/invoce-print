@@ -80,8 +80,8 @@
                                                 <div class="prop-inner">cm</div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group row">
+<!-- 
+                                        <div class="form-group row" >
                                             <label class="col-md-5 label-title"> Görsel </label>
                                             <div class="col-md-7">
                                                 <label for="image-upload" name="image-label" class="btn-efar-upload"
@@ -90,10 +90,10 @@
                                                 </label>
                                                 <label for="image-remove" class="btn-efar-upload remove"
                                                     style="display: inline-block;">
-                                                    <i class="fa fa-remove"></i> Kaldır
+                                                    <i class="fa fa-remove" ></i> Kaldır
                                                 </label>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group row">
                                             <label class="col-md-5 label-title"> Ürün Adedi</label>
@@ -139,7 +139,7 @@
                         <div class="modal-footer">
                             <div class="popup_alert left"> </div>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
-                            <button type="button" class="btn btn-black" name="BtnSettingSave">Kaydet</button>
+                            <button type="button" class="btn btn-black" data-dismiss="modal" name="BtnSettingSave">Kaydet</button>
                         </div>
                     </form>
                 </div>
@@ -194,40 +194,14 @@
                 <div class="p-text-content">
                     <div class="p-text-fontsize">
                         <ul style="display:flex;position: absolute;right: 1em; justify-content:space-around;list-style:none;">
-                            <li style="margin-top: 0.5em;margin-right: 1em;"><button id="JsonConfig">Json Göster </button></li>
-                            <li style="margin-top: 0.5em;margin-right: 1em;"><button id="newPrint">Yazdır</button></li>
-                            <li style="margin-top: 0.5em;margin-right: 1em;"><button id="PrintSettings">Ayar</button></li>
+                            <li id="JsonConfig"><i class="fa fa-file-text" style="font-size:24px;margin:5px;padding:3px"></i></li>
+                            <li id="newPrint"><i class="fa fa-print" style="font-size:24px;margin:5px;padding:3px"></i></li>
+                            <li id="PrintSettings"><i class="fa fa-cog fa-spin" style="font-size:24px;margin:5px;padding:3px"></i></li>
                         </ul>
                         <div class="p-font-block">
-                           <p >Yazı boyutunu
-                                        <input type="text" name="fontsize">
-                            </p>
-                            <p >Yazı Stili
-                                    <select name="fontstyle">
-                                        <option value="normal">Normal</option>
-                                        <option value="italic">Italic</option>
-                                        <option value="oblique">Oblique</option>
-                                    </select>
-                                </p>
-                                <p >Yazı Kalınlığı
-                                 <select name="fontweight">
-                                            <option value="normal">Normal</option>
-                                            <option value="bold">Bold</option>
-                                            <option value="bolder">bolder</option>
-                                            <option value="lighter">lighter</option>
-                                    <option value="100">100</option>
-                                    <option value="200">200</option>
-                                    <option value="200">200</option>
-                                    <option value="400">400</option>
-                                    <option value="500">500</option>
-                                    <option value="600">600</option>
-                                    <option value="700">700</option>
-                                    <option value="800">800</option>
-                                    <option value="900">900</option>
-                                </select>
-                            </p>
                             <p>
                                 <ul class="p-font-ul">
+                                    <li style="opacity: 1"><i class="fa fa-text-height" aria-hidden="true"></i> <input type="text" name="fontsize" style="width: 50px;;"></li>
                                     <li data-text-align="left"><i class="fa fa-align-left" aria-hidden="true"></i></li>
                                     <li data-text-align="center"><i class="fa fa-align-center" aria-hidden="true"></i></li>
                                     <li data-text-align="right"> <i class="fa fa-align-right" aria-hidden="true"></i></li>
@@ -236,6 +210,7 @@
                                     <li data-text-decoration="underline"><i class="fa fa-underline" aria-hidden="true"></i></li>
                                 </ul>
                             </p>
+                            
                         </div>
                     </div>
                 </div>
@@ -257,27 +232,6 @@
             </div>
         </form>
     </div>
-    <!-- <div style="display:none">
-        <div id="TextField" class="efar-field">
-            <i class="fa fa-times Remove"></i>
-        </div>
-        <!-- <div id="TableField">
-            <button type="button" class="close pull-right" style="margin-right:-0.3em;margin-top:-0.6em"
-                data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <table class="table-style">
-                <thead>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div> -->
-    </div> -->
-    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
-    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
-
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
-    <!-- <script type="text/javascript" src="https://content.magenty.com/static/scripts/printThis.js"></script> -->
     <script src="dist/index.js"></script>
 </body>
 

@@ -116,6 +116,7 @@ export const SetJsonData = (state,success)=>{
     })
     let _data = JSON.stringify(JsonData)
     let _parsed =JSON.parse(_data)
+    console.log(JsonData)
     success(JsonData)
 }
 
