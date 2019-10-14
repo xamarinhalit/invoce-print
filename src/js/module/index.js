@@ -1,8 +1,10 @@
-import { dispatch,addReducer } from '../reducer'
+import { dispatch,addReducer, StyleParamClick } from '../reducer'
 import { actionTypes } from '../reducer/const'
 const { subscribe }  = addReducer
-const Init = function (payload,...args) {
-    for (let i = 0; i < args.length; i++) $(args[i].selector).click((e)=>$(this)[args[i].fn](e))
+const Init = function (payload,fontSelects) {
+    for (let i = 0; i < fontSelects.length; i++) {
+        StyleParamClick(fontSelects[i])
+    }
     dispatch({ type: actionTypes.INIT.FETCHED, payload })
 }
 

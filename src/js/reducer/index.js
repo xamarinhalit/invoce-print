@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData,SwapTableItem } from './actions'
+import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData,SwapTableItem,ChangeFontEvent,StyleParamClick } from './actions'
 const SetInit = (state,payload)=>{
     const {tools,PrintSetting,PrintLoad,PrintSave,target,dragclass,accordion,tablerowclass,tablecolumnclass} = payload
     state.Cache.Http.Tools=tools
@@ -76,6 +76,9 @@ const dispatch = (action,state=InitialState)=>{
         break
     case actionTypes.CLONE.DRAG_STOP:
         sendReducers(action.type,{status:action.payload},state)
+        break
+    case actionTypes.CLONE.FONT_CHANGE:
+        ChangeFontEvent(state,action.payload)
         break
     case actionTypes.HTTP.POST:
         postData({data:{
@@ -168,4 +171,4 @@ const reducer_pipe=(c,...ops)=>{
     })
     delete reducer_ListFn.objects[reducer_ListFn.index]
 }
-export { addReducer,dispatch,reducer_pipe ,sendReducers}
+export { addReducer,dispatch,reducer_pipe ,sendReducers,StyleParamClick}

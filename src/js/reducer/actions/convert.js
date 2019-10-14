@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const f =[
     {
         'TableKey': 'VatWithholdingRate',
@@ -119,7 +121,22 @@ const f =[
 
 
 
-export const GetFormat =( value,format)=>{
+export const GetFormat =(value,format,isTest =true)=>{
+    if(isTest==false){
+        switch (value) {
+        case '0,00':
+                
+            break
+        case 'Adet':
+            break
+        case 'fa fa-money':
+            break
+        case 'N2':
+            break
+        default:
+            return moment(value,format)
+        }
+    }
     return value
 }
 

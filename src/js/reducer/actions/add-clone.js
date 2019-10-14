@@ -5,6 +5,20 @@ import { dispatch } from '..'
 import { actionTypes } from '../const'
 import { styleToObject, GetFormat } from './convert'
 import { PixelToPoint } from './print-settings'
+export const StyleParamClick = ({selector,readselector,defaultvalue})=>{
+    $('li[data-'+selector+']').click((e)=>{
+        $('li[data-'+selector+']').each((i,ele)=>{
+            if(ele!=undefined && e.currentTarget!= ele){
+                if(ele.classList.contains('active')){
+                    ele.classList.remove('active')
+                }
+            }
+        })
+        e.currentTarget.classList.toggle('active')
+        const elactive = e.currentTarget.classList.contains('active')
+        dispatch({type:actionTypes.CLONE.FONT_CHANGE,payload:{ font:selector,style:e.currentTarget.dataset[readselector],status:elactive,defaultvalue}})
+    })
+}
 const CalcLeftTop = (uioffset ,mainoffset)=>{
     const { left: uleft, top: utop } =uioffset
     const { left: mleft, top: mtop } = mainoffset
@@ -85,6 +99,14 @@ export const SetConfig = (state, _data) => {
         }
     }
   
+}
+export const ChangeFontEvent = (state,payload)=>{
+    if(payload.font!=undefined){
+        if(payload.status==true)
+            state.UI.SELECT.$font.style[payload.font]=payload.style
+        else 
+            state.UI.SELECT.$font.style[payload.font]=payload.defaultvalue
+    }
 }
 const ChangeFontSize=(state,e)=>{
     state.UI.SELECT.$font=e.currentTarget

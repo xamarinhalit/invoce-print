@@ -90,3 +90,23 @@
     pointer-events:all;
   }
 }
+.p-font-ul{
+  list-style: none;
+   display: flex;
+   li{
+     padding: 4px;
+     margin: 5px;
+     opacity: 0.5;
+     transition: 1s opacity;
+     &.active{
+      border: 1px gray dotted;
+      margin: 5px;
+      padding: 3px;
+      opacity: 1;
+     }
+     i{
+       width: 14px;
+       height: 14px;
+     }
+   }
+}

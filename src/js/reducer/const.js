@@ -16,7 +16,8 @@ export const actionTypes={
         REMOVE_TABLEITEM:'REMOVE-TABLEITEM',
         SWAP_TABLEITEM:'SWAP-TABLEITEM',
         DRAG_START:'DRAG-START',
-        DRAG_STOP:'DRAG-STOP'
+        DRAG_STOP:'DRAG-STOP',
+        FONT_CHANGE:'FONT-CHANGE'
     },
     UI:{
         UI_PRINT:'UI-PRINT'
