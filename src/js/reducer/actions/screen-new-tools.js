@@ -116,7 +116,10 @@ export const SetJsonData = (state,success)=>{
     })
     let _data = JSON.stringify(JsonData)
     let _parsed =JSON.parse(_data)
-    console.log(JsonData)
+    var n = window.open('','')
+    const pre = document.createElement('pre')
+    pre.innerText=_data
+    n.document.body.appendChild(pre)
     success(JsonData)
 }
 
