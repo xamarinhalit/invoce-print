@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import { dispatch} from '..'
 import { actionTypes } from '../const'
-import { styleToObject, GetFormat, CalcLeftTop } from './convert'
+import { styleToObject,  CalcLeftTop } from './convert'
 export const StyleParamClick = ({selector,readselector,defaultvalue})=>{
     $('li[data-'+selector+']').click((e)=>{
         $('li[data-'+selector+']').each((i,ele)=>{
@@ -40,7 +40,6 @@ export const SetConfig = (state, _data) => {
         })
         .disableSelection()
         //.css({ margin: '2px' })
-  
     const $pcopy = document.querySelector('select[name="PageCopy"]')
     const $dcopy = document.querySelector('select[name="CopyDirection"]')
     $pcopy.onchange=(e)=>{
@@ -225,24 +224,20 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
                 Style:'',
                 RowIndex:-1
             }
-            
-            $div
-                .resizable()
-                .on('resize',  function(_e) {
+            $div.resizable().on('resize', function(_e) {
+                _table.Style=extractCss($div)
+            }).draggable({
+                containment: DROPID,
+                cursor: 'move',
+                addClasses: false,
+                drag: function(_el, _ui) {
                     _table.Style=extractCss($div)
-                })
-                .draggable({
-                    containment: DROPID,
-                    cursor: 'move',
-                    addClasses: false,
-                    drag: function(_el, _ui) {
-                        _table.Style=extractCss($div)
-                    },
-                })
+                },
+            })
             if(payload.Table!=undefined && payload.Table!=null && payload.Table.Style!=undefined && payload.Table.Style!=null && payload.Table.Style!=''){
                 $div.css(payload.Table.Style)
             }else{
-                $div.css({ top:"500px", left: "20px" })
+                $div.css({ top:'500px', left: '20px' })
             }
             _table.Style=extractCss($div)
             Items.Tables.push(_table)
@@ -264,7 +259,6 @@ const UICloneTable = (state,menuitem,payload)=>{
                 if(x_width!=0){
                     _divtable.element.width(x_width+(leng*7))
                 }
-               
             }
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
@@ -335,7 +329,6 @@ const UICloneTable = (state,menuitem,payload)=>{
             })
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-s'))
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
-
             _divtable.children.push(elements)
             _divtable.childIndex.push(elements.Index)
             CalC_Table()
@@ -363,9 +356,7 @@ const UICloneTable = (state,menuitem,payload)=>{
     })
 }
 const SearchMenuItem = (Menu,Index)=>{
-    const _xitem ={
-
-    }
+    const _xitem ={}
     for (let ii = 0; ii < Menu.length; ii++) {
         const item = Menu[ii]
         if(item.Index==parseInt(Index)){
@@ -377,7 +368,6 @@ const SearchMenuItem = (Menu,Index)=>{
 }
 const AddCloneItem= (payload,state,success) =>{
     const _xitem = SearchMenuItem(state.UI.PANEL.Menu,payload.Index)
-    
     const { item } = _xitem
     if (item!=undefined && payload.Index!=undefined) {
         switch (item.value.ItemType) {
