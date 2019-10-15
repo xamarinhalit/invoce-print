@@ -16,7 +16,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "json-server": "^0.15.1",
-    "moment": "^2.24.0",
     "webpack-encoding-plugin": "^0.3.1"
   },
   "devDependencies": {
