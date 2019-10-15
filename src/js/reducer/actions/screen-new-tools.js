@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import copyObject from './copy-object'
-import { styleToObject } from './convert'
 const EmtoPixel=(point)=> {
     let size = getComputedStyle(document.documentElement).fontSize
     if (size != undefined) {
@@ -30,50 +29,6 @@ const pxToVw=($root,pixel)=>{
 const pxToVh=($root,pixel)=>{
     return ($root.clientHeight/100)*pixel
 }
-//    CloneType=> 'Field','Table','TableField,
-//  let body = document.createElement('div')
-      
-//  for (let i = 0; i < Items.Clone.Items.Tables.length; i++) {
-//      let item = Items.Clone.Items.Tables[i]
-//      let table = document.createElement('table')
-//      let $table =$(table)
-//      $table.css( item.value.Style)
-//      $table.css('position','absolute')
-          
-//      let tbody = document.createElement('tbody')
-//      let tr =document.createElement('tr')
-//      for (let j = 0; j < item.children.length; j++) {
-//          let tritem = item.children[j]
-//          if(tritem.value!=undefined){
-//              let td = document.createElement('td')
-//              td.innerHTML=tritem.value.ItemValue
-//              tr.appendChild(td)
-//          }
-//      }
-//      tbody.appendChild(tr)
-//      table.appendChild(tbody)
-//      body.appendChild(table)
-//  }
-// for (let i = 0; i < Items.Clone.Items.Tables.length; i++) {
-//     let item = Items.Clone.Items.Tables[i]
-//     let divmain = document.createElement('div')
-//     let $divmain =$(divmain)
-//     $divmain.css( item.value.Style)
-//     $divmain.css('position','absolute')
-//     let divrow =document.createElement('div')
-//     divrow.style.display='flex'
-//     for (let j = 0; j < item.children.length; j++) {
-//         let _item = item.children[j]
-//         if(_item.value!=undefined){
-//             let divcolumn = document.createElement('div')
-//             divcolumn.innerHTML=_item.value.ItemValue
-//             divrow.appendChild(divcolumn)
-//         }
-//     }
-        
-//     divmain.appendChild(divrow)
-//     body.appendChild(divmain)
-// }
 export const SetJsonData = (state,success)=>{
     let Items =copyObject(state,true)
     let JsonData = {}
@@ -134,7 +89,6 @@ const GetPrintInit = (state)=> {
         let clnode = $(state.UI.DROPID)[0].cloneNode(true)
         clnode.removeAttribute('id')
         let _div = null
-        let cl =null
         if(state.Print.PageCopy>1){
             _div=document.createElement('div')
             _div.style.display='flex'
@@ -147,12 +101,14 @@ const GetPrintInit = (state)=> {
                 const cl2 =clnode.cloneNode(true)
                 cl2.style.position='absolute'
                 if(state.Print.CopyDirection=='Yanyana'){
-                    let cw = state.Cache.Print.width
-                    cl2.style.width=state.Cache.Print.width + 'px'
+                 //   let cw = state.Cache.Print.width
+                    let cw = $(cl2).width()
+                    cl2.style.width=cw + 'px'
                     cl2.style.left=cw*i +'px'
                 }else{
-                    let cw = state.Cache.Print.height
-                    cl2.style.height=state.Cache.Print.height + 'px'
+                    let cw = $(cl2).height()
+                    //let cw = state.Cache.Print.height
+                    cl2.style.height=cw + 'px'
                     cl2.style.top=cw*i +'px'
                 }
                 _div.appendChild(cl2)
@@ -206,7 +162,7 @@ const GetPrintInit = (state)=> {
 
         
    
-        //  resolve()
+         resolve()
     })
 }
 export default GetPrintInit

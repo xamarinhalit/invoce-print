@@ -1,15 +1,4 @@
-import { actionTypes } from '../const'
-import { dispatch } from '..'
 import AddCloneItem from './add-clone'
-
-export const LoadJsonData = (state,payload,success)=>{
-    let _parsed =JSON.parse(payload[0])
-    var n = window.open('','')
-    const pre = document.createElement('pre')
-    pre.innerText=_parsed
-    n.document.body.appendChild(pre)
-    success(_parsed)
-}
 const AddCloneItemTo = (Clons,state,i,success)=>{
     if(i<Clons.length){
         const clonetext = Clons[i]
@@ -83,14 +72,6 @@ const LoadJson = (state,payload,success)=>{
             success()
         })
     })
-    //    let Items =copyObject(payload[0],true)
-      //  let JsonData = {}
-       
-       // let _data = JSON.stringify(Items)
-    // var n = window.open('','')
-    // const pre = document.createElement('pre')
-    // pre.innerText=JSON.stringify(_parsed)
-    // n.document.body.appendChild(pre)
     success(_parsed)
 }
 export {LoadJson}
