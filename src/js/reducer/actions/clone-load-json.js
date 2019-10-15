@@ -33,6 +33,42 @@ const AddCloneItemTo = (Clons,state,i,success)=>{
     }
    
 }
+const AddChildItemTo = (children,style,i,state,success)=>{
+    if(i<children.length){
+        const clonetext = children[i]
+        const { menuindex,value}= clonetext
+        AddCloneItem(
+            {
+                Table:{
+                    Style:style
+                },
+                Column:{
+                    Style:value.Style
+                },
+                Index:menuindex,
+            },state,()=>{
+                i++
+                AddChildItemTo (children,style,i,state,success)
+            }
+        )
+    }else{
+        success()
+    }
+}
+const AddTablesTo = (Tables,i,state,success)=>{
+    if(i<Tables.length){
+        const table = Tables[i]
+        const {Style}= table
+        let j =0
+        AddChildItemTo(table.children,Style,j,state,()=>{
+            i++
+            AddTablesTo(Tables,i,state,success)
+        })
+    }else{
+        success()
+    }
+}
+
 const LoadJson = (state,payload,success)=>{
     let _parsed =payload[0]
     const Clons =_parsed.Clons
@@ -42,9 +78,11 @@ const LoadJson = (state,payload,success)=>{
     state.Clone.Index.Index=0
     let i =0
     AddCloneItemTo(Clons,state,i,()=>{
-        success()
+        let j=0
+        AddTablesTo(Tables,j,state,()=>{
+            success()
+        })
     })
-    let j=0
     //    let Items =copyObject(payload[0],true)
       //  let JsonData = {}
        

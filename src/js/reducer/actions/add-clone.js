@@ -142,7 +142,7 @@ const UICloneText = (state,menuitem,payload)=>{
         state.Clone.Items.Clons.push(cloneItem)
        
         const extractCss=()=>{
-            const style =styleToObject(cloneItem.element,state.UI.$CONTENT[0])
+            const style =styleToObject(cloneItem.element)
             // eslint-disable-next-line require-atomic-updates
             cloneItem.value.Style = style
         }
@@ -175,7 +175,7 @@ const UICloneText = (state,menuitem,payload)=>{
             $(cloneItem.element).css(payload.text.style)
         }else{
             if(cloneItem.value.Style!='')
-                cloneItem.element.style.cssText=cloneItem.value.Style
+                $(cloneItem.element).css(cloneItem.value.Style)
         }
         if(payload.Style!=undefined && payload.Style!=null){
             $(cloneItem.element).css(payload.Style)
@@ -188,7 +188,7 @@ const UICloneText = (state,menuitem,payload)=>{
 const UICloneCreateTable = (state,tablekey,payload)=>{
     return new Promise((resolve)=>{
         const extractCss=(_$div)=>{
-            return styleToObject ( _$div[0],state.UI.$CONTENT[0].parentNode)
+            return styleToObject ( _$div[0])
         }
         const Items = state.Clone.Items
         const { DROPID } = state.UI
@@ -207,12 +207,11 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
             _div.classList.add('p-main')
             _div.style.position='absolute'
             const $div =$(_div)
-            $div.prop('id','table-'+tablekey)
-            $div.data('cloneId',Index.Index)
+            $div.prop('id','table-'+tablekey).data('cloneId',Index.Index)
             if(payload.table!= undefined && payload.table!=null && payload.table.style!=undefined && payload.table.style!= ''){
                 $div.css(payload.table.style)
             }else{
-                $div.offset({ top: 500, left: 0 })
+                $div.offset({ top: 350, left: 20 })
             }
             const button = document.createElement('i')
             button.className='fa fa-times Remove'
@@ -228,7 +227,6 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
                 children:[],
                 childIndex:[],
                 Style:'',
-                ColumIndex:-1,
                 RowIndex:-1
             }
             
@@ -245,6 +243,9 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
                         _table.Style=extractCss($div)
                     },
                 })
+            if(payload.Table!=undefined && payload.Table!=null && payload.Table.Style!=undefined && payload.Table.Style!=null && payload.Table.Style!=''){
+                $div.css(payload.Table.Style)
+            }
             _table.Style=extractCss($div)
             Items.Tables.push(_table)
         }
@@ -265,7 +266,7 @@ const UICloneTable = (state,menuitem,payload)=>{
                 if(x_width!=0){
                     _divtable.element.width(x_width+(leng*7))
                 }
-    
+               
             }
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
@@ -280,20 +281,12 @@ const UICloneTable = (state,menuitem,payload)=>{
             }else{
                 _divrow= _divtable.element[0].querySelector('div[data--row-index=\''+_divtable.RowIndex+'\']')
             }
-            if(payload.row!=undefined && payload.row!=null && payload.row.style!=undefined &&  payload.row.style!=''){
-                $(_divrow).css(payload.row.style)
-            }
             const _divcolumn = document.createElement('div')
             _divcolumn.classList.add(state.UI.TABLECOLUMNCLASS)
             _divcolumn.classList.add(value[TYPE_TABLE.ITEMKEY])
             _divcolumn.dataset.columnIndex =menuitem.element.dataset.columnIndex
             _divcolumn.dataset.cloneId=_Clone_Index.Index
-            if(payload.column!=undefined && payload.column!=null && 
-                 payload.column.style!=undefined && payload.column.style!=null){
-                $(_divcolumn).css(payload.column.style)
-            }else if (value.Style!=undefined && value.Style!=null && value.Style!=''){
-                $(_divcolumn).css(value.Style)
-            }
+
             _divcolumn.style.order=menuitem.element.dataset.columnIndex
             _divcolumn.style.transition='order 1s'
             DefaultFontSize(_divcolumn,value.Style)
@@ -305,33 +298,43 @@ const UICloneTable = (state,menuitem,payload)=>{
             }
             _divcolumn.onclick=(e)=>ChangeFontSize(state,e)
             _divrow.appendChild(_divcolumn)
-            const $colres=$(_divcolumn)
-            $colres.resizable({
-                grid: [1, state.UI.$CONTENT.width()]
-            })
-            _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-s'))
-            _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
+
             const elements = {
                 Index: _Clone_Index.Index,
                 element: _divcolumn,
                 value,
                 RowIndex:_divrow.dataset.RowIndex,
+                columnIndex:menuitem.element.dataset.columnIndex,
                 ToolValue,
                 menuindex:Index,
                 menuelement:element
             }
+            const $colres=$(_divcolumn)
+            $colres.resizable({
+                grid: [1, state.UI.$CONTENT.width()]
+            })
+           
             $colres.on('resize',  function(_e) {
-                let style = styleToObject ( $colres[0],state.UI.$CONTENT[0])
-                if(style ==null)
-                    return false
+                let style = styleToObject (_divcolumn)
                 if(style.width!=undefined){
                     CalC_Table()
+                    elements.value.Style=styleToObject ( _divcolumn)
+                }else{
+                    elements.value.Style= style
                 }
-                elements.value.Style= style
             })
+            _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-s'))
+            _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
+            if(payload.Column!=undefined && payload.Column!=null && 
+                payload.Column.Style!=undefined && payload.Column.Style!=null && payload.Column.Style!=''){
+                $colres.css(payload.Column.Style)
+            }else if (value.Style!=undefined && value.Style!=null && value.Style!=''){
+                $colres.css(value.Style)
+            }
             _divtable.children.push(elements)
             _divtable.childIndex.push(elements.Index)
             CalC_Table()
+            elements.value.Style=styleToObject (_divcolumn)
             resolve(elements)
         })
     })

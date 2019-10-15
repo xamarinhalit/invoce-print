@@ -1,7 +1,248 @@
 {
   "SaveLoad": [
     {
-      "Tables": [],
+      "Tables": [
+        {
+          "Index": 14,
+          "key": "InvoiceMovements",
+          "children": [
+            {
+              "Index": 15,
+              "value": {
+                "TableKey": "InvoiceMovements",
+                "ItemKey": "DiscountTotal",
+                "ItemTitle": "İndirim Toplamı",
+                "ItemValue": "100,00",
+                "Icon": "fa fa-arrows-v",
+                "Width": "40",
+                "Height": "20",
+                "ItemType": "TableField",
+                "ColumnIndex": "5",
+                "Format": "0,00",
+                "Style": {
+                  "order": "6",
+                  "transition-property": "order",
+                  "transition-duration": "1s",
+                  "transition-timing-function": "ease",
+                  "transition-delay": "0s",
+                  "font-size": "10pt",
+                  "font-style": "normal",
+                  "font-weight": "normal",
+                  "width": "203px",
+                  "height": "20px"
+                }
+              },
+              "RowIndex": "0",
+              "ToolValue": "Ürün bilgisi",
+              "menuindex": 28
+            },
+            {
+              "Index": 16,
+              "value": {
+                "TableKey": "InvoiceMovements",
+                "ItemKey": "StockPrice",
+                "ItemTitle": "Fiyat",
+                "ItemValue": "120,00",
+                "Icon": "fa fa-arrows-v",
+                "Width": "30",
+                "Height": "20",
+                "ItemType": "TableField",
+                "ColumnIndex": "4",
+                "Format": "0,00",
+                "Style": {
+                  "order": "5",
+                  "transition-property": "order",
+                  "transition-duration": "1s",
+                  "transition-timing-function": "ease",
+                  "transition-delay": "0s",
+                  "font-size": "10pt",
+                  "font-style": "normal",
+                  "font-weight": "normal",
+                  "width": "137px",
+                  "height": "20px"
+                }
+              },
+              "RowIndex": "0",
+              "ToolValue": "Ürün bilgisi",
+              "menuindex": 27
+            },
+            {
+              "Index": 17,
+              "value": {
+                "TableKey": "InvoiceMovements",
+                "ItemKey": "UnitName",
+                "ItemTitle": "Birim",
+                "ItemValue": "Adet",
+                "Icon": "fa fa-arrows-v",
+                "Width": "100",
+                "Height": "50",
+                "ItemType": "TableField",
+                "ColumnIndex": "8",
+                "Format": "Adet",
+                "Style": ""
+              },
+              "RowIndex": "0",
+              "ToolValue": "Ürün bilgisi",
+              "menuindex": 31
+            },
+            {
+              "Index": 18,
+              "value": {
+                "TableKey": "InvoiceMovements",
+                "ItemKey": "StockName",
+                "ItemTitle": "Stokadı",
+                "ItemValue": "Stok Adı",
+                "Icon": "fa fa-arrows-v",
+                "Width": "120",
+                "Height": "20",
+                "ItemType": "TableField",
+                "ColumnIndex": "2",
+                "Format": "",
+                "Style": ""
+              },
+              "RowIndex": "0",
+              "ToolValue": "Ürün bilgisi",
+              "menuindex": 25
+            }
+          ],
+          "childIndex": [
+            15,
+            16,
+            17,
+            18
+          ],
+          "ColumIndex": -1,
+          "RowIndex": 0,
+          "Style": {
+            "position": "absolute",
+            "top": "584px",
+            "left": "131px",
+            "width": "608px"
+          }
+        },
+        {
+          "Index": 19,
+          "key": "InvoiceTaxRates",
+          "children": [
+            {
+              "Index": 20,
+              "value": {
+                "TableKey": "InvoiceTaxRates",
+                "ItemKey": "TaxRate",
+                "ItemTitle": "Kdv Oranı",
+                "ItemValue": "%18",
+                "Icon": "fa fa-arrows-v",
+                "Width": "20",
+                "Height": "20",
+                "ItemType": "TableField",
+                "ColumnIndex": "0",
+                "Format": "fa fa-money",
+                "Style": {
+                  "transition-property": "order",
+                  "transition-duration": "1s",
+                  "transition-timing-function": "ease",
+                  "transition-delay": "0s",
+                  "font-size": "10pt",
+                  "font-style": "normal",
+                  "font-weight": "normal",
+                  "width": "59px",
+                  "height": "20px"
+                }
+              },
+              "RowIndex": "0",
+              "ToolValue": "Alt Toplamlar",
+              "menuindex": 19
+            },
+            {
+              "Index": 23,
+              "value": {
+                "TableKey": "InvoiceTaxRates",
+                "ItemKey": "TaxTotal",
+                "ItemTitle": "Kdv Tutar",
+                "ItemValue": "18,00",
+                "Icon": "fa fa-arrows-v",
+                "Width": "20",
+                "Height": "20",
+                "ItemType": "TableField",
+                "ColumnIndex": "1",
+                "Format": "",
+                "Style": {
+                  "transition-property": "order",
+                  "transition-duration": "1s",
+                  "transition-timing-function": "ease",
+                  "transition-delay": "0s",
+                  "font-size": "10pt",
+                  "font-style": "normal",
+                  "font-weight": "normal",
+                  "width": "73px",
+                  "height": "20px"
+                }
+              },
+              "RowIndex": "0",
+              "ToolValue": "Alt Toplamlar",
+              "menuindex": 22
+            }
+          ],
+          "childIndex": [
+            20,
+            23
+          ],
+          "ColumIndex": -1,
+          "RowIndex": 0,
+          "Style": {
+            "position": "absolute",
+            "top": "426px",
+            "left": "55px",
+            "width": "156px"
+          }
+        },
+        {
+          "Index": 21,
+          "key": "GrandTotal",
+          "children": [
+            {
+              "Index": 22,
+              "value": {
+                "TableKey": "GrandTotal",
+                "ItemKey": "GrandTotal",
+                "ItemTitle": "Genel Toplam",
+                "ItemValue": "236,00",
+                "Icon": "fa fa-money",
+                "Width": "80",
+                "Height": "20",
+                "ItemType": "TableField",
+                "ColumnIndex": "0",
+                "Format": "0,00",
+                "Style": {
+                  "transition-property": "order",
+                  "transition-duration": "1s",
+                  "transition-timing-function": "ease",
+                  "transition-delay": "0s",
+                  "font-size": "10pt",
+                  "font-style": "normal",
+                  "font-weight": "normal",
+                  "width": "99px",
+                  "height": "20px"
+                }
+              },
+              "RowIndex": "0",
+              "ToolValue": "Alt Toplamlar",
+              "menuindex": 20
+            }
+          ],
+          "childIndex": [
+            22
+          ],
+          "ColumIndex": -1,
+          "RowIndex": 0,
+          "Style": {
+            "position": "absolute",
+            "top": "421px",
+            "left": "616px",
+            "width": "111px"
+          }
+        }
+      ],
       "Menu": [
         {
           "Index": 0,
@@ -23,8 +264,8 @@
               "position": "absolute",
               "width": "122px",
               "height": "52px",
-              "top": "17px",
-              "left": "39px",
+              "top": "5px",
+              "left": "659px",
               "border-top-color": "currentcolor",
               "border-top-style": "none",
               "border-top-width": "medium",
@@ -101,7 +342,7 @@
               "width": "152px",
               "height": "37px",
               "top": "0px",
-              "left": "588px",
+              "left": "0px",
               "border-top-color": "currentcolor",
               "border-top-style": "none",
               "border-top-width": "medium",
@@ -136,7 +377,33 @@
             "Height": "30",
             "ItemType": "Field",
             "Format": "dd.MM.yyyy HH:mm",
-            "Style": ""
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "position": "absolute",
+              "width": "152px",
+              "height": "32px",
+              "top": "264px",
+              "left": "588px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            }
           },
           "Sort": 0
         },
@@ -153,7 +420,33 @@
             "Height": "35",
             "ItemType": "Field",
             "Format": "HH:mm",
-            "Style": ""
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "position": "absolute",
+              "width": "102px",
+              "height": "37px",
+              "top": "136px",
+              "left": "52px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            }
           },
           "Sort": 0
         },
@@ -392,7 +685,17 @@
             "ItemType": "TableField",
             "ColumnIndex": "0",
             "Format": "fa fa-money",
-            "Style": ""
+            "Style": {
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "59px",
+              "height": "20px"
+            }
           },
           "Sort": 3
         },
@@ -410,7 +713,17 @@
             "ItemType": "TableField",
             "ColumnIndex": "0",
             "Format": "0,00",
-            "Style": ""
+            "Style": {
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "99px",
+              "height": "20px"
+            }
           },
           "Sort": 3
         },
@@ -445,7 +758,17 @@
             "ItemType": "TableField",
             "ColumnIndex": "1",
             "Format": "",
-            "Style": ""
+            "Style": {
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "73px",
+              "height": "20px"
+            }
           },
           "Sort": 3
         },
@@ -535,7 +858,18 @@
             "ItemType": "TableField",
             "ColumnIndex": "4",
             "Format": "0,00",
-            "Style": ""
+            "Style": {
+              "order": "5",
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "137px",
+              "height": "20px"
+            }
           },
           "Sort": 4
         },
@@ -553,7 +887,18 @@
             "ItemType": "TableField",
             "ColumnIndex": "5",
             "Format": "0,00",
-            "Style": ""
+            "Style": {
+              "order": "6",
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "203px",
+              "height": "20px"
+            }
           },
           "Sort": 4
         },
@@ -687,8 +1032,8 @@
               "position": "absolute",
               "width": "122px",
               "height": "52px",
-              "top": "17px",
-              "left": "39px",
+              "top": "5px",
+              "left": "659px",
               "border-top-color": "currentcolor",
               "border-top-style": "none",
               "border-top-width": "medium",
@@ -731,7 +1076,7 @@
               "width": "152px",
               "height": "37px",
               "top": "0px",
-              "left": "588px",
+              "left": "0px",
               "border-top-color": "currentcolor",
               "border-top-style": "none",
               "border-top-width": "medium",
@@ -752,6 +1097,92 @@
             }
           },
           "menuindex": 3
+        },
+        {
+          "Index": 3,
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "TableKey": "InvoiceTime",
+            "ItemKey": "InvoiceTime",
+            "ItemTitle": "Fatura Saati",
+            "ItemValue": "12:30",
+            "Icon": "fa fa-clock-o",
+            "Width": "100",
+            "Height": "35",
+            "ItemType": "Field",
+            "Format": "HH:mm",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "position": "absolute",
+              "width": "102px",
+              "height": "37px",
+              "top": "136px",
+              "left": "52px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            }
+          },
+          "menuindex": 5
+        },
+        {
+          "Index": 13,
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "TableKey": "PaymentDate",
+            "ItemKey": "PaymentDate",
+            "ItemTitle": "Ödeme Tarihi",
+            "ItemValue": "22.07.2017 17:45",
+            "Icon": "fa fa-calendar",
+            "Width": "150",
+            "Height": "30",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy HH:mm",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "position": "absolute",
+              "width": "152px",
+              "height": "32px",
+              "top": "264px",
+              "left": "588px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            }
+          },
+          "menuindex": 4
         }
       ],
       "id": 1

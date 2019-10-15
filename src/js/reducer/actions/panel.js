@@ -137,7 +137,7 @@ const AddGroupForPanel= function(value ,o,s,state) {
                             addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
                                 // eslint-disable-next-line no-unused-vars
                             })
-                            dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index,column:{style:_xdata.style}}})
+                            dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index,Column:{Style:_xdata.style}}})
                         })
                         dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
                         // eslint-disable-next-line no-unused-vars
