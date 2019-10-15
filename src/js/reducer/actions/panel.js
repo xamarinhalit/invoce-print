@@ -110,7 +110,6 @@ const AddGroupForPanel= function(value ,o,s,state) {
         document.querySelector( Clone.GroupItems[s.Sort]).appendChild(li)
     }
     if(value.ItemType!=state.Clone.Type.TABLE.FIELD){
-        li.dataset.columnIndex=value.ColumnIndex
         $(li).draggable({
             helper: 'clone',
             revert: 'invalid',
@@ -119,7 +118,7 @@ const AddGroupForPanel= function(value ,o,s,state) {
             cursorAt: { top: 50, left: 50 }
         }).disableSelection()
     }else{
-    
+        li.dataset.columnIndex=value.ColumnIndex
         $('.'+groupNameId).sortable({
             containment:'.'+groupNameId,
             start:(_event,_ui)=>{

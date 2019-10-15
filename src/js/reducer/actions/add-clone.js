@@ -271,7 +271,7 @@ const UICloneTable = (state,menuitem,payload)=>{
                 _divrow.dataset.RowIndex=_divtable.RowIndex
                 _divtable.element[0].appendChild(_divrow)
             }else{
-                _divrow= _divtable.element[0].querySelector('div[data--row-index=\''+_divtable.RowIndex+'\']')
+                _divrow= _divtable.element[0].querySelector('div[data--row-index="0"]')
             }
             const _divcolumn = document.createElement('div')
             _divcolumn.classList.add(state.UI.TABLECOLUMNCLASS)
@@ -333,21 +333,20 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divtable.childIndex.push(elements.Index)
             CalC_Table()
             elements.value.Style=styleToObject (_divcolumn)
-            if(payload.Load==undefined || payload.Load==null){
-                const ccopySize =parseInt(state.Print.PageProduct)
-                const dchildren=_divtable.element[0].querySelectorAll('div[class="p-row"]')
-                for (let i = 1; i < dchildren.length; i++) {
-                    const cchildren = dchildren[i]
-                    if(cchildren!=undefined){
-                        _divtable.element[0].removeChild(cchildren)
-                    }
+            const ccopySize =parseInt(state.Print.PageProduct)
+            const dchildren=_divtable.element[0].querySelectorAll('div[class="p-row"]')
+            for (let i = 1; i < dchildren.length; i++) {
+                const cchildren = dchildren[i]
+                if(cchildren!=undefined){
+                    _divtable.element[0].removeChild(cchildren)
                 }
-                if(ccopySize>1){
-                    for (let i =0; i < ccopySize; i++) {
-                        const cloneCopy = dchildren[0].cloneNode(true)
-                        if(cloneCopy!=undefined){
-                            _divtable.element[0].appendChild(cloneCopy)
-                        }
+            }
+            if(ccopySize>1){
+                for (let i =0; i < ccopySize; i++) {
+                    const cloneCopy = dchildren[0].cloneNode(true)
+                    if(cloneCopy!=undefined){
+                        cloneCopy.dataset.RowIndex =i
+                        _divtable.element[0].appendChild(cloneCopy)
                     }
                 }
             }

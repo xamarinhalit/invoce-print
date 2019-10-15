@@ -1657,7 +1657,6 @@
   "PrintSetting": [
     {
       "Print": {
-        "Printer": "Laser",
         "PageCopy": "1",
         "PageProduct": "1",
         "PageSize": "A4",
