@@ -17,20 +17,21 @@ const TableCreate = (litarget)=>{
                 status.status=true
             })
             if(status.status==true){
-                    let { Index} = $el.dataset
-                    $el.classList.toggle('active')
-                    if ($el.classList.contains('active')) {
-                        // eslint-disable-next-line no-unused-vars
-                        addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
-                            $el.querySelector('input').checked=true
-                        })
-                        dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index}})
-                    } else {
-                        // eslint-disable-next-line no-unused-vars
-                        addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
-                            $el.querySelector('input').checked=false
-                        })
-                        dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
+                let { Index} = $el.dataset
+                $el.classList.toggle('active')
+                if ($el.classList.contains('active')) {
+                    // eslint-disable-next-line no-unused-vars
+                    addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
+                        $el.querySelector('input').checked=true
+                    })
+                    dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index}})
+                } else {
+                    // eslint-disable-next-line no-unused-vars
+                    addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
+                        $el.querySelector('input').checked=false
+                    })
+                    dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
+                }
             }
         }
     }
