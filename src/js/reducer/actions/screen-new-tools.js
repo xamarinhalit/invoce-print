@@ -70,7 +70,6 @@ export const SetJsonData = (state,success)=>{
         }
     })
     let _data = JSON.stringify(JsonData)
-    let _parsed =JSON.parse(_data)
     var n = window.open('','')
     const pre = document.createElement('pre')
     pre.innerText=_data

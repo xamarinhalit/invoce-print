@@ -1,9 +1,5 @@
 const State ={
     Cache:{
-        Print:{
-            width:0,
-            height:0
-        },
         Http:{
             Tools:'',
             PrintLoad:'',

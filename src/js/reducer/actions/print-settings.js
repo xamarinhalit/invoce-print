@@ -116,13 +116,23 @@ const PrintSetting= (state,payload,success)=>{
 
     const _width=width/pcopy.width
     const _height =height/pcopy.height
-    state.Cache.Print.width=_width
-    state.Cache.Print.height=_height
+    // state.Cache.Print.width=_width//ihtiyaç yok
+    // state.Cache.Print.height=_height//ihtiyac yok
     $content.width(_width).height(_height)
     state.UI.$CONTENT[0].style.backgroundImage='url('+state.Print.ImageUrl+')'
     const $tools =$(state.UI.PANEL.config.container)
     if(!$tools.hasClass('active')){
         $tools.addClass('active')
+    }
+    for (let i = 0; i < state.UI.PANEL.Menu.length; i++) {
+        const menuitem = state.UI.PANEL.Menu[i]
+        const { element } = menuitem
+        const $element = $(element)
+        if($element.hasClass('active')){
+            $element.removeClass('active')
+            const $input = $(element).find('input').first()
+            $input.prop('checked',false)
+        }
     }
     success(null)
 }

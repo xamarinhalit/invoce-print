@@ -36,6 +36,13 @@ const AddChildItemTo = (children,style,i,state,success)=>{
                 },
                 Index:menuindex,
             },state,()=>{
+                const menuitem = state.UI.PANEL.Menu[menuindex]
+                const $menuitem = $(menuitem.element)
+                if(!$menuitem.hasClass('active')){
+                    $menuitem.addClass('active')
+                    const $input  = $menuitem.find('input')
+                    $input.prop('checked',true)
+                }
                 i++
                 AddChildItemTo (children,style,i,state,success)
             }
@@ -69,9 +76,9 @@ const LoadJson = (state,payload,success)=>{
     AddCloneItemTo(Clons,state,i,()=>{
         let j=0
         AddTablesTo(Tables,j,state,()=>{
-            success()
+            success(_parsed)
         })
     })
-    success(_parsed)
+   // success(_parsed)
 }
 export {LoadJson}
