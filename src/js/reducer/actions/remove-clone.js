@@ -49,12 +49,13 @@ export const RemoveTableItem = (table,state,success)=>{
                 const restyle = styleToObject(element.element)
                 $(element.element).remove()
                 _Clons.Items.Tables[item.tindex].children.splice(item.index,1)
+                const tStyle = _Clons.Items.Tables[0].Style
                 _Clons.Items.Tables[item.tindex].childIndex.splice(item.index,1)
                 if(_Clons.Items.Tables[item.tindex].children.length==0){
                     _Clons.Items.Tables[item.tindex].element[0].parentNode.removeChild(_Clons.Items.Tables[item.tindex].element[0])
                     _Clons.Items.Tables.splice(item.tindex,1)
                 }
-                resolve({element:reelement,style:restyle})
+                resolve({element:reelement,style:restyle,Table:{Style:tStyle}})
             }else{
                 resolve()
             }

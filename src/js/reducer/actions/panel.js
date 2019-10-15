@@ -2,14 +2,17 @@
 import { dispatch, addReducer } from '..'
 import { actionTypes } from '../const'
 
-const TableCreate = (litarget)=>{
+const TableCreate = (litarget,content)=>{
     const $el =litarget
     if ($el) {
         const elinput = document.createElement('input')
         elinput.setAttribute('type','checkbox')
         $el.prepend(elinput)
         const status={status:true}
+        const $content =$(content)
         $el.onclick=(_e)=>{
+            
+            
             addReducer.subscribe(actionTypes.CLONE.DRAG_START,()=>{
                 status.status=false
             })
@@ -17,23 +20,27 @@ const TableCreate = (litarget)=>{
                 status.status=true
             })
             if(status.status==true){
-                let { Index} = $el.dataset
-                $el.classList.toggle('active')
-                if ($el.classList.contains('active')) {
-                    // eslint-disable-next-line no-unused-vars
-                    addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
-                        $el.querySelector('input').checked=true
-                    })
-                    dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index}})
-                } else {
-                    // eslint-disable-next-line no-unused-vars
-                    addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
-                        $el.querySelector('input').checked=false
-                    })
-                    dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
+                if($content.hasClass('active')){
+                    let { Index} = $el.dataset
+                    $el.classList.toggle('active')
+                    if ($el.classList.contains('active')) {
+                        // eslint-disable-next-line no-unused-vars
+                        addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
+                            $el.querySelector('input').checked=true
+                        })
+                        dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index}})
+                    } else {
+                        // eslint-disable-next-line no-unused-vars
+                        addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
+                            $el.querySelector('input').checked=false
+                        })
+                        dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
+                    }
+                }
+                else{
+                    $(elinput).prop('checked',false)
                 }
             }
-            
         }
     }
 }
@@ -58,7 +65,7 @@ const SetGroupItem=(state)=> {
                             const { li ,className}= AddGroupForPanel(menuitem,TABLE,{Sort:toolindex,ToolValue,menulength},state)
                             if(state.Clone.GroupItems[toolindex]==undefined)
                                 state.Clone.GroupItems[toolindex]='.'+className
-                            TableCreate(li)
+                            TableCreate(li,state.UI.PANEL.config.container)
                             break
                         case TEXT.CUSTOMTEXT:
                             AddGroupForPanel(menuitem,TEXT,{Sort:toolindex,ToolValue},state)
@@ -123,10 +130,10 @@ const AddGroupForPanel= function(value ,o,s,state) {
     
         $('.'+groupNameId).sortable({
             containment:'.'+groupNameId,
-            start:(event,ui)=>{
+            start:(_event,_ui)=>{
                 dispatch({type:actionTypes.CLONE.DRAG_START})
             },
-            stop:( event, ui )=>{
+            stop:( _event, ui )=>{
                 let parents =ui.item[0].parentNode
                 for (let j = 0; j < parents.children.length; j++) {
                     const $el = parents.children[j]
@@ -137,7 +144,7 @@ const AddGroupForPanel= function(value ,o,s,state) {
                             addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
                                 // eslint-disable-next-line no-unused-vars
                             })
-                            dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index,Column:{Style:_xdata.style}}})
+                            dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index,Column:{Style:_xdata.style},Table:_xdata.Table}})
                         })
                         dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
                         // eslint-disable-next-line no-unused-vars

@@ -131,3 +131,9 @@
     }
    }
 }
+.m-Template-Tools{
+  pointer-events: none;
+  &.active{
+    pointer-events: fill;
+  }
+}

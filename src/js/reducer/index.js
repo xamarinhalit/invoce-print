@@ -30,6 +30,7 @@ const dispatch = (action,state=InitialState)=>{
         break
     case actionTypes.INIT.PRINT:
         PrintSetting(state,action.payload,(_data)=>{
+            
             sendReducer(action.type,_data,state)
         })
         break
@@ -78,6 +79,9 @@ const dispatch = (action,state=InitialState)=>{
     case actionTypes.CLONE.FONT_CHANGE:
         ChangeFontEvent(state,action.payload)
         break
+    case actionTypes.CLONE.FORMAT_CHANGE:
+        sendReducers(action.type,action.payload,state)
+        break
     case actionTypes.CLONE.FONT_ITEM_SELECT:
         sendReducers(action.type,action.payload,state)
         break
@@ -114,7 +118,7 @@ const dispatch = (action,state=InitialState)=>{
 }
 const sendReducer= (type,data,state)=> {// {type:actionTypes, payload:{}}
     for (let i = observers.length - 1; i >= 0; i--) {
-        if(!type){
+        if(type==undefined || type==null){
             observers[i].fn()
             //addReducer.unSubscribe(observers[i])
         }else{
@@ -130,7 +134,7 @@ const sendReducer= (type,data,state)=> {// {type:actionTypes, payload:{}}
 }
 const sendReducers= (type,data,state)=> {// {type:actionTypes, payload:{}}
     for (let i = observers.length - 1; i >= 0; i--) {
-        if(!type){
+        if(type==undefined || type==null){
             observers[i].fn()
             //addReducer.unSubscribe(observers[i])
         }else{

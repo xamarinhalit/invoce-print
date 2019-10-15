@@ -13,6 +13,33 @@ import '../_plugin/js/used/bootstrap.min.js'
 
 (function () {
     const { subscribe, dispatch , actionTypes, Init } =require('./module')
+    const GetFormat =(element)=>{
+
+        let deger =element.ItemValue
+        switch (element.Format) {
+        case '0,00':
+            if(deger.indexOf(',')==-1)
+            //deger =......      
+                break
+            break
+        case 'Adet':
+            if(deger.indexOf('adet')==-1)
+                deger +=' adet'
+            break
+        case 'fa fa-money':
+            if(deger.indexOf('<i class="fa fa-money"></i>')==-1)
+                deger +=' <i class="fa fa-money"></i>'
+            break
+        case 'N2':
+            //deger =......      
+            break
+        default:
+          //deger =......      
+          //tarih format
+        }
+        return deger
+    }
+    
     $(document).ready(function () {
         const fontSelects = [
             {selector:'font-style',readselector:'fontStyle',defaultvalue:'initial'},
@@ -31,6 +58,13 @@ import '../_plugin/js/used/bootstrap.min.js'
             PrintSave:'http://localhost:3000/SaveLoad',
         }
         Init(InitConfig ,fontSelects)
+        subscribe(actionTypes.CLONE.FORMAT_CHANGE,(state,changed)=>{
+            const { element,value} =changed
+            if(element!=undefined){
+                value.ItemValue= GetFormat(value)
+                element.innerHTML=value.ItemValue
+            }
+        })
         const $FONTSIZE= document.querySelector('input[name="fontsize"]')
         $FONTSIZE.addEventListener('keyup',(e)=>{
             const _target =e.currentTarget

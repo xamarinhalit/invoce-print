@@ -113,6 +113,10 @@ const PrintSetting= (state,payload,success)=>{
     state.Cache.Print.height=_height
     $(state.UI.$CONTENT[0]).width(_width).height(_height)
     state.UI.$CONTENT[0].style.backgroundImage='url('+state.Print.ImageUrl+')'
+    const $tools =$(state.UI.PANEL.config.container)
+    if(!$tools.hasClass('active')){
+        $tools.addClass('active')
+    }
     success(null)
 }
 export default PrintSetting

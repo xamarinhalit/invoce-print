@@ -18,7 +18,8 @@ export const actionTypes={
         DRAG_START:'DRAG-START',
         DRAG_STOP:'DRAG-STOP',
         FONT_CHANGE:'FONT-CHANGE',
-        FONT_ITEM_SELECT:'FONT-ITEM-SELECT'
+        FONT_ITEM_SELECT:'FONT-ITEM-SELECT',
+        FORMAT_CHANGE:'FORMAT-CHANGE'
     },
     UI:{
         UI_PRINT:'UI-PRINT'

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-undef */
-import { dispatch } from '..'
+import { dispatch} from '..'
 import { actionTypes } from '../const'
 import { styleToObject, GetFormat, CalcLeftTop } from './convert'
 export const StyleParamClick = ({selector,readselector,defaultvalue})=>{
@@ -120,7 +120,8 @@ const UICloneText = (state,menuitem,payload)=>{
         }
         else{
             if(value.Format!=''){
-                textclone.innerText=GetFormat(value[TYPE_TEXT.VALUE],value.Format)
+                textclone.innerText=value[TYPE_TEXT.VALUE]
+                dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:value}})
             }else{
                 textclone.innerText=value[TYPE_TEXT.VALUE]
             }
@@ -208,11 +209,6 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
             _div.style.position='absolute'
             const $div =$(_div)
             $div.prop('id','table-'+tablekey).data('cloneId',Index.Index)
-            if(payload.table!= undefined && payload.table!=null && payload.table.style!=undefined && payload.table.style!= ''){
-                $div.css(payload.table.style)
-            }else{
-                $div.offset({ top: 350, left: 20 })
-            }
             const button = document.createElement('i')
             button.className='fa fa-times Remove'
             button.onclick=_e=> {
@@ -245,6 +241,8 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
                 })
             if(payload.Table!=undefined && payload.Table!=null && payload.Table.Style!=undefined && payload.Table.Style!=null && payload.Table.Style!=''){
                 $div.css(payload.Table.Style)
+            }else{
+                $div.css({ top:"500px", left: "20px" })
             }
             _table.Style=extractCss($div)
             Items.Tables.push(_table)
@@ -286,13 +284,19 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divcolumn.classList.add(value[TYPE_TABLE.ITEMKEY])
             _divcolumn.dataset.columnIndex =menuitem.element.dataset.columnIndex
             _divcolumn.dataset.cloneId=_Clone_Index.Index
-
+            if(payload.Column!=undefined && payload.Column!=null && 
+                payload.Column.Style!=undefined && payload.Column.Style!=null && payload.Column.Style!=''){
+                $(_divcolumn).css(payload.Column.Style)
+            }else if (value.Style!=undefined && value.Style!=null && value.Style!=''){
+                $(_divcolumn).css(value.Style)
+            }
             _divcolumn.style.order=menuitem.element.dataset.columnIndex
             _divcolumn.style.transition='order 1s'
             DefaultFontSize(_divcolumn,value.Style)
             $(_divcolumn).width(value.Width).height(value.Height)
             if(value.Format!=''){
-                _divcolumn.innerHTML= GetFormat(value[TYPE_TABLE.VALUE])
+                _divcolumn.innerHTML= value[TYPE_TABLE.VALUE]
+                dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:_divcolumn,value:value}})
             }else{
                 _divcolumn.innerHTML= value[TYPE_TABLE.VALUE]
             }
@@ -302,7 +306,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             const elements = {
                 Index: _Clone_Index.Index,
                 element: _divcolumn,
-                value,
+                value:value,
                 RowIndex:_divrow.dataset.RowIndex,
                 columnIndex:menuitem.element.dataset.columnIndex,
                 ToolValue,
@@ -325,12 +329,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             })
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-s'))
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
-            if(payload.Column!=undefined && payload.Column!=null && 
-                payload.Column.Style!=undefined && payload.Column.Style!=null && payload.Column.Style!=''){
-                $colres.css(payload.Column.Style)
-            }else if (value.Style!=undefined && value.Style!=null && value.Style!=''){
-                $colres.css(value.Style)
-            }
+
             _divtable.children.push(elements)
             _divtable.childIndex.push(elements.Index)
             CalC_Table()
