@@ -1,37 +1,12 @@
 /* eslint-disable no-undef */
 import copyObject from './copy-object'
-const EmtoPixel=(point)=> {
-    let size = getComputedStyle(document.documentElement).fontSize
-    if (size != undefined) {
-        size = size.replace('px', '')
-        size = parseFloat(size)
-        if (size < 11) size = 16
-    } else {
-        size = 16
-    }
-    return (parseFloat(point) * size).toFixed(0)
-}
-const PixeltoEm=(pixcel)=> {
-    let size = getComputedStyle(document.documentElement).fontSize
-    if (size != undefined) {
-        size = size.replace('px', '')
-        size = parseFloat(size)
-        if (size < 11) size = 16
-    } else {
-        size = 16
-    }
-    return (pixcel/ size)
-}
-
-const pxToVw=($root,pixel)=>{
-    return ($root.clientWidth/100)*pixel
-}
-const pxToVh=($root,pixel)=>{
-    return ($root.clientHeight/100)*pixel
-}
-export const SetJsonData = (state,success)=>{
+export const SetJsonData = (state,payload,success)=>{
     let Items =copyObject(state,true)
-    let JsonData = {}
+    const { PageName } =payload
+    let JsonData = {
+        PageName
+    }
+    JsonData.Print = Items.Print
     JsonData.Tables =Items.Clone.Items.Tables.map(x=>{
         return {
             Index:x.Index,
@@ -53,14 +28,6 @@ export const SetJsonData = (state,success)=>{
             Style:x.Style
         }
     })
-    JsonData.Menu =Items.UI.PANEL.Menu.map(x=>{
-        return {
-            Index:x.Index,
-            ToolValue:x.ToolValue,
-            value:x.value,
-            Sort:x.Sort
-        }
-    })
     JsonData.Clons =Items.Clone.Items.Clons.map(x=>{
         return {
             Index:x.Index,
@@ -69,11 +36,6 @@ export const SetJsonData = (state,success)=>{
             menuindex:x.menuindex
         }
     })
-    let _data = JSON.stringify(JsonData)
-    var n = window.open('','')
-    const pre = document.createElement('pre')
-    pre.innerText=_data
-    n.document.body.appendChild(pre)
     success(JsonData)
 }
 

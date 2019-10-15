@@ -95,7 +95,7 @@ const dispatch = (action,state=InitialState)=>{
         })
         break
     case actionTypes.HTTP.JSON_CONFIG_SAVE:
-        SetJsonData(state,(_data)=>{
+        SetJsonData(state,action.payload,(_data)=>{
             sendReducer(action.type,{data:_data},state)
             postData({url:state.Cache.Http.PrintSave,data:_data}).then((_sonuc)=>{
                 // sendReducer(action.type,null,state)

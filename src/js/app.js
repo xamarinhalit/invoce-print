@@ -47,6 +47,17 @@ import '../_plugin/js/used/bootstrap.min.js'
             {selector:'text-align',readselector:'textAlign',defaultvalue:'initial'},
             {selector:'text-decoration',readselector:'textDecoration',defaultvalue:'initial'}
         ]
+        const PageName='Sayfa'
+        const DefaultPrint = {
+            PageCopy: 1,
+            PageProduct: 1,
+            PageSize: 'A4',
+            PageType: 'Dikey',
+            CopyDirection: 'Yanyana',
+            PageWidth: '21,00',
+            PageHeight: '29,70',
+            ImageUrl: 'https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg'
+        }
         const InitConfig ={ target:'.m-Template-Page-Area',
             dragclass:'m-drag-ul',
             accordion:'#accordion',
@@ -55,9 +66,26 @@ import '../_plugin/js/used/bootstrap.min.js'
             tools:'http://localhost:3000/tools',
             PrintSetting:'http://localhost:3000/PrintSetting',
             PrintLoad:'http://localhost:3000/SaveLoad',
-            PrintSave:'http://localhost:3000/SaveLoad',
+            PrintSave:'http://localhost:3000/SaveLoad?PageName',
+        }
+        const SetPrint = (_Print)=> {
+            const forms =  document.forms.PanelPaperSetting
+            for (let i = 0; i < forms.length; i++) {
+                const element = forms[i]
+                const {name,value,type} =element
+                for (const key in _Print) {
+                    if (_Print.hasOwnProperty(key)) {
+                        const printvalue = _Print[key]
+                        if(key==name)
+                        {
+                            element.value=printvalue
+                        }
+                    }
+                }
+            }
         }
         Init(InitConfig ,fontSelects)
+        SetPrint(DefaultPrint)
         subscribe(actionTypes.CLONE.FORMAT_CHANGE,(state,changed)=>{
             const { element,value} =changed
             if(element!=undefined){
@@ -95,19 +123,19 @@ import '../_plugin/js/used/bootstrap.min.js'
             subscribe(actionTypes.HTTP.JSON_CONFIG_LOAD,(state,_data)=>{
                 // eslint-disable-next-line no-empty-pattern
                 console.log(_data.data)
-                  
+                  SetPrint(_data.Print)
             })
-            dispatch({type:actionTypes.CLONE.LOAD_JSON_CONTAINER})
+       //     dispatch({type:actionTypes.CLONE.LOAD_JSON_CONTAINER})
             dispatch({type:actionTypes.HTTP.JSON_CONFIG_LOAD})
         })
         $('#JsonConfig').click(function(e) {
             e.preventDefault()
             subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE,(state,_data)=>{
                 // eslint-disable-next-line no-empty-pattern
-                console.log(_data.data)
+              //  console.log(_data.data)
                   
             })
-            dispatch({type:actionTypes.HTTP.JSON_CONFIG_SAVE})
+            dispatch({type:actionTypes.HTTP.JSON_CONFIG_SAVE,payload:{PageName}})
         }) 
         $('#newPrint').click(function(e){
             e.preventDefault()

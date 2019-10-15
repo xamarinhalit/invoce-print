@@ -1,4 +1,5 @@
-import AddCloneItem from './add-clone'
+import { AddCloneItem, PrintSetting } from './index'
+
 const AddCloneItemTo = (Clons,state,i,success)=>{
     if(i<Clons.length){
         const clonetext = Clons[i]
@@ -66,19 +67,21 @@ const AddTablesTo = (Tables,i,state,success)=>{
 }
 
 const LoadJson = (state,payload,success)=>{
-    let _parsed =payload[0]
-    const Clons =_parsed.Clons
-    const Tables = _parsed.Tables
-    state.Clone.Items.Clons=[]
-    state.Clone.Items.Tables=[]
-    state.Clone.Index.Index=0
-    let i =0
-    AddCloneItemTo(Clons,state,i,()=>{
-        let j=0
-        AddTablesTo(Tables,j,state,()=>{
-            success(_parsed)
+    let Value =payload[0]
+    if(Value!=undefined)
+        PrintSetting(state,Value.Print,(_data)=>{
+            const Clons =Value.Clons
+            const Tables = Value.Tables
+            state.Clone.Items.Clons=[]
+            state.Clone.Items.Tables=[]
+            state.Clone.Index.Index=0
+            let i =0
+            AddCloneItemTo(Clons,state,i,()=>{
+                let j=0
+                AddTablesTo(Tables,j,state,()=>{
+                    success(Value)
+                })
+            })
         })
-    })
-   // success(_parsed)
 }
 export {LoadJson}
