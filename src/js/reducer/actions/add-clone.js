@@ -235,7 +235,7 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
                     containment: DROPID,
                     cursor: 'move',
                     addClasses: false,
-                    drag: function(el, ui) {
+                    drag: function(_el, _ui) {
                         _table.Style=extractCss($div)
                     },
                 })
@@ -326,6 +326,12 @@ const UICloneTable = (state,menuitem,payload)=>{
                 }else{
                     elements.value.Style= style
                 }
+                _divcolumn.parentNode.parentNode.querySelectorAll('[class="p-row"]').forEach((celement)=>{
+                    if(celement!=undefined){
+                        const ccolumn=$(celement).find('.'+value.ItemKey).first()
+                        ccolumn[0].style.width=elements.value.Style.width
+                    }
+                })
             })
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-s'))
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
@@ -334,6 +340,24 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divtable.childIndex.push(elements.Index)
             CalC_Table()
             elements.value.Style=styleToObject (_divcolumn)
+            if(payload.Load==undefined || payload.Load==null){
+                const ccopySize =parseInt(state.Print.PageProduct)
+                const dchildren=_divtable.element[0].querySelectorAll('div[class="p-row"]')
+                for (let i = 1; i < dchildren.length; i++) {
+                    const cchildren = dchildren[i]
+                    if(cchildren!=undefined){
+                        _divtable.element[0].removeChild(cchildren)
+                    }
+                }
+                if(ccopySize>1){
+                    for (let i =0; i < ccopySize; i++) {
+                        const cloneCopy = dchildren[0].cloneNode(true)
+                        if(cloneCopy!=undefined){
+                            _divtable.element[0].appendChild(cloneCopy)
+                        }
+                    }
+                }
+            }
             resolve(elements)
         })
     })

@@ -98,6 +98,13 @@ const SetPageCopy = (pcopy,copyd)=>{
 }
 const PrintSetting= (state,payload,success)=>{
     state.Print={...payload}
+    state.Clone.Items.Clons=[]
+    state.Clone.Items.Tables=[]
+    state.Clone.Index.Index=0
+    const $content =$(state.UI.$CONTENT[0])
+    $content.html('')
+    // eslint-disable-next-line no-undef
+    $('.p-font-block.p-active').removeClass('p-active')
     const $imagecopy = document.querySelector('div[name="image-preview"]')
     $imagecopy.style.backgroundImage='url('+state.Print.ImageUrl+')'
     const $imageurl = document.querySelector('input[name="ImageUrl"]')
@@ -111,7 +118,7 @@ const PrintSetting= (state,payload,success)=>{
     const _height =height/pcopy.height
     state.Cache.Print.width=_width
     state.Cache.Print.height=_height
-    $(state.UI.$CONTENT[0]).width(_width).height(_height)
+    $content.width(_width).height(_height)
     state.UI.$CONTENT[0].style.backgroundImage='url('+state.Print.ImageUrl+')'
     const $tools =$(state.UI.PANEL.config.container)
     if(!$tools.hasClass('active')){
