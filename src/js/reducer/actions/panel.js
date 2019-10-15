@@ -2,17 +2,14 @@
 import { dispatch, addReducer } from '..'
 import { actionTypes } from '../const'
 
-const TableCreate = (litarget,content)=>{
+const TableCreate = (litarget)=>{
     const $el =litarget
     if ($el) {
         const elinput = document.createElement('input')
         elinput.setAttribute('type','checkbox')
         $el.prepend(elinput)
         const status={status:true}
-        const $content =$(content)
         $el.onclick=(_e)=>{
-            
-            
             addReducer.subscribe(actionTypes.CLONE.DRAG_START,()=>{
                 status.status=false
             })
@@ -20,7 +17,6 @@ const TableCreate = (litarget,content)=>{
                 status.status=true
             })
             if(status.status==true){
-                if($content.hasClass('active')){
                     let { Index} = $el.dataset
                     $el.classList.toggle('active')
                     if ($el.classList.contains('active')) {
@@ -35,11 +31,6 @@ const TableCreate = (litarget,content)=>{
                             $el.querySelector('input').checked=false
                         })
                         dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
-                    }
-                }
-                else{
-                    $(elinput).prop('checked',false)
-                }
             }
         }
     }
@@ -65,7 +56,7 @@ const SetGroupItem=(state)=> {
                             const { li ,className}= AddGroupForPanel(menuitem,TABLE,{Sort:toolindex,ToolValue,menulength},state)
                             if(state.Clone.GroupItems[toolindex]==undefined)
                                 state.Clone.GroupItems[toolindex]='.'+className
-                            TableCreate(li,state.UI.PANEL.config.container)
+                            TableCreate(li)
                             break
                         case TEXT.CUSTOMTEXT:
                             AddGroupForPanel(menuitem,TEXT,{Sort:toolindex,ToolValue},state)
