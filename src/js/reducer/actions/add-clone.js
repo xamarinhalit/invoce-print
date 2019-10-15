@@ -407,37 +407,4 @@ const AddCloneItem= (payload,state,success) =>{
        
     }
 }
-const AddCloneItemWithLoad= (payload,state,success) =>{
-    const _xitem = {}
-    for (let ii = 0; ii < state.UI.PANEL.Menu.length; ii++) {
-        const element = state.UI.PANEL.Menu[ii]
-        if(element.Index==parseInt(payload.Index)){
-            _xitem.item = element
-            break
-        }
-    }
-    const { item } = _xitem
-    if (item && payload.Index) {
-        switch (item.value.ItemType) {
-        case state.Clone.Type.TEXT.FIELD:
-            UICloneText(state,item,payload).then((_data)=>{
-                success(_data)
-            })
-            break
-        case state.Clone.Type.TABLE.FIELD:
-            UICloneTable(state,item).then((_data)=>{
-                success(_data)
-            })
-            break
-        case state.Clone.Type.TABLE.DEFAULT:
-            UICloneTable(state,item,item.value.Style).then((_data)=>{
-                success(_data)
-            })
-            break
-        default:
-            break
-        }
-       
-    }
-}
 export default AddCloneItem
