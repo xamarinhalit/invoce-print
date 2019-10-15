@@ -7,9 +7,9 @@ import '../_plugin/css/jquery-ui.min.css'
 import '../_plugin/css/efar.css'
 import '../scss/mycss.scss'
 import '../scss/print.scss'
-import 'webpack-jquery-ui' //ui.js
-import '../_plugin/js/used/printThis.js'
-import '../_plugin/js/used/bootstrap.min.js'
+// import 'webpack-jquery-ui' //ui.js
+// import '../_plugin/js/used/printThis.js'
+// import '../_plugin/js/used/bootstrap.min.js'
 
 (function () {
     const { subscribe, dispatch , actionTypes, Init } =require('./module')
