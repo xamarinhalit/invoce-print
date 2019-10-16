@@ -120,29 +120,26 @@ import '../scss/print.scss'
         })
         $('#loadJson').click(function(e){
             e.preventDefault()
-            subscribe(actionTypes.HTTP.JSON_CONFIG_LOAD,(state,_data)=>{
+            subscribe(actionTypes.HTTP.JSON_CONFIG_LOAD,(_state,_data)=>{
                 // eslint-disable-next-line no-empty-pattern
-                console.log(_data.data)
                   SetPrint(_data.Print)
             })
-       //     dispatch({type:actionTypes.CLONE.LOAD_JSON_CONTAINER})
-            dispatch({type:actionTypes.HTTP.JSON_CONFIG_LOAD})
+            dispatch(
+                {type:actionTypes.HTTP.JSON_CONFIG_LOAD,
+                    payload:
+                        {url:'http://localhost:3000/SaveLoad'}
+                })
         })
         $('#JsonConfig').click(function(e) {
             e.preventDefault()
-            subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE,(state,_data)=>{
-                // eslint-disable-next-line no-empty-pattern
-              //  console.log(_data.data)
-                  
+            subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE,(_state,_data)=>{
             })
-            dispatch({type:actionTypes.HTTP.JSON_CONFIG_SAVE,payload:{PageName}})
+            dispatch({type:actionTypes.HTTP.JSON_CONFIG_SAVE,payload:{data:{PageName},url:'http://localhost:3000/SaveLoad'}})
         }) 
         $('#newPrint').click(function(e){
             e.preventDefault()
-            subscribe(actionTypes.UI.UI_PRINT,(state,_tools)=>{
-                // eslint-disable-next-line no-empty-pattern
-                const { } = _tools.Tools
-                  
+            subscribe(actionTypes.UI.UI_PRINT,(_state,_tools)=>{
+            
             })
             dispatch({type: actionTypes.UI.UI_PRINT})
         

@@ -67,11 +67,17 @@ const AddTablesTo = (Tables,i,state,success)=>{
 }
 
 const LoadJson = (state,payload,success)=>{
-    let Value =payload[0]
-    if(Value!=undefined)
-        PrintSetting(state,Value.Print,(_data)=>{
-            const Clons =Value.Clons
-            const Tables = Value.Tables
+    let value
+    if(payload && typeof payload === 'object' && payload.constructor === Array){
+        value=payload[0]
+    }else if(payload && typeof payload === 'object' && payload.constructor === Object){
+        value=payload
+    }
+    if(value!=undefined)
+        // eslint-disable-next-line no-unused-vars
+        PrintSetting(state,value.Print,(_data)=>{
+            const Clons =value.Clons
+            const Tables = value.Tables
             state.Clone.Items.Clons=[]
             state.Clone.Items.Tables=[]
             state.Clone.Index.Index=0
@@ -79,7 +85,7 @@ const LoadJson = (state,payload,success)=>{
             AddCloneItemTo(Clons,state,i,()=>{
                 let j=0
                 AddTablesTo(Tables,j,state,()=>{
-                    success(Value)
+                    success(value)
                 })
             })
         })

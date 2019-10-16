@@ -110,6 +110,4 @@ const PrintToLoad = ({Print},{Tables,Clons},$root)=>{
             afterPrint: null // function called before iframe is removed
         })
     }
-      
-
 }

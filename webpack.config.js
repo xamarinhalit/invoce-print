@@ -5,11 +5,12 @@ var webpack = require("webpack");
 const UglifyEsPlugin = require('uglify-es-webpack-plugin')
 module.exports = {
  //   devtool: 'eval-source-map',              //dev-mode only,
-   // entry: './src/js/app.js',
-   entry: './src/js/module/index.js',
+ entry: './src/js/app.js',
+ //   entry: './src/js/module/index.js',
     output: {
+        //path: path.resolve(__dirname, 'dist/js'),
         path: path.resolve(__dirname, 'dist'),
-        filename: "index.js",
+        filename: 'index.js',
         // chunkFilename: '[name].bundle.js',
         publicPath:'dist'
     },
@@ -50,12 +51,12 @@ module.exports = {
         
       },
       plugins: [
-        //new UglifyJsPlugin(),
-        new UglifyEsPlugin({
-          compress:{
-            drop_console: true
-          }
-        }),
+        new UglifyJsPlugin(),
+        // new UglifyEsPlugin({
+        //   compress:{
+        //     drop_console: true
+        //   }
+        // }),
         new webpack.ProvidePlugin({
           $: "jquery",
           jQuery: "jquery",

@@ -2,10 +2,11 @@
 import copyObject from './copy-object'
 export const SetJsonData = (state,payload,success)=>{
     let Items =copyObject(state,true)
-    const { PageName } =payload
-    let JsonData = {
-        PageName
+    let JsonData={}
+    if(payload!=undefined && payload!=null && payload.data!=undefined && payload.data!=null){
+        JsonData=payload.data
     }
+
     JsonData.Print = Items.Print
     JsonData.Tables =Items.Clone.Items.Tables.map(x=>{
         return {
@@ -119,11 +120,7 @@ const GetPrintInit = (state)=> {
                 afterPrint: null // function called before iframe is removed
             })
         }
-      
-
-        
-   
-         resolve()
+        resolve()
     })
 }
 export default GetPrintInit

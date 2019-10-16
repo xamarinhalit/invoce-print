@@ -21,23 +21,39 @@ const dispatch = (action,state=InitialState)=>{
     switch (action.type) {
     case actionTypes.CLONE.LOAD_JSON_CONTAINER:
         state.UI.$CONTENT.html('')
-        fetchData(state.Cache.Http.PrintSetting,_print=>{
-            if(_print!=undefined && _print!=null){
-                PrintSetting(state,_print[0].Print,(_print)=>{
-                })
-            }
-        })
+        if(action.payload!=undefined && action.payload.url!=undefined)
+        {
+            fetchData(action.payload.url,_print=>{
+                if(_print!=undefined && _print!=null){
+                    PrintSetting(state,_print[0].Print,(_print)=>{
+                    })
+                }
+            })
+        }else{
+            fetchData(state.Cache.Http.PrintSetting,_print=>{
+                if(_print!=undefined && _print!=null){
+                    PrintSetting(state,_print[0].Print,(_print)=>{
+                    })
+                }
+            })
+        }
+        
         break
     case actionTypes.INIT.PRINT:
         PrintSetting(state,action.payload,(_data)=>{
-            
             sendReducer(action.type,_data,state)
         })
         break
     case actionTypes.INIT.FETCHED:
         SetInit(state,action.payload)
         fetchData(state.Cache.Http.Tools,data=>{
-            state.Clone.Items.StaticItems=data[0].Tools
+            let _value
+            if(data && typeof data === 'object' && data.constructor === Array){
+                _value=data[0].Tools
+            }else if(data && typeof data === 'object' && data.constructor === Object){
+                _value=data.Tools
+            }
+            state.Clone.Items.StaticItems=_value
             state.UI.$CONTENT = $(action.payload.target)
             SetGroupItem(state)
             SetConfig(state)
@@ -97,18 +113,29 @@ const dispatch = (action,state=InitialState)=>{
     case actionTypes.HTTP.JSON_CONFIG_SAVE:
         SetJsonData(state,action.payload,(_data)=>{
             sendReducer(action.type,{data:_data},state)
-            postData({url:state.Cache.Http.PrintSave,data:_data}).then((_sonuc)=>{
-                // sendReducer(action.type,null,state)
-            })
+            if(action.payload!=undefined && action.payload.url!=undefined){
+                postData({url:action.payload.url,data:_data}).then((_sonuc)=>{
+                })
+            }else{
+                postData({url:state.Cache.Http.PrintSave,data:_data}).then((_sonuc)=>{
+                })
+            }
         })
         break
     case actionTypes.HTTP.JSON_CONFIG_LOAD:
-        postData({url:state.Cache.Http.PrintLoad,data:action.payload,type:'GET'}).then((_sonuc)=>{
-            LoadJson(state,_sonuc,(_data)=>{
-                sendReducer(action.type,{data:_sonuc},state)
+        if(action.payload!=undefined && action.payload.url!=undefined){
+            postData({url:action.payload.url,data:action.payload,type:'GET'}).then((_sonuc)=>{
+                LoadJson(state,_sonuc,(_data)=>{
+                    sendReducer(action.type,{data:_sonuc},state)
+                })
             })
-        })
-       
+        }else{
+            postData({url:state.Cache.Http.PrintLoad,data:action.payload,type:'GET'}).then((_sonuc)=>{
+                LoadJson(state,_sonuc,(_data)=>{
+                    sendReducer(action.type,{data:_sonuc},state)
+                })
+            })
+        }
         break
     default:
         break
