@@ -1,44 +1,33 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, fetchData, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
+import { SetGroupItem, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig, postData, PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
 const SetInit = (state,payload)=>{
-    const {tools,PrintSetting,PrintLoad,PrintSave,target,dragclass,accordion,tablerowclass,tablecolumnclass} = payload
-    state.Cache.Http.Tools=tools
-    state.Cache.Http.PrintSetting =PrintSetting
-    state.Cache.Http.PrintLoad =PrintLoad
-    state.Cache.Http.PrintSave =PrintSave
+    const {fieldclass,target,dragclass,accordion,
+        tablerowclass,tablecolumnclass,tablemainclass ,data} = payload
+    let _value
+    if(data && typeof data === 'object' && data.constructor === Array){
+        _value=data
+    }else if(data && typeof data === 'object' && data.constructor === Object){
+        _value=data
+    }
+    state.Clone.Items.StaticItems=_value
+    state.UI.$CONTENT = $(target)
+    SetGroupItem(state)
+    SetConfig(state)
     state.UI.DROPID=target
     state.UI.DRAGCLASS=dragclass
     state.UI.ACCORDIONID=accordion
     state.UI.TABLEROWCLASS=tablerowclass
     state.UI.TABLECOLUMNCLASS=tablecolumnclass
+    state.UI.TABLEMAINCLASS=tablemainclass
+    state.UI.FIELDCLASS=fieldclass
 }
 const observers= []
 
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
-    case actionTypes.CLONE.LOAD_JSON_CONTAINER:
-        state.UI.$CONTENT.html('')
-        if(action.payload!=undefined && action.payload.url!=undefined)
-        {
-            fetchData(action.payload.url,_print=>{
-                if(_print!=undefined && _print!=null){
-                    PrintSetting(state,_print[0].Print,(_print)=>{
-                    })
-                }
-            })
-        }else{
-            fetchData(state.Cache.Http.PrintSetting,_print=>{
-                if(_print!=undefined && _print!=null){
-                    PrintSetting(state,_print[0].Print,(_print)=>{
-                    })
-                }
-            })
-        }
-        
-        break
     case actionTypes.INIT.PRINT:
         PrintSetting(state,action.payload,(_data)=>{
             sendReducer(action.type,_data,state)
@@ -46,20 +35,7 @@ const dispatch = (action,state=InitialState)=>{
         break
     case actionTypes.INIT.FETCHED:
         SetInit(state,action.payload)
-        fetchData(state.Cache.Http.Tools,data=>{
-            let _value
-            if(data && typeof data === 'object' && data.constructor === Array){
-                _value=data[0].Tools
-            }else if(data && typeof data === 'object' && data.constructor === Object){
-                _value=data.Tools
-            }
-            state.Clone.Items.StaticItems=_value
-            state.UI.$CONTENT = $(action.payload.target)
-            SetGroupItem(state)
-            SetConfig(state)
-            sendReducer(action.type,data[0].Tools,state)
-        })
-        
+        sendReducer(action.type,action.payload.data,state)
         break
     case actionTypes.CLONE.ADD_CLONEITEM:
         AddCloneItem(action.payload,state,data=>{
@@ -101,39 +77,16 @@ const dispatch = (action,state=InitialState)=>{
     case actionTypes.CLONE.FONT_ITEM_SELECT:
         sendReducers(action.type,action.payload,state)
         break
-    case actionTypes.HTTP.POST:
-        postData({data:{
-            Tables:state.Clone.Items.Tables,
-            Clons:state.Clone.Items.Clons,
-            Menu:state.UI.PANEL.Menu
-        }}).then((_data)=>{
-            // sendReducer(action.type,null,state)
-        })
-        break
     case actionTypes.HTTP.JSON_CONFIG_SAVE:
         SetJsonData(state,action.payload,(_data)=>{
             sendReducer(action.type,{data:_data},state)
-            if(action.payload!=undefined && action.payload.url!=undefined){
-                postData({url:action.payload.url,data:_data}).then((_sonuc)=>{
-                })
-            }else{
-                postData({url:state.Cache.Http.PrintSave,data:_data}).then((_sonuc)=>{
-                })
-            }
         })
         break
     case actionTypes.HTTP.JSON_CONFIG_LOAD:
-        if(action.payload!=undefined && action.payload.url!=undefined){
-            postData({url:action.payload.url,data:action.payload,type:'GET'}).then((_sonuc)=>{
-                LoadJson(state,_sonuc,(_data)=>{
-                    sendReducer(action.type,{data:_sonuc},state)
-                })
-            })
-        }else{
-            postData({url:state.Cache.Http.PrintLoad,data:action.payload,type:'GET'}).then((_sonuc)=>{
-                LoadJson(state,_sonuc,(_data)=>{
-                    sendReducer(action.type,{data:_sonuc},state)
-                })
+        if(action.payload.data!=undefined){
+            // eslint-disable-next-line no-unused-vars
+            LoadJson(state,action.payload.data,(_data)=>{
+                sendReducer(action.type,{data:action.payload.data},state)
             })
         }
         break

@@ -102,8 +102,8 @@ const UICloneText = (state,menuitem,payload)=>{
         const _Clone_Index = state.Clone.Index
         _Clone_Index.Index++
         const textclone= document.createElement('div')
-        textclone.classList.add(TYPE_TEXT.FIELD)
-        textclone.classList.add('efar-field')
+        textclone.classList.add(value[TYPE_TEXT.ITEMKEY])
+        textclone.classList.add(state.UI.FIELDCLASS)
         textclone.dataset.cloneId = _Clone_Index.Index
         const textremove = document.createElement('i')
         textremove.className='fa fa-times Remove'
@@ -119,10 +119,10 @@ const UICloneText = (state,menuitem,payload)=>{
         }
         else{
             if(value.Format!=''){
-                textclone.innerText=value[TYPE_TEXT.VALUE]
+                textclone.innerHTML=value[TYPE_TEXT.VALUE]
                 dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:value}})
             }else{
-                textclone.innerText=value[TYPE_TEXT.VALUE]
+                textclone.innerHTML=value[TYPE_TEXT.VALUE]
             }
 
         }
@@ -204,7 +204,7 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
         if(_table==null){
             Index.Index++
             const _div = document.createElement('div')
-            _div.classList.add('p-main')
+            _div.classList.add(state.UI.TABLEMAINCLASS)
             _div.style.position='absolute'
             const $div =$(_div)
             $div.prop('id','table-'+tablekey).data('cloneId',Index.Index)
@@ -275,6 +275,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             }
             const _divcolumn = document.createElement('div')
             _divcolumn.classList.add(state.UI.TABLECOLUMNCLASS)
+            _divcolumn.classList.add(state.UI.FIELDCLASS)
             _divcolumn.classList.add(value[TYPE_TABLE.ITEMKEY])
             _divcolumn.dataset.columnIndex =menuitem.element.dataset.columnIndex
             _divcolumn.dataset.cloneId=_Clone_Index.Index
@@ -366,9 +367,15 @@ const SearchMenuItem = (Menu,Index)=>{
     return _xitem
 }
 const AddCloneItem= (payload,state,success) =>{
+    let itemValue=null
+    if(payload.MenuValue!=undefined){
+        itemValue =payload.MenuValue
+    }
     const _xitem = SearchMenuItem(state.UI.PANEL.Menu,payload.Index)
     const { item } = _xitem
-    if (item!=undefined && payload.Index!=undefined) {
+    if (item!=undefined && item!=null && payload.Index!=undefined) {
+        if(itemValue!=null && itemValue!=undefined)
+            item.value=itemValue
         switch (item.value.ItemType) {
         case state.Clone.Type.TEXT.FIELD:
             UICloneText(state,item,payload).then((_data)=>{

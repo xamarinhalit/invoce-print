@@ -13,6 +13,8 @@ const State ={
         DROPID: null,
         TABLEROWCLASS:null,
         TABLECOLUMNCLASS:null,
+        TABLEMAINCLASS:null,
+        FIELDCLASS:null,
         $CONTENT: null,
         $FONTSIZE:null,
         $FONTSTYLE:null,

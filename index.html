@@ -9,6 +9,32 @@
 
 <body>
     <div>
+        <div class="modal fade" role="dialog" id="loadFormSetting">
+                <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form name="loadFormSetting">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Yazıcı Ayarları Geri Yükle</h4>
+                            </div>
+                            <div class="modal-body">
+                                    <select name="loadname">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                    <div class="popup_alert left"> </div>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
+                                    <button type="button" class="btn btn-black" data-dismiss="modal" name="loadFormSettingBtn">Yükle</button>
+                            </div>
+                        </form>
+                        </div>
+                </div>
+        </div>
         <div id="PopupSettings" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -188,6 +214,7 @@
                 
         </div>
     </div>
+    
     <div class="m-content">
         <form class="m-form">
             <div class="m-Template">
@@ -195,7 +222,7 @@
                     <div class="p-text-fontsize">
                         <ul style="display:flex;position: absolute;right: 1em; justify-content:space-around;list-style:none;">
                             <li id="JsonConfig"><i class="fa fa-file-text" style="font-size:24px;margin:5px;padding:3px"></i></li>
-                            <li id="loadJson"><i class="fa fa-file-code-o" style="font-size:24px;margin:5px;padding:3px"></i></li>
+                            <li id="loadJson" ><i class="fa fa-file-code-o" style="font-size:24px;margin:5px;padding:3px"></i></li>
                             <li id="newPrint"><i class="fa fa-print" style="font-size:24px;margin:5px;padding:3px"></i></li>
                             <li id="PrintSettings"><i class="fa fa-cog fa-spin" style="font-size:24px;margin:5px;padding:3px"></i></li>
                         </ul>

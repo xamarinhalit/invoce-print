@@ -23,9 +23,61 @@
     }
   }
   @media screen {
-    border-right-color: black;
-    border-right-style: solid;
-    border-right-width: 1px;
+    .p-column.p-field{
+        border-right-color: black!important;
+        border-right-style: solid!important;
+        border-right-width: 1px!important;
+    }
+    .p-field {
+      position: initial;
+      border: 1px solid #e8e7e7!important;
+      cursor: move;
+      color: #000;
+      &.active {
+        border-width: 2px;
+        border-color: #ca4b53;
+        background-color: transparent;
+      }
+      &:hover {
+        border-color: #ca4b53!important;
+        i {
+          &.Remove, &.Edit, &.Upload {
+            display: block;
+          }
+        }
+      }
+      &.ui-draggable-dragging {
+        color: #000;
+      }
+      i {
+        &.Remove {
+          display: none;
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 4px 5px 5px 6px;
+          background-color: #e8e7e7;
+          cursor: pointer;
+          font-size: 16px;
+          &:hover {
+            color: #ca4b53;
+          }
+        }
+      }
+      .p-field-textarea {
+        display: none;
+        width: 100%;
+        height: 100%;
+      }
+      .p-field-image {
+        width: 100%;
+        height: 100%;
+      }
+      .field-file {
+        display: none;
+      }
+    }
+
   }
 }
 @include mRemove();

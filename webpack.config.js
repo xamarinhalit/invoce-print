@@ -4,7 +4,7 @@ var webpack = require("webpack");
 
 const UglifyEsPlugin = require('uglify-es-webpack-plugin')
 module.exports = {
- //   devtool: 'eval-source-map',              //dev-mode only,
+   devtool: 'eval-source-map',              //dev-mode only,
  entry: './src/js/app.js',
  //   entry: './src/js/module/index.js',
     output: {

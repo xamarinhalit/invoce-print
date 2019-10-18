@@ -9,7 +9,8 @@ const AddCloneItemTo = (Clons,state,i,success)=>{
             Index:menuindex,
             left:left.replace('px',''),
             top:top.replace('px',''),
-            Style:clonetext.value.Style
+            Style:clonetext.value.Style,
+            MenuValue:clonetext.value
         },state,()=>{
             i++
             if(i<Clons.length){
@@ -36,6 +37,7 @@ const AddChildItemTo = (children,style,i,state,success)=>{
                     Style:value.Style
                 },
                 Index:menuindex,
+                MenuValue:value
             },state,()=>{
                 const menuitem = state.UI.PANEL.Menu[menuindex]
                 const $menuitem = $(menuitem.element)
