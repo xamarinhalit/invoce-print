@@ -117,17 +117,11 @@ const UICloneText = (state,menuitem,payload)=>{
                 payload: cloneId
             })
         }
-        if(value.ItemType==TYPE_TEXT.CUSTOMTEXT || value.ItemType==TYPE_TEXT.CUSTOMIMAGE){
-            textclone.innerHTML= value[TYPE_TEXT.VALUE]
-        }
-        else{
-            if(value.Format!=''){
-                textclone.innerHTML=value[TYPE_TEXT.VALUE]
-                dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:value}})
-            }else{
-                textclone.innerHTML=value[TYPE_TEXT.VALUE]
-            }
-
+        if(value.Format!=''){
+            textclone.innerHTML=value[TYPE_TEXT.VALUE]
+            dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:value}})
+        }else{
+            textclone.innerHTML=value[TYPE_TEXT.VALUE]
         }
         textclone.appendChild(textremove)
         DefaultFontSize(textclone,value.Style)
@@ -282,6 +276,8 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divcolumn.classList.add(value[TYPE_TABLE.ITEMKEY])
             _divcolumn.dataset.columnIndex =menuitem.element.dataset.columnIndex
             _divcolumn.dataset.cloneId=_Clone_Index.Index
+            DefaultFontSize(_divcolumn,value.Style)
+            $(_divcolumn).width(value.Width).height(value.Height)
             if(payload.Column!=undefined && payload.Column!=null && 
                 payload.Column.Style!=undefined && payload.Column.Style!=null && payload.Column.Style!=''){
                 $(_divcolumn).css(payload.Column.Style)
@@ -290,8 +286,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             }
             _divcolumn.style.order=menuitem.element.dataset.columnIndex
             _divcolumn.style.transition='order 1s'
-            DefaultFontSize(_divcolumn,value.Style)
-            $(_divcolumn).width(value.Width).height(value.Height)
+            
             if(value.Format!=''){
                 _divcolumn.innerHTML= value[TYPE_TABLE.VALUE]
                 dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:_divcolumn,value:value}})
