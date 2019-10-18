@@ -34,9 +34,10 @@
       cursor: move;
       color: #000;
       &.active {
-        border-width: 2px;
-        border-color: #ca4b53;
-        background-color: transparent;
+        border-style: outset;
+        border-width: 2px!important;
+        border-color: #3d3a3a!important;
+        background-color: transparent!important;
       }
       &:hover {
         border-color: #ca4b53!important;

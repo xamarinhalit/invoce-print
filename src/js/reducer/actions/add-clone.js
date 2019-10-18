@@ -84,8 +84,11 @@ export const ChangeFontEvent = (state,payload)=>{
     }
 }
 const ChangeFontSize=(state,e)=>{
+    $('.'+state.UI.FIELDCLASS+'.active').removeClass('active')
     state.UI.SELECT.$font=e.currentTarget
-   
+    if(state.UI.SELECT.$font!=null)
+        state.UI.SELECT.$font.classList.add('active')
+    
     dispatch({type:actionTypes.CLONE.FONT_ITEM_SELECT,payload:{element:state.UI.SELECT.$font}})
 }
 const DefaultFontSize= (element,style)=>{
