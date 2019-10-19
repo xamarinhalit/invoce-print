@@ -25,18 +25,19 @@ const AddCloneItemTo = (Clons,state,i,success)=>{
     }
    
 }
-const SetMenuItem = (Menu,menuindex,ColumnIndex)=>{
+const SetMenuItem = (Menu,menuindex,ColumnIndex,tablekey)=>{
     for (let i = 0; i < Menu.length; i++) {
         const item = Menu[i]
-        if(item!=undefined &&item.value.ColumnIndex!=undefined){
-            if(parseInt(item.value.ColumnIndex)==parseInt(ColumnIndex)){
-             let oldindex =Menu[menuindex].element.dataset.columnIndex
-             item.element.dataset.columnIndex=oldindex
-             item.value.ColumnIndex=oldindex
-             Menu[menuindex].element.dataset.columnIndex=ColumnIndex
-             Menu[menuindex].value.ColumnIndex=ColumnIndex
-               $(item.element).detach().insertBefore(Menu[menuindex].element)
-            break
+        if(item!=undefined &&item.value.ColumnIndex!=undefined && item.value.TableKey!=undefined){
+            if(parseInt(item.value.ColumnIndex)==parseInt(ColumnIndex) &&  item.value.TableKey==tablekey){
+                if(menuindex!=item.Index){
+                    let oldindex =Menu[menuindex].element.dataset.columnIndex
+                    item.element.dataset.columnIndex=oldindex
+                    item.value.ColumnIndex=oldindex
+                    Menu[menuindex].element.dataset.columnIndex=ColumnIndex
+                    Menu[menuindex].value.ColumnIndex=ColumnIndex
+                    $(item.element).detach().insertBefore(Menu[menuindex].element)
+                }
             }
         }
         
@@ -45,7 +46,9 @@ const SetMenuItem = (Menu,menuindex,ColumnIndex)=>{
 const AddChildItemTo = (children,style,i,state,success)=>{
     if(i<children.length){
         const clonetext = children[i]
-      
+        if(clonetext!=undefined){
+            console.log(clonetext)
+        }
         const { menuindex,value}= clonetext
         AddCloneItem(
             {
@@ -101,7 +104,7 @@ const LoadJson = (state,payload,success)=>{
             const table = value.Tables[i]
             for (let j = 0; j < table.children.length; j++) {
                 const clonetext = table.children[j]
-                SetMenuItem(state.UI.PANEL.Menu,clonetext.menuindex,clonetext.value.ColumnIndex)
+                SetMenuItem(state.UI.PANEL.Menu,clonetext.menuindex,clonetext.value.ColumnIndex,clonetext.value.TableKey)
             }
         }
     

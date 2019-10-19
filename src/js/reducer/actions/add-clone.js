@@ -243,6 +243,7 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
     })
 }
 const UICloneTable = (state,menuitem,payload)=>{
+
     return new Promise((resolve,_reject)=>{
         const {value,element,ToolValue,Index } =menuitem
         UICloneCreateTable(state,menuitem.value.TableKey,payload).then((_divtable)=>{
@@ -305,7 +306,7 @@ const UICloneTable = (state,menuitem,payload)=>{
                 element: _divcolumn,
                 value:value,
                 RowIndex:_divrow.dataset.RowIndex,
-                columnIndex:menuitem.element.dataset.columnIndex,
+                ColumnIndex:menuitem.element.dataset.columnIndex,
                 ToolValue,
                 menuindex:Index,
                 menuelement:element
@@ -354,8 +355,25 @@ const UICloneTable = (state,menuitem,payload)=>{
                 }
             }
             resolve(elements)
+            
         })
     })
+}
+const SetMenuItem = (Menu,menuindex,ColumnIndex)=>{
+    for (let i = 0; i < Menu.length; i++) {
+        const item = Menu[i]
+        if(item!=undefined &&item.value.ColumnIndex!=undefined){
+            if(parseInt(item.value.ColumnIndex)==parseInt(ColumnIndex)){
+                let oldindex =Menu[menuindex].element.dataset.columnIndex
+                item.element.dataset.columnIndex=oldindex
+                item.value.ColumnIndex=oldindex
+                Menu[menuindex].element.dataset.columnIndex=ColumnIndex
+                Menu[menuindex].value.ColumnIndex=ColumnIndex
+                $(item.element).detach().insertBefore(Menu[menuindex].element)
+            }
+        }
+        
+    }
 }
 const SearchMenuItem = (Menu,Index)=>{
     const _xitem ={}

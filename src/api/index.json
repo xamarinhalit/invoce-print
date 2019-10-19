@@ -13,194 +13,6 @@
         "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
         "image": ""
       },
-      "Tables": [
-        {
-          "Index": 9,
-          "key": "InvoiceMovements",
-          "children": [
-            {
-              "Index": 10,
-              "value": {
-                "TableKey": "InvoiceMovements",
-                "ItemKey": "UnitName",
-                "ItemTitle": "Birim",
-                "ItemValue": "Adet adet",
-                "Icon": "fa fa-arrows-v",
-                "Width": "100",
-                "Height": "50",
-                "ItemType": "TableField",
-                "ColumnIndex": 9,
-                "Format": "Adet",
-                "Style": {
-                  "width": "164px",
-                  "height": "20px",
-                  "font-size": "10pt",
-                  "font-style": "normal",
-                  "font-weight": "normal",
-                  "order": "9",
-                  "transition-duration": "1s",
-                  "transition-timing-function": "ease",
-                  "transition-delay": "0s",
-                  "transition-property": "order"
-                }
-              },
-              "RowIndex": "0",
-              "ToolValue": "Ürün bilgisi",
-              "menuindex": 31
-            },
-            {
-              "Index": 11,
-              "value": {
-                "TableKey": "InvoiceMovements",
-                "ItemKey": "Quantity",
-                "ItemTitle": "Miktar",
-                "ItemValue": "120",
-                "Icon": "fa fa-arrows-v",
-                "Width": "30",
-                "Height": "20",
-                "ItemType": "TableField",
-                "ColumnIndex": 8,
-                "Format": "",
-                "Style": {
-                  "width": "110px",
-                  "height": "20px",
-                  "font-size": "10pt",
-                  "font-style": "normal",
-                  "font-weight": "normal",
-                  "order": "8",
-                  "transition-duration": "1s",
-                  "transition-timing-function": "ease",
-                  "transition-delay": "0s",
-                  "transition-property": "order"
-                }
-              },
-              "RowIndex": "0",
-              "ToolValue": "Ürün bilgisi",
-              "menuindex": 30
-            },
-            {
-              "Index": 12,
-              "value": {
-                "TableKey": "InvoiceMovements",
-                "ItemKey": "Total",
-                "ItemTitle": "Toplam Tutar",
-                "ItemValue": "118,00",
-                "Icon": "fa fa-arrows-v",
-                "Width": "30",
-                "Height": "20",
-                "ItemType": "TableField",
-                "ColumnIndex": 7,
-                "Format": "0,00",
-                "Style": {
-                  "width": "112px",
-                  "height": "20px",
-                  "font-size": "10pt",
-                  "font-style": "normal",
-                  "font-weight": "normal",
-                  "order": "7",
-                  "transition-duration": "1s",
-                  "transition-timing-function": "ease",
-                  "transition-delay": "0s",
-                  "transition-property": "order"
-                }
-              },
-              "RowIndex": "0",
-              "ToolValue": "Ürün bilgisi",
-              "menuindex": 29
-            },
-            {
-              "Index": 13,
-              "value": {
-                "TableKey": "InvoiceMovements",
-                "ItemKey": "StockName",
-                "ItemTitle": "Stokadı",
-                "ItemValue": "Stok Adı",
-                "Icon": "fa fa-arrows-v",
-                "Width": "120",
-                "Height": "20",
-                "ItemType": "TableField",
-                "ColumnIndex": 3,
-                "Format": "",
-                "Style": {
-                  "width": "121px",
-                  "height": "20px",
-                  "font-size": "10pt",
-                  "font-style": "normal",
-                  "font-weight": "normal",
-                  "order": "3",
-                  "transition-duration": "1s",
-                  "transition-timing-function": "ease",
-                  "transition-delay": "0s",
-                  "transition-property": "order"
-                }
-              },
-              "RowIndex": "0",
-              "ToolValue": "Ürün bilgisi",
-              "menuindex": 25
-            },
-            {
-              "Index": 14,
-              "value": {
-                "TableKey": "InvoiceMovements",
-                "ItemKey": "DiscountedStockTotal",
-                "ItemTitle": "İndirimli Ara Toplam",
-                "ItemValue": "100,00",
-                "Icon": "fa fa-arrows-v",
-                "Width": "100",
-                "Height": "50",
-                "ItemType": "TableField",
-                "ColumnIndex": 1,
-                "Format": "0,00",
-                "Style": {
-                  "width": "110px",
-                  "height": "20px",
-                  "font-size": "10pt",
-                  "font-style": "normal",
-                  "font-weight": "normal",
-                  "order": "1",
-                  "transition-duration": "1s",
-                  "transition-timing-function": "ease",
-                  "transition-delay": "0s",
-                  "transition-property": "order"
-                }
-              },
-              "RowIndex": "0",
-              "ToolValue": "Ürün bilgisi",
-              "menuindex": 33
-            }
-          ],
-          "childIndex": [
-            10,
-            11,
-            12,
-            13,
-            14
-          ],
-          "RowIndex": 0,
-          "Style": {
-            "position": "absolute",
-            "top": "522px",
-            "left": "96px",
-            "width": "677px"
-          }
-        }
-      ],
-      "Clons": [],
-      "id": 1
-    },
-    {
-      "PageName": "Sayfa",
-      "Print": {
-        "PageCopy": "1",
-        "PageSize": "A4",
-        "CopyDirection": "Yanyana",
-        "PageType": "Dikey",
-        "PageWidth": 21,
-        "PageHeight": 29.7,
-        "PageProduct": "1",
-        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
-        "image": ""
-      },
       "Menu": [
         {
           "Index": 0,
@@ -585,15 +397,15 @@
             "Width": "100",
             "Height": "20",
             "ItemType": "TableField",
-            "ColumnIndex": 5,
+            "ColumnIndex": 2,
             "Format": "",
             "Style": {
-              "width": "100px",
+              "width": "120px",
               "height": "20px",
               "font-size": "10pt",
               "font-style": "normal",
               "font-weight": "normal",
-              "order": "5",
+              "order": "2",
               "transition-duration": "1s",
               "transition-timing-function": "ease",
               "transition-delay": "0s",
@@ -613,15 +425,15 @@
             "Width": "120",
             "Height": "20",
             "ItemType": "TableField",
-            "ColumnIndex": 4,
+            "ColumnIndex": 3,
             "Format": "",
             "Style": {
-              "width": "100px",
+              "width": "120px",
               "height": "20px",
               "font-size": "10pt",
               "font-style": "normal",
               "font-weight": "normal",
-              "order": "4",
+              "order": "3",
               "transition-duration": "1s",
               "transition-timing-function": "ease",
               "transition-delay": "0s",
@@ -641,15 +453,15 @@
             "Width": "120",
             "Height": "20",
             "ItemType": "TableField",
-            "ColumnIndex": 6,
+            "ColumnIndex": 4,
             "Format": "",
             "Style": {
-              "width": "100px",
+              "width": "120px",
               "height": "20px",
               "font-size": "10pt",
               "font-style": "normal",
               "font-weight": "normal",
-              "order": "6",
+              "order": "4",
               "transition-duration": "1s",
               "transition-timing-function": "ease",
               "transition-delay": "0s",
@@ -669,15 +481,15 @@
             "Width": "30",
             "Height": "20",
             "ItemType": "TableField",
-            "ColumnIndex": 7,
+            "ColumnIndex": 0,
             "Format": "",
             "Style": {
-              "width": "100px",
+              "width": "120px",
               "height": "20px",
               "font-size": "10pt",
               "font-style": "normal",
               "font-weight": "normal",
-              "order": "7",
+              "order": "0",
               "transition-duration": "1s",
               "transition-timing-function": "ease",
               "transition-delay": "0s",
@@ -697,9 +509,20 @@
             "Width": "30",
             "Height": "20",
             "ItemType": "TableField",
-            "ColumnIndex": 0,
+            "ColumnIndex": 1,
             "Format": "0,00",
-            "Style": ""
+            "Style": {
+              "width": "120px",
+              "height": "20px",
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            }
           }
         },
         {
@@ -714,7 +537,7 @@
             "Width": "40",
             "Height": "20",
             "ItemType": "TableField",
-            "ColumnIndex": 1,
+            "ColumnIndex": 5,
             "Format": "0,00",
             "Style": ""
           }
@@ -731,20 +554,9 @@
             "Width": "30",
             "Height": "20",
             "ItemType": "TableField",
-            "ColumnIndex": 2,
+            "ColumnIndex": 6,
             "Format": "0,00",
-            "Style": {
-              "width": "100px",
-              "height": "20px",
-              "font-size": "10pt",
-              "font-style": "normal",
-              "font-weight": "normal",
-              "order": "2",
-              "transition-duration": "1s",
-              "transition-timing-function": "ease",
-              "transition-delay": "0s",
-              "transition-property": "order"
-            }
+            "Style": ""
           }
         },
         {
@@ -759,7 +571,7 @@
             "Width": "30",
             "Height": "20",
             "ItemType": "TableField",
-            "ColumnIndex": 3,
+            "ColumnIndex": 7,
             "Format": "",
             "Style": ""
           }
@@ -835,41 +647,11 @@
       ],
       "Tables": [
         {
-          "Index": 31,
+          "Index": 19,
           "key": "InvoiceMovements",
           "children": [
             {
-              "Index": 32,
-              "value": {
-                "TableKey": "InvoiceMovements",
-                "ItemKey": "VatSell",
-                "ItemTitle": "Kdv Oranı",
-                "ItemValue": "%18",
-                "Icon": "fa fa-arrows-v",
-                "Width": "30",
-                "Height": "20",
-                "ItemType": "TableField",
-                "ColumnIndex": 7,
-                "Format": "",
-                "Style": {
-                  "width": "100px",
-                  "height": "20px",
-                  "font-size": "10pt",
-                  "font-style": "normal",
-                  "font-weight": "normal",
-                  "order": "7",
-                  "transition-duration": "1s",
-                  "transition-timing-function": "ease",
-                  "transition-delay": "0s",
-                  "transition-property": "order"
-                }
-              },
-              "RowIndex": "0",
-              "ToolValue": "Ürün bilgisi",
-              "menuindex": 26
-            },
-            {
-              "Index": 33,
+              "Index": 20,
               "value": {
                 "TableKey": "InvoiceMovements",
                 "ItemKey": "StockName",
@@ -879,70 +661,10 @@
                 "Width": "120",
                 "Height": "20",
                 "ItemType": "TableField",
-                "ColumnIndex": 6,
-                "Format": "",
-                "Style": {
-                  "width": "100px",
-                  "height": "20px",
-                  "font-size": "10pt",
-                  "font-style": "normal",
-                  "font-weight": "normal",
-                  "order": "6",
-                  "transition-duration": "1s",
-                  "transition-timing-function": "ease",
-                  "transition-delay": "0s",
-                  "transition-property": "order"
-                }
-              },
-              "RowIndex": "0",
-              "ToolValue": "Ürün bilgisi",
-              "menuindex": 25
-            },
-            {
-              "Index": 34,
-              "value": {
-                "TableKey": "InvoiceMovements",
-                "ItemKey": "Barcode",
-                "ItemTitle": "Barkod",
-                "ItemValue": "8695486541283",
-                "Icon": "fa fa-arrows-v",
-                "Width": "100",
-                "Height": "20",
-                "ItemType": "TableField",
-                "ColumnIndex": 5,
-                "Format": "",
-                "Style": {
-                  "width": "100px",
-                  "height": "20px",
-                  "font-size": "10pt",
-                  "font-style": "normal",
-                  "font-weight": "normal",
-                  "order": "5",
-                  "transition-duration": "1s",
-                  "transition-timing-function": "ease",
-                  "transition-delay": "0s",
-                  "transition-property": "order"
-                }
-              },
-              "RowIndex": "0",
-              "ToolValue": "Ürün bilgisi",
-              "menuindex": 23
-            },
-            {
-              "Index": 35,
-              "value": {
-                "TableKey": "InvoiceMovements",
-                "ItemKey": "StockCode",
-                "ItemTitle": "Stokkodu",
-                "ItemValue": "S0112555",
-                "Icon": "fa fa-arrows-v",
-                "Width": "120",
-                "Height": "20",
-                "ItemType": "TableField",
                 "ColumnIndex": 4,
                 "Format": "",
                 "Style": {
-                  "width": "100px",
+                  "width": "120px",
                   "height": "20px",
                   "font-size": "10pt",
                   "font-style": "normal",
@@ -956,23 +678,53 @@
               },
               "RowIndex": "0",
               "ToolValue": "Ürün bilgisi",
+              "menuindex": 25
+            },
+            {
+              "Index": 21,
+              "value": {
+                "TableKey": "InvoiceMovements",
+                "ItemKey": "StockCode",
+                "ItemTitle": "Stokkodu",
+                "ItemValue": "S0112555",
+                "Icon": "fa fa-arrows-v",
+                "Width": "120",
+                "Height": "20",
+                "ItemType": "TableField",
+                "ColumnIndex": 3,
+                "Format": "",
+                "Style": {
+                  "width": "120px",
+                  "height": "20px",
+                  "font-size": "10pt",
+                  "font-style": "normal",
+                  "font-weight": "normal",
+                  "order": "3",
+                  "transition-duration": "1s",
+                  "transition-timing-function": "ease",
+                  "transition-delay": "0s",
+                  "transition-property": "order"
+                }
+              },
+              "RowIndex": "0",
+              "ToolValue": "Ürün bilgisi",
               "menuindex": 24
             },
             {
-              "Index": 36,
+              "Index": 22,
               "value": {
                 "TableKey": "InvoiceMovements",
-                "ItemKey": "Total",
-                "ItemTitle": "Toplam Tutar",
-                "ItemValue": "118,00",
+                "ItemKey": "Barcode",
+                "ItemTitle": "Barkod",
+                "ItemValue": "8695486541283",
                 "Icon": "fa fa-arrows-v",
-                "Width": "30",
+                "Width": "100",
                 "Height": "20",
                 "ItemType": "TableField",
                 "ColumnIndex": 2,
-                "Format": "0,00",
+                "Format": "",
                 "Style": {
-                  "width": "100px",
+                  "width": "120px",
                   "height": "20px",
                   "font-size": "10pt",
                   "font-style": "normal",
@@ -986,27 +738,86 @@
               },
               "RowIndex": "0",
               "ToolValue": "Ürün bilgisi",
-              "menuindex": 29
+              "menuindex": 23
+            },
+            {
+              "Index": 23,
+              "value": {
+                "TableKey": "InvoiceMovements",
+                "ItemKey": "StockPrice",
+                "ItemTitle": "Fiyat",
+                "ItemValue": "120,00",
+                "Icon": "fa fa-arrows-v",
+                "Width": "30",
+                "Height": "20",
+                "ItemType": "TableField",
+                "ColumnIndex": 1,
+                "Format": "0,00",
+                "Style": {
+                  "width": "120px",
+                  "height": "20px",
+                  "font-size": "10pt",
+                  "font-style": "normal",
+                  "font-weight": "normal",
+                  "order": "1",
+                  "transition-duration": "1s",
+                  "transition-timing-function": "ease",
+                  "transition-delay": "0s",
+                  "transition-property": "order"
+                }
+              },
+              "RowIndex": "0",
+              "ToolValue": "Ürün bilgisi",
+              "menuindex": 27
+            },
+            {
+              "Index": 24,
+              "value": {
+                "TableKey": "InvoiceMovements",
+                "ItemKey": "VatSell",
+                "ItemTitle": "Kdv Oranı",
+                "ItemValue": "%18",
+                "Icon": "fa fa-arrows-v",
+                "Width": "30",
+                "Height": "20",
+                "ItemType": "TableField",
+                "ColumnIndex": 0,
+                "Format": "",
+                "Style": {
+                  "width": "120px",
+                  "height": "20px",
+                  "font-size": "10pt",
+                  "font-style": "normal",
+                  "font-weight": "normal",
+                  "order": "0",
+                  "transition-duration": "1s",
+                  "transition-timing-function": "ease",
+                  "transition-delay": "0s",
+                  "transition-property": "order"
+                }
+              },
+              "RowIndex": "0",
+              "ToolValue": "Ürün bilgisi",
+              "menuindex": 26
             }
           ],
           "childIndex": [
-            26,
             25,
-            23,
             24,
-            29
+            23,
+            27,
+            26
           ],
           "RowIndex": 0,
           "Style": {
             "position": "absolute",
-            "top": "508px",
-            "left": "142px",
-            "width": "560px"
+            "top": "500px",
+            "left": "20px"
           }
         }
       ],
       "Clons": [],
-      "id": 2
+      "id": 1
     }
   ],
   "Menu": [
