@@ -277,6 +277,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divcolumn.dataset.columnIndex =menuitem.element.dataset.columnIndex
             _divcolumn.dataset.cloneId=_Clone_Index.Index
             DefaultFontSize(_divcolumn,value.Style)
+            _divcolumn.style.order=menuitem.element.dataset.columnIndex
             $(_divcolumn).width(value.Width).height(value.Height)
             if(payload.Column!=undefined && payload.Column!=null && 
                 payload.Column.Style!=undefined && payload.Column.Style!=null && payload.Column.Style!=''){
@@ -284,7 +285,6 @@ const UICloneTable = (state,menuitem,payload)=>{
             }else if (value.Style!=undefined && value.Style!=null && value.Style!=''){
                 $(_divcolumn).css(value.Style)
             }
-            _divcolumn.style.order=menuitem.element.dataset.columnIndex
             _divcolumn.style.transition='order 1s'
             
             if(value.Format!=''){
