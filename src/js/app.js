@@ -293,6 +293,7 @@ import '../scss/index.scss'
             App.InitConfig.data=data[0].Tools
             Init(App.InitConfig ,App.fontSelects)
             App.PageInit()
+
         })
     })
 })()

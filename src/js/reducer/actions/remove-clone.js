@@ -68,11 +68,12 @@ export const RemoveTableItem = (table,state,success)=>{
         if(_t && _t.childIndex){
             for (let j = 0; j < _t.childIndex.length; j++) {
                 const element = _t.childIndex[j]
-                if(element && table.table.Index){
+                if(parseInt(table.table.Index)==element){
                     _removeitem.table=_t
                     _removeitem.child=_t.children[j]
                     _removeitem.index=j
                     _removeitem.tindex=i
+                    break
                 }
             }
         }

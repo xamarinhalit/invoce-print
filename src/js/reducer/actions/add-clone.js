@@ -274,17 +274,21 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divcolumn.classList.add(state.UI.TABLECOLUMNCLASS)
             _divcolumn.classList.add(state.UI.FIELDCLASS)
             _divcolumn.classList.add(value[TYPE_TABLE.ITEMKEY])
-            _divcolumn.dataset.columnIndex =menuitem.element.dataset.columnIndex
             _divcolumn.dataset.cloneId=_Clone_Index.Index
             DefaultFontSize(_divcolumn,value.Style)
-            _divcolumn.style.order=menuitem.element.dataset.columnIndex
             $(_divcolumn).width(value.Width).height(value.Height)
-            if(payload.Column!=undefined && payload.Column!=null && 
-                payload.Column.Style!=undefined && payload.Column.Style!=null && payload.Column.Style!=''){
+            if(payload.load!=true){
+                if(payload.Column!=undefined && payload.Column!=null && 
+                    payload.Column.Style!=undefined && payload.Column.Style!=null && payload.Column.Style!=''){
+                    $(_divcolumn).css(payload.Column.Style)
+                }else if (value.Style!=undefined && value.Style!=null && value.Style!=''){
+                    $(_divcolumn).css(value.Style)
+                }
+            }else{
                 $(_divcolumn).css(payload.Column.Style)
-            }else if (value.Style!=undefined && value.Style!=null && value.Style!=''){
-                $(_divcolumn).css(value.Style)
             }
+            _divcolumn.dataset.columnIndex =menuitem.value.ColumnIndex
+            _divcolumn.style.order=menuitem.value.ColumnIndex
             _divcolumn.style.transition='order 1s'
             
             if(value.Format!=''){
@@ -329,7 +333,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-s'))
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
             _divtable.children.push(elements)
-            _divtable.childIndex.push(elements.Index)
+            _divtable.childIndex.push(elements.menuindex)
             CalC_Table()
             elements.value.Style=styleToObject (_divcolumn)
             const ccopySize =parseInt(state.Print.PageProduct)

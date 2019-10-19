@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import { dispatch, addReducer } from '..'
 import { actionTypes } from '../const'
-
 const TableCreate = (litarget)=>{
     const $el =litarget
     if ($el) {
@@ -130,12 +129,15 @@ const AddGroupForPanel= function(value ,o,s,state) {
                     const $el = parents.children[j]
                     $el.dataset.columnIndex=j
                     let { Index} = $el.dataset
+                    GetMenuValue( state.UI.PANEL.Menu,Index,j)
                     if ($el.classList.contains('active')) {
                         addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
-                            addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
-                                // eslint-disable-next-line no-unused-vars
-                            })
-                            dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index,Column:{Style:_xdata.style},Table:_xdata.Table}})
+                            if(_xdata!=null){
+                                addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
+                                    // eslint-disable-next-line no-unused-vars
+                                })
+                                dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index,Column:{Style:_xdata.style},Table:_xdata.Table}})
+                            }
                         })
                         dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
                         // eslint-disable-next-line no-unused-vars
@@ -144,11 +146,11 @@ const AddGroupForPanel= function(value ,o,s,state) {
                 setTimeout(()=>{
                     dispatch({type:actionTypes.CLONE.DRAG_STOP})
                   
-                },1000)
+                },250)
             }
         })
     }
-       
+    
     state.UI.PANEL.Menu.push({
         Index:state.UI.PANEL.Index,
         element:li,
@@ -158,19 +160,40 @@ const AddGroupForPanel= function(value ,o,s,state) {
     })
     return { li, className:groupNameId}
 }
+const GetMenuValue = (Menu,Index,columnIndex)=>{
+    for (let i = 0; i < Menu.length; i++) {
+        const item = Menu[i]
+        if(item!=undefined){
+            if(item.Index==parseInt(Index)){
+                item.element.dataset.columnIndex=columnIndex
+                item.value.ColumnIndex=columnIndex
+            }
+        }
+        
+    }
+}
+
 /* eslint-disable no-undef */
 $.fn.extend({
     ReloadPanel: function(options, e,state) {
         const { up, down } = options
         let $children = $(this)
         const ilist = []
+        const Islist = (ToolValue)=>{
+            ilist.map(x=>{
+                if(x.ToolValue == ToolValue)
+                return true
+            })
+            return ilist.length==0
+        }
         for (let i = 0; i < $children.length; i++) {
             const v = $children[i]
             if (v != undefined) {
                 if (e != null) {
                     const _$ul =$(e.querySelector('ul'))
                     state.UI.PANEL.Menu.forEach(item => {
-                        if(ilist.indexOf(item.Sort)==-1){
+                      
+                        if(Islist(item.ToolValue)){
                             const $ul =$(item.element.parentNode)
                             const $i =$($ul[0].previousSibling.querySelector('i'))
                             if($ul[0].className == _$ul[0].className){
@@ -184,19 +207,19 @@ $.fn.extend({
                                     $i.removeClass(up)
                                     $i.addClass(down)
                                 }
-                                ilist.push(item.Sort)
+                                ilist.push({ToolValue:item.ToolValue})
                             }else if($i.hasClass(down))
                             {
                                 $ul.css('display','none')
                                 $i.removeClass(down)
                                 $i.addClass(up)
-                                ilist.push(item.Sort)
+                               // ilist.push(item.Sort)
                             }
                         }
                     })
                 } else {
                     state.UI.PANEL.Menu.forEach(item => {
-                        if(ilist.indexOf(item.Sort)==-1){
+                        if(Islist(item.ToolValue)){
                             const $ul =$(item.element.parentNode)
                             const $i =$($ul[0].previousSibling.querySelector('i'))
                             $ul[0].style.display='none'
@@ -204,7 +227,7 @@ $.fn.extend({
                             {
                                 $i.addClass(up)
                                 $i.removeClass(down)
-                                ilist.push(item.Sort)
+                               // ilist.push(item.Sort)
                             }
                         }
                     })

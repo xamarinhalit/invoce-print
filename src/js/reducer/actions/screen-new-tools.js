@@ -8,6 +8,13 @@ export const SetJsonData = (state,payload,success)=>{
     }
 
     JsonData.Print = Items.Print
+    JsonData.Menu = Items.UI.PANEL.Menu.map(x=>{
+        return {
+            Index:x.Index,
+            ToolValue:x.ToolValue,
+            value:x.value
+        }
+    })
     JsonData.Tables =Items.Clone.Items.Tables.map(x=>{
         return {
             Index:x.Index,

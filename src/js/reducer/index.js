@@ -13,8 +13,6 @@ const SetInit = (state,payload)=>{
     }
     state.Clone.Items.StaticItems=_value
     state.UI.$CONTENT = $(target)
-    SetGroupItem(state)
-    SetConfig(state)
     state.UI.DROPID=target
     state.UI.DRAGCLASS=dragclass
     state.UI.ACCORDIONID=accordion
@@ -22,6 +20,8 @@ const SetInit = (state,payload)=>{
     state.UI.TABLECOLUMNCLASS=tablecolumnclass
     state.UI.TABLEMAINCLASS=tablemainclass
     state.UI.FIELDCLASS=fieldclass
+    SetConfig(state)
+    SetGroupItem(state)
 }
 const observers= []
 
@@ -35,7 +35,7 @@ const dispatch = (action,state=InitialState)=>{
         break
     case actionTypes.INIT.FETCHED:
         SetInit(state,action.payload)
-        sendReducer(action.type,action.payload.data,state)
+            sendReducer(action.type,action.payload.data,state)
         break
     case actionTypes.CLONE.ADD_CLONEITEM:
         AddCloneItem(action.payload,state,data=>{

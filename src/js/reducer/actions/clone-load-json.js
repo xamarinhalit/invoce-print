@@ -10,7 +10,8 @@ const AddCloneItemTo = (Clons,state,i,success)=>{
             left:left.replace('px',''),
             top:top.replace('px',''),
             Style:clonetext.value.Style,
-            MenuValue:clonetext.value
+            MenuValue:clonetext.value,
+            load:true
         },state,()=>{
             i++
             if(i<Clons.length){
@@ -24,9 +25,27 @@ const AddCloneItemTo = (Clons,state,i,success)=>{
     }
    
 }
+const SetMenuItem = (Menu,menuindex,ColumnIndex)=>{
+    for (let i = 0; i < Menu.length; i++) {
+        const item = Menu[i]
+        if(item!=undefined &&item.value.ColumnIndex!=undefined){
+            if(parseInt(item.value.ColumnIndex)==parseInt(ColumnIndex)){
+             let oldindex =Menu[menuindex].element.dataset.columnIndex
+             item.element.dataset.columnIndex=oldindex
+             item.value.ColumnIndex=oldindex
+             Menu[menuindex].element.dataset.columnIndex=ColumnIndex
+             Menu[menuindex].value.ColumnIndex=ColumnIndex
+               $(item.element).detach().insertBefore(Menu[menuindex].element)
+            break
+            }
+        }
+        
+    }
+}
 const AddChildItemTo = (children,style,i,state,success)=>{
     if(i<children.length){
         const clonetext = children[i]
+      
         const { menuindex,value}= clonetext
         AddCloneItem(
             {
@@ -37,7 +56,8 @@ const AddChildItemTo = (children,style,i,state,success)=>{
                     Style:value.Style
                 },
                 Index:menuindex,
-                MenuValue:value
+                MenuValue:value,
+                load:true
             },state,()=>{
                 const menuitem = state.UI.PANEL.Menu[menuindex]
                 const $menuitem = $(menuitem.element)
@@ -59,6 +79,7 @@ const AddTablesTo = (Tables,i,state,success)=>{
         const table = Tables[i]
         const {Style}= table
         let j =0
+
         AddChildItemTo(table.children,Style,j,state,()=>{
             i++
             AddTablesTo(Tables,i,state,success)
@@ -75,7 +96,15 @@ const LoadJson = (state,payload,success)=>{
     }else if(payload && typeof payload === 'object' && payload.constructor === Object){
         value=payload
     }
-    if(value!=undefined)
+    if(value!=undefined){
+        for (let i = 0; i < value.Tables.length; i++) {
+            const table = value.Tables[i]
+            for (let j = 0; j < table.children.length; j++) {
+                const clonetext = table.children[j]
+                SetMenuItem(state.UI.PANEL.Menu,clonetext.menuindex,clonetext.value.ColumnIndex)
+            }
+        }
+    
         // eslint-disable-next-line no-unused-vars
         PrintSetting(state,value.Print,(_data)=>{
             const Clons =value.Clons
@@ -91,5 +120,6 @@ const LoadJson = (state,payload,success)=>{
                 })
             })
         })
+    }
 }
 export {LoadJson}
