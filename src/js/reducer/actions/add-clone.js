@@ -75,7 +75,6 @@ export const SetConfig = (state, _data) => {
 export const ChangeFontEvent = (state,payload)=>{
     if(NullCheck(payload.font)){
         if(!NullCheck(payload.status)){
-           // const hasPixel =payload.input.indexOf('px')!=-1
             state.UI.SELECT.$font.style[payload.font]=payload.input
         }else if(payload.status==true && NullCheck(payload.style))
             state.UI.SELECT.$font.style[payload.font]=payload.style
