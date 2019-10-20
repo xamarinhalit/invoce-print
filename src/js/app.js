@@ -56,7 +56,7 @@ import '../scss/index.scss'
             tablecolumnclass:'p-column',
             tablemainclass:'p-main',
             fieldclass:'p-field',
-            defaultRow:false
+            defaultRow:true
         },
         DefaultPrint :{
             PageCopy: 1,
@@ -92,7 +92,7 @@ import '../scss/index.scss'
                     if(_target !=undefined && _target!=null && _target.value!=''){
                         dispatch(
                             {type:actionTypes.CLONE.FONT_CHANGE,
-                                payload:{ font:'font-size',style:null,defaultvalue:'10pt',input:_target.value}})
+                                payload:{ font:'font-size',style:null,defaultvalue:'10pt',input:_target.value+'pt'}})
                     }
                 })
             },
@@ -105,17 +105,37 @@ import '../scss/index.scss'
                     }
                 })
             },
+            DefaultFontTools:(selectedelemet,state,value)=>{
+                const fsize=selectedelemet.style.fontSize
+                if(fsize!=''){
+                    if(fsize.indexOf('pt')>-1){
+                        App.$FONTSIZE.value=fsize.replace('pt','')
+                    }
+                }else{
+                    App.$FONTSIZE.value='' 
+                }
+                App.fontSelects.forEach((v,i)=>{
+                    const d = $('li[data-'+v.selector+']')
+                    const v2=selectedelemet.style[v.selector]
+                    d.each((ii,ix)=>{
+                        if(ix!=undefined){
+                            const $ix=$(ix)
+                            const v1=$ix.data(v.readselector)
+                            if(v2==v1){
+                                if(!$ix.hasClass('active'))
+                                    $ix.addClass('active')
+                            }else{
+                                if($ix.hasClass('active'))
+                                    $ix.removeClass('active')
+                            }
+                        }
+                    })
+                })
+            },
             ItemSelect:()=>{
                 subscribe(actionTypes.CLONE.FONT_ITEM_SELECT,(state,data)=>{
                     const selectedelemet = data.element
-                    const fsize=selectedelemet.style.fontSize
-                    if(fsize!=''){
-                        if(fsize.indexOf('pt')>-1){
-                            App.$FONTSIZE.value=fsize.replace('pt','')
-                        }
-                    }else{
-                        App.$FONTSIZE.value='' 
-                    }
+                    App.Event.DefaultFontTools(selectedelemet,state,data.value)
                     const $ffsize =$('.p-font-block')
                     if(!$ffsize.hasClass('p-active')){
                         $ffsize.addClass('p-active')
@@ -273,9 +293,6 @@ import '../scss/index.scss'
                 
             }
 
-        },
-        OverrideType:()=>{
-         
         },
         PageInit:()=>{
             App.SetPrint(App.DefaultPrint)

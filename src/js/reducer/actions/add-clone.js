@@ -74,22 +74,31 @@ export const SetConfig = (state, _data) => {
 }
 export const ChangeFontEvent = (state,payload)=>{
     if(NullCheck(payload.font)){
-        if(NullCheck(payload.status)){
-            const hasPixel =payload.input.indexOf('px')!=-1
-            state.UI.SELECT.$font.style[payload.font]=hasPixel?payload.input:payload.input+'pt'
-        }else if(payload.status==true)
+        if(!NullCheck(payload.status)){
+           // const hasPixel =payload.input.indexOf('px')!=-1
+            state.UI.SELECT.$font.style[payload.font]=payload.input
+        }else if(payload.status==true && NullCheck(payload.style))
             state.UI.SELECT.$font.style[payload.font]=payload.style
         else 
             state.UI.SELECT.$font.style[payload.font]=payload.defaultvalue
+        if( NullCheck(state.UI.SELECT.$font)){
+            const parent =$(state.UI.SELECT.$font).parents('.'+state.UI.TABLEMAINCLASS)
+            const className='.'+ state.UI.SELECT.$font.className.replace(' '+state.UI.FIELDCLASS,'').replace(' '+state.UI.TABLECOLUMNCLASS,' ').replace(' ui-resizable active','').replace(' ','.')
+            parent.find(className).each((ii,ix)=>{
+                if(ix!=undefined)
+                    ix.style.cssText=state.UI.SELECT.$font.style.cssText
+            })
+
+        }
     }
 }
-const ChangeFontSize=(state,e)=>{
+const ChangeFontSize=(state,e,value)=>{
     $('.'+state.UI.FIELDCLASS+'.active').removeClass('active')
     state.UI.SELECT.$font=e.currentTarget
     if(NullCheck(state.UI.SELECT.$font))
         state.UI.SELECT.$font.classList.add('active')
     
-    dispatch({type:actionTypes.CLONE.FONT_ITEM_SELECT,payload:{element:state.UI.SELECT.$font}})
+    dispatch({type:actionTypes.CLONE.FONT_ITEM_SELECT,payload:{element:state.UI.SELECT.$font,value:value}})
 }
 const DefaultFontSize= (element,style)=>{
     if(NullCheck(style)){
@@ -126,7 +135,7 @@ const UICloneText = (state,menuitem,payload)=>{
         textclone.appendChild(textremove)
         DefaultFontSize(textclone,value.Style)
         
-        textclone.onclick=(e)=>ChangeFontSize(state,e)
+        textclone.onclick=(e)=>ChangeFontSize(state,e,value)
 
         const cloneItem = {
             Index: _Clone_Index.Index,
@@ -305,7 +314,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             }else{
                 _divcolumn.innerHTML= value[TYPE_TABLE.VALUE]
             }
-            _divcolumn.onclick=(e)=>ChangeFontSize(state,e)
+            _divcolumn.onclick=(e)=>ChangeFontSize(state,e,value)
             _divrow.appendChild(_divcolumn)
 
             const elements = {
