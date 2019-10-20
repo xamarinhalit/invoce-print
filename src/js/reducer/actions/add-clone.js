@@ -331,7 +331,7 @@ const UICloneTable = (state,menuitem,payload)=>{
                 }else{
                     elements.value.Style= style
                 }
-                _divcolumn.parentNode.parentNode.querySelectorAll('[class="p-row"]').forEach((celement)=>{
+                _divcolumn.parentNode.parentNode.querySelectorAll('[class="'+state.UI.TABLEROWCLASS+'"]').forEach((celement)=>{
                     if(NullCheck(celement)){
                         const ccolumn=$(celement).find('.'+value.ItemKey).first()
                         ccolumn[0].style.width=elements.value.Style.width
@@ -346,7 +346,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             elements.value.Style=styleToObject (_divcolumn)
             if(state.UI.PANEL.config.defaultRow==true){//DEFAULT
                 const ccopySize =parseInt(state.Print.PageProduct)
-                const dchildren=_divtable.element[0].querySelectorAll('div[class="p-row"]')
+                const dchildren=_divtable.element[0].querySelectorAll('div[class="'+state.UI.TABLEROWCLASS+'"]')
                 for (let i = 1; i < dchildren.length; i++) {
                     const cchildren = dchildren[i]
                     if(NullCheck(cchildren)){
