@@ -33,7 +33,8 @@ const State ={
                 activeClass: 'active',//Kullanımda deği
                 container:'.m-Template-Tools',
                 panelupclass:'fa fa-chevron-up',
-                panelclass:'m-Tool'
+                panelclass:'m-Tool',
+                defaultRow:true
             },
             
             Index:-1,

@@ -55,7 +55,8 @@ import '../scss/index.scss'
             tablerowclass:'p-row',
             tablecolumnclass:'p-column',
             tablemainclass:'p-main',
-            fieldclass:'p-field'
+            fieldclass:'p-field',
+            defaultRow:false
         },
         DefaultPrint :{
             PageCopy: 1,
@@ -63,8 +64,8 @@ import '../scss/index.scss'
             PageSize: 'A4',
             PageType: 'Dikey',
             CopyDirection: 'Yanyana',
-            PageWidth: '21,00',
-            PageHeight: '29,70',
+            PageWidth: 21.00,
+            PageHeight: 29.70,
             ImageUrl: 'https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg'
         },
         SetPrint : (_Print)=> {

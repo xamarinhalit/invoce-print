@@ -223,17 +223,17 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
             }
             // .resizable()
             $div
-            .on('resize', function(_e) {
-                _table.Style=extractCss($div)
-            })
-            .draggable({
-                containment: DROPID,
-                cursor: 'move',
-                addClasses: false,
-                drag: function(_el, _ui) {
+                .on('resize', function(_e) {
                     _table.Style=extractCss($div)
-                },
-            })
+                })
+                .draggable({
+                    containment: DROPID,
+                    cursor: 'move',
+                    addClasses: false,
+                    drag: function(_el, _ui) {
+                        _table.Style=extractCss($div)
+                    },
+                })
             if(NullCheck(payload.Table) && NullCheck(payload.Table.Style)){
                 $div.css(payload.Table.Style)
             }else{
@@ -263,7 +263,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             }
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
-            if(payload.load!=true){
+            if(state.UI.PANEL.config.defaultRow==true){
                 value.RowIndex='0'
             }
             let rowQuery='div[data--row-index="'+value.RowIndex+'"]'
@@ -344,7 +344,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divtable.childIndex.push(elements.menuindex)
             CalC_Table()
             elements.value.Style=styleToObject (_divcolumn)
-            if(payload.load!=true){
+            if(state.UI.PANEL.config.defaultRow==true){//DEFAULT
                 const ccopySize =parseInt(state.Print.PageProduct)
                 const dchildren=_divtable.element[0].querySelectorAll('div[class="p-row"]')
                 for (let i = 1; i < dchildren.length; i++) {
@@ -358,8 +358,8 @@ const UICloneTable = (state,menuitem,payload)=>{
                         const cloneCopy = dchildren[0].cloneNode(true)
                         if(NullCheck(cloneCopy)){
                             cloneCopy.dataset.RowIndex =i
-                               $(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS).removeClass(state.UI.FIELDCLASS)
-                               $(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS+'>.ui-resizable-e').remove()
+                            $(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS).removeClass(state.UI.FIELDCLASS)
+                            $(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS+'>.ui-resizable-e').remove()
                             _divtable.element[0].appendChild(cloneCopy)
                         }
                     }
