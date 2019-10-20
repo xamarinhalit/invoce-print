@@ -1,7 +1,8 @@
 export const actionTypes={
     INIT:{
         FETCHED:'FETCHED',
-        PRINT:'PRINT'
+        PRINT:'PRINT',
+        OVERRIDE_TYPE:'OVERRIDE_TYPE'
     },
     HTTP:{
         // POST:'POST',

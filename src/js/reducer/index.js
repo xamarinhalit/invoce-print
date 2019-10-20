@@ -28,6 +28,9 @@ const observers= []
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
+    case actionTypes.INIT.OVERRIDE_TYPE:
+        sendReducer(action.type,{data:{}},state)
+        break
     case actionTypes.INIT.PRINT:
         PrintSetting(state,action.payload,(_data)=>{
             sendReducer(action.type,_data,state)

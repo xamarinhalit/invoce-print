@@ -1,4 +1,4 @@
-import { styleToObject } from "./convert"
+import { styleToObject, NullCheck } from './convert'
 
 /* eslint-disable no-undef */
 const RemoveReset = (state)=>{
@@ -12,7 +12,7 @@ export const RemoveTable = (table,state,success)=>{
     const { Clone:_Clons }=state
     let removedTable=null
     const _Remove = (item)=>{
-        if (item != null) {
+        if (NullCheck(item)) {
             for (let i = 0; i < item.children.length; i++) {
                 const element = item.children[i]
                 if(element!=undefined){
@@ -44,7 +44,7 @@ export const RemoveTableItem = (table,state,success)=>{
     const _Remove = (item)=>{
         return new Promise((resolve)=>{
             const element = item.child
-            if(element!=undefined){
+            if(NullCheck(element)){
                 const reelement =element.element.cloneNode(true)
                 const restyle = styleToObject(element.element)
                 $(element.element).remove()
@@ -79,7 +79,7 @@ export const RemoveTableItem = (table,state,success)=>{
         }
         
     }
-    if(_removeitem.table!=undefined){
+    if(NullCheck(_removeitem.table)){
         _Remove(_removeitem).then((reitem)=>{
             RemoveReset(state)
             success(reitem,state)

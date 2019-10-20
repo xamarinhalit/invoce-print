@@ -108,10 +108,7 @@
   }
   .p-row {
     display: inline-flex;
-    margin-right: 20px;
     .p-column {
-      width: 20vw;
-      margin-right: 5px;
       @include mprint();
     }
   }

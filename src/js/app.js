@@ -236,42 +236,45 @@ import '../scss/index.scss'
                 })
             },
             $HTTP:async ({url = '', data = {},type='POST'})=> {
-                    //  data = JSON.stringify(data, getCircularReplacer())
-                    if(type=='POST'){
-                        const response = await fetch(url, {
-                            method:type, // *GET, POST, PUT, DELETE, etc.
-                            mode: 'cors', // no-cors, *cors, same-origin
-                            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                            credentials: 'same-origin', // include, *same-origin, omit
-                            headers: {
-                                'Content-Type': 'application/json'
-                                // 'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            redirect: 'follow', // manual, *follow, error
-                            referrer: 'no-referrer', // no-referrer, *client
-                            body:JSON.stringify(data) // body data type must match "Content-Type" header
-                        })
-                        return await response.json() // parses JSON response into native JavaScript objects
-                    }
-                    else{
+                //  data = JSON.stringify(data, getCircularReplacer())
+                if(type=='POST'){
+                    const response = await fetch(url, {
+                        method:type, // *GET, POST, PUT, DELETE, etc.
+                        mode: 'cors', // no-cors, *cors, same-origin
+                        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                        credentials: 'same-origin', // include, *same-origin, omit
+                        headers: {
+                            'Content-Type': 'application/json'
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        redirect: 'follow', // manual, *follow, error
+                        referrer: 'no-referrer', // no-referrer, *client
+                        body:JSON.stringify(data) // body data type must match "Content-Type" header
+                    })
+                    return await response.json() // parses JSON response into native JavaScript objects
+                }
+                else{
                         
-                        const response = await fetch(url, {
-                            method:type, // *GET, POST, PUT, DELETE, etc.
-                            mode: 'cors', // no-cors, *cors, same-origin
-                            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                            credentials: 'same-origin', // include, *same-origin, omit
-                            headers: {
-                                'Content-Type': 'application/json'
-                                // 'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            redirect: 'follow', // manual, *follow, error
-                            referrer: 'no-referrer', // no-referrer, *client
-                        })
-                        return await response.json() // parses JSON response into native JavaScript objects
-                    }
+                    const response = await fetch(url, {
+                        method:type, // *GET, POST, PUT, DELETE, etc.
+                        mode: 'cors', // no-cors, *cors, same-origin
+                        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                        credentials: 'same-origin', // include, *same-origin, omit
+                        headers: {
+                            'Content-Type': 'application/json'
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        redirect: 'follow', // manual, *follow, error
+                        referrer: 'no-referrer', // no-referrer, *client
+                    })
+                    return await response.json() // parses JSON response into native JavaScript objects
+                }
                 
             }
 
+        },
+        OverrideType:()=>{
+         
         },
         PageInit:()=>{
             App.SetPrint(App.DefaultPrint)
@@ -289,11 +292,15 @@ import '../scss/index.scss'
     }
 
     $(document).ready(function () {
-        App.Event.$HTTP({url:'http://localhost:3000/tools',type:'GET'}).then((data)=>{
-            App.InitConfig.data=data[0].Tools
-            Init(App.InitConfig ,App.fontSelects)
-            App.PageInit()
-
+        subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{
+            state.Clone.Type.TEXT.FIELD=0
+            state.Clone.Type.TABLE.FIELD=2
+            App.Event.$HTTP({url:'http://localhost:3000/test',type:'GET'}).then((data)=>{
+                App.InitConfig.data=data.Tools
+                Init(App.InitConfig ,App.fontSelects)
+                App.PageInit()
+            })
         })
+        dispatch({type:actionTypes.INIT.OVERRIDE_TYPE})
     })
 })()

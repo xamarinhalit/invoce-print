@@ -9,7 +9,11 @@ export const CalcLeftTop = (uioffset ,mainoffset)=>{
         left,top
     }
 }
-
+export const NullCheck = (value)=>{
+    if(value == null || value == undefined || value =='')
+        return false
+    return true
+}
 
 export const styleToObject = (element,_root=null)=>{
     const out={}

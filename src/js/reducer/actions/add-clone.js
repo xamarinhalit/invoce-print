@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import { dispatch} from '..'
 import { actionTypes } from '../const'
-import { styleToObject,  CalcLeftTop } from './convert'
+import { styleToObject,  CalcLeftTop, NullCheck } from './convert'
 export const StyleParamClick = ({selector,readselector,defaultvalue})=>{
     $('li[data-'+selector+']').click((e)=>{
         $('li[data-'+selector+']').each((i,ele)=>{
@@ -43,7 +43,7 @@ export const SetConfig = (state, _data) => {
     const $pcopy = document.querySelector('select[name="PageCopy"]')
     const $dcopy = document.querySelector('select[name="CopyDirection"]')
     $pcopy.onchange=(e)=>{
-        if($pcopy!=undefined && $pcopy!=null){
+        if(NullCheck($pcopy)){
             if($pcopy.value=='1'){
                 $dcopy.parentNode.parentNode.style.display='none'
             }else{
@@ -57,7 +57,7 @@ export const SetConfig = (state, _data) => {
     const $pscopy = document.querySelector('select[name="PageSize"]')
     const $wcopy = document.querySelector('input[name="PageHeight"]')
     $pscopy.onchange=(e)=>{
-        if( $pscopy!=undefined && $pscopy!=null){
+        if( NullCheck($pscopy)){
             if( $pscopy.value!='Özel'){
                 $wcopy.parentNode.parentNode.style.display='none'
                 $hcopy.parentNode.parentNode.style.display='none'
@@ -73,8 +73,8 @@ export const SetConfig = (state, _data) => {
   
 }
 export const ChangeFontEvent = (state,payload)=>{
-    if(payload.font!=undefined){
-        if(payload.status==undefined){
+    if(NullCheck(payload.font)){
+        if(NullCheck(payload.status)){
             const hasPixel =payload.input.indexOf('px')!=-1
             state.UI.SELECT.$font.style[payload.font]=hasPixel?payload.input:payload.input+'pt'
         }else if(payload.status==true)
@@ -86,13 +86,13 @@ export const ChangeFontEvent = (state,payload)=>{
 const ChangeFontSize=(state,e)=>{
     $('.'+state.UI.FIELDCLASS+'.active').removeClass('active')
     state.UI.SELECT.$font=e.currentTarget
-    if(state.UI.SELECT.$font!=null)
+    if(NullCheck(state.UI.SELECT.$font))
         state.UI.SELECT.$font.classList.add('active')
     
     dispatch({type:actionTypes.CLONE.FONT_ITEM_SELECT,payload:{element:state.UI.SELECT.$font}})
 }
 const DefaultFontSize= (element,style)=>{
-    if(style==''){
+    if(NullCheck(style)){
         element.style.fontSize='10pt'
         element.style.fontStyle='normal'
         element.style.fontWeight='normal'
@@ -117,7 +117,7 @@ const UICloneText = (state,menuitem,payload)=>{
                 payload: cloneId
             })
         }
-        if(value.Format!=''){
+        if(NullCheck(value.Format)){
             textclone.innerHTML=value[TYPE_TEXT.VALUE]
             dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:value}})
         }else{
@@ -168,13 +168,13 @@ const UICloneText = (state,menuitem,payload)=>{
             .on('resize', extractCss)
             .css({ border: 'none', left: left + 'px', top: top + 'px' })
             .disableSelection()
-        if(payload.text!=undefined && payload.text!=null && payload.text.style!=undefined &&  payload.text.style!=''){
+        if(NullCheck(payload.text) && NullCheck(payload.text.style)){
             $(cloneItem.element).css(payload.text.style)
         }else{
-            if(cloneItem.value.Style!='')
+            if(NullCheck(cloneItem.value.Style))
                 $(cloneItem.element).css(cloneItem.value.Style)
         }
-        if(payload.Style!=undefined && payload.Style!=null){
+        if(NullCheck(payload.Style)){
             $(cloneItem.element).css(payload.Style)
         }
         extractCss()
@@ -198,7 +198,7 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
                 _table=el
             }
         }
-        if(_table==null){
+        if(!NullCheck(_table)){
             Index.Index++
             const _div = document.createElement('div')
             _div.classList.add(state.UI.TABLEMAINCLASS)
@@ -221,9 +221,12 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
                 Style:'',
                 RowIndex:-1
             }
-            $div.resizable().on('resize', function(_e) {
+            // .resizable()
+            $div
+            .on('resize', function(_e) {
                 _table.Style=extractCss($div)
-            }).draggable({
+            })
+            .draggable({
                 containment: DROPID,
                 cursor: 'move',
                 addClasses: false,
@@ -231,7 +234,7 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
                     _table.Style=extractCss($div)
                 },
             })
-            if(payload.Table!=undefined && payload.Table!=null && payload.Table.Style!=undefined && payload.Table.Style!=null && payload.Table.Style!=''){
+            if(NullCheck(payload.Table) && NullCheck(payload.Table.Style)){
                 $div.css(payload.Table.Style)
             }else{
                 $div.css({ top:'500px', left: '20px' })
@@ -246,7 +249,7 @@ const UICloneTable = (state,menuitem,payload)=>{
 
     return new Promise((resolve,_reject)=>{
         const {value,element,ToolValue,Index } =menuitem
-        UICloneCreateTable(state,menuitem.value.TableKey,payload).then((_divtable)=>{
+        UICloneCreateTable(state,value.TableKey,payload).then((_divtable)=>{
             const CalC_Table = ()=>{
                 let x_width = 0
                 let leng = _divtable.children.length
@@ -260,16 +263,20 @@ const UICloneTable = (state,menuitem,payload)=>{
             }
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
-            let _divrow = null
+            if(payload.load!=true){
+                value.RowIndex='0'
+            }
+            let rowQuery='div[data--row-index="'+value.RowIndex+'"]'
+            let _divrow
+            const _divrow0 = _divtable.element[0].querySelector(rowQuery)
             _Clone_Index.Index++
-            if(_divtable.RowIndex==-1){
-                _divtable.RowIndex++   
+            if(!NullCheck(_divrow0)){
                 _divrow= document.createElement('div')
                 _divrow.classList.add(state.UI.TABLEROWCLASS)
-                _divrow.dataset.RowIndex=_divtable.RowIndex
+                _divrow.dataset.RowIndex=value.RowIndex
                 _divtable.element[0].appendChild(_divrow)
             }else{
-                _divrow= _divtable.element[0].querySelector('div[data--row-index="0"]')
+                _divrow=_divrow0
             }
             const _divcolumn = document.createElement('div')
             _divcolumn.classList.add(state.UI.TABLECOLUMNCLASS)
@@ -279,20 +286,20 @@ const UICloneTable = (state,menuitem,payload)=>{
             DefaultFontSize(_divcolumn,value.Style)
             $(_divcolumn).width(value.Width).height(value.Height)
             if(payload.load!=true){
-                if(payload.Column!=undefined && payload.Column!=null && 
-                    payload.Column.Style!=undefined && payload.Column.Style!=null && payload.Column.Style!=''){
+                if(NullCheck(payload.Column) && NullCheck(payload.Column.Style)){
                     $(_divcolumn).css(payload.Column.Style)
-                }else if (value.Style!=undefined && value.Style!=null && value.Style!=''){
+                }else if (NullCheck(value.Style)){
                     $(_divcolumn).css(value.Style)
                 }
             }else{
                 $(_divcolumn).css(payload.Column.Style)
             }
-            _divcolumn.dataset.columnIndex =menuitem.value.ColumnIndex
-            _divcolumn.style.order=menuitem.value.ColumnIndex
+            _divcolumn.dataset.columnIndex =value.ColumnIndex
+            _divcolumn.dataset.RowIndex=value.RowIndex
+            _divcolumn.style.order=value.ColumnIndex
             _divcolumn.style.transition='order 1s'
             
-            if(value.Format!=''){
+            if(NullCheck(value.Format)){
                 _divcolumn.innerHTML= value[TYPE_TABLE.VALUE]
                 dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:_divcolumn,value:value}})
             }else{
@@ -305,8 +312,8 @@ const UICloneTable = (state,menuitem,payload)=>{
                 Index: _Clone_Index.Index,
                 element: _divcolumn,
                 value:value,
-                RowIndex:_divrow.dataset.RowIndex,
-                ColumnIndex:menuitem.element.dataset.columnIndex,
+                RowIndex:value.RowIndex,
+                ColumnIndex:value.ColumnIndex,
                 ToolValue,
                 menuindex:Index,
                 menuelement:element
@@ -318,14 +325,14 @@ const UICloneTable = (state,menuitem,payload)=>{
            
             $colres.on('resize',  function(_e) {
                 let style = styleToObject (_divcolumn)
-                if(style.width!=undefined){
+                if(NullCheck(style.width)){
                     CalC_Table()
                     elements.value.Style=styleToObject ( _divcolumn)
                 }else{
                     elements.value.Style= style
                 }
                 _divcolumn.parentNode.parentNode.querySelectorAll('[class="p-row"]').forEach((celement)=>{
-                    if(celement!=undefined){
+                    if(NullCheck(celement)){
                         const ccolumn=$(celement).find('.'+value.ItemKey).first()
                         ccolumn[0].style.width=elements.value.Style.width
                     }
@@ -337,43 +344,32 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divtable.childIndex.push(elements.menuindex)
             CalC_Table()
             elements.value.Style=styleToObject (_divcolumn)
-            const ccopySize =parseInt(state.Print.PageProduct)
-            const dchildren=_divtable.element[0].querySelectorAll('div[class="p-row"]')
-            for (let i = 1; i < dchildren.length; i++) {
-                const cchildren = dchildren[i]
-                if(cchildren!=undefined){
-                    _divtable.element[0].removeChild(cchildren)
+            if(payload.load!=true){
+                const ccopySize =parseInt(state.Print.PageProduct)
+                const dchildren=_divtable.element[0].querySelectorAll('div[class="p-row"]')
+                for (let i = 1; i < dchildren.length; i++) {
+                    const cchildren = dchildren[i]
+                    if(NullCheck(cchildren)){
+                        _divtable.element[0].removeChild(cchildren)
+                    }
                 }
-            }
-            if(ccopySize>1){
-                for (let i =0; i < ccopySize; i++) {
-                    const cloneCopy = dchildren[0].cloneNode(true)
-                    if(cloneCopy!=undefined){
-                        cloneCopy.dataset.RowIndex =i
-                        _divtable.element[0].appendChild(cloneCopy)
+                if(ccopySize>1){
+                    for (let i =0; i < ccopySize; i++) {
+                        const cloneCopy = dchildren[0].cloneNode(true)
+                        if(NullCheck(cloneCopy)){
+                            cloneCopy.dataset.RowIndex =i
+                               $(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS).removeClass(state.UI.FIELDCLASS)
+                               $(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS+'>.ui-resizable-e').remove()
+                            _divtable.element[0].appendChild(cloneCopy)
+                        }
                     }
                 }
             }
+            
             resolve(elements)
             
         })
     })
-}
-const SetMenuItem = (Menu,menuindex,ColumnIndex)=>{
-    for (let i = 0; i < Menu.length; i++) {
-        const item = Menu[i]
-        if(item!=undefined &&item.value.ColumnIndex!=undefined){
-            if(parseInt(item.value.ColumnIndex)==parseInt(ColumnIndex)){
-                let oldindex =Menu[menuindex].element.dataset.columnIndex
-                item.element.dataset.columnIndex=oldindex
-                item.value.ColumnIndex=oldindex
-                Menu[menuindex].element.dataset.columnIndex=ColumnIndex
-                Menu[menuindex].value.ColumnIndex=ColumnIndex
-                $(item.element).detach().insertBefore(Menu[menuindex].element)
-            }
-        }
-        
-    }
 }
 const SearchMenuItem = (Menu,Index)=>{
     const _xitem ={}
@@ -388,13 +384,13 @@ const SearchMenuItem = (Menu,Index)=>{
 }
 const AddCloneItem= (payload,state,success) =>{
     let itemValue=null
-    if(payload.MenuValue!=undefined){
+    if(NullCheck(payload.MenuValue)){
         itemValue =payload.MenuValue
     }
     const _xitem = SearchMenuItem(state.UI.PANEL.Menu,payload.Index)
     const { item } = _xitem
-    if (item!=undefined && item!=null && payload.Index!=undefined) {
-        if(itemValue!=null && itemValue!=undefined)
+    if (NullCheck(item) && NullCheck(payload.Index)) {
+        if(NullCheck(itemValue))
             item.value=itemValue
         switch (item.value.ItemType) {
         case state.Clone.Type.TEXT.FIELD:
