@@ -12,7 +12,8 @@ export const SetJsonData = (state,payload,success)=>{
         return {
             Index:x.Index,
             ToolValue:x.ToolValue,
-            value:x.value
+            value:x.value,
+            Sort:x.Sort
         }
     })
     JsonData.Tables =Items.Clone.Items.Tables.map(x=>{
@@ -70,7 +71,7 @@ const GetPrintInit = (state)=> {
                 const cl2 =clnode.cloneNode(true)
                 cl2.style.position='absolute'
                 if(state.Print.CopyDirection=='Yanyana'){
-                 //   let cw = state.Cache.Print.width
+                    //   let cw = state.Cache.Print.width
                     let cw = $(cl2).width()
                     cl2.style.width=cw + 'px'
                     cl2.style.left=cw*i +'px'

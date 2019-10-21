@@ -4,6 +4,8 @@ import '../../_plugin/js/used/bootstrap.min.js'
 
 import { dispatch,addReducer, StyleParamClick } from '../reducer'
 import { actionTypes } from '../reducer/const'
+import JsonToHtml from '../reducer/actions/html/json.js'
+
 const { subscribe }  = addReducer
 const Init = function (payload,fontSelects) {
     for (let i = 0; i < fontSelects.length; i++) {
@@ -12,4 +14,4 @@ const Init = function (payload,fontSelects) {
     dispatch({ type: actionTypes.INIT.FETCHED, payload })
 }
 window.$_FATURA ={ Init ,actionTypes,dispatch,subscribe}
-export { Init ,actionTypes,dispatch,subscribe}
+export { Init ,actionTypes,dispatch,subscribe,JsonToHtml}

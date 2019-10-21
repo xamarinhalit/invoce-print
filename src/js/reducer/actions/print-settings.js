@@ -23,8 +23,8 @@ const setPageSize = (_print) => {
         _height=21.0
         break
     default: // ÖZEL
-        _width=_w
-        _height=_h
+        _width=_print.PageWidth
+        _height=_print.PageHeight
         break
     }
     width=cmToPixel(_width)

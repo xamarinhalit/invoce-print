@@ -13,7 +13,7 @@ import '../scss/index.scss'
 // import '../_plugin/js/used/bootstrap.min.js'
 
 (function () {
-    const { subscribe, dispatch , actionTypes, Init } =require('./module')
+    const { subscribe, dispatch , actionTypes, Init,JsonToHtml } =require('./module')
     const GetFormat =(element)=>{
 
         let deger =element.ItemValue
@@ -306,6 +306,43 @@ import '../scss/index.scss'
             App.Event.Modal.PrintSettings()
             App.Event.Modal.PrintSettingsClick()
             App.Event.LoadConfigHttp()
+        },
+        OnlyLoadJson:(state)=>{
+            App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',type:'GET'}).then((data)=>{
+                if(data!=undefined && data.length>0){
+                    JsonToHtml(state,data[1],(_data)=>{
+                        const {element,hstyle,hbstyle} = _data
+                        
+                        $(element).printThis({
+                            debug: false, // show the iframe for debugging
+                            importCSS: true, // import parent page css
+                            importStyle: true, // import style tags
+                            printContainer: true, // print outer container/$.selector
+                            pageTitle: '', // add title to print page
+                            removeInline: false, // remove inline styles from print elements
+                            removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
+                            printDelay: 0, // variable print delay
+                            header:hstyle, // prefix to html
+                            footer: null, // postfix to html
+                            base: false, // preserve the BASE tag or accept a string for the URL
+                            formValues: true, // preserve input/form values
+                            canvas: false, // copy canvas content
+                            removeScripts: false, // remove script tags from print content
+                            copyTagClasses: true, // copy classes from the html & body tag
+                            beforePrintEvent: null, // function for printEvent in iframe
+                            beforePrint: null, // function called before iframe is filled
+                            afterPrint: null // function called before iframe is removed
+                        })
+                        // const myWindow = window.open("", "MsgWindow","")
+                        // const head = document.createElement('style')
+                        // head.innerHTML=hbstyle
+                        // myWindow.document.head.appendChild(head)
+                        // myWindow.document.write(element.innerHTML)
+                    })
+
+                }
+            })
+
         }
     }
 
@@ -317,6 +354,7 @@ import '../scss/index.scss'
                 App.InitConfig.data=data.Tools
                 Init(App.InitConfig ,App.fontSelects)
                 App.PageInit()
+                //App.OnlyLoadJson(state)
             })
         })
         dispatch({type:actionTypes.INIT.OVERRIDE_TYPE})

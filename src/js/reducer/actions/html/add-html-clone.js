@@ -1,104 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-undef */
-import { dispatch} from '..'
-import { actionTypes } from '../const'
-import { styleToObject,  CalcLeftTop, NullCheck } from './convert'
-export const StyleParamClick = ({selector,readselector,defaultvalue})=>{
-    $('li[data-'+selector+']').click((e)=>{
-        $('li[data-'+selector+']').each((i,ele)=>{
-            if(ele!=undefined && e.currentTarget!= ele){
-                if(ele.classList.contains('active')){
-                    ele.classList.remove('active')
-                }
-            }
-        })
-        e.currentTarget.classList.toggle('active')
-        const elactive = e.currentTarget.classList.contains('active')
-        dispatch({type:actionTypes.CLONE.FONT_CHANGE,payload:{ font:selector,style:e.currentTarget.dataset[readselector],status:elactive,defaultvalue}})
-    })
-}
-
-export const SetConfig = (state, _data) => {
-    state.UI.$CONTENT
-        .droppable({
-            accept: '.' + state.UI.DRAGCLASS + '>li',
-            classes: {
-                'ui-droppable-active': 'ui-state-active',
-                'ui-droppable-hover': 'ui-state-hover'
-            },
-            drop: (event, ui) => {
-                const {left,top } =CalcLeftTop(ui.offset,state.UI.$CONTENT.offset())
-                dispatch({
-                    type: actionTypes.CLONE.ADD_CLONEITEM,
-                    payload:{
-                        Index:ui.helper[0].dataset.Index,
-                        left,top
-                    }
-                })
-            }
-        })
-        .disableSelection()
-        //.css({ margin: '2px' })
-    const $pcopy = document.querySelector('select[name="PageCopy"]')
-    const $dcopy = document.querySelector('select[name="CopyDirection"]')
-    $pcopy.onchange=(e)=>{
-        if(NullCheck($pcopy)){
-            if($pcopy.value=='1'){
-                $dcopy.parentNode.parentNode.style.display='none'
-            }else{
-                $dcopy.parentNode.parentNode.style.display='block'
-            }
-        }else{
-            $dcopy.parentNode.parentNode.style.display='none'
-        }
-    }
-    const $hcopy = document.querySelector('input[name="PageWidth"]')
-    const $pscopy = document.querySelector('select[name="PageSize"]')
-    const $wcopy = document.querySelector('input[name="PageHeight"]')
-    $pscopy.onchange=(e)=>{
-        if( NullCheck($pscopy)){
-            if( $pscopy.value!='Özel'){
-                $wcopy.parentNode.parentNode.style.display='none'
-                $hcopy.parentNode.parentNode.style.display='none'
-            }else{
-                $wcopy.parentNode.parentNode.style.display='block'
-                $hcopy.parentNode.parentNode.style.display='block'
-            }
-        }else{
-            $wcopy.parentNode.parentNode.style.display='none'
-            $hcopy.parentNode.parentNode.style.display='none'
-        }
-    }
-  
-}
-export const ChangeFontEvent = (state,payload)=>{
-    if(NullCheck(payload.font)){
-        if(!NullCheck(payload.status)){
-            state.UI.SELECT.$font.style[payload.font]=payload.input
-        }else if(payload.status==true && NullCheck(payload.style))
-            state.UI.SELECT.$font.style[payload.font]=payload.style
-        else 
-            state.UI.SELECT.$font.style[payload.font]=payload.defaultvalue
-        if( NullCheck(state.UI.SELECT.$font)){
-            const parent =$(state.UI.SELECT.$font).parents('.'+state.UI.TABLEMAINCLASS)
-            const className='.'+ state.UI.SELECT.$font.className.replace(' '+state.UI.FIELDCLASS,'').replace(' '+state.UI.TABLECOLUMNCLASS,' ').replace(' ui-resizable active','').replace(' ','.')
-            parent.find(className).each((ii,ix)=>{
-                if(ix!=undefined)
-                    ix.style.cssText=state.UI.SELECT.$font.style.cssText
-            })
-
-        }
-    }
-}
-const ChangeFontSize=(state,e,value)=>{
-    $('.'+state.UI.FIELDCLASS+'.active').removeClass('active')
-    state.UI.SELECT.$font=e.currentTarget
-    if(NullCheck(state.UI.SELECT.$font))
-        state.UI.SELECT.$font.classList.add('active')
-    
-    dispatch({type:actionTypes.CLONE.FONT_ITEM_SELECT,payload:{element:state.UI.SELECT.$font,value:value}})
-}
+import { dispatch} from '../..'
+import { actionTypes } from '../../const'
+import { styleToObject,  NullCheck } from './../convert'
 const DefaultFontSize= (element,style)=>{
     if(NullCheck(style)){
         element.style.fontSize='10pt'
@@ -116,26 +21,13 @@ const UICloneText = (state,menuitem,payload)=>{
         textclone.classList.add(value[TYPE_TEXT.ITEMKEY])
         textclone.classList.add(state.UI.FIELDCLASS)
         textclone.dataset.cloneId = _Clone_Index.Index
-        const textremove = document.createElement('i')
-        textremove.className='fa fa-times Remove'
-        textremove.onclick=(e)=>{
-            const { cloneId } = textclone.dataset
-            dispatch({
-                type: actionTypes.CLONE.REMOVE_CLONEITEM,
-                payload: cloneId
-            })
-        }
         if(NullCheck(value.Format)){
             textclone.innerHTML=value[TYPE_TEXT.VALUE]
             dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:value}})
         }else{
             textclone.innerHTML=value[TYPE_TEXT.VALUE]
         }
-        textclone.appendChild(textremove)
         DefaultFontSize(textclone,value.Style)
-        
-        textclone.onclick=(e)=>ChangeFontSize(state,e,value)
-
         const cloneItem = {
             Index: _Clone_Index.Index,
             element: textclone,
@@ -144,8 +36,6 @@ const UICloneText = (state,menuitem,payload)=>{
             menuindex:Index,
             menuelement:element
         }
-        state.Clone.Items.Clons.push(cloneItem)
-       
         const extractCss=()=>{
             const style =styleToObject(cloneItem.element)
             // eslint-disable-next-line require-atomic-updates
@@ -153,26 +43,13 @@ const UICloneText = (state,menuitem,payload)=>{
         }
         const { left,top} = payload
        
-        state.UI.$CONTENT.append(cloneItem.element)
+        state.UI.$CacheContent.append(cloneItem.element)
         
         $(cloneItem.element)
             .css({ position: 'absolute' })
             .width(cloneItem.value.Width)
             .height(cloneItem.value.Height)
             .offset({ left: left, top: top })
-            .draggable({
-                containment: state.UI.DROPID,
-                cursorAt: {
-                    top: cloneItem.element.offsetY,
-                    left: cloneItem.element.offsetX
-                },
-                cursor: 'move',
-                drag: extractCss
-            })
-            .resizable({
-                minHeight: cloneItem.value.Height,
-                minWidth:cloneItem.value.Width
-            })
             .on('resize', extractCss)
             .css({ border: 'none', left: left + 'px', top: top + 'px' })
             .disableSelection()
@@ -189,7 +66,50 @@ const UICloneText = (state,menuitem,payload)=>{
         resolve(cloneItem)
     })
 }
-
+export const GetPrintInit = (state)=> {
+    return new Promise((resolve)=>{
+        let hbstyle='body {'
+        hbstyle+='size: '+state.Print.PageSize+ ' '
+        hbstyle+=state.Print.PageType=='Dikey'?'landscape':'portrait' +';'
+        hbstyle+='padding:0;margin:0cm;}'
+        let hstyle= '<style>'
+        hstyle+='@page {'
+        hstyle+='size: '+state.Print.PageSize+ ' '
+        hstyle+=state.Print.PageType=='Dikey'?'landscape':'portrait' +';'
+        hstyle+='padding:0;margin:0cm;}</style>'
+        let clnode = state.UI.$CacheContent
+        clnode.removeAttribute('id')
+        let _div = null
+        if(state.Print.PageCopy>1){
+            _div=document.createElement('div')
+            _div.style.display='flex'
+            if(state.Print.CopyDirection=='Yanyana'){
+                _div.style.flexDirection='row'
+            }else{
+                _div.style.flexDirection='column'
+            }
+            for (let i = 0; i < parseInt(state.Print.PageCopy); i++) {
+                const cl2 =clnode.cloneNode(true)
+                cl2.style.position='absolute'
+                if(state.Print.CopyDirection=='Yanyana'){
+                 //   let cw = state.Cache.Print.width
+                    let cw = $(cl2).width()
+                    cl2.style.width=cw + 'px'
+                    cl2.style.left=cw*i +'px'
+                }else{
+                    let cw = $(cl2).height()
+                    //let cw = state.Cache.Print.height
+                    cl2.style.height=cw + 'px'
+                    cl2.style.top=cw*i +'px'
+                }
+                _div.appendChild(cl2)
+            }
+            resolve({element:_div,hstyle,hbstyle})
+        }else{
+            resolve({element:clnode,hstyle,hbstyle})
+        }
+    })
+}
 const UICloneCreateTable = (state,tablekey,payload)=>{
     return new Promise((resolve)=>{
         const extractCss=(_$div)=>{
@@ -219,7 +139,8 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
                 dispatch({type:actionTypes.CLONE.REMOVE_TABLE,payload:{table:_table}})
             }
             $div.prepend(button)
-            $(DROPID).append($div)
+            const $DROID=state.UI.$CacheContent
+            $DROID.appendChild($div[0])
             _table={
                 Index:Index.Index,
                 key:tablekey,
@@ -229,19 +150,7 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
                 Style:'',
                 RowIndex:-1
             }
-            // .resizable()
-            $div
-                .on('resize', function(_e) {
-                    _table.Style=extractCss($div)
-                })
-                .draggable({
-                    containment: DROPID,
-                    cursor: 'move',
-                    addClasses: false,
-                    drag: function(_el, _ui) {
-                        _table.Style=extractCss($div)
-                    },
-                })
+            
             if(NullCheck(payload.Table) && NullCheck(payload.Table.Style)){
                 $div.css(payload.Table.Style)
             }else{
@@ -271,9 +180,6 @@ const UICloneTable = (state,menuitem,payload)=>{
             }
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
-            if(state.UI.PANEL.config.defaultRow==true){
-                value.RowIndex='0'
-            }
             let rowQuery='div[data--row-index="'+value.RowIndex+'"]'
             let _divrow
             const _divrow0 = _divtable.element[0].querySelector(rowQuery)
@@ -313,7 +219,6 @@ const UICloneTable = (state,menuitem,payload)=>{
             }else{
                 _divcolumn.innerHTML= value[TYPE_TABLE.VALUE]
             }
-            _divcolumn.onclick=(e)=>ChangeFontSize(state,e,value)
             _divrow.appendChild(_divcolumn)
 
             const elements = {
@@ -326,54 +231,10 @@ const UICloneTable = (state,menuitem,payload)=>{
                 menuindex:Index,
                 menuelement:element
             }
-            const $colres=$(_divcolumn)
-            $colres.resizable({
-                grid: [1, state.UI.$CONTENT.width()]
-            })
-           
-            $colres.on('resize',  function(_e) {
-                let style = styleToObject (_divcolumn)
-                if(NullCheck(style.width)){
-                    CalC_Table()
-                    elements.value.Style=styleToObject ( _divcolumn)
-                }else{
-                    elements.value.Style= style
-                }
-                _divcolumn.parentNode.parentNode.querySelectorAll('[class="'+state.UI.TABLEROWCLASS+'"]').forEach((celement)=>{
-                    if(NullCheck(celement)){
-                        const ccolumn=$(celement).find('.'+value.ItemKey).first()
-                        ccolumn[0].style.width=elements.value.Style.width
-                    }
-                })
-            })
-            _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-s'))
-            _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
             _divtable.children.push(elements)
             _divtable.childIndex.push(elements.menuindex)
             CalC_Table()
             elements.value.Style=styleToObject (_divcolumn)
-            if(state.UI.PANEL.config.defaultRow==true){//DEFAULT
-                const ccopySize =parseInt(state.Print.PageProduct)
-                const dchildren=_divtable.element[0].querySelectorAll('div[class="'+state.UI.TABLEROWCLASS+'"]')
-                for (let i = 1; i < dchildren.length; i++) {
-                    const cchildren = dchildren[i]
-                    if(NullCheck(cchildren)){
-                        _divtable.element[0].removeChild(cchildren)
-                    }
-                }
-                if(ccopySize>1){
-                    for (let i =1; i < ccopySize; i++) {
-                        const cloneCopy = dchildren[0].cloneNode(true)
-                        if(NullCheck(cloneCopy)){
-                            cloneCopy.dataset.RowIndex =i
-                            $(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS).removeClass(state.UI.FIELDCLASS)
-                            $(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS+'>.ui-resizable-e').remove()
-                            _divtable.element[0].appendChild(cloneCopy)
-                        }
-                    }
-                }
-            }
-            
             resolve(elements)
             
         })

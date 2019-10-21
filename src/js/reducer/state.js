@@ -19,6 +19,7 @@ const State ={
         $FONTSIZE:null,
         $FONTSTYLE:null,
         $FONTWEIGHT:null,
+        $CacheContent:null,
         TABLE:{
             CLASSNAME:'m-Tool'
         },
