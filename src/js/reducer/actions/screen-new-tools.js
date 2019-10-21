@@ -1,5 +1,10 @@
 /* eslint-disable no-undef */
 import copyObject from './copy-object'
+// const SetMenuToJson = (Menu)=>{
+//     const obj = {}
+
+
+// }
 export const SetJsonData = (state,payload,success)=>{
     let Items =copyObject(state,true)
     let JsonData={}

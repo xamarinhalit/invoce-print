@@ -92,13 +92,11 @@ export const GetPrintInit = (state)=> {
                 const cl2 =clnode.cloneNode(true)
                 cl2.style.position='absolute'
                 if(state.Print.CopyDirection=='Yanyana'){
-                 //   let cw = state.Cache.Print.width
                     let cw = $(cl2).width()
                     cl2.style.width=cw + 'px'
                     cl2.style.left=cw*i +'px'
                 }else{
                     let cw = $(cl2).height()
-                    //let cw = state.Cache.Print.height
                     cl2.style.height=cw + 'px'
                     cl2.style.top=cw*i +'px'
                 }
@@ -166,6 +164,8 @@ const UICloneTable = (state,menuitem,payload)=>{
 
     return new Promise((resolve,_reject)=>{
         const {value,element,ToolValue,Index } =menuitem
+        value.ColumnIndex=parseInt(value.ColumnIndex)
+        value.RowIndex=parseInt(value.RowIndex)
         UICloneCreateTable(state,value.TableKey,payload).then((_divtable)=>{
             const CalC_Table = ()=>{
                 let x_width = 0

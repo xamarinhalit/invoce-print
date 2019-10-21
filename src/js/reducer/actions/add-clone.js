@@ -254,9 +254,9 @@ const UICloneCreateTable = (state,tablekey,payload)=>{
     })
 }
 const UICloneTable = (state,menuitem,payload)=>{
-
     return new Promise((resolve,_reject)=>{
         const {value,element,ToolValue,Index } =menuitem
+    
         UICloneCreateTable(state,value.TableKey,payload).then((_divtable)=>{
             const CalC_Table = ()=>{
                 let x_width = 0
@@ -400,6 +400,8 @@ const AddCloneItem= (payload,state,success) =>{
     if (NullCheck(item) && NullCheck(payload.Index)) {
         if(NullCheck(itemValue))
             item.value=itemValue
+        item.value.ColumnIndex=parseInt(item.value.ColumnIndex)
+        item.value.RowIndex=parseInt(item.value.RowIndex)
         switch (item.value.ItemType) {
         case state.Clone.Type.TEXT.FIELD:
             UICloneText(state,item,payload).then((_data)=>{
