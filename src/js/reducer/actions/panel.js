@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import { dispatch, addReducer } from '..'
 import { actionTypes } from '../const'
@@ -6,6 +7,7 @@ const TableCreate = (litarget)=>{
     if ($el) {
         const elinput = document.createElement('input')
         elinput.setAttribute('type','checkbox')
+        elinput.onchange=()=>false
         $el.prepend(elinput)
         const status={status:true}
         $el.onclick=(_e)=>{
@@ -35,7 +37,39 @@ const TableCreate = (litarget)=>{
         }
     }
 }
-const SetGroupItem=(state)=> {
+const SetGroupItem=(state,_Menu)=> {
+    const { TEXT, TABLE } = state.Clone.Type
+    _Menu.forEach(function(item) {
+        if (item != undefined && item!=null) {
+            const {  ToolValue, value } = item
+            if (value != undefined && value!=null) {
+                switch (value[TEXT.ITEMTYPE]) {
+                case TEXT.FIELD:
+                    AddGroupForPanel(item,TEXT,state)
+                    break
+                case TABLE.FIELD:
+                    // eslint-disable-next-line no-case-declarations
+                    const { li ,className}= AddGroupForPanel(item,TABLE,state)
+                    if(state.Clone.GroupItems[value.MenuRowIndex]==undefined)
+                        state.Clone.GroupItems[value.MenuRowIndex]='.'+className
+                    TableCreate(li)
+                    break
+                case TEXT.CUSTOMTEXT:
+                    AddGroupForPanel(item,TEXT,state)
+                    break
+                case TEXT.CUSTOMIMAGE:
+                    AddGroupForPanel(item,TEXT,state)
+                    break
+                default:
+                    break
+                }
+            }
+            
+        }
+    })
+    $('.'+state.UI.TABLE.CLASSNAME).PanelGroup(state.UI.PANEL.config,state)
+}
+const SetGroupItemOriginal=(state)=> {
     const { TEXT, TABLE } = state.Clone.Type
     let toolindex= -1
     state.Clone.Items.StaticItems.forEach(function(item) {
@@ -75,22 +109,23 @@ const SetGroupItem=(state)=> {
     })
     $('.'+state.UI.TABLE.CLASSNAME).PanelGroup(state.UI.PANEL.config,state)
 }
-const AddGroupForPanel= function(value ,o,s,state) {
+const AddGroupForPanel= function(item,o ,state) {
+    const { value, ToolValue} =item
     const { Clone}  = state
-    state.UI.PANEL.Index++
-    let groupNameId = 'menu-panel-' + state.UI.PANEL.Index
+   // state.UI.PANEL.Index++
+    let groupNameId = 'menu-panel-' +item.id
     const li = document.createElement('li')
-    li.dataset.Index=state.UI.PANEL.Index
+    li.dataset.Index=item.id
     li.style.cursor='pointer'
     const lii=document.createElement('i')
     lii.className=value[o.ICON]
     li.appendChild(lii)
     li.innerHTML+=value[o.ITEMTITLE]
-    if (Clone.GroupItems[s.Sort] == undefined) {
+    if (Clone.GroupItems[value.MenuRowIndex] == undefined) {
         const div = document.createElement('div')
         div.className=state.UI.TABLE.CLASSNAME
         const h2 = document.createElement('h2')
-        h2.innerText=s.ToolValue
+        h2.innerText=ToolValue
         const upi = document.createElement('i')
         h2.appendChild(upi)
         div.appendChild(h2)
@@ -103,10 +138,10 @@ const AddGroupForPanel= function(value ,o,s,state) {
         ul.appendChild(li)
         div.appendChild(ul)
         document.querySelector(state.UI.PANEL.config.container).appendChild(div)
-        Clone.GroupItems[s.Sort]='.'+groupNameId
+        Clone.GroupItems[value.MenuRowIndex]='.'+groupNameId
        
     }else {
-        document.querySelector( Clone.GroupItems[s.Sort]).appendChild(li)
+        document.querySelector( Clone.GroupItems[value.MenuRowIndex]).appendChild(li)
     }
     if(value.ItemType!=state.Clone.Type.TABLE.FIELD){
         $(li).draggable({
@@ -133,6 +168,7 @@ const AddGroupForPanel= function(value ,o,s,state) {
                     if ($el.classList.contains('active')) {
                         addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
                             if(_xdata!=null){
+                                // eslint-disable-next-line no-unused-vars
                                 addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
                                     // eslint-disable-next-line no-unused-vars
                                 })
@@ -152,11 +188,8 @@ const AddGroupForPanel= function(value ,o,s,state) {
     }
     
     state.UI.PANEL.Menu.push({
-        Index:state.UI.PANEL.Index,
+        ...item,
         element:li,
-        value:value,
-        Sort:s.Sort,
-        ToolValue:s.ToolValue
     })
     return { li, className:groupNameId}
 }
@@ -164,7 +197,7 @@ const GetMenuValue = (Menu,Index,columnIndex)=>{
     for (let i = 0; i < Menu.length; i++) {
         const item = Menu[i]
         if(item!=undefined){
-            if(item.Index==parseInt(Index)){
+            if(item.id==parseInt(Index)){
                 item.element.dataset.columnIndex=columnIndex
                 item.value.ColumnIndex=columnIndex
             }
@@ -182,7 +215,7 @@ $.fn.extend({
         const Islist = (ToolValue)=>{
             ilist.map(x=>{
                 if(x.ToolValue == ToolValue)
-                return true
+                    return true
             })
             return ilist.length==0
         }
@@ -213,7 +246,7 @@ $.fn.extend({
                                 $ul.css('display','none')
                                 $i.removeClass(down)
                                 $i.addClass(up)
-                               // ilist.push(item.Sort)
+                                // ilist.push(item.Sort)
                             }
                         }
                     })
@@ -227,7 +260,7 @@ $.fn.extend({
                             {
                                 $i.addClass(up)
                                 $i.removeClass(down)
-                               // ilist.push(item.Sort)
+                                // ilist.push(item.Sort)
                             }
                         }
                     })

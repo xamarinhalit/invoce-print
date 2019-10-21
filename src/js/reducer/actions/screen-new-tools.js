@@ -15,39 +15,21 @@ export const SetJsonData = (state,payload,success)=>{
     JsonData.Print = Items.Print
     JsonData.Menu = Items.UI.PANEL.Menu.map(x=>{
         return {
-            Index:x.Index,
+            id:x.id,
             ToolValue:x.ToolValue,
             value:x.value,
-            Sort:x.Sort
         }
     })
-    JsonData.Tables =Items.Clone.Items.Tables.map(x=>{
-        return {
-            Index:x.Index,
-            key:x.key,
-            children:x.children.map(y=>{
-                return {
-                    Index:y.Index,
-                    value:y.value,
-                    ColumIndex:y.ColumIndex,
-                    RowIndex:y.RowIndex,
-                    ToolValue:y.ToolValue,
-                    menuindex:y.menuindex,
-                }
-            }),
-            childIndex:x.childIndex,
-            ColumIndex:x.ColumIndex,
-            RowIndex:x.RowIndex,
-            value:x.value,
-            Style:x.Style
-        }
-    })
+    let tablesinc =0
+    const incTables= ()=>{
+        tablesinc--
+        return tablesinc
+    }
     JsonData.Clons =Items.Clone.Items.Clons.map(x=>{
         return {
-            Index:x.Index,
+            id:x.id!=undefined?x.id:incTables(),
             ToolValue:x.ToolValue,
             value:x.value,
-            menuindex:x.menuindex
         }
     })
     success(JsonData)

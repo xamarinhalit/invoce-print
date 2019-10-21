@@ -42,12 +42,6 @@ import '../scss/index.scss'
     }
     const App= {
         PageName:'Sayfa',
-        fontSelects : [
-            {selector:'font-style',readselector:'fontStyle',defaultvalue:'initial'},
-            {selector:'font-weight',readselector:'fontWeight',defaultvalue:'initial'},
-            {selector:'text-align',readselector:'textAlign',defaultvalue:'initial'},
-            {selector:'text-decoration',readselector:'textDecoration',defaultvalue:'initial'}
-        ],
         InitConfig :{ 
             target:'.m-Template-Page-Area',
             dragclass:'m-drag-ul',
@@ -56,7 +50,13 @@ import '../scss/index.scss'
             tablecolumnclass:'p-column',
             tablemainclass:'p-main',
             fieldclass:'p-field',
-            defaultRow:true
+            defaultRow:true,
+            FontSelects:[
+                {selector:'font-style',readselector:'fontStyle',defaultvalue:'initial'},
+                {selector:'font-weight',readselector:'fontWeight',defaultvalue:'initial'},
+                {selector:'text-align',readselector:'textAlign',defaultvalue:'initial'},
+                {selector:'text-decoration',readselector:'textDecoration',defaultvalue:'initial'}
+            ]
         },
         DefaultPrint :{
             PageCopy: 1,
@@ -114,23 +114,7 @@ import '../scss/index.scss'
                 }else{
                     App.$FONTSIZE.value='' 
                 }
-                App.fontSelects.forEach((v,i)=>{
-                    const d = $('li[data-'+v.selector+']')
-                    const v2=selectedelemet.style[v.selector]
-                    d.each((ii,ix)=>{
-                        if(ix!=undefined){
-                            const $ix=$(ix)
-                            const v1=$ix.data(v.readselector)
-                            if(v2==v1){
-                                if(!$ix.hasClass('active'))
-                                    $ix.addClass('active')
-                            }else{
-                                if($ix.hasClass('active'))
-                                    $ix.removeClass('active')
-                            }
-                        }
-                    })
-                })
+
             },
             ItemSelect:()=>{
                 subscribe(actionTypes.CLONE.FONT_ITEM_SELECT,(state,data)=>{
@@ -350,9 +334,16 @@ import '../scss/index.scss'
         subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{
             state.Clone.Type.TEXT.FIELD=0
             state.Clone.Type.TABLE.FIELD=2
-            App.Event.$HTTP({url:'http://localhost:3000/test',type:'GET'}).then((data)=>{
-                App.InitConfig.data=data.Tools
-                Init(App.InitConfig ,App.fontSelects)
+            state.Clone.Type.TABLE.DEFAULT=1
+            // App.Event.$HTTP({url:'http://localhost:3000/test',type:'GET'}).then((data)=>{
+            //     App.InitConfig.data=data.Tools
+            //     Init(App.InitConfig ,App.fontSelects)
+            //     App.PageInit()
+            //     //App.OnlyLoadJson(state)
+            // })
+            App.Event.$HTTP({url:'http://localhost:3000/menu',type:'GET'}).then((data)=>{
+                App.InitConfig.data=data.Menu
+                Init(App.InitConfig)
                 App.PageInit()
                 //App.OnlyLoadJson(state)
             })

@@ -20,6 +20,7 @@ const State ={
         $FONTSTYLE:null,
         $FONTWEIGHT:null,
         $CacheContent:null,
+        FontSelects:[],
         TABLE:{
             CLASSNAME:'m-Tool'
         },

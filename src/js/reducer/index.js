@@ -4,15 +4,19 @@ import { actionTypes } from './const'
 import { SetGroupItem, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,  PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
 const SetInit = (state,payload)=>{
     const {fieldclass,target,dragclass,accordion,defaultRow,
-        tablerowclass,tablecolumnclass,tablemainclass ,data} = payload
+        tablerowclass,tablecolumnclass,tablemainclass,FontSelects ,data} = payload
     let _value
     if(data && typeof data === 'object' && data.constructor === Array){
         _value=data
     }else if(data && typeof data === 'object' && data.constructor === Object){
         _value=data
     }
-    state.Clone.Items.StaticItems=_value
+    //state.Clone.Items.StaticItems=_value
     state.UI.$CONTENT = $(target)
+    state.UI.FontSelects=FontSelects
+    for (let i = 0; i < FontSelects.length; i++) {
+        StyleParamClick(FontSelects[i])
+    }
     state.UI.DROPID=target
     state.UI.DRAGCLASS=dragclass
     state.UI.ACCORDIONID=accordion
@@ -22,7 +26,7 @@ const SetInit = (state,payload)=>{
     state.UI.FIELDCLASS=fieldclass
     state.UI.PANEL.config.defaultRow=defaultRow
     SetConfig(state)
-    SetGroupItem(state)
+    SetGroupItem(state,_value)
 }
 const observers= []
 
@@ -79,6 +83,7 @@ const dispatch = (action,state=InitialState)=>{
         sendReducers(action.type,action.payload,state)
         break
     case actionTypes.CLONE.FONT_ITEM_SELECT:
+
         sendReducers(action.type,action.payload,state)
         break
     case actionTypes.HTTP.JSON_CONFIG_SAVE:

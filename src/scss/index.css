@@ -6,6 +6,7 @@
     padding: 15px;
     background-color: #c7e6e194 !important;
     color: rgba(70, 69, 59, 0.924);
+    margin-left:20px;
   }
   .table-style {
     border-width: 0;
@@ -7267,7 +7268,8 @@ ul.ui-autocomplete li.ui-menu-item div.item .Info {
 .p-text-content {
   position: fixed;
   width: calc(100% - 560px);
-  border-right: 1px solid #ccc;
+  border-right: 1px solid
+ #ccc;
   text-align: center;
   top: 1em;
   left: 5em;

@@ -1,5 +1,4 @@
-import { styleToObject, NullCheck } from './convert'
-
+import { styleToObject, NullCheck, CalC_Table } from './convert'
 /* eslint-disable no-undef */
 const RemoveReset = (state)=>{
     state.UI.SELECT.$font =null
@@ -7,55 +6,111 @@ const RemoveReset = (state)=>{
         $('.p-font-block').removeClass('p-active')
     },300)
 }
+const RemoveInputChecked = ({rowIndex,columnIndex},state)=>{
+    for (let i = 0; i < state.UI.PANEL.Menu.length; i++) {
+        const item = state.UI.PANEL.Menu[i]
+        if(item!=undefined && item.value.ColumnIndex==columnIndex && item.value.RowIndex==rowIndex){
+            if(item.element.classList.contains('active'))
+                item.element.classList.remove('active')
+            item.element.querySelector('input').checked=false
+        }
+        
+    }
 
+}
+const RemoveTableTo = ($child,i,state,success)=>{
+    if($child.length>i){
+        const $el = $child[i]
+        let { cloneId,rowIndex,columnIndex} = $el.dataset
+        RemoveTableItem({table:{cloneId:cloneId}},state,()=>{
+            i++
+            RemoveInputChecked({rowIndex,columnIndex},state)
+            RemoveTableTo($child,i,state,success)
+        })
+    }else{
+        success()
+    }
+}
 export const RemoveTable = (table,state,success)=>{
     const { Clone:_Clons }=state
     let removedTable=null
     const _Remove = (item)=>{
         if (NullCheck(item)) {
-            for (let i = 0; i < item.children.length; i++) {
-                const element = item.children[i]
-                if(element!=undefined){
-                    element.menuelement.children[0].checked=false
-                }
+            const tableitem=item.item
+            const $trow= $(tableitem.element).find('.'+state.UI.TABLEROWCLASS).first().find('.'+state.UI.TABLECOLUMNCLASS)
+            if($trow.length>0){
+                RemoveTableTo($trow,0,state,()=>{
+                    const removeindex=state.Clone.Items.Clons.indexOf(tableitem)
+                    state.Clone.Items.Clons.splice(removeindex,1)
+                    const reelement =tableitem.element.cloneNode(true)
+                    const style = styleToObject(tableitem.element)
+                    removedTable={element:reelement,style}
+                    RemoveReset(state)
+                    success(removedTable,state)
+                })
+            }else{
+                const removeindex=state.Clone.Items.Clons.indexOf(tableitem)
+                state.Clone.Items.Clons.splice(removeindex,1)
+                const reelement =tableitem.element.cloneNode(true)
+                const style = styleToObject(tableitem.element)
+                removedTable={element:reelement,style}
+                tableitem.element.parentNode.removeChild(tableitem.element)
+                RemoveReset(state)
+                success(removedTable,state)
             }
-            const reelement =item.element[0].cloneNode(true)
-            const style = styleToObject(item.element[0])
-            removedTable={element:reelement,style}
-            item.element[0].parentNode.removeChild(item.element[0])
+           
         }   
     }
     // eslint-disable-next-line no-unused-vars
-    _Clons.Items.Tables = _Clons.Items.Tables.filter(function(value) {
+    const _removedTable = {
+
+    }
+    for (let i = 0; i < _Clons.Items.Clons.length; i++) {
+        const value = _Clons.Items.Clons[i];
         if (value != undefined && value != null) {
-            if (value.Index !==table.table.Index) {
-                return true
-            } else {
-                _Remove(value)
-                return false
+            if (value.Index ==table.table.Index) {
+                _removedTable.item=value
+                _removedTable.index=i
+                break
             }
         }
-    })
-    RemoveReset(state)
-    success(removedTable,state)
+    }
+    _Remove(_removedTable)
+   
 }
+const GetTableItem = (state,tableKey,succes)=>{
+    for (let i = 0; i < state.Clone.Items.Clons.length; i++) {
+        const item = state.Clone.Items.Clons[i]
+        if(item.value.ItemType==state.Clone.Type.TABLE.DEFAULT && item.value.TableKey==tableKey){
+            succes(item)
+            break
+        }
+    }
+}
+
 export const RemoveTableItem = (table,state,success)=>{
     const { Clone:_Clons }=state
     const _Remove = (item)=>{
         return new Promise((resolve)=>{
-            const element = item.child
+            const element = item.item
             if(NullCheck(element)){
                 const reelement =element.element.cloneNode(true)
                 const restyle = styleToObject(element.element)
-                $(element.element).remove()
-                _Clons.Items.Tables[item.tindex].children.splice(item.index,1)
-                const tStyle = _Clons.Items.Tables[0].Style
-                _Clons.Items.Tables[item.tindex].childIndex.splice(item.index,1)
-                if(_Clons.Items.Tables[item.tindex].children.length==0){
-                    _Clons.Items.Tables[item.tindex].element[0].parentNode.removeChild(_Clons.Items.Tables[item.tindex].element[0])
-                    _Clons.Items.Tables.splice(item.tindex,1)
-                }
-                resolve({element:reelement,style:restyle,Table:{Style:tStyle}})
+                GetTableItem(state,element.value.TableKey,(tableitem)=>{
+                   
+                    $(element.element).remove()
+                    state.Clone.Items.Clons.splice(item.index,1)
+                    const tStyle = styleToObject(tableitem.element)
+                    const $trow= $(tableitem.element).find('.'+state.UI.TABLEROWCLASS).first()
+                    if($trow.length>0 && $trow[0].children.length==0){
+                        const removeindex=state.Clone.Items.Clons.indexOf(tableitem)
+                        $(tableitem.element).remove()
+                        state.Clone.Items.Clons.splice(removeindex,1)
+                    }else{
+                        CalC_Table($(tableitem.element),state)
+                    }
+                    resolve({element:reelement,style:restyle,Table:{Style:tStyle}})
+                })
             }else{
                 resolve()
             }
@@ -63,23 +118,17 @@ export const RemoveTableItem = (table,state,success)=>{
     }
     // eslint-disable-next-line no-unused-vars
     const _removeitem= {}
-    for (let i = 0; i <  _Clons.Items.Tables.length; i++) {
-        const _t =  _Clons.Items.Tables[i]
-        if(_t && _t.childIndex){
-            for (let j = 0; j < _t.childIndex.length; j++) {
-                const element = _t.childIndex[j]
-                if(parseInt(table.table.Index)==element){
-                    _removeitem.table=_t
-                    _removeitem.child=_t.children[j]
-                    _removeitem.index=j
-                    _removeitem.tindex=i
-                    break
-                }
+    for (let i = 0; i <  _Clons.Items.Clons.length; i++) {
+        const item =  _Clons.Items.Clons[i]
+        if(NullCheck(item) && item.value.ItemType==state.Clone.Type.TABLE.FIELD){
+            if(parseInt(table.table.Index)==parseInt(item.id) || parseInt(table.table.cloneId) == item.Index ){
+                _removeitem.item=item
+                _removeitem.index=i
+                break
             }
         }
-        
     }
-    if(NullCheck(_removeitem.table)){
+    if(NullCheck(_removeitem.item)){
         _Remove(_removeitem).then((reitem)=>{
             RemoveReset(state)
             success(reitem,state)

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export const CalcLeftTop = (uioffset ,mainoffset)=>{
     const { left: uleft, top: utop } =uioffset
     const { left: mleft, top: mtop } = mainoffset
@@ -14,8 +15,19 @@ export const NullCheck = (value)=>{
         return false
     return true
 }
-
-export const styleToObject = (element,_root=null)=>{
+export const CalC_Table = (elx,state)=>{
+    let x_width = 0
+    let _leng = elx.length
+    let $_el = elx.find('div.'+state.UI.TABLEROWCLASS)
+    const _el =$_el.first()
+    if(_leng>0 && elx[0].children.length>0){
+        x_width=_el[0].offsetWidth
+    }
+    if(x_width!=0){
+        $(_el[0].parentNode).width(x_width+($_el.length*10))
+    }
+}
+export const styleToObject = (element)=>{
     const out={}
     const elementStyle = element.style
     for (const prop of elementStyle) {

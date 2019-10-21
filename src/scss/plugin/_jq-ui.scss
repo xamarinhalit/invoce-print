@@ -4,6 +4,9 @@
     padding: 15px;
     background-color:#c7e6e194!important;
     color:rgba(70, 69, 59, 0.924);
+    &>div.p-row >div.p-field{
+        border:none!important;
+    }
 }
 
 .table-style {
