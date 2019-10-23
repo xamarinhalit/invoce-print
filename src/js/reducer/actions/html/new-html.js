@@ -16,7 +16,7 @@ export const AddCloneItemAsync = (payload) =>{
 }
 const SetPrintInit = ({Print,content})=> {
     return new Promise((resolve)=>{
-        let hbodystyle= `<style>'
+        let hbodystyle= `<style>
         body {
             size: ${Print.PageSize} ${Print.PageType=='Dikey'?'landscape':'portrait'};
             padding:0;margin:0cm;
@@ -30,7 +30,7 @@ const SetPrintInit = ({Print,content})=> {
               border: none;
           }
         </style>`
-        let hstyle= `<style>'
+        let hstyle= `<style>
         @page {
             size: ${Print.PageSize} ${Print.PageType=='Dikey'?'landscape':'portrait'};
             padding:0;margin:0cm;
