@@ -6,7 +6,9 @@
     padding: 15px;
     background-color: #c7e6e194 !important;
     color: rgba(70, 69, 59, 0.924);
-    margin-left:20px;
+  }
+  .ui-draggable-dragging > div.p-row > div.p-field {
+    border: none !important;
   }
   .table-style {
     border-width: 0;
@@ -7268,8 +7270,7 @@ ul.ui-autocomplete li.ui-menu-item div.item .Info {
 .p-text-content {
   position: fixed;
   width: calc(100% - 560px);
-  border-right: 1px solid
- #ccc;
+  border-right: 1px solid #ccc;
   text-align: center;
   top: 1em;
   left: 5em;
@@ -7357,5 +7358,40 @@ ul.ui-autocomplete li.ui-menu-item div.item .Info {
 
 .m-Template-Tools.active {
   pointer-events: fill;
+}
+
+select[name="loadname"] {
+  width: 100%;
+  height: 45px;
+  position: relative;
+}
+
+select[name="loadname"]::after {
+  content: '\f0d7';
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  color: #a8310d;
+  font-size: 45px;
+  z-index: 2;
+}
+
+select[name="loadname"] {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #ca3305;
+  font-size: 20px;
+  background-color: #91035115;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 /*# sourceMappingURL=index.css.map */

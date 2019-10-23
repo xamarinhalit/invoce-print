@@ -1,0 +1,41 @@
+@mixin mprint {
+    @media print {
+      border: none;
+    }
+    @media screen {
+      border-right-color: black;
+      border-right-style: solid;
+      border-right-width: 1px;
+    }
+}
+.p-main {
+    width: 100vw;
+    i.Remove {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 4px 5px 5px 6px;
+      background-color: #e8e7e7;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    &:hover {
+      i.Remove {
+        display: block;
+        color: black;
+      }
+    }
+    &:hover {
+      i.Remove:hover {
+        color: #ca4b53;
+        display: block;
+      }
+    }
+    .p-row {
+      display: inline-flex;
+      .p-column {
+        @include mprint();
+      }
+    }
+}

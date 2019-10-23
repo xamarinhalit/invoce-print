@@ -19,13 +19,13 @@ const setInputChecked = ({id,checked},state)=>{
         if(item!=undefined){
             if(item.id==id){
                 if(checked==true){
-                   // if(!item.element.classList.contains('active'))
-                        item.element.classList.add('active')
-                        item.element.querySelector('input').checked=true
+                    // if(!item.element.classList.contains('active'))
+                    item.element.classList.add('active')
+                    item.element.querySelector('input').checked=true
                 }else{
                     if(item.element.classList.contains('active'))
                         item.element.classList.remove('active')
-                        item.element.querySelector('input').checked=false
+                    item.element.querySelector('input').checked=false
                 }
                 _item=item
                 break
@@ -105,24 +105,6 @@ const AddCloneItemTo = (Clons,state,i)=>{
             })
         }
     })
-}
-const SetMenuItem = (Menu,menuindex,ColumnIndex,tablekey)=>{
-    for (let i = 0; i < Menu.length; i++) {
-        const item = Menu[i]
-        if(item!=undefined &&item.value.ColumnIndex!=undefined && item.value.TableKey!=undefined){
-            if(parseInt(item.value.ColumnIndex)==parseInt(ColumnIndex) &&  item.value.TableKey==tablekey){
-                if(menuindex!=item.Index){
-                    let oldindex =Menu[menuindex].element.dataset.columnIndex
-                    item.element.dataset.columnIndex=oldindex
-                    item.value.ColumnIndex=oldindex
-                    Menu[menuindex].element.dataset.columnIndex=ColumnIndex
-                    Menu[menuindex].value.ColumnIndex=ColumnIndex
-                    $(item.element).detach().insertBefore(Menu[menuindex].element)
-                }
-            }
-        }
-        
-    }
 }
 const LoadJson = (state,payload,success)=>{
     let value

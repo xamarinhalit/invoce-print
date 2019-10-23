@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,  PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
+import { SetGroupItem, AddCloneItemAsync, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,  PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
+import { JsonToHtmlPrint } from './actions/html/new-html'
 const SetInit = (state,payload)=>{
     const {fieldclass,target,dragclass,accordion,
         tablerowclass,tablecolumnclass,tablemainclass,FontSelects ,data} = payload
@@ -32,6 +33,11 @@ const observers= []
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
+    case actionTypes.CLONE.JSON_HTMLTOPRINT:
+        JsonToHtmlPrint(action.payload).then((_data)=>{
+            sendReducer(action.type,_data,state)
+        })
+        break
     case actionTypes.INIT.OVERRIDE_TYPE:
         sendReducer(action.type,{data:{}},state)
         break
@@ -42,10 +48,10 @@ const dispatch = (action,state=InitialState)=>{
         break
     case actionTypes.INIT.FETCHED:
         SetInit(state,action.payload)
-            sendReducer(action.type,action.payload.data,state)
+        sendReducer(action.type,action.payload.data,state)
         break
     case actionTypes.CLONE.ADD_CLONEITEM:
-        AddCloneItem(action.payload,state,data=>{
+        AddCloneItemAsync(action.payload,state).then(data=>{
             sendReducer(action.type,data,state)
         })
         break
@@ -82,7 +88,6 @@ const dispatch = (action,state=InitialState)=>{
         sendReducers(action.type,action.payload,state)
         break
     case actionTypes.CLONE.FONT_ITEM_SELECT:
-
         sendReducers(action.type,action.payload,state)
         break
     case actionTypes.HTTP.JSON_CONFIG_SAVE:

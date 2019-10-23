@@ -394,7 +394,6 @@ const AddCloneItem= (payload,state,success) =>{
             })
             break
         case state.Clone.Type.TABLE.DEFAULT:
-         
             UICloneCreateTable(state,item,payload,state.Clone.Items).then((_$table)=>{
                 success(_$table)
             })
@@ -403,7 +402,5 @@ const AddCloneItem= (payload,state,success) =>{
           
             break
         }
-       
     }
 }
-export default AddCloneItem
