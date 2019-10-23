@@ -162,24 +162,20 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
             button.className='fa fa-times Remove'
             button.style.right='-15px'
             $div.prepend(button)
-                button.onclick=_e=> {
-                    dispatch({type:actionTypes.CLONE.REMOVE_TABLE,payload:{table:{Index:$div.data('cloneId')}}})
-                }
+            button.onclick=_e=> {
+                dispatch({type:actionTypes.CLONE.REMOVE_TABLE,payload:{table:{Index:$div.data('cloneId')}}})
+            }
             $(DROPID).append($div)
             const _table={
                 ToolValue,
                 Index:$div.data('cloneId'),
-                element:null,
+                element:_div,
                 value:{
                     TableKey:value.TableKey,
                     ItemType:state.Clone.Type.TABLE.DEFAULT,
                     Style:null
                 },
-                children:[],
-                childIndex:[]
-               
             }
-            // .resizable()
             $div
                 .on('resize', function(_e) {
                     _table.value.Style=extractCss($div)
@@ -192,17 +188,25 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
                         _table.value.Style=extractCss($div)
                     },
                 })
-            if(NullCheck(payload.Table) && NullCheck(payload.Table.Style)){
+            if(value.ItemType==state.Clone.Type.TABLE.DEFAULT){
+                $div.css(value.Style)
+            }else if(NullCheck(payload.Table) && NullCheck(payload.Table.Style)){
                 $div.css(payload.Table.Style)
             }else{
                 $div.css({ top:'500px', left: '20px' })
             }
-            _table.element=$div[0]
+           
             _table.value.Style=extractCss($div)
             Items.Clons.push(_table)
-            resolve($div)
+            if(value.ItemType==state.Clone.Type.TABLE.DEFAULT)
+                resolve(_table)
+            else
+                resolve($div)
         }else{
-            resolve($_table)
+            if(value.ItemType==state.Clone.Type.TABLE.DEFAULT)
+                resolve(_table)
+            else
+                resolve($_table)
         }
     })
 }
@@ -273,12 +277,11 @@ const UICloneCreateTableOld = (state,tablekey,payload)=>{
 
 const UICloneTable = (state,menuitem,payload)=>{
     return new Promise((resolve,_reject)=>{
-        const {value,element,ToolValue,id:Index } =menuitem
+        const {value,element,ToolValue,id } =menuitem
         UICloneCreateTable(state,menuitem,payload,state.Clone.Items).then((_divtable)=>{
-            
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
-            if(state.UI.PANEL.config.defaultRow==true){
+            if(state.Print.DefaultRow==true){
                 value.RowIndex=0
             }
             let rowQuery='div[data--row-index="'+value.RowIndex+'"]'
@@ -307,7 +310,7 @@ const UICloneTable = (state,menuitem,payload)=>{
                     $(_divcolumn).css(value.Style)
                 }
             }else{
-                $(_divcolumn).css(payload.Column.Style)
+                $(_divcolumn).css(value.Style)
             }
             _divcolumn.dataset.columnIndex =value.ColumnIndex
             _divcolumn.dataset.rowIndex=value.RowIndex
@@ -325,7 +328,7 @@ const UICloneTable = (state,menuitem,payload)=>{
 
             const elements = {
                 Index: _Clone_Index.Index,
-                id:Index,
+                id,
                 ToolValue,
                 value,
                 element: _divcolumn
@@ -352,11 +355,9 @@ const UICloneTable = (state,menuitem,payload)=>{
             })
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-s'))
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
-            // _divtable.children.push(elements)
-            // _divtable.childIndex.push(elements.menuindex)
             CalC_Table(_divtable,state)
             elements.value.Style=styleToObject (_divcolumn)
-            if(state.UI.PANEL.config.defaultRow==true){//DEFAULT
+            if(state.Print.DefaultRow==true){//DEFAULT
                 const ccopySize =parseInt(state.Print.PageProduct)
                 const dchildren=_divtable[0].querySelectorAll('div[class="'+state.UI.TABLEROWCLASS+'"]')
                 for (let i = 1; i < dchildren.length; i++) {
@@ -370,6 +371,12 @@ const UICloneTable = (state,menuitem,payload)=>{
                         const cloneCopy = dchildren[0].cloneNode(true)
                         if(NullCheck(cloneCopy)){
                             cloneCopy.dataset.RowIndex =i
+                            const $fields =$(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS)
+                            $fields.each((ii,vv)=>{
+                                if(vv!=undefined){
+                                    vv.dataset.RowIndex =i
+                                }
+                            })
                             $(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS).removeClass(state.UI.FIELDCLASS)
                             $(cloneCopy).find('.'+state.UI.TABLECOLUMNCLASS+'>.ui-resizable-e').remove()
                             _divtable[0].appendChild(cloneCopy)
@@ -389,9 +396,8 @@ const SearchMenuItem = (Menu,Index,menuitem)=>{
         const item = Menu[ii]
         if(item.id==parseInt(Index)){
             if(NullCheck(menuitem)){
-                Menu[ii]={...item,...menuitem}
-                const itemi= Menu[ii]
-                _xitem.item = itemi
+                Menu[ii]={...menuitem,element:item.element}
+                _xitem.item =Menu[ii]
             }else{
                 _xitem.item = item
             }
@@ -400,25 +406,32 @@ const SearchMenuItem = (Menu,Index,menuitem)=>{
     }
     return _xitem
 }
+export const AddCloneItemAsync = (payload,state) =>{
+    return new Promise((resolve)=>{
+        AddCloneItem (payload,state,(data)=>{
+            resolve(data)
+        })
+    })
+}
 const AddCloneItem= (payload,state,success) =>{
     let itemValue=null
     if(NullCheck(payload.MenuValue)){
         itemValue =payload.MenuValue
     }
-    const _xitem = {
-
-    }
+    const _xitem = {}
     if(NullCheck(itemValue)){
-        const _x0item=  SearchMenuItem(state.UI.PANEL.Menu,payload.Index,itemValue)
-        _xitem.item=_x0item.item
+        if(itemValue.value.ItemType!= state.Clone.Type.TABLE.DEFAULT){
+            const _x0item=  SearchMenuItem(state.UI.PANEL.Menu,payload.Index,itemValue)
+            _xitem.item=_x0item.item
+        }else{
+            _xitem.item=itemValue
+        }
     }else{
         const _x0item=  SearchMenuItem(state.UI.PANEL.Menu,payload.Index,null)
         _xitem.item=_x0item.item
     }
     const { item } = _xitem
     if (NullCheck(item) && NullCheck(payload.Index)) {
-        item.value.ColumnIndex=item.value.ColumnIndex!=null ?parseInt(item.value.ColumnIndex):item.value.ColumnIndex
-        item.value.RowIndex=item.value.RowIndex!=null ?parseInt(item.value.RowIndex):item.value.RowIndex
         switch (item.value.ItemType) {
         case state.Clone.Type.TEXT.FIELD:
             UICloneText(state,item,payload).then((_data)=>{
@@ -426,6 +439,8 @@ const AddCloneItem= (payload,state,success) =>{
             })
             break
         case state.Clone.Type.TABLE.FIELD:
+            item.value.ColumnIndex=NullCheck(item.value.ColumnIndex) ?parseInt(item.value.ColumnIndex):item.value.ColumnIndex
+            item.value.RowIndex=NullCheck(item.value.RowIndex)?parseInt(item.value.RowIndex):item.value.RowIndex
             UICloneTable(state,item,payload).then((_data)=>{
                 success(_data)
             })
@@ -433,11 +448,19 @@ const AddCloneItem= (payload,state,success) =>{
         case state.Clone.Type.TEXT.CUSTOMTEXT:
             UICloneText(state,item,payload).then((_data)=>{
                 success(_data)
+               
             })
             break
         case state.Clone.Type.TEXT.CUSTOMIMAGE:
             UICloneText(state,item,payload).then((_data)=>{
                 success(_data)
+               
+            })
+            break
+        case state.Clone.Type.TABLE.DEFAULT:
+         
+            UICloneCreateTable(state,item,payload,state.Clone.Items).then((_$table)=>{
+                success(_$table)
             })
             break
         default:
@@ -446,6 +469,5 @@ const AddCloneItem= (payload,state,success) =>{
         }
        
     }
-    success(null)
 }
 export default AddCloneItem

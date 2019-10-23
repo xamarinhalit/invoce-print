@@ -1,4 +1,4 @@
-import { NullCheck } from './convert'
+import { NullCheck, styleToObject } from './convert'
 import { dispatch } from '..'
 import { actionTypes } from '../const'
 /* eslint-disable no-undef */
@@ -16,7 +16,20 @@ export const StyleParamClick = ({selector,readselector,defaultvalue})=>{
         dispatch({type:actionTypes.CLONE.FONT_CHANGE,payload:{ font:selector,style:e.currentTarget.dataset[readselector],status:elactive,defaultvalue}})
     })
 }
-
+const GetCloneItem = (state,cloneId)=>{
+    const _item ={
+        item:null
+    }
+    for (let i = 0; i < state.Clone.Items.Clons.length; i++) {
+        const item = state.Clone.Items.Clons[i]
+        if(item!=undefined && item.Index==cloneId){
+            _item.item=item
+            break
+        }
+        
+    }
+    return _item
+}
 export const ChangeFontEvent = (state,payload)=>{
     if(NullCheck(payload.font)){
         if(!NullCheck(payload.status)){
@@ -27,11 +40,24 @@ export const ChangeFontEvent = (state,payload)=>{
             state.UI.SELECT.$font.style[payload.font]=payload.defaultvalue
         if( NullCheck(state.UI.SELECT.$font)){
             const parent =$(state.UI.SELECT.$font).parents('.'+state.UI.TABLEMAINCLASS)
-            const className='.'+ state.UI.SELECT.$font.className.replace(' '+state.UI.FIELDCLASS,'').replace(' '+state.UI.TABLECOLUMNCLASS,' ').replace(' ui-resizable active','').replace(' ','.')
-            parent.find(className).each((ii,ix)=>{
-                if(ix!=undefined)
-                    ix.style.cssText=state.UI.SELECT.$font.style.cssText
-            })
+            if(parent.length==0){
+                const { cloneId } =  state.UI.SELECT.$font.dataset
+                const { item } = GetCloneItem(state,cloneId)
+                item.value.Style=styleToObject( state.UI.SELECT.$font)
+            }else{
+                const className='.'+ state.UI.SELECT.$font.className
+                    .replace(' '+state.UI.FIELDCLASS,'').replace(' '+state.UI.TABLECOLUMNCLASS,' ')
+                    .replace(' ui-resizable active','').replace(' ','.')
+                parent.find(className).each((ii,ix)=>{
+                    if(ix!=undefined){
+                        const { cloneId } = ix.dataset
+                        const { item } = GetCloneItem(state,cloneId)
+                        ix.style.cssText=state.UI.SELECT.$font.style.cssText
+                        item.value.Style=styleToObject(ix)
+                    }
+                })
+            }
+          
 
         }
     }

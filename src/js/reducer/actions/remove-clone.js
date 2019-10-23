@@ -78,7 +78,7 @@ export const RemoveTable = (table,state,success)=>{
     _Remove(_removedTable)
    
 }
-const GetTableItem = (state,tableKey,succes)=>{
+const GetTable = (state,tableKey,succes)=>{
     for (let i = 0; i < state.Clone.Items.Clons.length; i++) {
         const item = state.Clone.Items.Clons[i]
         if(item.value.ItemType==state.Clone.Type.TABLE.DEFAULT && item.value.TableKey==tableKey){
@@ -96,18 +96,18 @@ export const RemoveTableItem = (table,state,success)=>{
             if(NullCheck(element)){
                 const reelement =element.element.cloneNode(true)
                 const restyle = styleToObject(element.element)
-                GetTableItem(state,element.value.TableKey,(tableitem)=>{
-                   
+                GetTable(state,element.value.TableKey,(_table)=>{
+                    
                     $(element.element).remove()
                     state.Clone.Items.Clons.splice(item.index,1)
-                    const tStyle = styleToObject(tableitem.element)
-                    const $trow= $(tableitem.element).find('.'+state.UI.TABLEROWCLASS).first()
+                    const tStyle = styleToObject(_table.element)
+                    const $trow= $(_table.element).find('.'+state.UI.TABLEROWCLASS).first()
                     if($trow.length>0 && $trow[0].children.length==0){
-                        const removeindex=state.Clone.Items.Clons.indexOf(tableitem)
-                        $(tableitem.element).remove()
+                        const removeindex=state.Clone.Items.Clons.indexOf(_table)
+                        $(_table.element).remove()
                         state.Clone.Items.Clons.splice(removeindex,1)
                     }else{
-                        CalC_Table($(tableitem.element),state)
+                        CalC_Table($(_table.element),state)
                     }
                     resolve({element:reelement,style:restyle,Table:{Style:tStyle}})
                 })

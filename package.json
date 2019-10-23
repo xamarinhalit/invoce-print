@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
-    "start1": "webpack-dev-server --mode development --open firefox.exe",
+    "s": "webpack-dev-server --mode development",
+    "api": "json-server ./src/api/index.json",
     "build": "webpack --mode production",
-    "apiindex": "json-server ./src/api/index.json",
-    "apilist": "json-server ./src/api/list.json"
+    "apilist": "json-server ./src/api/list.json",
+    "_start1": "webpack-dev-server --mode development --open firefox.exe"
   },
   "keywords": [],
   "author": "",

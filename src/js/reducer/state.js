@@ -36,9 +36,8 @@ const State ={
                 container:'.m-Template-Tools',
                 panelupclass:'fa fa-chevron-up',
                 panelclass:'m-Tool',
-                defaultRow:true
+              
             },
-            
             Index:-1,
             Menu:[]
         }
@@ -49,9 +48,10 @@ const State ={
         PageSize: 'A4',
         PageType: 'Dikey',
         CopyDirection: 'Yanyana',
-        PageWidth: '21,00',
-        PageHeight: '29,70',
-        ImageUrl: 'https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg'
+        PageWidth: 21.00,
+        PageHeight: 29.70,
+        ImageUrl: 'https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg',
+        DefaultRow:true
     },
     Clone:{
         Type: {
@@ -81,17 +81,13 @@ const State ={
             }
         },
         SelectElement: {
-            DragSelect: 'm-drag-ul',
-            TEXT: '#TextField',
-            TABLE: '#TableField' /* It must be 'div' element */
+            DragSelect: 'm-drag-ul'
         },
         Index: {
             Index: 0,
         },
         Items: {
-            Tables:[],
-            Clons:[],
-            StaticItems:[]
+            Clons:[]
         },
         GroupItems: {}
     },

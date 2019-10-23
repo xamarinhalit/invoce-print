@@ -3,7 +3,7 @@ import InitialState from './state'
 import { actionTypes } from './const'
 import { SetGroupItem, AddCloneItem, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,  PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
 const SetInit = (state,payload)=>{
-    const {fieldclass,target,dragclass,accordion,defaultRow,
+    const {fieldclass,target,dragclass,accordion,
         tablerowclass,tablecolumnclass,tablemainclass,FontSelects ,data} = payload
     let _value
     if(data && typeof data === 'object' && data.constructor === Array){
@@ -24,7 +24,6 @@ const SetInit = (state,payload)=>{
     state.UI.TABLECOLUMNCLASS=tablecolumnclass
     state.UI.TABLEMAINCLASS=tablemainclass
     state.UI.FIELDCLASS=fieldclass
-    state.UI.PANEL.config.defaultRow=defaultRow
     SetConfig(state)
     SetGroupItem(state,_value)
 }

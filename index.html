@@ -8,213 +8,201 @@
 </head>
 
 <body>
-    <div>
-        <div class="modal fade" role="dialog" id="loadFormSetting">
-                <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form name="loadFormSetting">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Yazıcı Ayarları Geri Yükle</h4>
-                            </div>
-                            <div class="modal-body">
-                                    <select name="loadname">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                
-                            </div>
-                            <div class="modal-footer">
-                                    <div class="popup_alert left"> </div>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
-                                    <button type="button" class="btn btn-black" data-dismiss="modal" name="loadFormSettingBtn">Yükle</button>
-                            </div>
-                        </form>
-                        </div>
-                </div>
-        </div>
-        <div id="PopupSettings" class="modal fade" role="dialog">
+    <div  id="loadFormSetting" class="modal fade" role="dialog">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <form name="PanelPaperSetting">
+                    <div class="modal-content">
+                        <form name="loadFormSetting">
                         <div class="modal-header">
-                            <h4 class="modal-title">Şablon Ayarları</h4>
+                            <h4 class="modal-title">Yazıcı Ayarları Geri Yükle</h4>
                         </div>
-                        <div class="modal-body" style="padding-top:0;">
-                            <div class="container-fluid" style="margin:0; padding:0;">
-                                <div class="clear"></div>
-                                <div class="efar-popup-panel" id="PanelPaperSetting" style="min-height: 300px;">
-                                    <h2><i class="fa fa-file-text-o"></i>Kağıt Özellikleri </h2>
-                                    <p>Tek sayfada birden fazla fatura kopyanız varsa, aşağıdan kopya adedini seçiniz.
-                                        Faturanızın tek bir kopyasının boyutunu Genişlik ve Yükseklik olarak giriniz.
-                                    </p>
-
-                                    <div class="col-md-6">
-
-                                        <div class="form-group row">
-                                            <label class="col-md-5 label-title"> Kopya / Sayfa </label>
-                                            <div class="col-md-7">
-                                                <select class="form-control" name="PageCopy">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-5 label-title"> Kağıt Ebatı </label>
-                                            <div class="col-md-7">
-                                                <select class="form-control" name="PageSize">
-                                                    <option value="A4">A4</option>
-                                                    <option value="A5">A5</option>
-                                                    <option value="Özel">Özel</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row" >
-                                            <label class="col-md-5 label-title"> Kopya Yönü</label>
-                                            <div class="col-md-7">
-                                                <select class="form-control" name="CopyDirection">
-                                                    <option value="Yanyana">Yanyana</option>
-                                                    <option value="Altalta">Altalta</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-5 label-title"> Dikey/ Yatay </label>
-                                            <div class="col-md-7">
-                                                <select class="form-control" name="PageType">
-                                                    <option value="Dikey">Dikey</option>
-                                                    <option value="Yatay">Yatay</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row" style="display: none;">
-                                            <label class="col-md-5 label-title"> Genişlik </label>
-                                            <div class="col-md-7">
-                                                <input type="text" class="form-control efar-money" name="PageWidth">
-                                                <div class="prop-inner">cm</div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row" style="display: none;">
-                                            <label class="col-md-5 label-title"> Yükseklik </label>
-                                            <div class="col-md-7">
-                                                <input type="text" class="form-control efar-money" name="PageHeight">
-                                                <div class="prop-inner">cm</div>
-                                            </div>
-                                        </div>
-<!-- 
-                                        <div class="form-group row" >
-                                            <label class="col-md-5 label-title"> Görsel </label>
-                                            <div class="col-md-7">
-                                                <label for="image-upload" name="image-label" class="btn-efar-upload"
-                                                    style="display: none;">
-                                                    <i class="fa fa-upload"></i> Yükle
-                                                </label>
-                                                <label for="image-remove" class="btn-efar-upload remove"
-                                                    style="display: inline-block;">
-                                                    <i class="fa fa-remove" ></i> Kaldır
-                                                </label>
-                                            </div>
-                                        </div> -->
-
-                                        <div class="form-group row">
-                                            <label class="col-md-5 label-title"> Ürün Adedi</label>
-                                            <div class="col-md-7">
-                                                <select class="form-control" name="PageProduct">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="20">20</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-2">
-
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="hidden" name="ImageUrl">
-                                        <div name="image-preview" class="efar-image-preview"
-                                            style="width: 106.06px; height: 150px; background-size: cover; background-position: center center;">
-                                            <input type="file" name="image" name="image-upload">
-                                        </div>
-                                        <canvas name="PreviewCanvas" width="150" height="150">
-                                            https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage#fallback_content
-
-                                            An alternative text describing what your canvas displays.
-                                        </canvas>
-                                    </div>
-
-                                    <div class="clear"></div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
+                        <div class="modal-body">
+                            <select name="loadname">
+                            </select>
                         </div>
                         <div class="modal-footer">
-                            <div class="popup_alert left"> </div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
-                            <button type="button" class="btn btn-black" data-dismiss="modal" name="BtnSettingSave">Kaydet</button>
+                                <div class="popup_alert left"> </div>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
+                                <button type="button" class="btn btn-black" data-dismiss="modal" name="loadFormSettingBtn">Yükle</button>
                         </div>
                     </form>
-                </div>
-
+                    </div>
             </div>
-        </div>
-
-        <div id="PopupPrint" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
+    </div>
+    <div id="PopupSettings" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="PanelPaperSetting">
                     <div class="modal-header">
-                        <h4 class="modal-title">Yazdırma şablonunuzu test etmek için </h4>
+                        <h4 class="modal-title">Şablon Ayarları</h4>
                     </div>
                     <div class="modal-body" style="padding-top:0;">
                         <div class="container-fluid" style="margin:0; padding:0;">
-                            <div class="PdfRule">
-                                <ul>
-                                    <li>Aşağıdaki butonu kullanarak test bilgileri içeren PDF dosyasını açın.
-                                    </li>
-                                    <li>Matbu fatura veya irsaliyenizle aynı büyüklükte boş bir kağıda PDF
-                                        dosyasını yazdırın.</li>
-                                    <li>Yazdırdığınız test bilgilerini matbu fatura veya irsaliyenizin tam
-                                        üzerine yerleştirin.</li>
-                                    <li>Test çıktısını ve fatura veya irsaliyeyi ışığa doğru kaldırarak
-                                        bilgilerin doğru yere denk geldiğini kontrol edin.</li>
-                                    <li>Bilgiler doğru yere denk gelene kadar şablonu düzenleyip tekrar test
-                                        çıktısı yazdırın.</li>
-                                </ul>
+                            <div class="clear"></div>
+                            <div class="efar-popup-panel" id="PanelPaperSetting" style="min-height: 300px;">
+                                <h2><i class="fa fa-file-text-o"></i>Kağıt Özellikleri </h2>
+                                <p>Tek sayfada birden fazla fatura kopyanız varsa, aşağıdan kopya adedini seçiniz.
+                                    Faturanızın tek bir kopyasının boyutunu Genişlik ve Yükseklik olarak giriniz.
+                                </p>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group row">
+                                        <label class="col-md-5 label-title"> Kopya / Sayfa </label>
+                                        <div class="col-md-7">
+                                            <select class="form-control" name="PageCopy">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-5 label-title"> Kağıt Ebatı </label>
+                                        <div class="col-md-7">
+                                            <select class="form-control" name="PageSize">
+                                                <option value="A4">A4</option>
+                                                <option value="A5">A5</option>
+                                                <option value="Özel">Özel</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" >
+                                        <label class="col-md-5 label-title"> Kopya Yönü</label>
+                                        <div class="col-md-7">
+                                            <select class="form-control" name="CopyDirection">
+                                                <option value="Yanyana">Yanyana</option>
+                                                <option value="Altalta">Altalta</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-5 label-title"> Dikey/ Yatay </label>
+                                        <div class="col-md-7">
+                                            <select class="form-control" name="PageType">
+                                                <option value="Dikey">Dikey</option>
+                                                <option value="Yatay">Yatay</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" style="display: none;">
+                                        <label class="col-md-5 label-title"> Genişlik </label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control efar-money" name="PageWidth">
+                                            <div class="prop-inner">cm</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" style="display: none;">
+                                        <label class="col-md-5 label-title"> Yükseklik </label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control efar-money" name="PageHeight">
+                                            <div class="prop-inner">cm</div>
+                                        </div>
+                                    </div>
+<!-- 
+                                    <div class="form-group row" >
+                                        <label class="col-md-5 label-title"> Görsel </label>
+                                        <div class="col-md-7">
+                                            <label for="image-upload" name="image-label" class="btn-efar-upload"
+                                                style="display: none;">
+                                                <i class="fa fa-upload"></i> Yükle
+                                            </label>
+                                            <label for="image-remove" class="btn-efar-upload remove"
+                                                style="display: inline-block;">
+                                                <i class="fa fa-remove" ></i> Kaldır
+                                            </label>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="form-group row">
+                                        <label class="col-md-5 label-title"> Ürün Adedi</label>
+                                        <div class="col-md-7">
+                                            <select class="form-control" name="PageProduct">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-2">
+
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="hidden" name="ImageUrl">
+                                    <input type="hidden" name="DefaultRow">
+                                    <div name="image-preview" class="efar-image-preview"
+                                        style="width: 106.06px; height: 150px; background-size: cover; background-position: center center;">
+                                        <input type="file" name="image" name="image-upload">
+                                    </div>
+                                    <canvas name="PreviewCanvas" width="150" height="150">
+                                        https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage#fallback_content
+
+                                        An alternative text describing what your canvas displays.
+                                    </canvas>
+                                </div>
+
+                                <div class="clear"></div>
                             </div>
-                            <div class="PdfRuleNote">
-                                Dikkat! Dosyayı yazdırırken Sayfaya Sığdır (Fit to Page) şeçeneğinin <b>seçili
-                                    olmadığından</b> emin olun.
-                            </div>
+                            <div class="clear"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="popup_alert left"> </div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
-                        <button type="button" class="btn btn-black" id="BtnPdfOpen">PDF Dosyasını Aç</button>
+                        <button type="button" class="btn btn-black" data-dismiss="modal" name="BtnSettingSave">Kaydet</button>
                     </div>
-                </div>
-
+                </form>
             </div>
-        </div>
-        <div class="m-Template">
-                
+
         </div>
     </div>
-    
+    <div id="PopupPrint" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Yazdırma şablonunuzu test etmek için </h4>
+                </div>
+                <div class="modal-body" style="padding-top:0;">
+                    <div class="container-fluid" style="margin:0; padding:0;">
+                        <div class="PdfRule">
+                            <ul>
+                                <li>Aşağıdaki butonu kullanarak test bilgileri içeren PDF dosyasını açın.
+                                </li>
+                                <li>Matbu fatura veya irsaliyenizle aynı büyüklükte boş bir kağıda PDF
+                                    dosyasını yazdırın.</li>
+                                <li>Yazdırdığınız test bilgilerini matbu fatura veya irsaliyenizin tam
+                                    üzerine yerleştirin.</li>
+                                <li>Test çıktısını ve fatura veya irsaliyeyi ışığa doğru kaldırarak
+                                    bilgilerin doğru yere denk geldiğini kontrol edin.</li>
+                                <li>Bilgiler doğru yere denk gelene kadar şablonu düzenleyip tekrar test
+                                    çıktısı yazdırın.</li>
+                            </ul>
+                        </div>
+                        <div class="PdfRuleNote">
+                            Dikkat! Dosyayı yazdırırken Sayfaya Sığdır (Fit to Page) şeçeneğinin <b>seçili
+                                olmadığından</b> emin olun.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="popup_alert left"> </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
+                    <button type="button" class="btn btn-black" id="BtnPdfOpen">PDF Dosyasını Aç</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <div class="m-content">
         <form class="m-form">
             <div class="m-Template">

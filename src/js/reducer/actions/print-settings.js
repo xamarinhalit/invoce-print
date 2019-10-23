@@ -99,7 +99,6 @@ const SetPageCopy = (pcopy,copyd)=>{
 const PrintSetting= (state,payload,success)=>{
     state.Print={...payload}
     state.Clone.Items.Clons=[]
-    state.Clone.Items.Tables=[]
     state.Clone.Index.Index=0
     const $content =$(state.UI.$CONTENT[0])
     $content.html('')

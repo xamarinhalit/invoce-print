@@ -37,6 +37,8 @@ const TableCreate = (litarget)=>{
         }
     }
 }
+
+
 const SetGroupItem=(state,_Menu)=> {
     const { TEXT, TABLE } = state.Clone.Type
     _Menu.forEach(function(item) {
@@ -109,10 +111,11 @@ const SetGroupItemOriginal=(state)=> {
     })
     $('.'+state.UI.TABLE.CLASSNAME).PanelGroup(state.UI.PANEL.config,state)
 }
+
 const AddGroupForPanel= function(item,o ,state) {
     const { value, ToolValue} =item
     const { Clone}  = state
-   // state.UI.PANEL.Index++
+    // state.UI.PANEL.Index++
     let groupNameId = 'menu-panel-' +item.id
     const li = document.createElement('li')
     li.dataset.Index=item.id
@@ -160,29 +163,10 @@ const AddGroupForPanel= function(item,o ,state) {
             },
             stop:( _event, ui )=>{
                 let parents =ui.item[0].parentNode
-                for (let j = 0; j < parents.children.length; j++) {
-                    const $el = parents.children[j]
-                    $el.dataset.columnIndex=j
-                    let { Index} = $el.dataset
-                    GetMenuValue( state.UI.PANEL.Menu,Index,j)
-                    if ($el.classList.contains('active')) {
-                        addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
-                            if(_xdata!=null){
-                                // eslint-disable-next-line no-unused-vars
-                                addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
-                                    // eslint-disable-next-line no-unused-vars
-                                })
-                                dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index,Column:{Style:_xdata.style},Table:_xdata.Table}})
-                            }
-                        })
-                        dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
-                        // eslint-disable-next-line no-unused-vars
-                    } 
-                }
-                setTimeout(()=>{
-                    dispatch({type:actionTypes.CLONE.DRAG_STOP})
-                  
-                },250)
+                let i =0
+                GetMenuValue(parents.children,i,{Menu: state.UI.PANEL.Menu},state,()=>{
+                        dispatch({type:actionTypes.CLONE.DRAG_STOP})
+                })
             }
         })
     }
@@ -193,16 +177,46 @@ const AddGroupForPanel= function(item,o ,state) {
     })
     return { li, className:groupNameId}
 }
-const GetMenuValue = (Menu,Index,columnIndex)=>{
-    for (let i = 0; i < Menu.length; i++) {
-        const item = Menu[i]
-        if(item!=undefined){
-            if(item.id==parseInt(Index)){
-                item.element.dataset.columnIndex=columnIndex
-                item.value.ColumnIndex=columnIndex
+const GetMenuValue = ($chilren,j,{Menu},state,success)=>{
+    if($chilren.length>j){
+        const $el = $chilren[j]
+        let { Index:id} = $el.dataset
+        for (let i = 0; i < Menu.length; i++) {
+            const item = Menu[i]
+            if(item!=undefined){
+                if(item.id==id && item.value.ColumnIndex!=j){
+                    $el.dataset.columnIndex=j
+                    item.value.ColumnIndex=j
+                }
+            }
+        }
+        if ($el.classList.contains('active')) {
+            addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
+                if(_xdata!=null){
+                    // eslint-disable-next-line no-unused-vars
+                    addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
+                        j++
+                        if($chilren.length>j){
+                            GetMenuValue ($chilren,j,{Menu},state,success)
+                        }else{
+                            success()
+                        }
+                    })
+                    dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index:id,Column:{Style:_xdata.style},Table:_xdata.Table}})
+                }
+            })
+            dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index:id}}})
+            // eslint-disable-next-line no-unused-vars
+        }else{
+            j++
+            if($chilren.length>j){
+                GetMenuValue ($chilren,j,{Menu},state,success)
+            }else{
+                success()
             }
         }
         
+       
     }
 }
 
