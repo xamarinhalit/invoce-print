@@ -1,10 +1,5 @@
 /* eslint-disable no-undef */
 import copyObject from './copy-object'
-// const SetMenuToJson = (Menu)=>{
-//     const obj = {}
-
-
-// }
 export const SetJsonData = (state,payload,success)=>{
     let Items =copyObject(state,true)
     let JsonData={}
@@ -63,9 +58,6 @@ const GetPrintInit = (state)=> {
                 }
                 _div.appendChild(cl2)
             }
-          
-            // var myWindow = window.open("", "MsgWindow")
-            // myWindow.document.write(_div.innerHTML)
             $(_div).printThis({
                 debug: false, // show the iframe for debugging
                 importCSS: true, // import parent page css

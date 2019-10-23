@@ -211,77 +211,13 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
     })
 }
 
-const UICloneCreateTableOld = (state,tablekey,payload)=>{
-    return new Promise((resolve)=>{
-        const extractCss=(_$div)=>{
-            return styleToObject ( _$div[0])
-        }
-        const Items = state.Clone.Items
-        const { DROPID } = state.UI
-        const { Index } = state.Clone
-
-        let _table = null
-        for (let i = 0; i < Items.Tables.length; i++) {
-            const el = Items.Tables[i]
-            if(el.key==tablekey){
-                _table=el
-            }
-        }
-        if(!NullCheck(_table)){
-            Index.Index++
-            const _div = document.createElement('div')
-            _div.classList.add(state.UI.TABLEMAINCLASS)
-            _div.style.position='absolute'
-            const $div =$(_div)
-            $div.prop('id','table-'+tablekey).data('cloneId',Index.Index)
-            const button = document.createElement('i')
-            button.className='fa fa-times Remove'
-            button.onclick=_e=> {
-                dispatch({type:actionTypes.CLONE.REMOVE_TABLE,payload:{table:_table}})
-            }
-            $div.prepend(button)
-            $(DROPID).append($div)
-            _table={
-                Index:Index.Index,
-                key:tablekey,
-                element:$div,
-                children:[],
-                childIndex:[],
-                Style:'',
-                RowIndex:-1
-            }
-            // .resizable()
-            $div
-                .on('resize', function(_e) {
-                    _table.Style=extractCss($div)
-                })
-                .draggable({
-                    containment: DROPID,
-                    cursor: 'move',
-                    addClasses: false,
-                    drag: function(_el, _ui) {
-                        _table.Style=extractCss($div)
-                    },
-                })
-            if(NullCheck(payload.Table) && NullCheck(payload.Table.Style)){
-                $div.css(payload.Table.Style)
-            }else{
-                $div.css({ top:'500px', left: '20px' })
-            }
-            _table.Style=extractCss($div)
-            Items.Tables.push(_table)
-        }
-        resolve(_table)
-    })
-}
-
 const UICloneTable = (state,menuitem,payload)=>{
     return new Promise((resolve,_reject)=>{
         const {value,element,ToolValue,id } =menuitem
         UICloneCreateTable(state,menuitem,payload,state.Clone.Items).then((_divtable)=>{
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
-            if(state.Print.DefaultRow==true){
+            if(state.Print.DefaultRow==true || state.Print.DefaultRow=="true"){
                 value.RowIndex=0
             }
             let rowQuery='div[data--row-index="'+value.RowIndex+'"]'
@@ -357,7 +293,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
             CalC_Table(_divtable,state)
             elements.value.Style=styleToObject (_divcolumn)
-            if(state.Print.DefaultRow==true){//DEFAULT
+            if(state.Print.DefaultRow==true || state.Print.DefaultRow=="true"){//DEFAULT
                 const ccopySize =parseInt(state.Print.PageProduct)
                 const dchildren=_divtable[0].querySelectorAll('div[class="'+state.UI.TABLEROWCLASS+'"]')
                 for (let i = 1; i < dchildren.length; i++) {
