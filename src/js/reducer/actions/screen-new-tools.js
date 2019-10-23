@@ -13,13 +13,6 @@ export const SetJsonData = (state,payload,success)=>{
     }
 
     JsonData.Print = Items.Print
-    JsonData.Menu = Items.UI.PANEL.Menu.map(x=>{
-        return {
-            id:x.id,
-            ToolValue:x.ToolValue,
-            value:x.value,
-        }
-    })
     let tablesinc =0
     const incTables= ()=>{
         tablesinc--
