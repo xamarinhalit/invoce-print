@@ -62,7 +62,7 @@ export const SetConfig = (state, _data) => {
 
 const UICloneText = (state,menuitem,payload)=>{
     return new Promise((resolve,reject)=>{
-        const {value,element,ToolValue,id:Index } =menuitem
+        const {value,ToolValue,id:Index } =menuitem
         const TYPE_TEXT = state.Clone.Type.TEXT
         const _Clone_Index = state.Clone.Index
         _Clone_Index.Index++
@@ -89,16 +89,30 @@ const UICloneText = (state,menuitem,payload)=>{
         DefaultFontSize(textclone,value.Style)
         
         textclone.onclick=(e)=>ChangeFontSize(state,e,value)
-
+      
         const cloneItem = {
             Index: _Clone_Index.Index,
             element: textclone,
-            value,
+            value:{...value},
             ToolValue,
             id:Index,
         }
+        if(value[TYPE_TEXT.ITEMTYPE]==TYPE_TEXT.CUSTOMTEXT){
+            textclone.contentEditable=true
+            textclone.addEventListener('input',()=>{
+                if(textclone.innerText.length==0){
+                    const { cloneId } = textclone.dataset
+                    dispatch({
+                        type: actionTypes.CLONE.REMOVE_CLONEITEM,
+                        payload: cloneId
+                    })
+                }else{
+                    cloneItem.value[TYPE_TEXT.VALUE]=textclone.innerText
+                }
+            })
+        }
         state.Clone.Items.Clons.push(cloneItem)
-       
+            
         const extractCss=()=>{
             const style =styleToObject(cloneItem.element)
             // eslint-disable-next-line require-atomic-updates
@@ -213,11 +227,11 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
 
 const UICloneTable = (state,menuitem,payload)=>{
     return new Promise((resolve,_reject)=>{
-        const {value,element,ToolValue,id } =menuitem
+        const {value,ToolValue,id } =menuitem
         UICloneCreateTable(state,menuitem,payload,state.Clone.Items).then((_divtable)=>{
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
-            if(state.Print.DefaultRow==true || state.Print.DefaultRow=="true"){
+            if(state.Print.DefaultRow==true || state.Print.DefaultRow=='true'){
                 value.RowIndex=0
             }
             let rowQuery='div[data--row-index="'+value.RowIndex+'"]'
@@ -293,7 +307,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
             CalC_Table(_divtable,state)
             elements.value.Style=styleToObject (_divcolumn)
-            if(state.Print.DefaultRow==true || state.Print.DefaultRow=="true"){//DEFAULT
+            if(state.Print.DefaultRow==true || state.Print.DefaultRow=='true'){//DEFAULT
                 const ccopySize =parseInt(state.Print.PageProduct)
                 const dchildren=_divtable[0].querySelectorAll('div[class="'+state.UI.TABLEROWCLASS+'"]')
                 for (let i = 1; i < dchildren.length; i++) {

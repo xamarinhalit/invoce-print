@@ -396,7 +396,7 @@
           "Icon": "fa fa-user",
           "Width": "120",
           "Height": "50",
-          "ItemType": 0,
+          "ItemType": 3,
           "Format": "dd.MM.yyyy",
           "Style": null,
           "ColumnIndex": null,
@@ -1311,6 +1311,166 @@
         }
       ],
       "id": 1
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": "0",
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "asdasdasd dasdas8",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": 3,
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "461px",
+              "left": "63px",
+              "border-top-width": "initial",
+              "border-right-width": "initial",
+              "border-bottom-width": "initial",
+              "border-left-width": "initial",
+              "border-top-style": "none",
+              "border-right-style": "none",
+              "border-bottom-style": "none",
+              "border-left-style": "none",
+              "border-top-color": "initial",
+              "border-right-color": "initial",
+              "border-bottom-color": "initial",
+              "border-left-color": "initial",
+              "border-image-source": "initial",
+              "border-image-slice": "initial",
+              "border-image-width": "initial",
+              "border-image-outset": "initial",
+              "border-image-repeat": "initial"
+            },
+            "ColumnIndex": null,
+            "RowIndex": "01"
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "InvoiceSubTotal",
+            "ItemTitle": "Fatura İndirimsiz Toplam",
+            "ItemValue": "100,00",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": 0,
+            "Format": "",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "453px",
+              "left": "261px",
+              "border-top-width": "initial",
+              "border-right-width": "initial",
+              "border-bottom-width": "initial",
+              "border-left-width": "initial",
+              "border-top-style": "none",
+              "border-right-style": "none",
+              "border-bottom-style": "none",
+              "border-left-style": "none",
+              "border-top-color": "initial",
+              "border-right-color": "initial",
+              "border-bottom-color": "initial",
+              "border-left-color": "initial",
+              "border-image-source": "initial",
+              "border-image-slice": "initial",
+              "border-image-width": "initial",
+              "border-image-outset": "initial",
+              "border-image-repeat": "initial"
+            },
+            "ColumnIndex": null,
+            "RowIndex": "05"
+          }
+        }
+      ],
+      "id": 2
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": "0",
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "vvvvvvvvvv",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": 3,
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "427px",
+              "left": "222px",
+              "border-top-width": "initial",
+              "border-right-width": "initial",
+              "border-bottom-width": "initial",
+              "border-left-width": "initial",
+              "border-top-style": "none",
+              "border-right-style": "none",
+              "border-bottom-style": "none",
+              "border-left-style": "none",
+              "border-top-color": "initial",
+              "border-right-color": "initial",
+              "border-bottom-color": "initial",
+              "border-left-color": "initial",
+              "border-image-source": "initial",
+              "border-image-slice": "initial",
+              "border-image-width": "initial",
+              "border-image-outset": "initial",
+              "border-image-repeat": "initial"
+            },
+            "ColumnIndex": null,
+            "RowIndex": "01"
+          }
+        }
+      ],
+      "id": 3
     }
   ],
   "Tools": [

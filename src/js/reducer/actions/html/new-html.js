@@ -2,7 +2,7 @@
 export const JsonToHtmlPrint = (payload)=>{
     return new Promise((resolve)=>{
         AddCloneItemAsync(payload).then((data)=>{
-           resolve(data)
+            resolve(data)
         })
 
     })
@@ -14,19 +14,19 @@ export const AddCloneItemAsync = (payload) =>{
         })
     })
 }
-const SetPrintInit = ({Print,content})=> {
+const SetPrintInit = ({Print,content,config})=> {
     return new Promise((resolve)=>{
         let hbodystyle= `<style>
         body {
             size: ${Print.PageSize} ${Print.PageType=='Dikey'?'landscape':'portrait'};
             padding:0;margin:0cm;
         }
-         .p-main .p-row {
+         .${config.UI.TABLEMAINCLASS} .${config.UI.TABLEROWCLASS} {
             display: -webkit-inline-box;
             display: -ms-inline-flexbox;
             display: inline-flex;
           }
-         .p-main .p-row .p-column {
+         .${config.UI.TABLEMAINCLASS} .${config.UI.TABLEROWCLASS} .${config.UI.TABLECOLUMNCLASS} {
               border: none;
           }
         </style>`
@@ -104,14 +104,13 @@ const AddCloneItem= async (payload,success)=>{
             }
         }
 
-        const {element,hbodystyle,pagestyle} =await SetPrintInit({Print,content})
+        const {element,hbodystyle,pagestyle} =await SetPrintInit({Print,content,config})
 
         success({element,hbodystyle,pagestyle})
     }
 }
 const AddCloneTableItem = (item,content,config)=>{
     return new Promise((resolve)=>{
-        console.log('tableitem',item)
         const $table = $(content).find('#table-'+item.value.TableKey).first()
         let rowQuery='div[data--row-index="'+item.value.RowIndex+'"]'
         let _divrow
@@ -134,7 +133,6 @@ const AddCloneTableItem = (item,content,config)=>{
 }
 const AddCloneTable = (menuitem,config)=>{
     return new Promise((resolve)=>{
-        console.log('table',menuitem)
         const { value}=menuitem
         const _div = document.createElement('div')
         _div.classList.add(config.UI.TABLEMAINCLASS)
@@ -147,7 +145,6 @@ const AddCloneTable = (menuitem,config)=>{
 }
 const AddCloneTextItem= (menuitem)=>{
     return new Promise((resolve)=>{
-        console.log('text',menuitem)
         const {value} =menuitem
         const textclone= document.createElement('div')
         textclone.innerHTML= value.ItemValue

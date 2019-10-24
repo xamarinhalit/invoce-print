@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const cmToPixel = (cm)=>{
     return cm * 37.7952755906
 }
@@ -104,8 +105,6 @@ const PrintSetting= (state,payload,success)=>{
     $content.html('')
     // eslint-disable-next-line no-undef
     $('.p-font-block.p-active').removeClass('p-active')
-    const $imagecopy = document.querySelector('div[name="image-preview"]')
-    $imagecopy.style.backgroundImage='url('+state.Print.ImageUrl+')'
     const $imageurl = document.querySelector('input[name="ImageUrl"]')
     $imageurl.value=state.Print.ImageUrl
     document.querySelector('.m-Ruler-Top').style.display='block'
@@ -115,8 +114,6 @@ const PrintSetting= (state,payload,success)=>{
 
     const _width=width/pcopy.width
     const _height =height/pcopy.height
-    // state.Cache.Print.width=_width//ihtiyaç yok
-    // state.Cache.Print.height=_height//ihtiyac yok
     $content.width(_width).height(_height)
     state.UI.$CONTENT[0].style.backgroundImage='url('+state.Print.ImageUrl+')'
     const $tools =$(state.UI.PANEL.config.container)

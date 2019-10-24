@@ -73,7 +73,6 @@ const State ={
                 VALUE: 'ItemValue',
                 ITEMKEY: 'ItemKey',
                 ITEMTITLE: 'ItemTitle',
-                SUBITEMKEY: 'SubItemKey',
                 ITEMCOLUM: 'RowGroup',
                 TABLEKEY:'TableKey',
                 ITEMTYPE:'ItemType',
