@@ -65,7 +65,8 @@ import '../scss/index.scss'
             CopyDirection: 'Yanyana',
             PageWidth: 21.00,
             PageHeight: 29.70,
-            ImageUrl: 'https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg',
+            ImageUrl:'http://localhost:8080/src/img/fatura.jpg',
+            // ImageUrl: 'https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg',
             DefaultRow:true
         },
         SetPrint : (_Print)=> {

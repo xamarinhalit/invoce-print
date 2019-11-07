@@ -891,7 +891,7 @@
         "PageWidth": 21,
         "PageHeight": 29.7,
         "PageProduct": "1",
-        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
         "DefaultRow": true,
         "image": ""
       },
@@ -1107,7 +1107,7 @@
         "PageWidth": 21,
         "PageHeight": 29.7,
         "PageProduct": "3",
-        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
         "DefaultRow": "true",
         "image": ""
       },
@@ -1322,7 +1322,7 @@
         "PageWidth": 21,
         "PageHeight": 29.7,
         "PageProduct": "1",
-        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
         "DefaultRow": "true"
       },
       "Clons": [
@@ -1423,7 +1423,7 @@
         "PageWidth": 21,
         "PageHeight": 29.7,
         "PageProduct": "1",
-        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
         "DefaultRow": "true"
       },
       "Clons": [
@@ -1661,7 +1661,7 @@
               "TableKey": "CustomImage",
               "ItemKey": "CustomImage",
               "ItemTitle": "Resim",
-              "ItemValue": "<img src=\"https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg\"  style=\"width: 100px; height:100px; background-size: cover; background-position: center center;\" />",
+              "ItemValue": "<img src=\"http://localhost:8080/src/img/fatura.jpg\"  style=\"width: 100px; height:100px; background-size: cover; background-position: center center;\" />",
               "Icon": "fa fa-image",
               "Width": "100",
               "Height": "100",
@@ -1949,7 +1949,7 @@
         "CopyDirection": "Yanyana",
         "PageWidth": "21,00",
         "PageHeight": "29,70",
-        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
         "DefaultRow": true
       }
     }
