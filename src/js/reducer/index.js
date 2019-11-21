@@ -3,6 +3,7 @@ import InitialState from './state'
 import { actionTypes } from './const'
 import { SetGroupItem, AddCloneItemAsync, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,  PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
 import { JsonToHtmlPrint } from './actions/html/new-html'
+import { CalC_Table } from './actions/convert'
 const SetInit = (state,payload)=>{
     const {fieldclass,target,dragclass,accordion,
         tablerowclass,tablecolumnclass,tablemainclass,FontSelects ,data} = payload
@@ -102,6 +103,9 @@ const dispatch = (action,state=InitialState)=>{
                 sendReducer(action.type,{data:action.payload.data},state)
             })
         }
+        break
+    case actionTypes.CLONE.CALCTABLE:
+         CalC_Table(state.UI.SELECT.$font.parentNode.parentNode,state)
         break
     default:
         break

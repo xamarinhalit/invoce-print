@@ -18,7 +18,7 @@ const SetPrintInit = ({Print,content,config})=> {
     return new Promise((resolve)=>{
         let hbodystyle= `<style>
         body {
-            size: ${Print.PageSize} ${Print.PageType=='Dikey'?'landscape':'portrait'};
+            size: ${Print.PageSize} ${Print.PageType=='Dikey'?'portrait':'landscape'};
             padding:0;margin:0cm;
         }
          .${config.UI.TABLEMAINCLASS} .${config.UI.TABLEROWCLASS} {

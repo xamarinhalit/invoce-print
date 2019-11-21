@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import copyObject from './copy-object'
+import {CalcWidthHeight,cmToPixel} from './convert'
 export const SetJsonData = (state,payload,success)=>{
     let Items =copyObject(state,true)
     let JsonData={}
@@ -25,40 +26,88 @@ export const SetJsonData = (state,payload,success)=>{
 
 const GetPrintInit = (state)=> {
     return new Promise((resolve)=>{
-    
         let hstyle= '<style>'
         hstyle+='@page {'
-        hstyle+='size: '+state.Print.PageSize+ ' '
-        hstyle+=state.Print.PageType=='Dikey'?'landscape':'portrait' +';'
-        hstyle+='padding:0;margin:0cm;}</style>'
+        hstyle+='size:'+state.Print.PageSize.toLowerCase()+ ' '
+        hstyle+=state.Print.PageType=='Dikey'?'portrait':'landscape' +';'
+        hstyle+='padding:0cm;margin:0cm;}</style>'
         let clnode = $(state.UI.DROPID)[0].cloneNode(true)
         clnode.removeAttribute('id')
         let _div = null
         if(state.Print.PageCopy>1){
-            _div=document.createElement('div')
+          _div=document.createElement('div')
             _div.style.display='flex'
-            if(state.Print.CopyDirection=='Yanyana'){
-                _div.style.flexDirection='row'
+            _div.style.margin='0'
+            _div.style.padding='0'
+            let size =`${state.Print.PageSize.toLowerCase()} ${state.Print.PageType=='Dikey'?'portrait':'landscape'}`
+            _div.style.size=size
+            if(state.Print.PageType=='Dikey'){
+                 _div.style.width=cmToPixel(state.Print.PageWidth)+'px'
+                 _div.style.height=cmToPixel(state.Print.PageHeight)+'px'
+                if(state.Print.CopyDirection=='Yanyana'){
+                    _div.style.flexDirection='row'
+                }else{
+                    _div.style.flexDirection='column'
+                }
             }else{
-                _div.style.flexDirection='column'
+                _div.style.height=Math.floor(cmToPixel(state.Print.PageWidth))+'px'
+                _div.style.width=Math.floor(cmToPixel(state.Print.PageHeight))+'px'
+                if(state.Print.CopyDirection=='Yanyana'){
+                    _div.style.flexDirection='row'
+                }else{
+                    _div.style.flexDirection='column'
+                }
             }
+            const {_width,_height} = CalcWidthHeight(state.Print)
             for (let i = 0; i < parseInt(state.Print.PageCopy); i++) {
                 const cl2 =clnode.cloneNode(true)
                 cl2.style.position='absolute'
                 if(state.Print.CopyDirection=='Yanyana'){
-                    //   let cw = state.Cache.Print.width
-                    let cw = $(cl2).width()
-                    cl2.style.width=cw + 'px'
-                    cl2.style.left=cw*i +'px'
+                    if(state.Print.PageType=='Yatay'){
+                        let cw ={
+                            width:'',
+                            height:''
+                        }
+                        cw.width = _width
+                        cw.height =_height-1
+                        cl2.style.width=cw.width + 'px'
+                        cl2.style.height=cw.height+'px'
+                        cl2.style.left= cw.width*i+'px'
+                        cl2.style.top= '0px'
+                    }else{
+                        let cw = _width
+                        cl2.style.width=cw + 'px'
+                        cl2.style.height=_height+'px'
+                        cl2.style.left=cw*i +'px'
+                        cl2.style.top= '0px'
+                    }
                 }else{
-                    let cw = $(cl2).height()
-                    //let cw = state.Cache.Print.height
-                    cl2.style.height=cw + 'px'
-                    cl2.style.top=cw*i +'px'
+                    if(state.Print.PageType=='Yatay'){
+                        let cw ={
+                            width:'',
+                            height:''
+                        }
+                        cw.width = _width
+                        cw.height =_height
+                        cl2.style.width=cw.width + 'px'
+                        cl2.style.height=cw.height+'px'
+                        cl2.style.top= cw.height*i+'px'
+                    }else{
+                        let cw ={
+                            width:'',
+                            height:''
+                        }
+                        cw.width = _width
+                        cw.height =_height
+
+                        cl2.style.width=cw.width + 'px'
+                        cl2.style.height=cw.height+'px'
+                        cl2.style.top= cw.height*i+'px'
+                    }
                 }
                 _div.appendChild(cl2)
             }
-            $(_div).printThis({
+            $(_div.innerHTML).printThis({
                 debug: false, // show the iframe for debugging
                 importCSS: true, // import parent page css
                 importStyle: true, // import style tags
@@ -79,6 +128,21 @@ const GetPrintInit = (state)=> {
                 afterPrint: null // function called before iframe is removed
             })
         }else{
+            const {_width,_height} = CalcWidthHeight(state.Print)
+            clnode.style.margin='0'
+            clnode.style.padding='0'
+            let size =`${state.Print.PageSize.toLowerCase()} ${state.Print.PageType=='Dikey'?'portrait':'landscape'}`
+            clnode.style.size=size
+                let cw ={
+                    width:'',
+                    height:''
+                }
+                cw.width = _width
+                cw.height =_height-1
+                clnode.style.width=cw.width + 'px'
+                clnode.style.height=cw.height+'px'
+                clnode.style.left= '0px'
+                clnode.style.top= '0px'
             $(clnode).printThis({
                 debug: false, // show the iframe for debugging
                 importCSS: true, // import parent page css

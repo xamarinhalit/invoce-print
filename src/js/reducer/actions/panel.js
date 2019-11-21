@@ -165,7 +165,7 @@ const AddGroupForPanel= function(item,o ,state) {
                 let parents =ui.item[0].parentNode
                 let i =0
                 GetMenuValue(parents.children,i,{Menu: state.UI.PANEL.Menu},state,()=>{
-                        dispatch({type:actionTypes.CLONE.DRAG_STOP})
+                    dispatch({type:actionTypes.CLONE.DRAG_STOP})
                 })
             }
         })

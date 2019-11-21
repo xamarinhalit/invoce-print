@@ -62,7 +62,7 @@ import '../scss/index.scss'
             PageProduct: 1,
             PageSize: 'A4',
             PageType: 'Dikey',
-            CopyDirection: 'Yanyana',
+            CopyDirection: 'Altalta',
             PageWidth: 21.00,
             PageHeight: 29.70,
             ImageUrl:'http://localhost:8080/src/img/fatura.jpg',
@@ -86,13 +86,33 @@ import '../scss/index.scss'
             }
         },
         $FONTSIZE:document.querySelector('input[name="fontsize"]'),
+        $LeftCor:$('[name="xfontLeft"]'),
+        $TopCor:$('[name="xfontTop"]'),
+        $heightCor:$('[name="xfontheight"]'),
         Event:{
+            ChangeLeftCor:(e)=>{
+                const value=e.currentTarget.value+'px'
+                 dispatch({type:actionTypes.CLONE.FONT_CHANGE,
+                                payload:{ font:'left',style:null,defaultvalue:value,input:value}})
+            },
+            ChangeTopCor:(e)=>{
+                const value=e.currentTarget.value+'px'
+               dispatch({type:actionTypes.CLONE.FONT_CHANGE,
+                                payload:{ font:'top',style:null,defaultvalue:value,input:value}})
+            },
+            ChangeHeightCor:(e,state)=>{
+                const value=e.currentTarget.value+'px'
+               dispatch({type:actionTypes.CLONE.FONT_CHANGE,
+                                payload:{ font:'height',style:null,defaultvalue:value,input:value}})
+                let isTable = state.UI.SELECT.$font.dataset.columnIndex
+                if(isTable!=undefined)
+                dispatch({type:actionTypes.CLONE.CALCTABLE})
+            },
             FontSize:()=>{
                 App.$FONTSIZE.addEventListener('keyup',(e)=>{
                     const _target =e.currentTarget
                     if(_target !=undefined && _target!=null && _target.value!=''){
-                        dispatch(
-                            {type:actionTypes.CLONE.FONT_CHANGE,
+                        dispatch({type:actionTypes.CLONE.FONT_CHANGE,
                                 payload:{ font:'font-size',style:null,defaultvalue:'10pt',input:_target.value+'pt'}})
                     }
                 })
@@ -120,11 +140,21 @@ import '../scss/index.scss'
             ItemSelect:()=>{
                 subscribe(actionTypes.CLONE.FONT_ITEM_SELECT,(state,data)=>{
                     const selectedelemet = data.element
+                 
                     App.Event.DefaultFontTools(selectedelemet,state,data.value)
                     const $ffsize =$('.p-font-block')
                     if(!$ffsize.hasClass('p-active')){
                         $ffsize.addClass('p-active')
                     }
+                    App.$LeftCor[0].removeEventListener('keyup',null)
+                    App.$TopCor[0].removeEventListener('keyup',null)
+                    App.$heightCor[0].removeEventListener('keyup',null)
+                    App.$LeftCor.val(selectedelemet.style.left.replace('px',''));
+                    App.$TopCor.val(selectedelemet.style.top.replace('px',''));
+                    App.$heightCor.val(selectedelemet.style.height.replace('px',''));
+                    App.$LeftCor[0].addEventListener('keyup',(e)=>App.Event.ChangeLeftCor(e))
+                    App.$TopCor[0].addEventListener('keyup',(e)=>App.Event.ChangeTopCor(e))
+                    App.$heightCor[0].addEventListener('keyup',(e)=>App.Event.ChangeHeightCor(e,state))
                     $( state.UI.SELECT.$font).trigger('change')
                 })
             },
@@ -352,13 +382,14 @@ import '../scss/index.scss'
     $(document).ready(function () {
        // App.Event.JsonToHtmlPrint()
         subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{
-            state.Clone.Type.TEXT.FIELD=0
-            state.Clone.Type.TEXT.CUSTOMTEXT=3
-            state.Clone.Type.TEXT.CUSTOMIMAGE=4
-            state.Clone.Type.TABLE.FIELD=2
-            state.Clone.Type.TABLE.DEFAULT=1
-            App.Event.$HTTP({url:'http://localhost:3000/menu',type:'GET'}).then((data)=>{
-                App.InitConfig.data=data.Menu
+            state.Clone.Type.TEXT.FIELD='Field'
+            state.Clone.Type.TEXT.CUSTOMTEXT='CustomText'
+            state.Clone.Type.TEXT.CUSTOMIMAGE='CustomImage'
+            state.Clone.Type.TABLE.FIELD='TableField'
+            state.Clone.Type.TABLE.DEFAULT='Table'
+            App.Event.$HTTP({url:'http://localhost:3000/new',type:'GET'}).then((data)=>{
+                // App.InitConfig.data=data.Menu
+                App.InitConfig.data=data.TemplateItemValues
                 Init(App.InitConfig)
                 App.PageInit()
                 //App.OnlyLoadJson(state)

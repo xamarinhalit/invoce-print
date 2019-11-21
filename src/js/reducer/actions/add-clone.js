@@ -164,14 +164,17 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
         const { ToolValue,value,id}=menuitem
         const { DROPID } = state.UI
         const { Index } = state.Clone
-        let $_table = state.UI.$CONTENT.find('#table-'+value.TableKey)
+        // let $_table = state.UI.$CONTENT.find('#table-'+value.TableKey)
+        let $_table = state.UI.$CONTENT.find('.table-'+value.TableKey)
         if($_table.length==0){
             Index.Index++
             const _div = document.createElement('div')
             _div.classList.add(state.UI.TABLEMAINCLASS)
             _div.style.position='absolute'
             const $div =$(_div)
-            $div.prop('id','table-'+value.TableKey).data('cloneId',Index.Index)
+            // $div.prop('id','table-'+value.TableKey).data('cloneId',Index.Index)
+            $div.addClass('table-'+value.TableKey)
+            $div.data('cloneId',Index.Index)
             const button = document.createElement('i')
             button.className='fa fa-times Remove'
             button.style.right='-15px'

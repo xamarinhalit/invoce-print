@@ -1,4 +1,84 @@
 {
+  "new": {
+    "TemplateItemValues": [
+      {
+        "id": "0",
+        "ToolValue": "Fatura Bilgileri",
+        "value": {
+          "MenuRowIndex": 0,
+          "TableKey": null,
+          "ItemKey": "OrderDate",
+          "ItemTitle": "Fatura Tarihi",
+          "ItemValue": "20.11.2019 14:43:15",
+          "Icon": "fa fa-user",
+          "Width": "120",
+          "Height": "50",
+          "ItemType": "Field",
+          "Format": "dd.MM.yyyy",
+          "Style": null,
+          "ColumnIndex": 0,
+          "RowIndex": 1
+        }
+      },
+      {
+        "id": "1",
+        "ToolValue": "Müşteri Bilgileri",
+        "value": {
+          "MenuRowIndex": 1,
+          "TableKey": null,
+          "ItemKey": "InvoiceCommercialTitle",
+          "ItemTitle": "Ticari Ünvanı",
+          "ItemValue": "Abc Ticaret Ltd.Şti",
+          "Icon": "fa fa-user",
+          "Width": "120",
+          "Height": "50",
+          "ItemType": "Field",
+          "Format": "",
+          "Style": null,
+          "ColumnIndex": 0,
+          "RowIndex": 1
+        }
+      },
+      {
+        "id": "3",
+        "ToolValue": "Ürün Bilgileri",
+        "value": {
+          "MenuRowIndex": 2,
+          "TableKey": "InvoiceLine",
+          "ItemKey": "LineStockCode",
+          "ItemTitle": "Stok Kodu",
+          "ItemValue": "Mg001",
+          "Icon": "fa fa-user",
+          "Width": "120",
+          "Height": "50",
+          "ItemType": "TableField",
+          "Format": "",
+          "Style": null,
+          "ColumnIndex": 100,
+          "RowIndex": 1
+        }
+      },
+      {
+        "id": "4",
+        "ToolValue": "Ürün Bilgileri",
+        "value": {
+          "MenuRowIndex": 2,
+          "TableKey": "InvoiceLine",
+          "ItemKey": "LineProductName",
+          "ItemTitle": "Ürün Adı",
+          "ItemValue": "Test Ürünü",
+          "Icon": "fa fa-user",
+          "Width": "120",
+          "Height": "50",
+          "ItemType": "TableField",
+          "Format": "",
+          "Style": null,
+          "ColumnIndex": 101,
+          "RowIndex": 1
+        }
+      }
+    ]
+  },
   "Test": {
     "Tools": [
       {
@@ -892,348 +972,18 @@
         "PageHeight": 29.7,
         "PageProduct": "1",
         "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
-        "DefaultRow": true,
-        "image": ""
+        "DefaultRow": "true"
       },
       "Clons": [
         {
-          "id": -1,
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "TableKey": "InvoiceLine",
-            "ItemType": 1,
-            "Style": {
-              "position": "absolute",
-              "top": "493px",
-              "left": "132px",
-              "width": "507px"
-            }
-          }
-        },
-        {
-          "id": "20",
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "MenuRowIndex": 2,
-            "TableKey": "InvoiceLine",
-            "ItemKey": "LineProductName",
-            "ItemTitle": "Ürün Adı",
-            "ItemValue": "Test Ürünü",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 2,
-            "Format": "",
-            "Style": {
-              "font-size": "15pt",
-              "font-style": "normal",
-              "font-weight": "normal",
-              "width": "185px",
-              "height": "50px",
-              "order": "2",
-              "transition-duration": "1s",
-              "transition-timing-function": "ease",
-              "transition-delay": "0s",
-              "transition-property": "order"
-            },
-            "ColumnIndex": 2,
-            "RowIndex": 0
-          }
-        },
-        {
-          "id": "19",
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "MenuRowIndex": 2,
-            "TableKey": "InvoiceLine",
-            "ItemKey": "LineStockCode",
-            "ItemTitle": "Stok Kodu",
-            "ItemValue": "Mg001",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 2,
-            "Format": "",
-            "Style": {
-              "font-size": "10pt",
-              "font-style": "normal",
-              "font-weight": "bold",
-              "width": "192px",
-              "height": "50px",
-              "order": "3",
-              "transition-duration": "1s",
-              "transition-timing-function": "ease",
-              "transition-delay": "0s",
-              "transition-property": "order",
-              "text-align": "right"
-            },
-            "ColumnIndex": 3,
-            "RowIndex": 0
-          }
-        },
-        {
-          "id": "21",
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "MenuRowIndex": 2,
-            "TableKey": "InvoiceLine",
-            "ItemKey": "LineQuantity",
-            "ItemTitle": "Ürün Miktarı",
-            "ItemValue": "10 Ad",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 2,
-            "Format": "",
-            "Style": {
-              "font-size": "10pt",
-              "font-style": "normal",
-              "font-weight": "normal",
-              "width": "120px",
-              "height": "50px",
-              "order": "4",
-              "transition-duration": "1s",
-              "transition-timing-function": "ease",
-              "transition-delay": "0s",
-              "transition-property": "order",
-              "text-align": "left",
-              "text-decoration-line": "underline",
-              "text-decoration-style": "initial",
-              "text-decoration-color": "initial"
-            },
-            "ColumnIndex": 4,
-            "RowIndex": 0
-          }
-        },
-        {
-          "id": "0",
+          "id": 0,
           "ToolValue": "Fatura Bilgileri",
           "value": {
             "MenuRowIndex": 0,
             "TableKey": null,
             "ItemKey": "OrderDate",
             "ItemTitle": "Fatura Tarihi",
-            "ItemValue": "20.10.2019 10:13:28",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 0,
-            "Format": "dd.MM.yyyy",
-            "Style": {
-              "position": "absolute",
-              "width": "208px",
-              "height": "50px",
-              "top": "319px",
-              "left": "86px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
-              "border-top-style": "none",
-              "border-right-style": "none",
-              "border-bottom-style": "none",
-              "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial",
-              "text-align": "left",
-              "font-size": "15pt"
-            },
-            "ColumnIndex": null,
-            "RowIndex": "01"
-          }
-        },
-        {
-          "id": "5",
-          "ToolValue": "Fatura Bilgileri",
-          "value": {
-            "MenuRowIndex": 0,
-            "TableKey": null,
-            "ItemKey": "InvoiceDiscountTotal",
-            "ItemTitle": "Fatura İndirim toplamı",
-            "ItemValue": "20.00",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 0,
-            "Format": "",
-            "Style": {
-              "position": "absolute",
-              "width": "122px",
-              "height": "52px",
-              "top": "311px",
-              "left": "613px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
-              "border-top-style": "none",
-              "border-right-style": "none",
-              "border-bottom-style": "none",
-              "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial",
-              "text-align": "right",
-              "font-weight": "bold",
-              "font-size": "14pt"
-            },
-            "ColumnIndex": null,
-            "RowIndex": "06"
-          }
-        }
-      ],
-      "id": 0
-    },
-    {
-      "PageName": "Sayfa",
-      "Print": {
-        "PageCopy": "1",
-        "PageSize": "A4",
-        "CopyDirection": "Yanyana",
-        "PageType": "Dikey",
-        "PageWidth": 21,
-        "PageHeight": 29.7,
-        "PageProduct": "3",
-        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
-        "DefaultRow": "true",
-        "image": ""
-      },
-      "Clons": [
-        {
-          "id": -1,
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "TableKey": "InvoiceLine",
-            "ItemType": 1,
-            "Style": {
-              "position": "absolute",
-              "top": "525px",
-              "left": "191px",
-              "width": "390px"
-            }
-          }
-        },
-        {
-          "id": "23",
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "MenuRowIndex": 2,
-            "TableKey": "InvoiceLine",
-            "ItemKey": "LineDiscountedPrice",
-            "ItemTitle": "Ürün İndirimli Fiyatı",
-            "ItemValue": "10 Ad",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 2,
-            "Format": "",
-            "Style": {
-              "font-size": "12pt",
-              "font-style": "normal",
-              "font-weight": "normal",
-              "width": "120px",
-              "height": "50px",
-              "order": "2",
-              "transition-duration": "1s",
-              "transition-timing-function": "ease",
-              "transition-delay": "0s",
-              "transition-property": "order",
-              "text-align": "right"
-            },
-            "ColumnIndex": 2,
-            "RowIndex": 0
-          }
-        },
-        {
-          "id": "19",
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "MenuRowIndex": 2,
-            "TableKey": "InvoiceLine",
-            "ItemKey": "LineStockCode",
-            "ItemTitle": "Stok Kodu",
-            "ItemValue": "Mg001",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 2,
-            "Format": "",
-            "Style": {
-              "font-size": "15pt",
-              "font-style": "normal",
-              "font-weight": "normal",
-              "width": "120px",
-              "height": "50px",
-              "order": "3",
-              "transition-duration": "1s",
-              "transition-timing-function": "ease",
-              "transition-delay": "0s",
-              "transition-property": "order",
-              "text-align": "right",
-              "text-decoration-line": "underline",
-              "text-decoration-style": "initial",
-              "text-decoration-color": "initial"
-            },
-            "ColumnIndex": 3,
-            "RowIndex": 0
-          }
-        },
-        {
-          "id": "22",
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "MenuRowIndex": 2,
-            "TableKey": "InvoiceLine",
-            "ItemKey": "LinePrice",
-            "ItemTitle": "Ürün Fiyatı",
-            "ItemValue": "10 Ad",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 2,
-            "Format": "",
-            "Style": {
-              "font-size": "15pt",
-              "font-style": "normal",
-              "font-weight": "bold",
-              "width": "120px",
-              "height": "50px",
-              "order": "4",
-              "transition-duration": "1s",
-              "transition-timing-function": "ease",
-              "transition-delay": "0s",
-              "transition-property": "order",
-              "text-decoration-line": "underline",
-              "text-decoration-style": "initial",
-              "text-decoration-color": "initial",
-              "text-align": "center"
-            },
-            "ColumnIndex": 4,
-            "RowIndex": 0
-          }
-        },
-        {
-          "id": "0",
-          "ToolValue": "Fatura Bilgileri",
-          "value": {
-            "MenuRowIndex": 0,
-            "TableKey": null,
-            "ItemKey": "OrderDate",
-            "ItemTitle": "Fatura Tarihi",
-            "ItemValue": "20.10.2019 10:13:28",
+            "ItemValue": "20.11.2019 14:07:39",
             "Icon": "fa fa-user",
             "Width": "120",
             "Height": "50",
@@ -1243,39 +993,39 @@
               "position": "absolute",
               "width": "122px",
               "height": "52px",
-              "top": "313px",
-              "left": "107px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
+              "top": "337px",
+              "left": "103px",
+              "border-top-color": "currentcolor",
               "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
               "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
               "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
               "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial"
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
             },
-            "ColumnIndex": null,
-            "RowIndex": "01"
+            "ColumnIndex": 0,
+            "RowIndex": 1
           }
         },
         {
-          "id": "6",
-          "ToolValue": "Fatura Bilgileri",
+          "id": 1,
+          "ToolValue": "Müşteri Bilgileri",
           "value": {
-            "MenuRowIndex": 0,
+            "MenuRowIndex": 1,
             "TableKey": null,
-            "ItemKey": "InvoiceGrossTotal",
-            "ItemTitle": "Fatura Ara Toplam",
-            "ItemValue": "100,00",
+            "ItemKey": "InvoiceCommercialTitle",
+            "ItemTitle": "Ticari Ünvanı",
+            "ItemValue": "Abc Ticaret Ltd.Şti",
             "Icon": "fa fa-user",
             "Width": "120",
             "Height": "50",
@@ -1285,28 +1035,28 @@
               "position": "absolute",
               "width": "122px",
               "height": "52px",
-              "top": "324px",
-              "left": "477px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
+              "top": "310px",
+              "left": "491px",
+              "border-top-color": "currentcolor",
               "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
               "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
               "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
               "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial"
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
             },
-            "ColumnIndex": null,
-            "RowIndex": "07"
+            "ColumnIndex": 0,
+            "RowIndex": 1
           }
         }
       ],
@@ -1334,7 +1084,7 @@
             "TableKey": null,
             "ItemKey": "OrderDate",
             "ItemTitle": "Fatura Tarihi",
-            "ItemValue": "asdasdasd dasdas8",
+            "ItemValue": "20.10.2019 10:13:28",
             "Icon": "fa fa-user",
             "Width": "120",
             "Height": "50",
@@ -1344,25 +1094,25 @@
               "position": "absolute",
               "width": "122px",
               "height": "52px",
-              "top": "461px",
-              "left": "63px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
+              "top": "241px",
+              "left": "333px",
+              "border-top-color": "currentcolor",
               "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
               "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
               "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
               "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial"
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
             },
             "ColumnIndex": null,
             "RowIndex": "01"
@@ -1386,25 +1136,25 @@
               "position": "absolute",
               "width": "122px",
               "height": "52px",
-              "top": "453px",
-              "left": "261px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
+              "top": "311px",
+              "left": "495px",
+              "border-top-color": "currentcolor",
               "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
               "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
               "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
               "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial"
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
             },
             "ColumnIndex": null,
             "RowIndex": "05"
@@ -1428,6 +1178,523 @@
       },
       "Clons": [
         {
+          "id": 0,
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "20.11.2019 14:25:05",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "307px",
+              "left": "40px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": 1,
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "InvoiceCommercialTitle",
+            "ItemTitle": "Ticari Ünvanı",
+            "ItemValue": "Abc Ticaret Ltd.Şti",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "327px",
+              "left": "394px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        }
+      ],
+      "id": 3
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "510px",
+              "left": "172px",
+              "width": "250px"
+            }
+          }
+        },
+        {
+          "id": 3,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "0",
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": 4,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "1",
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 4
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "510px",
+              "left": "172px",
+              "width": "250px"
+            }
+          }
+        },
+        {
+          "id": 3,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "120px",
+              "height": "50px",
+              "order": "0",
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": 4,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "120px",
+              "height": "50px",
+              "order": "1",
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": 0,
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "20.11.2019 14:25:05",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "300px",
+              "left": "178px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": 1,
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "InvoiceCommercialTitle",
+            "ItemTitle": "Ticari Ünvanı",
+            "ItemValue": "Abc Ticaret Ltd.Şti",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "341px",
+              "left": "398px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        }
+      ],
+      "id": 5
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": 0,
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "20.11.2019 14:25:05",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "475px",
+              "left": "153px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            }
+          }
+        }
+      ],
+      "id": 6
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": 0,
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "20.11.2019 14:25:05",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "329px",
+              "left": "116px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            }
+          }
+        },
+        {
+          "id": 1,
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "InvoiceCommercialTitle",
+            "ItemTitle": "Ticari Ünvanı",
+            "ItemValue": "Abc Ticaret Ltd.Şti",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "313px",
+              "left": "445px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1",
+              "font-size": "10pt",
+              "font-weight": "bold"
+            }
+          }
+        }
+      ],
+      "id": 7
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
           "id": "0",
           "ToolValue": "Fatura Bilgileri",
           "value": {
@@ -1435,42 +1702,597 @@
             "TableKey": null,
             "ItemKey": "OrderDate",
             "ItemTitle": "Fatura Tarihi",
-            "ItemValue": "vvvvvvvvvv",
+            "ItemValue": "20.11.2019 14:25:05",
             "Icon": "fa fa-user",
             "Width": "120",
             "Height": "50",
-            "ItemType": 3,
+            "ItemType": "Field",
             "Format": "dd.MM.yyyy",
             "Style": {
               "position": "absolute",
               "width": "122px",
               "height": "52px",
-              "top": "427px",
-              "left": "222px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
+              "top": "134px",
+              "left": "184px",
+              "border-top-color": "currentcolor",
               "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
               "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
               "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
               "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial"
-            },
-            "ColumnIndex": null,
-            "RowIndex": "01"
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            }
           }
         }
       ],
-      "id": 3
+      "id": 8
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": "0",
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "20.11.2019 14:43:15",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "467px",
+              "left": "47px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "1",
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "InvoiceCommercialTitle",
+            "ItemTitle": "Ticari Ünvanı",
+            "ItemValue": "Abc Ticaret Ltd.Şti",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "432px",
+              "left": "181px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "545px",
+              "left": "285px",
+              "width": "250px"
+            }
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "0",
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "1",
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "font-size": "15pt",
+              "text-align": "right"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 9
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": "0",
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "20.11.2019 14:43:15",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "150px",
+              "left": "250px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        }
+      ],
+      "id": 10
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": "0",
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "20.11.2019 14:43:15",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "134px",
+              "left": "273px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        }
+      ],
+      "id": 11
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": "0",
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "20.11.2019 14:43:15",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "84px",
+              "left": "210px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        }
+      ],
+      "id": 12
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": "0",
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "20.11.2019 14:43:15",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "200px",
+              "left": "200px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        }
+      ],
+      "id": 13
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": "0",
+          "ToolValue": "Fatura Bilgileri",
+          "value": {
+            "MenuRowIndex": 0,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "20.11.2019 14:43:15",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": {
+              "position": "absolute",
+              "width": "122px",
+              "height": "52px",
+              "top": "200px",
+              "left": "200px",
+              "border-top-color": "currentcolor",
+              "border-top-style": "none",
+              "border-top-width": "medium",
+              "border-right-color": "currentcolor",
+              "border-right-style": "none",
+              "border-right-width": "medium",
+              "border-bottom-color": "currentcolor",
+              "border-bottom-style": "none",
+              "border-bottom-width": "medium",
+              "border-left-color": "currentcolor",
+              "border-left-style": "none",
+              "border-left-width": "medium",
+              "border-image-outset": "0",
+              "border-image-repeat": "stretch",
+              "border-image-slice": "100%",
+              "border-image-source": "none",
+              "border-image-width": "1"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        }
+      ],
+      "id": 14
+    },
+    {
+      "PageName": "Sayfa",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Yanyana",
+        "PageType": "Dikey",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "PageProduct": "5",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "472px",
+              "left": "264px",
+              "width": "290px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "120px",
+              "height": "30px",
+              "order": "0",
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "120px",
+              "height": "30px",
+              "order": "1",
+              "transition-property": "order",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 15
     }
   ],
   "Tools": [
