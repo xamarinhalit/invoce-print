@@ -13,19 +13,26 @@ const SetInit = (state,payload)=>{
     }else if(data && typeof data === 'object' && data.constructor === Object){
         _value=data
     }
-    //state.Clone.Items.StaticItems=_value
-    state.UI.$CONTENT = $(target)
-    state.UI.FontSelects=FontSelects
+    state.UI={
+        ...state.UI,
+        $CONTENT : $(target),
+        FontSelects:FontSelects,
+
+    }
     for (let i = 0; i < FontSelects.length; i++) {
         StyleParamClick(FontSelects[i])
     }
-    state.UI.DROPID=target
-    state.UI.DRAGCLASS=dragclass
-    state.UI.ACCORDIONID=accordion
-    state.UI.TABLEROWCLASS=tablerowclass
-    state.UI.TABLECOLUMNCLASS=tablecolumnclass
-    state.UI.TABLEMAINCLASS=tablemainclass
-    state.UI.FIELDCLASS=fieldclass
+    state.UI={
+        ...state.UI,
+        DROPID:target,
+        DRAGCLASS:dragclass,
+        ACCORDIONID:accordion,
+        TABLEROWCLASS:tablerowclass,
+        TABLECOLUMNCLASS:tablecolumnclass,
+        TABLEMAINCLASS:tablemainclass,
+        FIELDCLASS:fieldclass
+    }
+    
     SetConfig(state)
     SetGroupItem(state,_value)
 }
@@ -105,7 +112,7 @@ const dispatch = (action,state=InitialState)=>{
         }
         break
     case actionTypes.CLONE.CALCTABLE:
-         CalC_Table(state.UI.SELECT.$font.parentNode.parentNode,state)
+        CalC_Table(state.UI.SELECT.$font.parentNode.parentNode,state)
         break
     default:
         break

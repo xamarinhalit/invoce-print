@@ -85,35 +85,45 @@ import '../scss/index.scss'
                 }
             }
         },
-        $FONTSIZE:document.querySelector('input[name="fontsize"]'),
-        $LeftCor:$('[name="xfontLeft"]'),
-        $TopCor:$('[name="xfontTop"]'),
-        $heightCor:$('[name="xfontheight"]'),
+        Elements:{
+            $PageSize:$('select[name="PageSize"]'),
+            $PageCopy:$('select[name="PageCopy"]'),
+            $LeftCor:document.querySelector('[name="xfontLeft"]'),
+            $TopCor:document.querySelector('[name="xfontTop"]'),
+            $heightCor:document.querySelector('[name="xfontheight"]'),
+            $FONTSIZE:document.querySelector('input[name="fontsize"]')
+        },
         Event:{
+            AddRemoveListener:(el,eventname,val,add)=>{
+                el.removeEventListener(eventname,null)
+                el.value=(val==undefined || val==null)?'':parseInt(val)
+                el.addEventListener(eventname,add)
+                $(el).trigger(eventname);
+            },
             ChangeLeftCor:(e)=>{
                 const value=e.currentTarget.value+'px'
-                 dispatch({type:actionTypes.CLONE.FONT_CHANGE,
-                                payload:{ font:'left',style:null,defaultvalue:value,input:value}})
+                dispatch({type:actionTypes.CLONE.FONT_CHANGE,
+                    payload:{ font:'left',style:null,defaultvalue:value,input:value}})
             },
             ChangeTopCor:(e)=>{
                 const value=e.currentTarget.value+'px'
-               dispatch({type:actionTypes.CLONE.FONT_CHANGE,
-                                payload:{ font:'top',style:null,defaultvalue:value,input:value}})
+                dispatch({type:actionTypes.CLONE.FONT_CHANGE,
+                    payload:{ font:'top',style:null,defaultvalue:value,input:value}})
             },
             ChangeHeightCor:(e,state)=>{
                 const value=e.currentTarget.value+'px'
-               dispatch({type:actionTypes.CLONE.FONT_CHANGE,
-                                payload:{ font:'height',style:null,defaultvalue:value,input:value}})
+                dispatch({type:actionTypes.CLONE.FONT_CHANGE,
+                    payload:{ font:'height',style:null,defaultvalue:value,input:value}})
                 let isTable = state.UI.SELECT.$font.dataset.columnIndex
                 if(isTable!=undefined)
-                dispatch({type:actionTypes.CLONE.CALCTABLE})
+                    dispatch({type:actionTypes.CLONE.CALCTABLE})
             },
             FontSize:()=>{
-                App.$FONTSIZE.addEventListener('keyup',(e)=>{
+                App.Elements.$FONTSIZE.addEventListener('keyup',(e)=>{
                     const _target =e.currentTarget
                     if(_target !=undefined && _target!=null && _target.value!=''){
                         dispatch({type:actionTypes.CLONE.FONT_CHANGE,
-                                payload:{ font:'font-size',style:null,defaultvalue:'10pt',input:_target.value+'pt'}})
+                            payload:{ font:'font-size',style:null,defaultvalue:'10pt',input:_target.value+'pt'}})
                     }
                 })
             },
@@ -130,31 +140,27 @@ import '../scss/index.scss'
                 const fsize=selectedelemet.style.fontSize
                 if(fsize!=''){
                     if(fsize.indexOf('pt')>-1){
-                        App.$FONTSIZE.value=fsize.replace('pt','')
+                        App.Elements.$FONTSIZE.value=fsize.replace('pt','')
                     }
                 }else{
-                    App.$FONTSIZE.value='' 
+                    App.Elements.$FONTSIZE.value=''
                 }
 
             },
+
             ItemSelect:()=>{
                 subscribe(actionTypes.CLONE.FONT_ITEM_SELECT,(state,data)=>{
                     const selectedelemet = data.element
-                 
-                    App.Event.DefaultFontTools(selectedelemet,state,data.value)
+                    const { AddRemoveListener,DefaultFontTools,ChangeTopCor,ChangeLeftCor,ChangeHeightCor} =App.Event
+                    const {$LeftCor,$TopCor,$heightCor} = App.Elements;
+                    DefaultFontTools(selectedelemet,state,data.value)
                     const $ffsize =$('.p-font-block')
                     if(!$ffsize.hasClass('p-active')){
                         $ffsize.addClass('p-active')
                     }
-                    App.$LeftCor[0].removeEventListener('keyup',null)
-                    App.$TopCor[0].removeEventListener('keyup',null)
-                    App.$heightCor[0].removeEventListener('keyup',null)
-                    App.$LeftCor.val(selectedelemet.style.left.replace('px',''));
-                    App.$TopCor.val(selectedelemet.style.top.replace('px',''));
-                    App.$heightCor.val(selectedelemet.style.height.replace('px',''));
-                    App.$LeftCor[0].addEventListener('keyup',(e)=>App.Event.ChangeLeftCor(e))
-                    App.$TopCor[0].addEventListener('keyup',(e)=>App.Event.ChangeTopCor(e))
-                    App.$heightCor[0].addEventListener('keyup',(e)=>App.Event.ChangeHeightCor(e,state))
+                    AddRemoveListener($LeftCor,'keyup',selectedelemet.style.left.replace('px',''),(e)=>ChangeLeftCor(e))
+                    AddRemoveListener($TopCor,'keyup',selectedelemet.style.top.replace('px',''),(e)=>ChangeTopCor(e))
+                    AddRemoveListener($heightCor,'keyup',selectedelemet.style.height.replace('px',''),(e)=>ChangeHeightCor(e,state))
                     $( state.UI.SELECT.$font).trigger('change')
                 })
             },
@@ -162,7 +168,6 @@ import '../scss/index.scss'
                 LoadJson:()=>{
                     $('#loadJson').click(function(e){
                         e.preventDefault()
-    
                         $('#loadFormSetting').modal({ backdrop: 'static', keyboard: false })
                     })
                 },
@@ -199,16 +204,10 @@ import '../scss/index.scss'
                 PrintSettings:()=>{
                     $('#PrintSettings').click((e)=>{
                         e.preventDefault()
-                        const $ps =$('select[name="PageSize"]')
-                        let v1 = $ps.val()
-                        $ps.val('A4')
-                        $ps.val(v1)
-                        $ps.trigger('change')
-                        const $pc =$('select[name="PageCopy"]')
-                        let v2 = $pc.val()
-                        $pc.val('1')
-                        $pc.val(v2)
-                        $pc.trigger('change')
+                        let v1 = App.Elements.$PageSize.val()
+                        App.Elements.$PageSize.val('A4').val(v1).trigger('change')
+                        let v2 = App.Elements.$PageCopy.val()
+                        App.Elements.$PageCopy.val('1').val(v2).trigger('change')
                         $('#PopupSettings').modal({ backdrop: 'static', keyboard: false })
                     })
                 },
@@ -380,7 +379,7 @@ import '../scss/index.scss'
     }
 
     $(document).ready(function () {
-       // App.Event.JsonToHtmlPrint()
+        // App.Event.JsonToHtmlPrint()
         subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{
             state.Clone.Type.TEXT.FIELD='Field'
             state.Clone.Type.TEXT.CUSTOMTEXT='CustomText'
