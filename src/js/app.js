@@ -98,7 +98,7 @@ import '../scss/index.scss'
                 el.removeEventListener(eventname,null)
                 el.value=(val==undefined || val==null)?'':parseInt(val)
                 el.addEventListener(eventname,add)
-                $(el).trigger(eventname);
+                $(el).trigger(eventname)
             },
             ChangeLeftCor:(e)=>{
                 const value=e.currentTarget.value+'px'
@@ -152,7 +152,7 @@ import '../scss/index.scss'
                 subscribe(actionTypes.CLONE.FONT_ITEM_SELECT,(state,data)=>{
                     const selectedelemet = data.element
                     const { AddRemoveListener,DefaultFontTools,ChangeTopCor,ChangeLeftCor,ChangeHeightCor} =App.Event
-                    const {$LeftCor,$TopCor,$heightCor} = App.Elements;
+                    const {$LeftCor,$TopCor,$heightCor} = App.Elements
                     DefaultFontTools(selectedelemet,state,data.value)
                     const $ffsize =$('.p-font-block')
                     if(!$ffsize.hasClass('p-active')){
@@ -365,16 +365,18 @@ import '../scss/index.scss'
         },
         PageInit:()=>{
             App.SetPrint(App.DefaultPrint)
-            App.Event.FormatChange()
-            App.Event.FontSize()
-            App.Event.ItemSelect()
-            App.Event.Modal.LoadJson()
-            App.Event.Modal.LoadJsonBtn()
-            App.Event.SaveConfig()
-            App.Event.Print()
-            App.Event.Modal.PrintSettings()
-            App.Event.Modal.PrintSettingsClick()
-            App.Event.LoadConfigHttp()
+            const {FormatChange,FontSize,ItemSelect,SaveConfig,LoadConfigHttp,Print:Prints} = App.Event
+            const {LoadJson,LoadJsonBtn,PrintSettings,PrintSettingsClick}=App.Event.Modal
+            FormatChange()
+            FontSize()
+            ItemSelect()
+            Modal.LoadJson()
+            Modal.LoadJsonBtn()
+            SaveConfig()
+            Prints()
+            Modal.PrintSettings()
+            Modal.PrintSettingsClick()
+            LoadConfigHttp()
         }
     }
 
