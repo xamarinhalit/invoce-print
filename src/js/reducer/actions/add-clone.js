@@ -167,6 +167,7 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
         // let $_table = state.UI.$CONTENT.find('#table-'+value.TableKey)
         let $_table = state.UI.$CONTENT.find('.table-'+value.TableKey)
         if($_table.length==0){
+            const {clientHeight, clientWidth } = state.UI.$CONTENT[0]
             Index.Index++
             const _div = document.createElement('div')
             _div.classList.add(state.UI.TABLEMAINCLASS)
@@ -210,7 +211,15 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
             }else if(NullCheck(payload.Table) && NullCheck(payload.Table.Style)){
                 $div.css(payload.Table.Style)
             }else{
-                $div.css({ top:'500px', left: '20px' })
+                if(clientHeight!=undefined&& clientWidth!=undefined){
+                    if(clientHeight>=clientWidth){
+                        $div.css({ top:'50px', left: '20px' })    
+                    }else{
+                        $div.css({ top:'0px', left: '50px' })    
+                    }
+                }else{
+                    $div.css({ top:'500px', left: '20px' })
+                }
             }
            
             _table.value.Style=extractCss($div)

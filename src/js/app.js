@@ -58,17 +58,18 @@ import '../scss/index.scss'
             ]
         },
         DefaultPrint :{
-            PageCopy: 1,
+            PageCopy: 4,
             PageProduct: 1,
             PageSize: 'A4',
-            PageType: 'Dikey',
-            CopyDirection: 'Altalta',
+            PageType: 'Yatay',
+            CopyDirection: 'Yanyana',
             PageWidth: 21.00,
             PageHeight: 29.70,
             ImageUrl:'http://localhost:8080/src/img/fatura.jpg',
             // ImageUrl: 'https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg',
             DefaultRow:true
         },
+        LoadFromJson:true, /// for developer
         SetPrint : (_Print)=> {
             const forms =  document.forms.PanelPaperSetting
             for (let i = 0; i < forms.length; i++) {
@@ -96,7 +97,7 @@ import '../scss/index.scss'
         Event:{
             AddRemoveListener:(el,eventname,val,add)=>{
                 el.removeEventListener(eventname,null)
-                el.value=(val==undefined || val==null)?'':parseInt(val)
+                el.value=(val==undefined || val==null || val=='')?0:parseInt(val)
                 el.addEventListener(eventname,add)
                 $(el).trigger(eventname)
             },
@@ -145,7 +146,30 @@ import '../scss/index.scss'
                 }else{
                     App.Elements.$FONTSIZE.value=''
                 }
-
+                const fheight=selectedelemet.style.height
+                if(fheight!=''){
+                    if(fheight.indexOf('pt')>-1){
+                        App.Elements.$heightCor.value=fheight.replace('pt','')
+                    }
+                }else{
+                    App.Elements.$heightCor.value=''
+                }
+                const fleft=selectedelemet.style.left
+                if(fleft!=''){
+                    if(fleft.indexOf('pt')>-1){
+                        App.Elements.$LeftCor.value=fleft.replace('pt','')
+                    }
+                }else{
+                    App.Elements.$LeftCor.value=''
+                }
+                const ftop=selectedelemet.style.top
+                if(ftop!=''){
+                    if(ftop.indexOf('pt')>-1){
+                        App.Elements.$TopCor.value=ftop.replace('pt','')
+                    }
+                }else{
+                    App.Elements.$TopCor.value=''
+                }
             },
 
             ItemSelect:()=>{
@@ -165,6 +189,7 @@ import '../scss/index.scss'
                 })
             },
             Modal:{
+              
                 LoadJson:()=>{
                     $('#loadJson').click(function(e){
                         e.preventDefault()
@@ -194,7 +219,29 @@ import '../scss/index.scss'
                             alert(message)
                         }else{
                             App.Event.$HTTP({url:'http://localhost:3000/SaveLoad?id='+formEl.loadname,type:'GET'}).then((_sonuc)=>{
-                                dispatch({type:actionTypes.HTTP.JSON_CONFIG_LOAD,payload: {data:_sonuc}})
+                                if(App.LoadFromJson==true){
+                                    const config ={
+                                        TABLE:{
+                                            FIELD:'TableField',
+                                            DEFAULT:'Table'
+                                        },
+                                        TEXT:{
+                                            FIELD:'Field',
+                                            ITEMKEY:'ItemKey',
+                                            CUSTOMTEXT:'CustomText',
+                                            CUSTOMIMAGE:'CustomImage'
+                                        },
+                                        UI:{
+                                            TABLEROWCLASS:'p-row',
+                                            TABLECOLUMNCLASS:'p-column',
+                                            TABLEMAINCLASS:'p-main',
+                                        }
+                    
+                                    }
+                                    App.Event.JsonToHtmlPrint(undefined,config,_sonuc[0])
+                                }else{
+                                    dispatch({type:actionTypes.HTTP.JSON_CONFIG_LOAD,payload: {data:_sonuc}})
+                                }
                             })
                             
                         }
@@ -239,6 +286,7 @@ import '../scss/index.scss'
                     e.preventDefault()
                     subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE,(_state,_data)=>{
                         if(_data!=undefined && _data.data!=undefined){
+                            _data.data.PageName=_data.data.Print.PageType+' '+_data.data.Print.CopyDirection
                             App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',data:_data.data}).then((_sonuc)=>{
                             })
                         }
@@ -307,59 +355,49 @@ import '../scss/index.scss'
                 }
                 
             },
-            JsonToHtmlPrint:(e)=>{
+            JsonToHtmlPrint:async (e,config=null,sonuc=null)=>{
                 if(e!=undefined)
                     e.preventDefault()
-
-                App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',type:'GET'}).then((_sonuc)=>{
-                    const {Print,Clons} = _sonuc[1]
-                    const config ={
-                        TABLE:{
-                            FIELD:2,
-                            DEFAULT:1
-                        },
-                        TEXT:{
-                            FIELD:0,
-                            ITEMKEY:'ItemKey'
-                        },
-                        UI:{
-                            TABLEROWCLASS:'p-row',
-                            TABLECOLUMNCLASS:'p-column',
-                            TABLEMAINCLASS:'p-main',
-                        }
-
-                    }
-                    subscribe(actionTypes.CLONE.JSON_HTMLTOPRINT,(_state,_data)=>{
-                        const {pagestyle,hbodystyle,element } =_data
-                        var vn = window.open('','')
-                        vn.document.head.innerHTML=hbodystyle
-                        vn.document.body.innerHTML=element.innerHTML
-                        vn.focus()
-                        // document.head.innerHTML=hbodystyle
-                        // document.body.innerHTML=element.innerHTML
-                        $(element).printThis({
-                            debug: false, // show the iframe for debugging
-                            importCSS: true, // import parent page css
-                            importStyle: true, // import style tags
-                            printContainer: true, // print outer container/$.selector
-                            pageTitle: '', // add title to print page
-                            removeInline: false, // remove inline styles from print elements
-                            removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
-                            printDelay: 0, // variable print delay
-                            header:pagestyle, // prefix to html
-                            footer: null, // postfix to html
-                            base: false, // preserve the BASE tag or accept a string for the URL
-                            formValues: true, // preserve input/form values
-                            canvas: false, // copy canvas content
-                            removeScripts: false, // remove script tags from print content
-                            copyTagClasses: true, // copy classes from the html & body tag
-                            beforePrintEvent: null, // function for printEvent in iframe
-                            beforePrint: null, // function called before iframe is filled
-                            afterPrint: null // function called before iframe is removed
-                        })
+                let _sonucx=null,_sonuc=null
+                if(sonuc==null){
+                    _sonucx =await App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',type:'GET'})
+                    _sonuc = _sonucx[0]
+                }else{
+                    _sonuc=sonuc
+                }
+                const {Print,Clons} = _sonuc
+                subscribe(actionTypes.CLONE.JSON_HTMLTOPRINT,(_state,_data)=>{
+                    const {pagestyle,hbodystyle,element } =_data
+                    $(element.outerHTML).printThis({
+                        debug: false, // show the iframe for debugging
+                        importCSS: true, // import parent page css
+                        importStyle: true, // import style tags
+                        printContainer: true, // print outer container/$.selector
+                        pageTitle: '', // add title to print page
+                        removeInline: false, // remove inline styles from print elements
+                        removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
+                        printDelay: 0, // variable print delay
+                        header:pagestyle, // prefix to html
+                        footer: null, // postfix to html
+                        base: false, // preserve the BASE tag or accept a string for the URL
+                        formValues: true, // preserve input/form values
+                        canvas: false, // copy canvas content
+                        removeScripts: false, // remove script tags from print content
+                        copyTagClasses: true, // copy classes from the html & body tag
+                        beforePrintEvent: null, // function for printEvent in iframe
+                        beforePrint: null, // function called before iframe is filled
+                        afterPrint: null // function called before iframe is removed
                     })
-                    dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config}})
+                    // var vn = window.open('','',`resizable,scrollbars,
+                    // titlebar=no,
+                    //  left=200,
+                    //  top=200,
+                    //  width=768,
+                    //  height=600`)
+                    // vn.document.head.innerHTML=hbodystyle
+                    // vn.document.body.innerHTML=element.innerHTML
                 })
+                dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config}})
             }
 
         },
@@ -370,18 +408,18 @@ import '../scss/index.scss'
             FormatChange()
             FontSize()
             ItemSelect()
-            Modal.LoadJson()
-            Modal.LoadJsonBtn()
+            LoadJson()
+            LoadJsonBtn()
             SaveConfig()
             Prints()
-            Modal.PrintSettings()
-            Modal.PrintSettingsClick()
+            PrintSettings()
+            PrintSettingsClick()
             LoadConfigHttp()
         }
     }
 
     $(document).ready(function () {
-        // App.Event.JsonToHtmlPrint()
+        
         subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{
             state.Clone.Type.TEXT.FIELD='Field'
             state.Clone.Type.TEXT.CUSTOMTEXT='CustomText'
@@ -389,13 +427,16 @@ import '../scss/index.scss'
             state.Clone.Type.TABLE.FIELD='TableField'
             state.Clone.Type.TABLE.DEFAULT='Table'
             App.Event.$HTTP({url:'http://localhost:3000/new',type:'GET'}).then((data)=>{
-                // App.InitConfig.data=data.Menu
+              
                 App.InitConfig.data=data.TemplateItemValues
                 Init(App.InitConfig)
                 App.PageInit()
-                //App.OnlyLoadJson(state)
+                
+               
             })
+            
         })
         dispatch({type:actionTypes.INIT.OVERRIDE_TYPE})
+
     })
 })()
