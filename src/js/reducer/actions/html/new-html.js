@@ -83,7 +83,7 @@ const SetPrintInit = ({Print,content,config})=> {
                     _div.style.flexDirection='column'
                 }
             }
-            console.log(_div.style.cssText)
+           // console.log(_div.style.cssText)
           
             let cw ={
                 width:'',
@@ -92,7 +92,7 @@ const SetPrintInit = ({Print,content,config})=> {
             cw.width = _width
             for (let i = 0; i < parseInt(Print.PageCopy); i++) {
                 const cl2 =clnode.cloneNode(true)
-                console.log(cl2.outerHTML)
+                //console.log(cl2.outerHTML)
                 cl2.style.position='absolute'
                 if(Print.CopyDirection=='Yanyana'){
                     if(Print.PageType=='Yatay'){
@@ -102,7 +102,7 @@ const SetPrintInit = ({Print,content,config})=> {
                         cl2.style.height=cw.height+'px'
                         cl2.style.left= cw.width*i+'px'
                         cl2.style.top= '0px'
-                        console.log(cw)
+                        //console.log(cw)
                     }else{
                         cw.height =_height-1
                         cl2.style.width=cw.width + 'px'

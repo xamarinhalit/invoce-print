@@ -213,9 +213,9 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
             }else{
                 if(clientHeight!=undefined&& clientWidth!=undefined){
                     if(clientHeight>=clientWidth){
-                        $div.css({ top:'50px', left: '20px' })    
+                        $div.css({ top:parseInt(clientHeight/2) + 'px', left: '20px' })    
                     }else{
-                        $div.css({ top:'0px', left: '50px' })    
+                        $div.css({ top:'0px', left:parseInt(clientWidth/2)+'px'  })
                     }
                 }else{
                     $div.css({ top:'500px', left: '20px' })
