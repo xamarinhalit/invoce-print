@@ -42,7 +42,6 @@ const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
     case actionTypes.CLONE.JSON_HTMLTOPRINT:
-        console.log(state)
         JsonToHtmlPrint(action.payload).then((_data)=>{
             sendReducer(action.type,_data,state)
         })

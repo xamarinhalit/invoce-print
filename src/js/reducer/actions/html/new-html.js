@@ -83,8 +83,6 @@ const SetPrintInit = ({Print,content,config})=> {
                     _div.style.flexDirection='column'
                 }
             }
-           // console.log(_div.style.cssText)
-          
             let cw ={
                 width:'',
                 height:''
@@ -146,10 +144,93 @@ const SetPrintInit = ({Print,content,config})=> {
        
     })
 }
+const ClonsMerge = (clone,data,config)=>{
+    let _value={
+        IsTable:false,
+        IsDefault:true,
+        data:null
+    }
+    for (let j = 0; j < data.length; j++) {
+        const item=data[j]
+        if(item!=undefined && item!=null && item.value.ItemKey==clone.value.ItemKey)
+            switch (item.value.ItemType) {
+            case config.TEXT.FIELD:
+                _value.data={...clone,...item}
+                _value.IsDefault=false
+                break
+            case config.TEXT.CUSTOMTEXT:
+                _value.data={...clone,...item}
+                _value.IsDefault=false
+                break
+            case config.TEXT.CUSTOMIMAGE:
+                _value.data={...clone,...item}
+                _value.IsDefault=false
+                break
+            case config.TABLE.FIELD:
+                if(item.value.TableKey==clone.value.TableKey && item.value.RowIndex==clone.value.RowIndex && item.value.ColumnIndex==clone.value.ColumnIndex){
+                    _value.data={...clone,...item}
+                    _value.IsTable=true
+                    _value.IsDefault=false
+                }
+                break
+            default:
+                break
+            }
+    }
+    return _value
+}
+const DataMerge = (Clons,data,config)=>{
+    return new Promise((resolve)=>{
+        for (let i = 0; i < Clons.length; i++) {
+            let _data=null
+            _data=ClonsMerge(Clons[i],data,config)
+            if(_data.IsDefault==false){
+                if(_data.IsTable==true){
+                    Clons[i]=_data.data
+                }else{
+                    Clons[i]=_data.data
+                }
+                
+            }
+                
+        }
+        resolve(Clons)
+    })
+}
+const SetTableRow = (Clons,Print,config)=>{
+    return new Promise((resolve)=>{
+        let productcount=parseInt(Print.PageProduct)
+        if(productcount>1){
+            let newAddClone=[]
+            let StartId=1000
+            for (let i = 0; i < Clons.length; i++) {
+                const clone = Clons[i]
+                if(clone!=undefined){
+                    if(clone.value.ItemType==config.TABLE.FIELD && clone.value.RowIndex==0){
+                        for (let j = 0; j < productcount-1; j++) {
+                            let newclone ={ ...clone}
+                            newclone.value.RowIndex =parseInt(newclone.value.RowIndex)+1
+                            newclone.id =''+StartId
+                            StartId++
+                            newAddClone.push(newclone)
+                        }
+                    }
+                }
+            }
+            for (let i = 0; i < newAddClone.length; i++) {
+                const clone = newAddClone[i]
+                if(clone!=undefined){
+                    Clons.push(clone)
+                }
+            }
+            resolve(Clons)
+        }else{
+            resolve(Clons)
+        }
+    })
+}
 
 const AddCloneItem= async (payload,success)=>{
-    const {Print,Clons,config } =  payload
-
     let value
     if(payload && typeof payload === 'object' && payload.constructor === Array){
         value=payload[0]
@@ -157,13 +238,23 @@ const AddCloneItem= async (payload,success)=>{
         value=payload
     }
     if(value!=undefined){
+        const {Print,Clons,config,data } =  value
+        const TempClons=await DataMerge(await SetTableRow(Clons,Print,config),data,config)
         const content =document.createElement('div')
        
-        for (let i = 0; i < Clons.length; i++) {
-            const item = Clons[i]
+        for (let i = 0; i < TempClons.length; i++) {
+            const item = TempClons[i]
             let items =null
             switch (item.value.ItemType) {
             case config.TEXT.FIELD:
+                items ={...await AddCloneTextItem(item,config)}
+                content.appendChild(items.element)
+                break
+            case config.TEXT.CUSTOMTEXT:
+                items ={...await AddCloneTextItem(item,config)}
+                content.appendChild(items.element)
+                break
+            case config.TEXT.CUSTOMIMAGE:
                 items ={...await AddCloneTextItem(item,config)}
                 content.appendChild(items.element)
                 break
@@ -175,8 +266,8 @@ const AddCloneItem= async (payload,success)=>{
                 break
             }
         }
-        for (let i = 0; i < Clons.length; i++) {
-            const item = Clons[i]
+        for (let i = 0; i < TempClons.length; i++) {
+            const item = TempClons[i]
             if(item.value.ItemType==config.TABLE.FIELD){
                 await AddCloneTableItem(item,content,config)
             }

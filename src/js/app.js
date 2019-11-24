@@ -13,7 +13,7 @@ import '../scss/index.scss'
 // import '../_plugin/js/used/bootstrap.min.js'
 
 (function () {
-    const { subscribe, dispatch , actionTypes, Init,JsonToHtml } =require('./module')
+    const { subscribe, dispatch , actionTypes, Init } =require('./module')
     const GetFormat =(element)=>{
 
         let deger =element.ItemValue
@@ -58,15 +58,14 @@ import '../scss/index.scss'
             ]
         },
         DefaultPrint :{
-            PageCopy: 4,
+            PageCopy: 1,
             PageProduct: 1,
             PageSize: 'A4',
-            PageType: 'Yatay',
-            CopyDirection: 'Yanyana',
+            PageType: 'Dikey',
+            CopyDirection: 'Altalta',
             PageWidth: 21.00,
             PageHeight: 29.70,
             ImageUrl:'http://localhost:8080/src/img/fatura.jpg',
-            // ImageUrl: 'https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg',
             DefaultRow:true
         },
         LoadFromJson:true, /// for developer
@@ -96,10 +95,19 @@ import '../scss/index.scss'
         },
         Event:{
             AddRemoveListener:(el,eventname,val,add)=>{
-                el.removeEventListener(eventname,null)
-                el.value=(val==undefined || val==null || val=='')?0:parseInt(val)
-                el.addEventListener(eventname,add)
-                $(el).trigger(eventname)
+                if(el!=undefined){
+                    el.removeEventListener(eventname,null)
+                    if(el.classList.contains(App.InitConfig.tablecolumnclass)==true){
+                        debugger
+                        $(el).hide();
+                    }else{
+                        $(el).show();
+                        el.value=(val==undefined || val==null || val=='')?0:parseInt(val)
+                        el.addEventListener(eventname,add)
+                        $(el).trigger(eventname)
+                    }
+
+                }
             },
             ChangeLeftCor:(e)=>{
                 const value=e.currentTarget.value+'px'
@@ -171,7 +179,6 @@ import '../scss/index.scss'
                     App.Elements.$TopCor.value=''
                 }
             },
-
             ItemSelect:()=>{
                 subscribe(actionTypes.CLONE.FONT_ITEM_SELECT,(state,data)=>{
                     const selectedelemet = data.element
@@ -189,7 +196,6 @@ import '../scss/index.scss'
                 })
             },
             Modal:{
-              
                 LoadJson:()=>{
                     $('#loadJson').click(function(e){
                         e.preventDefault()
@@ -238,7 +244,7 @@ import '../scss/index.scss'
                                         }
                     
                                     }
-                                    App.Event.JsonToHtmlPrint(undefined,config,_sonuc[0])
+                                    App.Event.JsonToHtmlPrint(undefined,config,{..._sonuc[0],data:_sonuc[0].Clons})
                                 }else{
                                     dispatch({type:actionTypes.HTTP.JSON_CONFIG_LOAD,payload: {data:_sonuc}})
                                 }
@@ -338,7 +344,6 @@ import '../scss/index.scss'
                     return await response.json() // parses JSON response into native JavaScript objects
                 }
                 else{
-                        
                     const response = await fetch(url, {
                         method:type, // *GET, POST, PUT, DELETE, etc.
                         mode: 'cors', // no-cors, *cors, same-origin
@@ -355,7 +360,7 @@ import '../scss/index.scss'
                 }
                 
             },
-            JsonToHtmlPrint:async (e,config=null,sonuc=null)=>{
+            JsonToHtmlPrint:async (e,config=null,sonuc)=>{
                 if(e!=undefined)
                     e.preventDefault()
                 let _sonucx=null,_sonuc=null
@@ -365,7 +370,7 @@ import '../scss/index.scss'
                 }else{
                     _sonuc=sonuc
                 }
-                const {Print,Clons} = _sonuc
+                const {Print,Clons,data} = _sonuc
                 subscribe(actionTypes.CLONE.JSON_HTMLTOPRINT,(_state,_data)=>{
                     const {pagestyle,hbodystyle,element } =_data
                     $(element.outerHTML).printThis({
@@ -397,7 +402,7 @@ import '../scss/index.scss'
                     // vn.document.head.innerHTML=hbodystyle
                     // vn.document.body.innerHTML=element.innerHTML
                 })
-                dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config}})
+                dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config,data:Clons}})
             }
 
         },
