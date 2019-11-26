@@ -2261,6 +2261,92 @@
         }
       ],
       "id": 9
+    },
+    {
+      "PageName": "Dikey Altalta",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Dikey",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "5",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "852px",
+              "left": "533px",
+              "width": "240px",
+              "height": "250px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "101",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 101,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 10
     }
   ],
   "Tools": [

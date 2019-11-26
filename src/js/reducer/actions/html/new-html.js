@@ -100,7 +100,6 @@ const SetPrintInit = ({Print,content,config})=> {
             cw.width = _width
             for (let i = 0; i < parseInt(Print.PageCopy); i++) {
                 const cl2 =clnode.cloneNode(true)
-                //console.log(cl2.outerHTML)
                 cl2.style.position='absolute'
                 if(Print.CopyDirection=='Yanyana'){
                     if(Print.PageType=='Yatay'){
@@ -110,7 +109,6 @@ const SetPrintInit = ({Print,content,config})=> {
                         cl2.style.height=cw.height+'px'
                         cl2.style.left= cw.width*i+'px'
                         cl2.style.top= '0px'
-                        //console.log(cw)
                     }else{
                         cw.height =_height-1
                         cl2.style.width=cw.width + 'px'
@@ -155,84 +153,22 @@ const SetPrintInit = ({Print,content,config})=> {
        
     })
 }
-// const ClonsMerge = (clone,data,config)=>{
-//     let _value={
-//         IsTable:false,
-//         IsDefault:true,
-//         data:null
-//     }
-//     const count=[]
-//     for (let j = 0; j < data.length; j++) {
-//         const item=data[j]
-//         if(item!=undefined && item!=null && item.value.ItemKey==clone.value.ItemKey)
-//             switch (item.value.ItemType) {
-//             case config.TEXT.FIELD:
-//                 _value.data={...clone,...item}
-//                 _value.IsDefault=false
-//                 break
-//             case config.TEXT.CUSTOMTEXT:
-//                 _value.data={...clone,...item}
-//                 _value.IsDefault=false
-//                 break
-//             case config.TEXT.CUSTOMIMAGE:
-//                 _value.data={...clone,...item}
-//                 _value.IsDefault=false
-//                 break
-//             case config.TABLE.FIELD:
-//                 if(item.value.TableKey==clone.value.TableKey && item.value.RowIndex==clone.value.RowIndex && item.value.ColumnIndex==clone.value.ColumnIndex){
-//                     _value.data={...clone,...item}
-//                     _value.IsTable=true
-//                     _value.data.id=clone.id
-//                     _value.IsDefault=false
-//                     count.push(_value)
-//                 }
-//                 break
-//             default:
-//                 break
-//             }
-//     }
-//     return _value
-// }
-// const DataMerge = ({Clons,data,config,Print})=>{
-//     return new Promise((resolve)=>{
-//         for (let i = 0; i < Clons.length; i++) {
-//             let _data=null
-//             _data=ClonsMerge(Clons[i],data,config)
-//             if(_data.IsDefault==false){
-//                 if(_data.IsTable==true){
-//                     Clons[i]=_data.data
-//                 }else{
-//                     Clons[i]=_data.data
-//                 }
-                
-//             }
-                
-//         }
-//         resolve({Clons,data,config,Print})
-//     })
-// }
 const GetValue = (data,item,isTable=false)=>{
     const _item=Object.assign({},item)
     for (let i = 0; i < data.length; i++) {
         const clone = data[i]
         if(_item!=undefined && _item!=null && clone!=undefined && clone!=null && item.value.ItemKey==clone.value.ItemKey){
-            console.log('\nitem',_item)
-            console.log('\nclone',clone)
             if(isTable==true){
                 if(_item.value.RowIndex==clone.value.RowIndex){
-                    _item.value.ItemValue=clone.value.ItemValue
+                    _item.value=Object.assign(_item.value,clone.value)
                     return _item
                 }
             }else{
-                _item.value.ItemValue=clone.value.ItemValue
+                _item.value=Object.assign(_item.value,clone.value)
                 return _item
             }
-            // _item.value.ItemValue=clone.ItemValue
-            console.log('\nitem',_item)
-           
         }
     }
-    console.log('\nitem',item)
     return item
 }
 const SetTableRow = ({Clons,Print,config,data})=>{
@@ -247,11 +183,9 @@ const SetTableRow = ({Clons,Print,config,data})=>{
                     if(clone.value.ItemType==config.TABLE.FIELD && clone.value.RowIndex==0){
                         for (var j = 0; j < productcount; j++) {
                             const newclone = Object.assign({},clone)
-                            console.log('\nnewclone',newclone)
                             newclone.value.RowIndex =j
                             newclone.id =''+StartId
                             const dataclone =Object.assign({},GetValue(data,newclone,true))
-                            console.log('\ndataclone',dataclone)
                             if(j==0){
                                 Clons[i].value=Object.assign({},dataclone.value)
                             }else{
@@ -260,9 +194,9 @@ const SetTableRow = ({Clons,Print,config,data})=>{
                             }
                           
                         }
-                    }else{
-                        Clons[i] = Object.assign({},GetValue(data,clone,false))
-                    }
+                     }//else{
+                    //     Clons[i] = Object.assign({},GetValue(data,clone,false))
+                    // }
                 }
             }
             for (let i = 0; i < newAddClone.length; i++) {
