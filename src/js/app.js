@@ -405,105 +405,44 @@ import '../scss/index.scss'
                 dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config,data:[
                     {
                         'id': '112',
-                        'ToolValue': 'Ürün Bilgileri',
                         'value': {
-                            'MenuRowIndex': 2,
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineStockCode',
-                            'ItemTitle': 'Stok Kodu',
                             'ItemValue': 'row-0-col-0',
-                            'Icon': 'fa fa-user',
-                            'Width': '120',
-                            'Height': '50',
                             'ItemType': 'TableField',
-                            'Format': '',
-                            'Style': {
-                                'font-size': '10pt',
-                                'font-style': 'normal',
-                                'font-weight': 'normal',
-                                'width': '120px',
-                                'height': '50px',
-                                'order': '0',
-                                'transition-duration': '1s',
-                                'transition-timing-function': 'ease',
-                                'transition-delay': '0s',
-                                'transition-property': 'order'
-                            },
                             'ColumnIndex': 0,
                             'RowIndex': 0
                         }
                     },
                     {
                         'id': '111',
-                        'ToolValue': 'Ürün Bilgileri',
                         'value': {
-                            'MenuRowIndex': 2,
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineProductName',
-                            'ItemTitle': 'Ürün Adı',
                             'ItemValue': 'row-0-col-1',
-                            'Icon': 'fa fa-user',
-                            'Width': '120',
-                            'Height': '50',
                             'ItemType': 'TableField',
-                            'Format': '',
-                            'Style': {
-                                'width': '120px',
-                                'height': '50px',
-                                'order': '1',
-                                'transition-duration': '1s',
-                                'transition-timing-function': 'ease',
-                                'transition-delay': '0s',
-                                'transition-property': 'order'
-                            },
                             'ColumnIndex': 1,
                             'RowIndex': 0
                         }
                     },
                     {
                         'id': '101',
-                        'ToolValue': 'Ürün Bilgileri',
                         'value': {
-                            'MenuRowIndex': 2,
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineStockCode',
-                            'ItemTitle': 'Stok Kodu',
                             'ItemValue': 'row-1-col-0',
-                            'Icon': 'fa fa-user',
-                            'Width': '120',
-                            'Height': '50',
                             'ItemType': 'TableField',
-                            'Format': '',
-                            'Style': {
-                                'font-size': '10pt',
-                                'font-style': 'normal',
-                                'font-weight': 'normal',
-                                'width': '120px',
-                                'height': '50px',
-                                'order': '0',
-                                'transition-duration': '1s',
-                                'transition-timing-function': 'ease',
-                                'transition-delay': '0s',
-                                'transition-property': 'order'
-                            },
                             'ColumnIndex': 0,
                             'RowIndex': 1
                         }
                     },
                     {
                         'id': '102',
-                        'ToolValue': 'Ürün Bilgileri',
                         'value': {
-                            'MenuRowIndex': 2,
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineProductName',
-                            'ItemTitle': 'Ürün Adı',
                             'ItemValue': 'Row-1-col-1',
-                            'Icon': 'fa fa-user',
-                            'Width': '120',
-                            'Height': '50',
                             'ItemType': 'TableField',
-                            'Format': '',
                             'ColumnIndex': 1,
                             'RowIndex': 1
                         }
