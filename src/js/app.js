@@ -404,7 +404,7 @@ import '../scss/index.scss'
                 })
                 dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config,data:[
                     {
-                        'id': '112',
+                        'id': '100',
                         'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineStockCode',
@@ -415,7 +415,7 @@ import '../scss/index.scss'
                         }
                     },
                     {
-                        'id': '111',
+                        'id': '101',
                         'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineProductName',
@@ -426,7 +426,7 @@ import '../scss/index.scss'
                         }
                     },
                     {
-                        'id': '101',
+                        'id': '102',
                         'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineStockCode',
@@ -437,7 +437,7 @@ import '../scss/index.scss'
                         }
                     },
                     {
-                        'id': '102',
+                        'id': '103',
                         'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineProductName',
