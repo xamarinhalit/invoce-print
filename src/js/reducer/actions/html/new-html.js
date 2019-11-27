@@ -160,7 +160,8 @@ const SetPrintInit = ({Print,content,config})=> {
         clnode.removeAttribute('id')
         let _div = null
         const {_width,_height,width,height} = CalcWidthHeight(Print,true)
-        if(Print.PageCopy>1){
+        let pageCopy =parseInt(Print.PageCopy)
+        if(pageCopy>1){
             _div=document.createElement('div')
             _div.style.display='flex'
             _div.style.margin='0'
@@ -246,7 +247,7 @@ const SetPrintInit = ({Print,content,config})=> {
 }
 const GetRowCount = (data,config)=>{
     let ocount=-1
-    data.map(({value})=>{
+    data.map((value)=>{
         if(value!=undefined && config.TABLE.FIELD==value.ItemType){
             let rowindex=parseInt(value.RowIndex)
             if(rowindex>ocount)
@@ -275,7 +276,7 @@ const SetTableRow = ({Clons,Print,config,data},indexParam=null)=>{
                 if(clone.value.ItemType==config.TABLE.FIELD && clone.value.RowIndex==0){
                         for (var j = startindex; j < endindex; j++) {
                         data.filter(x=>{
-                            if(x.value.ItemType==config.TABLE.FIELD && x.value.RowIndex==j && clone.value.ItemKey==x.value.ItemKey){
+                            if(x.ItemType==config.TABLE.FIELD && x.RowIndex==j && clone.value.ItemKey==x.ItemKey){
                                 const dt = {
                                     id:''+StartId,
                                     value:{}
@@ -283,8 +284,8 @@ const SetTableRow = ({Clons,Print,config,data},indexParam=null)=>{
                                 for (const key in clone.value) {
                                     if (clone.value.hasOwnProperty(key)) {
                                         const el = clone.value[key]
-                                        if(x.value[key]!=undefined){
-                                            dt.value[key]=x.value[key]
+                                        if(x[key]!=undefined){
+                                            dt.value[key]=x[key]
                                         }else{
                                             dt.value[key]=el
                                         }
@@ -353,25 +354,35 @@ const AddCloneTableItemTo = (items,i,content,config,success)=>{
         const nClons =items.slice()
         const item=nClons[i]
         if(item!=undefined && item.value.ItemType==config.TABLE.FIELD){
-            const $table = $(content).find('.table-'+item.value.TableKey).first()
-            let rowQuery='div[data--row-index="'+item.value.RowIndex+'"]'
-            let _divrow
-            const _divcolumn = document.createElement('div')
-            _divcolumn.classList.add(config.UI.TABLECOLUMNCLASS)
-            _divcolumn.innerHTML=item.value.ItemValue
-            _divcolumn.dataset.ColumnIndex=item.value.ColumnIndex
-            $(_divcolumn).css(item.value.Style)
-    
-            const _divrow0 = $table[0].querySelector(rowQuery)
-            if(_divrow0==null){
-                _divrow= document.createElement('div')
-                _divrow.classList.add(config.UI.TABLEROWCLASS)
-                _divrow.dataset.RowIndex=item.value.RowIndex
-                _divrow.appendChild(_divcolumn)
-                $table[0].appendChild(_divrow)
-            }else{
-                _divrow0.appendChild(_divcolumn)
+            // const $table = $(content).find('.table-'+item.value.TableKey).first()
+            const $table = $(content).find('.table-'+item.value.TableKey)
+            for (let i = 0; i < $table.length; i++) {
+                const table = $table[i]
+                if(table!=undefined){
+                    let rowQuery='div[data--row-index="'+item.value.RowIndex+'"]'
+                    let _divrow
+                    const _divcolumn = document.createElement('div')
+                    _divcolumn.classList.add(config.UI.TABLECOLUMNCLASS)
+                    _divcolumn.innerHTML=item.value.ItemValue
+                    _divcolumn.dataset.ColumnIndex=item.value.ColumnIndex
+                    $(_divcolumn).css(item.value.Style)
+            
+                    // const _divrow0 = $table[0].querySelector(rowQuery)
+                     const _divrow0 = table.querySelector(rowQuery)
+                    if(_divrow0==null){
+                        _divrow= document.createElement('div')
+                        _divrow.classList.add(config.UI.TABLEROWCLASS)
+                        _divrow.dataset.RowIndex=item.value.RowIndex
+                        _divrow.appendChild(_divcolumn)
+                        // $table[0].appendChild(_divrow)
+                        table.appendChild(_divrow)
+                    }else{
+                        _divrow0.appendChild(_divcolumn)
+                    }
+                }
+                
             }
+
         }
        
         i++

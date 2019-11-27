@@ -410,68 +410,73 @@ import '../scss/index.scss'
                 dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config,data:[
                     {
                         'id': '100',
-                        'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineStockCode',
                             'ItemValue': 'LineStockCode -0',
                             'ItemType': 'TableField',
                             'RowIndex': 0,
                             'ColumnIndex': 100
-                        }
                     },
                     {
                         'id': '101',
-                        'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineProductName',
                             'ItemValue': 'LineProductName -0',
                             'ItemType': 'TableField',
                             'RowIndex': 0,
                             'ColumnIndex': 101
-                        }
                     },
                     {
                         'id': '102',
-                        'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineStockCode',
                             'ItemValue': 'LineStockCode -1',
                             'ItemType': 'TableField',
                             'RowIndex': 1,
                             'ColumnIndex': 100
-                        }
                     },
                     {
                         'id': '103',
-                        'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineProductName',
                             'ItemValue': 'LineProductName -1',
                             'ItemType': 'TableField',
                             'RowIndex': 1,
                             'ColumnIndex': 101
-                        }
                     },{
                         'id': '105',
-                        'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineStockCode',
                             'ItemValue': 'LineStockCode -2',
                             'ItemType': 'TableField',
                             'RowIndex': 2,
                             'ColumnIndex': 100
-                        }
                     },
                     {
                         'id': '106',
-                        'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineProductName',
                             'ItemValue': 'LineProductName -2',
                             'ItemType': 'TableField',
                             'RowIndex': 2,
                             'ColumnIndex': 101
-                        }
+                    },{
+                        'id': '107',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineStockCode',
+                            'ItemValue': 'LineStockCode -3',
+                            'ItemType': 'TableField',
+                            'RowIndex': 3,
+                            'ColumnIndex': 100
+                    },
+                    {
+                        'id': '108',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineProductName',
+                            'ItemValue': 'LineProductName -3',
+                            'ItemType': 'TableField',
+                            'RowIndex': 3,
+                            'ColumnIndex': 101
                     }
                     
                     
