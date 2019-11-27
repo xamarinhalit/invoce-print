@@ -44,6 +44,8 @@ const dispatch = (action,state=InitialState)=>{
     case actionTypes.CLONE.JSON_HTMLTOPRINT:
         JsonToHtmlPrint(action.payload).then((_data)=>{
             sendReducer(action.type,_data,state)
+        }).catch(()=>{
+            sendReducer(action.type,undefined,state)
         })
         break
     case actionTypes.INIT.OVERRIDE_TYPE:

@@ -1,22 +1,105 @@
 import {  CalcWidthHeight } from '../convert'
 /* eslint-disable no-undef */
 export const JsonToHtmlPrint = (payload)=>{
-    return new Promise((resolve)=>{
+    return new Promise((resolve,reject)=>{
         let value
         if(payload && typeof payload === 'object' && payload.constructor === Array){
             value=payload[0]
         }else if(payload && typeof payload === 'object' && payload.constructor === Object){
             value=payload
         }
-        SetTableRow(value).then((temp)=>{
-            AddCloneItemAsync(temp).then((data)=>{
-                resolve(data)
+        let datacount =GetRowCount(value.data,value.config)
+        let pagecount =parseInt(value.Print.PageProduct)
+        SetTableRowTo(value,{pagecount,datacount},(temp)=>{
+            if(temp.Pages!=undefined){
+                const ob = {
+                    element:document.createElement('div'),
+                    hbodystyle:'',
+                    pagestyle:''
+                }
+                for (const key in temp.Pages) {
+                    // eslint-disable-next-line no-prototype-builtins
+                    if (temp.Pages.hasOwnProperty(key)) {
+                        const page =Object.assign({}, temp.Pages[key])
+                        page.element.classList.add('pagebreakline')
+                        ob.element.appendChild(page.element)
+                        ob.hbodystyle=page.hbodystyle
+                        ob.pagestyle=page.pagestyle
+                    }
+                }
+                resolve(ob)
+            }else{
+                reject()
+            }
+        })
+    })
+}
+const SetTableRowTo =(value,
+    {datacount=0,pagecount=0},success,temp={},tempindex=0,startindex=0,endindex=0)=>{
+    endindex=startindex+pagecount
+    if(datacount==endindex){
+        SetTableRow(value,{startindex,endindex}).then((tempdata)=>{
+            AddCloneItemAsync(tempdata).then((data)=>{
+                temp[tempindex]=Object.assign({},data)
+                tempindex++
+                success({Pages:temp})
             })
         })
-       
-        
+    }else if(datacount<endindex){
+        SetTableRow(value,{startindex,endindex}).then((tempdata)=>{
+            AddCloneItemAsync(tempdata).then((data)=>{
+                temp[tempindex]=Object.assign({},data)
+                tempindex++
+                success({Pages:temp})
+            })
+        })
+    }else{
+        SetTableRow(value,{startindex,endindex}).then((tempdata)=>{
+            AddCloneItemAsync(tempdata).then((data)=>{
+                temp[tempindex]=Object.assign({},data)
+                tempindex++
+                startindex=endindex
+              SetTableRowTo(value,{datacount,pagecount},success,temp,tempindex,startindex,endindex)
+            })
+        })
+    }
 
-    })
+
+
+
+    // if(datacount>pagecount){
+    //     SetTableRow(value,{startindex,endindex}).then((tempdata)=>{
+    //         AddCloneItemAsync(tempdata).then((data)=>{
+    //             temp[tempindex]=Object.assign({},data)
+    //             tempindex++
+    //             datacount=datacount-pagecount
+    //             startindex+=pagecount
+    //             SetTableRowTo(value,{datacount,pagecount},success,temp,tempindex,startindex,endindex)
+    //         })
+    //     })
+    // }else if(datacount==pagecount){
+    //     SetTableRow(value).then((tempdata)=>{
+    //         AddCloneItemAsync(tempdata).then((data)=>{
+    //             temp[tempindex]=Object.assign({},data)
+    //             tempindex++
+    //             success({Pages:temp})
+    //         })
+    //     })
+    // }else{
+    //     if(datacount>-1){
+    //         SetTableRow(value).then((tempdata)=>{
+    //             AddCloneItemAsync(tempdata).then((data)=>{
+    //                 temp[tempindex]=Object.assign({},data)
+    //                 tempindex++
+    //                 success({Pages:temp})
+    //             })
+    //         })
+    //     }else{
+    //         success({Pages:temp})
+    //     }
+      
+    // }
+    
 }
 export const AddCloneItemAsync = (payload) =>{
     return new Promise((resolve)=>{
@@ -37,6 +120,10 @@ const SetPrintInit = ({Print,content,config})=> {
             padding:0;
             margin:0;
         }
+        .pagebreakline{
+            page-break-after:always;
+            position:relative;
+        }
          .${config.UI.TABLEMAINCLASS} .${config.UI.TABLEROWCLASS} {
             display: -webkit-inline-box;
             display: -ms-inline-flexbox;
@@ -55,6 +142,10 @@ const SetPrintInit = ({Print,content,config})=> {
             body{
                 padding:0cm;
                 margin:0cm;
+            }
+            .pagebreakline{
+                page-break-after:always;
+                position:relative;
             }
             .${config.UI.TABLEMAINCLASS}>.${config.UI.TABLEROWCLASS} {
                 display: -webkit-inline-box;
@@ -153,61 +244,67 @@ const SetPrintInit = ({Print,content,config})=> {
        
     })
 }
-const GetValue = (data,item,isTable=false)=>{
-    const _item=Object.assign({},item)
-    for (let i = 0; i < data.length; i++) {
-        const clone = data[i]
-        if(_item!=undefined && _item!=null && clone!=undefined && clone!=null && item.value.ItemKey==clone.value.ItemKey){
-            if(isTable==true){
-                if(_item.value.RowIndex==clone.value.RowIndex){
-                    _item.value=Object.assign(_item.value,clone.value)
-                    return _item
-                }
-            }else{
-                _item.value=Object.assign(_item.value,clone.value)
-                return _item
-            }
+const GetRowCount = (data,config)=>{
+    let ocount=-1
+    data.map(({value})=>{
+        if(value!=undefined && config.TABLE.FIELD==value.ItemType){
+            let rowindex=parseInt(value.RowIndex)
+            if(rowindex>ocount)
+                ocount=rowindex
         }
-    }
-    return item
+    })
+    return ocount+1
 }
-const SetTableRow = ({Clons,Print,config,data})=>{
+const SetTableRow = ({Clons,Print,config,data},indexParam=null)=>{
     return new Promise((resolve)=>{
-        let productcount=parseInt(Print.PageProduct)
-        if(productcount>1){
-            const newAddClone=[]
-            let StartId=1000
-            for (let i = 0; i < Clons.length; i++) {
-                const clone =Object.assign({}, Clons[i])
-                if(clone!=undefined){
-                    if(clone.value.ItemType==config.TABLE.FIELD && clone.value.RowIndex==0){
-                        for (var j = 0; j < productcount; j++) {
-                            const newclone = Object.assign({},clone)
-                            newclone.value.RowIndex =j
-                            newclone.id =''+StartId
-                            const dataclone =Object.assign({},GetValue(data,newclone,true))
-                            if(j==0){
-                                Clons[i].value=Object.assign({},dataclone.value)
-                            }else{
-                                newAddClone.push(dataclone)
+         const nClons= Clons.slice()
+         let productcount=parseInt(Print.PageProduct)
+         let startindex=0,endindex=0
+         if(indexParam!=null){
+            endindex=indexParam.endindex
+            startindex=indexParam.startindex
+         }else{
+            endindex=productcount
+         }
+        const newAddClone=[]
+        let StartId=1000
+        for (let i = 0; i < nClons.length; i++) {
+            const clone =Object.assign({}, nClons[i])
+            let cloneid= clone.id
+            if(clone!=undefined){
+                if(clone.value.ItemType==config.TABLE.FIELD && clone.value.RowIndex==0){
+                        for (var j = startindex; j < endindex; j++) {
+                        data.filter(x=>{
+                            if(x.value.ItemType==config.TABLE.FIELD && x.value.RowIndex==j && clone.value.ItemKey==x.value.ItemKey){
+                                const dt = {
+                                    id:''+StartId,
+                                    value:{}
+                                }
+                                for (const key in clone.value) {
+                                    if (clone.value.hasOwnProperty(key)) {
+                                        const el = clone.value[key]
+                                        if(x.value[key]!=undefined){
+                                            dt.value[key]=x.value[key]
+                                        }else{
+                                            dt.value[key]=el
+                                        }
+                                    }
+                                }
+                                newAddClone.push(dt)
                                 StartId++
                             }
-                          
-                        }
-                     }//else{
-                    //     Clons[i] = Object.assign({},GetValue(data,clone,false))
-                    // }
-                }
+                        })
+                    }
+                    Clons =Clons.filter(x=>x.id!=cloneid)
+                    }
             }
-            for (let i = 0; i < newAddClone.length; i++) {
-                if(newAddClone[i]!=undefined){
-                    Clons.push(newAddClone[i])
-                }
-            }
-            resolve({Clons,Print,config,data})
-        }else{
-            resolve({Clons,Print,config,data})
         }
+        for (let i = 0; i < newAddClone.length; i++) {
+            if(newAddClone[i]!=undefined){
+                Clons.push(newAddClone[i])
+            }
+        }
+        resolve({Clons,Print,config,data})
     })
 }
 
@@ -215,32 +312,32 @@ const AddCloneItem= async (payload,success)=>{
     if(payload!=undefined){
         const {Print,Clons,config } =  payload
         const content =document.createElement('div')
-       
-        for (let i = 0; i < Clons.length; i++) {
-            const item = Clons[i]
-            let items =null
+        const nClons =Clons.slice()
+        for (let i = 0; i < nClons.length; i++) {
+            const item = nClons[i]
+            var items =null
             switch (item.value.ItemType) {
             case config.TEXT.FIELD:
-                items =Object.assign({},await AddCloneTextItem(item,config))
+                items =AddCloneTextItem(item,config)
                 content.appendChild(items.element)
                 break
             case config.TEXT.CUSTOMTEXT:
-                items =Object.assign({},await AddCloneTextItem(item,config))
+                items =AddCloneTextItem(item,config)
                 content.appendChild(items.element)
                 break
             case config.TEXT.CUSTOMIMAGE:
-                items =Object.assign({},await AddCloneTextItem(item,config))
+                items =AddCloneTextItem(item,config)
                 content.appendChild(items.element)
                 break
             case config.TABLE.DEFAULT:
-                items =Object.assign({},await AddCloneTable(item,config))
+                items =AddCloneTable(item,config)
                 content.appendChild(items.element)
                 break
             default:
                 break
             }
         }
-        AddCloneTableItem(Clons,content,config,async ()=>{
+        AddCloneTableItem(Clons,content,config, ()=>{
             SetPrintInit({Print,content,config}).then(({element,hbodystyle,pagestyle})=>{
                 success({element,hbodystyle,pagestyle})
             })
@@ -253,14 +350,16 @@ const AddCloneTableItem = (items,content,config,success)=>{
 }
 const AddCloneTableItemTo = (items,i,content,config,success)=>{
     if(items.length>i){
-        const item=items[i]
-        if(item.value.ItemType==config.TABLE.FIELD){
+        const nClons =items.slice()
+        const item=nClons[i]
+        if(item!=undefined && item.value.ItemType==config.TABLE.FIELD){
             const $table = $(content).find('.table-'+item.value.TableKey).first()
             let rowQuery='div[data--row-index="'+item.value.RowIndex+'"]'
             let _divrow
             const _divcolumn = document.createElement('div')
             _divcolumn.classList.add(config.UI.TABLECOLUMNCLASS)
             _divcolumn.innerHTML=item.value.ItemValue
+            _divcolumn.dataset.ColumnIndex=item.value.ColumnIndex
             $(_divcolumn).css(item.value.Style)
     
             const _divrow0 = $table[0].querySelector(rowQuery)
@@ -276,14 +375,13 @@ const AddCloneTableItemTo = (items,i,content,config,success)=>{
         }
        
         i++
-        AddCloneTableItemTo(items,i,content,config,success)
+        AddCloneTableItemTo(nClons,i,content,config,success)
     }else{
         success()
     }
     
 }
 const AddCloneTable = (menuitem,config)=>{
-    return new Promise((resolve)=>{
         const { value}=menuitem
         const _div = document.createElement('div')
         _div.classList.add(config.UI.TABLEMAINCLASS)
@@ -291,16 +389,13 @@ const AddCloneTable = (menuitem,config)=>{
         _div.style.position='absolute'
         const $div =$(_div)
         $div.css(value.Style)
-        resolve({element:_div})
-    })
+        return {element:_div}
 }
 const AddCloneTextItem= (menuitem)=>{
-    return new Promise((resolve)=>{
         const {value} =menuitem
         const textclone= document.createElement('div')
         textclone.innerHTML= value.ItemValue
         if(value.Style!='' && value.Style!=undefined && value.Style!=null)
             $(textclone).css(value.Style)
-        resolve({element:textclone})
-    })
+        return {element:textclone}
 }

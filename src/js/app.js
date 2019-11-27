@@ -292,7 +292,7 @@ import '../scss/index.scss'
                     e.preventDefault()
                     subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE,(_state,_data)=>{
                         if(_data!=undefined && _data.data!=undefined){
-                            _data.data.PageName=_data.data.Print.PageType+' '+_data.data.Print.CopyDirection
+                            _data.data.PageName=_data.data.Print.PageType+' '+_data.data.Print.CopyDirection+ ' Ürün Sayısı'+ _data.data.Print.PageProduct + (_data.data.Print.PageCopy!=''?' Kopya Sayısı '+_data.data.Print.PageCopy : '')
                             App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',data:_data.data}).then((_sonuc)=>{
                             })
                         }
@@ -372,27 +372,32 @@ import '../scss/index.scss'
                 }
                 const {Print,Clons,data} = _sonuc
                 subscribe(actionTypes.CLONE.JSON_HTMLTOPRINT,(_state,_data)=>{
-                    const {pagestyle,hbodystyle,element } =_data
-                    $(element.outerHTML).printThis({
-                        debug: false, // show the iframe for debugging
-                        importCSS: true, // import parent page css
-                        importStyle: true, // import style tags
-                        printContainer: true, // print outer container/$.selector
-                        pageTitle: '', // add title to print page
-                        removeInline: false, // remove inline styles from print elements
-                        removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
-                        printDelay: 0, // variable print delay
-                        header:pagestyle, // prefix to html
-                        footer: null, // postfix to html
-                        base: false, // preserve the BASE tag or accept a string for the URL
-                        formValues: true, // preserve input/form values
-                        canvas: false, // copy canvas content
-                        removeScripts: false, // remove script tags from print content
-                        copyTagClasses: true, // copy classes from the html & body tag
-                        beforePrintEvent: null, // function for printEvent in iframe
-                        beforePrint: null, // function called before iframe is filled
-                        afterPrint: null // function called before iframe is removed
-                    })
+                    if(_data==undefined){
+                        alert('Tasklak Yanlış')
+                    }else{
+                        const {pagestyle,hbodystyle,element } =_data
+                        $(element.outerHTML).printThis({
+                            debug: false, // show the iframe for debugging
+                            importCSS: true, // import parent page css
+                            importStyle: true, // import style tags
+                            printContainer: true, // print outer container/$.selector
+                            pageTitle: '', // add title to print page
+                            removeInline: false, // remove inline styles from print elements
+                            removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
+                            printDelay: 0, // variable print delay
+                            header:pagestyle, // prefix to html
+                            footer: null, // postfix to html
+                            base: false, // preserve the BASE tag or accept a string for the URL
+                            formValues: true, // preserve input/form values
+                            canvas: false, // copy canvas content
+                            removeScripts: false, // remove script tags from print content
+                            copyTagClasses: true, // copy classes from the html & body tag
+                            beforePrintEvent: null, // function for printEvent in iframe
+                            beforePrint: null, // function called before iframe is filled
+                            afterPrint: null // function called before iframe is removed
+                        })
+                    }
+                  
                     // var vn = window.open('','',`resizable,scrollbars,
                     // titlebar=no,
                     //  left=200,
@@ -408,10 +413,10 @@ import '../scss/index.scss'
                         'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineStockCode',
-                            'ItemValue': 'row-0-col-0',
+                            'ItemValue': 'LineStockCode -0',
                             'ItemType': 'TableField',
-                            'ColumnIndex': 0,
-                            'RowIndex': 0
+                            'RowIndex': 0,
+                            'ColumnIndex': 100
                         }
                     },
                     {
@@ -419,10 +424,10 @@ import '../scss/index.scss'
                         'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineProductName',
-                            'ItemValue': 'row-0-col-1',
+                            'ItemValue': 'LineProductName -0',
                             'ItemType': 'TableField',
-                            'ColumnIndex': 1,
-                            'RowIndex': 0
+                            'RowIndex': 0,
+                            'ColumnIndex': 101
                         }
                     },
                     {
@@ -430,10 +435,10 @@ import '../scss/index.scss'
                         'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineStockCode',
-                            'ItemValue': 'row-1-col-0',
+                            'ItemValue': 'LineStockCode -1',
                             'ItemType': 'TableField',
-                            'ColumnIndex': 0,
-                            'RowIndex': 1
+                            'RowIndex': 1,
+                            'ColumnIndex': 100
                         }
                     },
                     {
@@ -441,12 +446,35 @@ import '../scss/index.scss'
                         'value': {
                             'TableKey': 'InvoiceLine',
                             'ItemKey': 'LineProductName',
-                            'ItemValue': 'Row-1-col-1',
+                            'ItemValue': 'LineProductName -1',
                             'ItemType': 'TableField',
-                            'ColumnIndex': 1,
-                            'RowIndex': 1
+                            'RowIndex': 1,
+                            'ColumnIndex': 101
+                        }
+                    },{
+                        'id': '105',
+                        'value': {
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineStockCode',
+                            'ItemValue': 'LineStockCode -2',
+                            'ItemType': 'TableField',
+                            'RowIndex': 2,
+                            'ColumnIndex': 100
+                        }
+                    },
+                    {
+                        'id': '106',
+                        'value': {
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineProductName',
+                            'ItemValue': 'LineProductName -2',
+                            'ItemType': 'TableField',
+                            'RowIndex': 2,
+                            'ColumnIndex': 101
                         }
                     }
+                    
+                    
                 ]}})
             }
 
