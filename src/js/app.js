@@ -477,6 +477,24 @@ import '../scss/index.scss'
                             'ItemType': 'TableField',
                             'RowIndex': 3,
                             'ColumnIndex': 101
+                    },
+                    {
+                        'id': '109',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineStockCode',
+                            'ItemValue': 'LineStockCode -4',
+                            'ItemType': 'TableField',
+                            'RowIndex': 4,
+                            'ColumnIndex': 100
+                    },
+                    {
+                        'id': '110',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineProductName',
+                            'ItemValue': 'LineProductName -4',
+                            'ItemType': 'TableField',
+                            'RowIndex': 4,
+                            'ColumnIndex': 101
                     }
                     
                     
