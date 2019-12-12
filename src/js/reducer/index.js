@@ -37,7 +37,13 @@ const SetInit = (state,payload)=>{
     SetGroupItem(state,_value)
 }
 const observers= []
-
+const dispatchForFormat =(action,state=InitialState)=>{
+    switch (action.type) {
+        case actionTypes.CLONE.FORMAT_CHANGE:
+            sendReducers(action.type,action.payload,state)
+            return;
+    }
+}
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
@@ -182,4 +188,4 @@ const reducer_pipe=(c,...ops)=>{
     })
     delete reducer_ListFn.objects[reducer_ListFn.index]
 }
-export { addReducer,dispatch,reducer_pipe ,sendReducers,StyleParamClick}
+export { addReducer,dispatch,reducer_pipe ,sendReducers,StyleParamClick,dispatchForFormat}

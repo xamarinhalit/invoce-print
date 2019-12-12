@@ -1,4 +1,8 @@
-import {  CalcWidthHeight } from '../convert'
+import {  CalcWidthHeight } from '../../convert'
+
+import { dispatchForFormat } from '../index'
+import { actionTypes} from '../../const'
+import { subscribe } from '../../../module'
 /* eslint-disable no-undef */
 export const JsonToHtmlPrint = (payload)=>{
     return new Promise((resolve,reject)=>{
@@ -371,39 +375,42 @@ const AddCloneItem= async (payload,success)=>{
 const AddCloneTableItem = (items,content,config,success)=>{
     AddCloneTableItemTo(items,0,content,config,success)
 }
+
 const AddCloneTableItemTo = (items,i,content,config,success)=>{
     if(items.length>i){
         const nClons =items.slice()
         const item=nClons[i]
         if(item!=undefined && item.value.ItemType==config.TABLE.FIELD){
-            // const $table = $(content).find('.table-'+item.value.TableKey).first()
             const $table = $(content).find('.table-'+item.value.TableKey)
+            const tempElement= document.createElement('div')
+            dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:tempElement,value:item.value}})
             for (let i = 0; i < $table.length; i++) {
-                const table = $table[i]
-                if(table!=undefined){
-                    let rowQuery='div[data--row-index="'+item.value.RowIndex+'"]'
-                    let _divrow
-                    const _divcolumn = document.createElement('div')
-                    _divcolumn.classList.add(config.UI.TABLECOLUMNCLASS)
-                    _divcolumn.innerHTML=item.value.ItemValue
-                    _divcolumn.dataset.ColumnIndex=item.value.ColumnIndex
-                    $(_divcolumn).css(item.value.Style)
-            
-                    // const _divrow0 = $table[0].querySelector(rowQuery)
-                     const _divrow0 = table.querySelector(rowQuery)
-                    if(_divrow0==null){
-                        _divrow= document.createElement('div')
-                        _divrow.classList.add(config.UI.TABLEROWCLASS)
-                        _divrow.dataset.RowIndex=item.value.RowIndex
-                        _divrow.appendChild(_divcolumn)
-                        // $table[0].appendChild(_divrow)
-                        table.appendChild(_divrow)
-                    }else{
-                        _divrow0.appendChild(_divcolumn)
-                    }
-                }
+                    const table = $table[i]
+                    if(table!=undefined){
+                        let rowQuery='div[data--row-index="'+item.value.RowIndex+'"]'
+                        let _divrow
+                        const _divcolumn = document.createElement('div')
+                        _divcolumn.classList.add(config.UI.TABLECOLUMNCLASS)
+                        _divcolumn.innerHTML=tempElement.innerHTML
+                        _divcolumn.dataset.ColumnIndex=item.value.ColumnIndex
+                        $(_divcolumn).css(item.value.Style)
                 
-            }
+                        const _divrow0 = table.querySelector(rowQuery)
+                        if(_divrow0==null){
+                            _divrow= document.createElement('div')
+                            _divrow.classList.add(config.UI.TABLEROWCLASS)
+                            _divrow.dataset.RowIndex=item.value.RowIndex
+                            _divrow.appendChild(_divcolumn)
+                            // $table[0].appendChild(_divrow)
+                            table.appendChild(_divrow)
+                        }else{
+                            _divrow0.appendChild(_divcolumn)
+                        }
+                    }
+                    
+                }
+            }}})
+          
 
         }
        
@@ -427,6 +434,7 @@ const AddCloneTable = (menuitem,config)=>{
 const AddCloneTextItem= (menuitem)=>{
         const {value} =menuitem
         const textclone= document.createElement('div')
+        dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:item.value}})
         textclone.innerHTML= value.ItemValue
         if(value.Style!='' && value.Style!=undefined && value.Style!=null)
             $(textclone).css(value.Style)
