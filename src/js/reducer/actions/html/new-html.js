@@ -1,8 +1,7 @@
-import {  CalcWidthHeight } from '../../convert'
+import {  CalcWidthHeight } from '../convert'
 
-import { dispatchForFormat } from '../index'
+import { dispatch } from '../../index'
 import { actionTypes} from '../../const'
-import { subscribe } from '../../../module'
 /* eslint-disable no-undef */
 export const JsonToHtmlPrint = (payload)=>{
     return new Promise((resolve,reject)=>{
@@ -407,13 +406,8 @@ const AddCloneTableItemTo = (items,i,content,config,success)=>{
                             _divrow0.appendChild(_divcolumn)
                         }
                     }
-                    
-                }
-            }}})
-          
-
-        }
-       
+            }
+        }       
         i++
         AddCloneTableItemTo(nClons,i,content,config,success)
     }else{
