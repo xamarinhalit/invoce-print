@@ -37,15 +37,25 @@ import '../scss/index.scss'
           //deger =......      
           //tarih format
         }
-        debugger
         return deger
     }
     const App= {
         PageName:'Sayfa',
-        SelectedCloneId:-99,
-        Service:{
-          FileUpload: 'http://localhost:3000/Test',
+        PageConfig:{
+            TemplateName:'Sayfa',
+            TemplateKey:1,
+            TemplateJsonData:{}
         },
+        HostConfig:{
+            host:'http://localhost:3000/',
+            save:'Settings/AddTemplate',
+            loadlist:'SaveLoad',
+            menu1:'shareddata/GetTemlateDefaultTools',
+            load:'setting/GetTemplate',
+            getdata:'order/GetinvoiceJsonData',
+            FileUpload: 'Test',
+        },
+        SelectedCloneId:-99,
         InitConfig :{ 
             target:'.m-Template-Page-Area',
             dragclass:'m-drag-ul',
@@ -72,7 +82,7 @@ import '../scss/index.scss'
             ImageUrl:'http://localhost:8080/src/img/fatura.jpg',
             DefaultRow:true
         },
-        LoadFromJson:true, /// for developer
+        LoadFromHtmlOrTask:true, /// for developer
         SetPrint : (_Print)=> {
             const forms =  document.forms.PanelPaperSetting
             for (let i = 0; i < forms.length; i++) {
@@ -225,14 +235,14 @@ import '../scss/index.scss'
                                 $.ajax({
                                     type: "POST",
                                     enctype: 'multipart/form-data',
-                                    url: App.Service.FileUpload,
+                                    url: App.HostConfig.host+ App.HostConfig.FileUpload,
                                     data: data,
                                     processData: false,
                                     contentType: false,
                                     cache: false,
                                  
                                     success: function (data) {
-                                        debugger
+                                    
                                         dispatch({type:actionTypes.CLONE.IMAGE_FILE_COMPLETED,payload:{
                                             cloneid:changed.cloneid,url:data.url
                                         }})
@@ -245,63 +255,83 @@ import '../scss/index.scss'
                        
                     })
                 },
-                LoadJson:()=>{
-                    $('#loadJson').click(function(e){
-                        e.preventDefault()
-                        $('#loadFormSetting').modal({ backdrop: 'static', keyboard: false })
+                JsonHtmlToPrint:()=>{
+                    subscribe(actionTypes.HTTP.JSON_CONFIG_LOAD,(_state,_data)=>{
+                        // eslint-disable-next-line no-empty-pattern
+                        App.SetPrint(_data.Print)
                     })
+                    App.Event.$HTTP({url:App.HostConfig.host+App.HostConfig.load ,type:'GET'}).then((_sonuc)=>{
+                                const config ={
+                                    TABLE:{
+                                        FIELD:'TableField',
+                                        DEFAULT:'Table'
+                                    },
+                                    TEXT:{
+                                        FIELD:'Field',
+                                        ITEMKEY:'ItemKey',
+                                        CUSTOMTEXT:'CustomText',
+                                        CUSTOMIMAGE:'CustomImage'
+                                    },
+                                    UI:{
+                                        TABLEROWCLASS:'p-row',
+                                        TABLECOLUMNCLASS:'p-column',
+                                        TABLEMAINCLASS:'p-main',
+                                    }
+                
+                                }
+                                const {Print,Clons} = _sonuc[0]
+                                subscribe(actionTypes.CLONE.JSON_HTMLTOPRINT,(_state,header_Element)=>{
+                                    if(header_Element==undefined){
+                                        alert('Tasklak Yanlış')
+                                    }else{
+                                        const {pagestyle,hbodystyle,element } =header_Element
+                                        $(element.outerHTML).printThis({
+                                            debug: false, // show the iframe for debugging
+                                            importCSS: true, // import parent page css
+                                            importStyle: true, // import style tags
+                                            printContainer: true, // print outer container/$.selector
+                                            pageTitle: '', // add title to print page
+                                            removeInline: false, // remove inline styles from print elements
+                                            removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
+                                            printDelay: 0, // variable print delay
+                                            header:pagestyle, // prefix to html
+                                            footer: null, // postfix to html
+                                            base: false, // preserve the BASE tag or accept a string for the URL
+                                            formValues: true, // preserve input/form values
+                                            canvas: false, // copy canvas content
+                                            removeScripts: false, // remove script tags from print content
+                                            copyTagClasses: true, // copy classes from the html & body tag
+                                            beforePrintEvent: null, // function for printEvent in iframe
+                                            beforePrint: null, // function called before iframe is filled
+                                            afterPrint: null // function called before iframe is removed
+                                        })
+                                    }
+                                    
+                                    // var vn = window.open('','',`resizable,scrollbars,
+                                    // titlebar=no,
+                                    //  left=200,
+                                    //  top=200,
+                                    //  width=768,
+                                    //  height=600`)
+                                    // vn.document.head.innerHTML=hbodystyle
+                                    // vn.document.body.innerHTML=element.innerHTML
+                                })
+                                App.Event.$HTTP({url:App.HostConfig.host+App.HostConfig.getdata ,type:'GET'}).then((_realdata)=>{
+                                        dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config,data:_realdata }})
+                                })
+                                
+                          
+                        })
                 },
-                LoadJsonBtn:()=>{
-                    $('[name=loadFormSettingBtn]').click((e)=>{
-                        e.preventDefault()
+                TaskToPrint:()=>{
                         subscribe(actionTypes.HTTP.JSON_CONFIG_LOAD,(_state,_data)=>{
                             // eslint-disable-next-line no-empty-pattern
                             App.SetPrint(_data.Print)
                         })
-                        const forms =  document.forms.loadFormSetting
-                        let message = ''
-                        let formEl ={}
-                        for (let i = 0; i < forms.length; i++) {
-                            const element = forms[i]
-                            const {name,value,type} =element
-                            if(name != '' && type!='button')
-                                formEl[name]=value
-                            if (!element.checkValidity()) {
-                                message+=element.validationMessage + ' , '
-                            }
-                        }
-                        if(message!=''){
-                            alert(message)
-                        }else{
-                            App.Event.$HTTP({url:'http://localhost:3000/SaveLoad?id='+formEl.loadname,type:'GET'}).then((_sonuc)=>{
-                                if(App.LoadFromJson==true){
-                                    const config ={
-                                        TABLE:{
-                                            FIELD:'TableField',
-                                            DEFAULT:'Table'
-                                        },
-                                        TEXT:{
-                                            FIELD:'Field',
-                                            ITEMKEY:'ItemKey',
-                                            CUSTOMTEXT:'CustomText',
-                                            CUSTOMIMAGE:'CustomImage'
-                                        },
-                                        UI:{
-                                            TABLEROWCLASS:'p-row',
-                                            TABLECOLUMNCLASS:'p-column',
-                                            TABLEMAINCLASS:'p-main',
-                                        }
-                    
-                                    }
-                                    App.Event.JsonToHtmlPrint(undefined,config,{..._sonuc[0],data:_sonuc[0].Clons})
-                                }else{
-                                    dispatch({type:actionTypes.HTTP.JSON_CONFIG_LOAD,payload: {data:_sonuc}})
-                                }
-                            })
-                            
-                        }
-                      
-                    })
+                        App.Event.$HTTP({url:App.HostConfig.host+App.HostConfig.load ,type:'GET'}).then((_sonuc)=>{
+                            dispatch({type:actionTypes.HTTP.JSON_CONFIG_LOAD,payload: {data:_sonuc}})
+                        
+                        })
                 },
                 PrintSettings:()=>{
                     $('#PrintSettings').click((e)=>{
@@ -339,43 +369,27 @@ import '../scss/index.scss'
             SaveConfig:()=>{
                 $('#JsonConfig').click(function(e) {
                     e.preventDefault()
-                    subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE,(_state,_data)=>{
-                        if(_data!=undefined && _data.data!=undefined){
-                            _data.data.PageName=_data.data.Print.PageType+' '+_data.data.Print.CopyDirection+ ' Ürün Sayısı'+ _data.data.Print.PageProduct + (_data.data.Print.PageCopy!=''?' Kopya Sayısı '+_data.data.Print.PageCopy : '')
-                            App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',data:_data.data}).then((_sonuc)=>{
-                            })
+                    subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE,(_state,_jsonconfig)=>{
+                        if(_jsonconfig!=undefined && _jsonconfig.data!=undefined){
+                            const jsondata ={}
+                            jsondata.TemplateKey=App.PageConfig.TemplateKey
+                            jsondata.TemplateName=App.PageConfig.TemplateName
+                            jsondata.TemplateJsonData=_jsonconfig.data
+                            App.Event.$HTTP({url:App.HostConfig.host+App.HostConfig.save,data:jsondata}).then((_sonuc)=>{})
                         }
                     })
-                    dispatch({type:actionTypes.HTTP.JSON_CONFIG_SAVE,payload:{data:{PageName:App.PageName}}})
+                    dispatch({type:actionTypes.HTTP.JSON_CONFIG_SAVE})
                 }) 
             },
             Print:()=>{
                 $('#newPrint').click(function(e){
                     e.preventDefault()
-                    subscribe(actionTypes.UI.UI_PRINT,(_state,_tools)=>{
-                    
-                    })
+                    subscribe(actionTypes.UI.UI_PRINT,(_state,_tools)=>{ })
                     dispatch({type: actionTypes.UI.UI_PRINT})
                 
                 })
             },
-            LoadConfigHttp:()=>{
-                App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',type:'GET'}).then((data)=>{
-                    if(data!=undefined && data.length>0){
-                        const selectload=document.forms.loadFormSetting.elements.loadname
-                        selectload.innerHTML=''
-                        for (let i = 0; i < data.length; i++) {
-                            const item = data[i]
-                            const opti = document.createElement('option')
-                            opti.text=item.PageName +' - ' +item.id
-                            opti.value=item.id
-                            selectload.appendChild(opti)
-                        }
-                    }
-                })
-            },
             $HTTP:async ({url = '', data = {},type='POST'})=> {
-                //  data = JSON.stringify(data, getCircularReplacer())
                 if(type=='POST'){
                     const response = await fetch(url, {
                         method:type, // *GET, POST, PUT, DELETE, etc.
@@ -408,97 +422,49 @@ import '../scss/index.scss'
                     return await response.json() // parses JSON response into native JavaScript objects
                 }
                 
-            },
-            JsonToHtmlPrint:async (e,config=null,sonuc)=>{
-                if(e!=undefined)
-                    e.preventDefault()
-                let _sonucx=null,_sonuc=null
-                if(sonuc==null){
-                    _sonucx =await App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',type:'GET'})
-                    _sonuc = _sonucx[0]
-                }else{
-                    _sonuc=sonuc
-                }
-                const {Print,Clons,data} = _sonuc
-                subscribe(actionTypes.CLONE.JSON_HTMLTOPRINT,(_state,_data)=>{
-                    if(_data==undefined){
-                        alert('Tasklak Yanlış')
-                    }else{
-                        const {pagestyle,hbodystyle,element } =_data
-                        $(element.outerHTML).printThis({
-                            debug: false, // show the iframe for debugging
-                            importCSS: true, // import parent page css
-                            importStyle: true, // import style tags
-                            printContainer: true, // print outer container/$.selector
-                            pageTitle: '', // add title to print page
-                            removeInline: false, // remove inline styles from print elements
-                            removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
-                            printDelay: 0, // variable print delay
-                            header:pagestyle, // prefix to html
-                            footer: null, // postfix to html
-                            base: false, // preserve the BASE tag or accept a string for the URL
-                            formValues: true, // preserve input/form values
-                            canvas: false, // copy canvas content
-                            removeScripts: false, // remove script tags from print content
-                            copyTagClasses: true, // copy classes from the html & body tag
-                            beforePrintEvent: null, // function for printEvent in iframe
-                            beforePrint: null, // function called before iframe is filled
-                            afterPrint: null // function called before iframe is removed
-                        })
-                    }
-                  
-                    // var vn = window.open('','',`resizable,scrollbars,
-                    // titlebar=no,
-                    //  left=200,
-                    //  top=200,
-                    //  width=768,
-                    //  height=600`)
-                    // vn.document.head.innerHTML=hbodystyle
-                    // vn.document.body.innerHTML=element.innerHTML
-                })
-                dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config,
-                    data:[{"id":null,"TableKey":null,"ItemKey":"InvoiceCommercialTitle","ItemValue":"ufuk şimşek","ItemType":"Field","Format":"","RowIndex":1},{"id":null,"TableKey":null,"ItemKey":"InvoiceName","ItemValue":"ufuk","ItemType":"Field","Format":"","RowIndex":2},{"id":null,"TableKey":null,"ItemKey":"InvoiceSurname","ItemValue":"şimşek","ItemType":"Field","Format":"","RowIndex":2},{"id":null,"TableKey":null,"ItemKey":"InvoiceAdress","ItemValue":"Cumhuriyet Savcısı Aadalet Sarayı N Blok Zemin Kat OSMANGAZİ BURSA ADALET OSMANGAZİ Bursa","ItemType":"Field","Format":"","RowIndex":2},{"id":null,"TableKey":null,"ItemKey":"InvoiceTaxOffice","ItemValue":null,"ItemType":"Field","Format":"","RowIndex":2},{"id":null,"TableKey":null,"ItemKey":"InvoiceTaxNumber","ItemValue":"","ItemType":"Field","Format":"","RowIndex":2},{"id":null,"TableKey":null,"ItemKey":"InvoiceDate","ItemValue":"12.12.2019 10:50:43","ItemType":"Field","Format":"ddMMyyyy","RowIndex":2},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockCode","ItemValue":"609636","ItemType":"TableField","Format":"","RowIndex":0},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockProductName","ItemValue":"Edco Balık Izgarası","ItemType":"TableField","Format":"","RowIndex":0},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockQuantity","ItemValue":"1","ItemType":"TableField","Format":"","RowIndex":0},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockPrice","ItemValue":"28,5600","ItemType":"TableField","Format":"0,00","RowIndex":0},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockDiscountedPrice","ItemValue":"28,5600","ItemType":"TableField","Format":"0,00","RowIndex":0},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockTotal","ItemValue":"28,5600","ItemType":"TableField","Format":"0,00","RowIndex":0},{"id":null,"TableKey":null,"ItemKey":"InvoiceSellTotal","ItemValue":"28,5600","ItemType":"Field","Format":"0,00","RowIndex":1},{"id":null,"TableKey":null,"ItemKey":"InvoiceDiscountTotal","ItemValue":"0","ItemType":"Field","Format":"0,00","RowIndex":1},{"id":null,"TableKey":null,"ItemKey":"InvoiceGrandTotal","ItemValue":"28,5600","ItemType":"Field","Format":"0,00","RowIndex":1}]
-            }})
             }
-
         },
         PageInit:()=>{
             App.SetPrint(App.DefaultPrint)
-            const {FormatChange,FontSize,ItemSelect,SaveConfig,LoadConfigHttp,Print:Prints} = App.Event
-            const {LoadJson,LoadJsonBtn,PrintSettings,PrintSettingsClick,FileUpload}=App.Event.Modal
+            const {FormatChange,FontSize,ItemSelect,SaveConfig,Print:Prints} = App.Event
+            const {PrintSettings,PrintSettingsClick,FileUpload}=App.Event.Modal
             FormatChange()
             FontSize()
             ItemSelect()
-            LoadJson()
-            LoadJsonBtn()
             SaveConfig()
             Prints()
             PrintSettings()
             PrintSettingsClick()
-            LoadConfigHttp()
+           
             FileUpload()
         }
     }
 
     $(document).ready(function () {
-        
+          // sadece normal yükleme için
         subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{
             state.Clone.Type.TEXT.FIELD='Field'
             state.Clone.Type.TEXT.CUSTOMTEXT='CustomText'
             state.Clone.Type.TEXT.CUSTOMIMAGE='CustomImage'
             state.Clone.Type.TABLE.FIELD='TableField'
             state.Clone.Type.TABLE.DEFAULT='Table'
-            App.Event.$HTTP({url:'http://localhost:3000/new',type:'GET'}).then((data)=>{
-              
+            App.Event.$HTTP({url:App.HostConfig.host+App.HostConfig.menu,type:'GET'}).then((data)=>{
                 App.InitConfig.data=data.TemplateItemValues
                 Init(App.InitConfig)
                 App.PageInit()
-                
-               
             })
             
         })
+        // sadece json to html print icin
+        // subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{
+        //     state.Clone.Type.TEXT.FIELD='Field'
+        //     state.Clone.Type.TEXT.CUSTOMTEXT='CustomText'
+        //     state.Clone.Type.TEXT.CUSTOMIMAGE='CustomImage'
+        //     state.Clone.Type.TABLE.FIELD='TableField'
+        //     state.Clone.Type.TABLE.DEFAULT='Table'
+        // })
         dispatch({type:actionTypes.INIT.OVERRIDE_TYPE})
 
     })
 })()
+
