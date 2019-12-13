@@ -19,10 +19,9 @@ import '../scss/index.scss'
         let deger =element.ItemValue
         switch (element.Format) {
         case '0,00':
-            if(deger.indexOf(',')==-1)
-            //deger =......      
-                break
-            break
+            // if(deger.indexOf(',')==-1)
+                deger =deger + ' tl'      
+            break        
         case 'Adet':
             if(deger.indexOf('adet')==-1)
                 deger +=' adet'
@@ -38,10 +37,15 @@ import '../scss/index.scss'
           //deger =......      
           //tarih format
         }
+        debugger
         return deger
     }
     const App= {
         PageName:'Sayfa',
+        SelectedCloneId:-99,
+        Service:{
+          FileUpload: 'http://localhost:3000/Test',
+        },
         InitConfig :{ 
             target:'.m-Template-Page-Area',
             dragclass:'m-drag-ul',
@@ -91,14 +95,14 @@ import '../scss/index.scss'
             $LeftCor:document.querySelector('[name="xfontLeft"]'),
             $TopCor:document.querySelector('[name="xfontTop"]'),
             $heightCor:document.querySelector('[name="xfontheight"]'),
-            $FONTSIZE:document.querySelector('input[name="fontsize"]')
+            $FONTSIZE:document.querySelector('input[name="fontsize"]'),
+            $FileUpload:document.querySelector('#data-file-url')
         },
         Event:{
             AddRemoveListener:(el,eventname,val,add)=>{
                 if(el!=undefined){
                     el.removeEventListener(eventname,null)
                     if(el.classList.contains(App.InitConfig.tablecolumnclass)==true){
-                        debugger
                         $(el).hide()
                     }else{
                         $(el).show()
@@ -182,8 +186,17 @@ import '../scss/index.scss'
             ItemSelect:()=>{
                 subscribe(actionTypes.CLONE.FONT_ITEM_SELECT,(state,data)=>{
                     const selectedelemet = data.element
+                    App.SelectedCloneId=selectedelemet.dataset.cloneId
+
                     const { AddRemoveListener,DefaultFontTools,ChangeTopCor,ChangeLeftCor,ChangeHeightCor} =App.Event
-                    const {$LeftCor,$TopCor,$heightCor} = App.Elements
+                    const {$LeftCor,$TopCor,$heightCor,$FileUpload} = App.Elements
+                    if($FileUpload!=null)
+                        $FileUpload.removeEventListener('click',null)
+                    $FileUpload.addEventListener('click',()=>{
+                        dispatch({type:actionTypes.CLONE.IMAGE_FILE_UPLOAD,payload:{
+                            cloneid: selectedelemet.dataset.cloneId
+                        }})
+                    })
                     DefaultFontTools(selectedelemet,state,data.value)
                     const $ffsize =$('.p-font-block')
                     if(!$ffsize.hasClass('p-active')){
@@ -196,6 +209,42 @@ import '../scss/index.scss'
                 })
             },
             Modal:{
+                FileUpload:()=>{
+                    const Uploaded ={}
+                    subscribe( actionTypes.CLONE.IMAGE_FILE_UPLOAD,(state,changed)=>{
+                        const {cloneid} =changed
+                        if(cloneid!=undefined && Uploaded[cloneid]==undefined){
+                            if(document.querySelector('#data-file-url')!=null)
+                            document.querySelector('#data-file-url').removeEventListener('click',null)
+                            document.querySelector('#data-file-url').addEventListener('click',()=>{
+                                var form = $('#data-file-form')[0];
+        
+                                // Create an FormData object 
+                                var data = new FormData(form);
+                            
+                                $.ajax({
+                                    type: "POST",
+                                    enctype: 'multipart/form-data',
+                                    url: App.Service.FileUpload,
+                                    data: data,
+                                    processData: false,
+                                    contentType: false,
+                                    cache: false,
+                                 
+                                    success: function (data) {
+                                        debugger
+                                        dispatch({type:actionTypes.CLONE.IMAGE_FILE_COMPLETED,payload:{
+                                            cloneid:changed.cloneid,url:data.url
+                                        }})
+                                        Uploaded[cloneid]=cloneid
+                                    }})
+                            //// AJAX
+                          
+                        })
+                         }
+                       
+                    })
+                },
                 LoadJson:()=>{
                     $('#loadJson').click(function(e){
                         e.preventDefault()
@@ -407,105 +456,16 @@ import '../scss/index.scss'
                     // vn.document.head.innerHTML=hbodystyle
                     // vn.document.body.innerHTML=element.innerHTML
                 })
-                dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config,data:[
-                    {
-                        'id': '100',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineStockCode',
-                            'ItemValue': 'LineStockCode -0',
-                            'ItemType': 'TableField',
-                            'RowIndex': 0,
-                            'ColumnIndex': 100
-                    },
-                    {
-                        'id': '101',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineProductName',
-                            'ItemValue': 'LineProductName -0',
-                            'ItemType': 'TableField',
-                            'RowIndex': 0,
-                            'ColumnIndex': 101
-                    },
-                    {
-                        'id': '102',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineStockCode',
-                            'ItemValue': 'LineStockCode -1',
-                            'ItemType': 'TableField',
-                            'RowIndex': 1,
-                            'ColumnIndex': 100
-                    },
-                    {
-                        'id': '103',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineProductName',
-                            'ItemValue': 'LineProductName -1',
-                            'ItemType': 'TableField',
-                            'RowIndex': 1,
-                            'ColumnIndex': 101
-                    },{
-                        'id': '105',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineStockCode',
-                            'ItemValue': 'LineStockCode -2',
-                            'ItemType': 'TableField',
-                            'RowIndex': 2,
-                            'ColumnIndex': 100
-                    },
-                    {
-                        'id': '106',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineProductName',
-                            'ItemValue': 'LineProductName -2',
-                            'ItemType': 'TableField',
-                            'RowIndex': 2,
-                            'ColumnIndex': 101
-                    },{
-                        'id': '107',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineStockCode',
-                            'ItemValue': 'LineStockCode -3',
-                            'ItemType': 'TableField',
-                            'RowIndex': 3,
-                            'ColumnIndex': 100
-                    },
-                    {
-                        'id': '108',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineProductName',
-                            'ItemValue': 'LineProductName -3',
-                            'ItemType': 'TableField',
-                            'RowIndex': 3,
-                            'ColumnIndex': 101
-                    },
-                    {
-                        'id': '109',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineStockCode',
-                            'ItemValue': 'LineStockCode -4',
-                            'ItemType': 'TableField',
-                            'RowIndex': 4,
-                            'ColumnIndex': 100
-                    },
-                    {
-                        'id': '110',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineProductName',
-                            'ItemValue': 'LineProductName -4',
-                            'ItemType': 'TableField',
-                            'RowIndex': 4,
-                            'ColumnIndex': 101
-                    }
-                    
-                    
-                ]}})
+                dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config,
+                    data:[{"id":null,"TableKey":null,"ItemKey":"InvoiceCommercialTitle","ItemValue":"ufuk şimşek","ItemType":"Field","Format":"","RowIndex":1},{"id":null,"TableKey":null,"ItemKey":"InvoiceName","ItemValue":"ufuk","ItemType":"Field","Format":"","RowIndex":2},{"id":null,"TableKey":null,"ItemKey":"InvoiceSurname","ItemValue":"şimşek","ItemType":"Field","Format":"","RowIndex":2},{"id":null,"TableKey":null,"ItemKey":"InvoiceAdress","ItemValue":"Cumhuriyet Savcısı Aadalet Sarayı N Blok Zemin Kat OSMANGAZİ BURSA ADALET OSMANGAZİ Bursa","ItemType":"Field","Format":"","RowIndex":2},{"id":null,"TableKey":null,"ItemKey":"InvoiceTaxOffice","ItemValue":null,"ItemType":"Field","Format":"","RowIndex":2},{"id":null,"TableKey":null,"ItemKey":"InvoiceTaxNumber","ItemValue":"","ItemType":"Field","Format":"","RowIndex":2},{"id":null,"TableKey":null,"ItemKey":"InvoiceDate","ItemValue":"12.12.2019 10:50:43","ItemType":"Field","Format":"ddMMyyyy","RowIndex":2},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockCode","ItemValue":"609636","ItemType":"TableField","Format":"","RowIndex":0},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockProductName","ItemValue":"Edco Balık Izgarası","ItemType":"TableField","Format":"","RowIndex":0},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockQuantity","ItemValue":"1","ItemType":"TableField","Format":"","RowIndex":0},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockPrice","ItemValue":"28,5600","ItemType":"TableField","Format":"0,00","RowIndex":0},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockDiscountedPrice","ItemValue":"28,5600","ItemType":"TableField","Format":"0,00","RowIndex":0},{"id":null,"TableKey":"InvoiceLine","ItemKey":"LineStockTotal","ItemValue":"28,5600","ItemType":"TableField","Format":"0,00","RowIndex":0},{"id":null,"TableKey":null,"ItemKey":"InvoiceSellTotal","ItemValue":"28,5600","ItemType":"Field","Format":"0,00","RowIndex":1},{"id":null,"TableKey":null,"ItemKey":"InvoiceDiscountTotal","ItemValue":"0","ItemType":"Field","Format":"0,00","RowIndex":1},{"id":null,"TableKey":null,"ItemKey":"InvoiceGrandTotal","ItemValue":"28,5600","ItemType":"Field","Format":"0,00","RowIndex":1}]
+            }})
             }
 
         },
         PageInit:()=>{
             App.SetPrint(App.DefaultPrint)
             const {FormatChange,FontSize,ItemSelect,SaveConfig,LoadConfigHttp,Print:Prints} = App.Event
-            const {LoadJson,LoadJsonBtn,PrintSettings,PrintSettingsClick}=App.Event.Modal
+            const {LoadJson,LoadJsonBtn,PrintSettings,PrintSettingsClick,FileUpload}=App.Event.Modal
             FormatChange()
             FontSize()
             ItemSelect()
@@ -516,6 +476,7 @@ import '../scss/index.scss'
             PrintSettings()
             PrintSettingsClick()
             LoadConfigHttp()
+            FileUpload()
         }
     }
 

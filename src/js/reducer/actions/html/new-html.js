@@ -383,6 +383,7 @@ const AddCloneTableItemTo = (items,i,content,config,success)=>{
             const $table = $(content).find('.table-'+item.value.TableKey)
             const tempElement= document.createElement('div')
             dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:tempElement,value:item.value}})
+            debugger
             for (let i = 0; i < $table.length; i++) {
                     const table = $table[i]
                     if(table!=undefined){
@@ -428,8 +429,9 @@ const AddCloneTable = (menuitem,config)=>{
 const AddCloneTextItem= (menuitem)=>{
         const {value} =menuitem
         const textclone= document.createElement('div')
-        dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:item.value}})
-        textclone.innerHTML= value.ItemValue
+        dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:menuitem.value}})
+        debugger
+        // textclone.innerHTML= value.ItemValue
         if(value.Style!='' && value.Style!=undefined && value.Style!=null)
             $(textclone).css(value.Style)
         return {element:textclone}

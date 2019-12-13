@@ -47,6 +47,12 @@ const dispatchForFormat =(action,state=InitialState)=>{
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
+    case actionTypes.CLONE.IMAGE_FILE_UPLOAD:
+            sendReducers(action.type,action.payload,state)
+        break;
+    case actionTypes.CLONE.IMAGE_FILE_COMPLETED:
+            sendReducers(action.type,action.payload,state)
+        break;
     case actionTypes.CLONE.JSON_HTMLTOPRINT:
         JsonToHtmlPrint(action.payload).then((_data)=>{
             sendReducer(action.type,_data,state)

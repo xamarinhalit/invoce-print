@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-undef */
-import { dispatch} from '..'
+import { dispatch,addReducer} from '..'
 import { actionTypes } from '../const'
 import { styleToObject,  CalcLeftTop, NullCheck, CalC_Table } from './convert'
 import {  ChangeFontSize, DefaultFontSize } from './font'
+
 
 export const SetConfig = (state, _data) => {
     state.UI.$CONTENT
@@ -79,11 +80,27 @@ const UICloneText = (state,menuitem,payload)=>{
                 payload: cloneId
             })
         }
-        if(NullCheck(value.Format)){
-            textclone.innerHTML=value[TYPE_TEXT.VALUE]
-            dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:value}})
-        }else{
-            textclone.innerHTML=value[TYPE_TEXT.VALUE]
+        if(value[TYPE_TEXT.ITEMTYPE]!=TYPE_TEXT.CUSTOMTEXT){
+            if(NullCheck(value.Format)){
+                textclone.innerHTML=value[TYPE_TEXT.VALUE]
+                dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:value}})
+            }else{
+                textclone.innerHTML=value[TYPE_TEXT.VALUE]
+            }
+        }
+        const tempdiv = document.createElement('div')
+        if(value[TYPE_TEXT.ITEMTYPE]==TYPE_TEXT.CUSTOMIMAGE){
+            textclone.innerHTML=''
+            tempdiv.innerHTML=value[TYPE_TEXT.VALUE]
+            tempdiv.style.width='100%'
+            tempdiv.style.height='100%'
+            tempdiv.style.display='block'
+            tempdiv.dataset.childcloneId=textclone.dataset.cloneId
+            
+           
+            textclone.appendChild(tempdiv)
+           
+         
         }
         textclone.appendChild(textremove)
         DefaultFontSize(textclone,value.Style)
@@ -97,25 +114,48 @@ const UICloneText = (state,menuitem,payload)=>{
             ToolValue,
             id:Index,
         }
+        if(value[TYPE_TEXT.ITEMTYPE]==TYPE_TEXT.CUSTOMIMAGE){
+
+                addReducer.subscribe( actionTypes.CLONE.IMAGE_FILE_COMPLETED,(state,changed)=>{
+                    if(changed.cloneid==cloneItem.Index){
+                        const iteme =cloneItem.element.querySelector('[data-childclone-id="'+cloneItem.Index+'"]')
+                  
+                        const image2 = document.createElement('img')
+                        iteme.innerHTML=''
+                        image2.style.display='block'
+                        image2.src=changed.url
+                        image2.style.width='100%'
+                        image2.style.height='100%'
+                        iteme.appendChild(image2)
+                        cloneItem.value[TYPE_TEXT.VALUE]=iteme.outerHTML
+                    }
+                   
+                })
+           
+        }
+
         if(value[TYPE_TEXT.ITEMTYPE]==TYPE_TEXT.CUSTOMTEXT){
-            textclone.contentEditable=true
-            textclone.addEventListener('input',()=>{
-                if(textclone.innerText.length==0){
-                    const { cloneId } = textclone.dataset
-                    dispatch({
-                        type: actionTypes.CLONE.REMOVE_CLONEITEM,
-                        payload: cloneId
-                    })
-                }else{
-                    cloneItem.value[TYPE_TEXT.VALUE]=textclone.innerText
-                }
+            const textbox = document.createElement('textarea')
+            textbox.style.width='100%'
+            textbox.style.height='100%'
+            textbox.value=value[TYPE_TEXT.VALUE]
+            textclone.appendChild(textbox)
+            textbox.addEventListener('input',()=>{
+                    cloneItem.value[TYPE_TEXT.VALUE]=textbox.value
             })
         }
         state.Clone.Items.Clons.push(cloneItem)
             
-        const extractCss=()=>{
+        const extractCss=(eventname='drag')=>{
             const style =styleToObject(cloneItem.element)
             // eslint-disable-next-line require-atomic-updates
+            if(eventname=='resize' && cloneItem.value.ItemType==TYPE_TEXT.CUSTOMTEXT){
+                const textarea=cloneItem.element.querySelector('textarea')
+                if(textarea!=null){
+                    cloneItem.element.width=textarea.width
+                    cloneItem.element.height=textarea.height
+                }
+            }
             cloneItem.value.Style = style
         }
         const { left,top} = payload
@@ -140,7 +180,7 @@ const UICloneText = (state,menuitem,payload)=>{
                 minHeight: cloneItem.value.Height,
                 minWidth:cloneItem.value.Width
             })
-            .on('resize', extractCss)
+            .on('resize',()=> extractCss('resize'))
             .css({ border: 'none', left: left + 'px', top: top + 'px' })
             .disableSelection()
         if(NullCheck(payload.text) && NullCheck(payload.text.style)){
