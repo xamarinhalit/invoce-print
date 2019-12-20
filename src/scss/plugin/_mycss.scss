@@ -1,0 +1,101 @@
+
+/*******************
+*** little RESET ***
+********************/
+
+*:not(body), *:not(body)::before, *:not(body)::after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-backface-visibility: hidden; /* Prevent flicker on webkit-transition of webkit-transform */
+}
+
+/* overrides bootstrap & jQuery default :focus style */
+*:focus {
+	outline: none !important;
+}
+
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+	box-shadow: none !important;
+	border-color: #72a9bc !important;
+}
+
+.list-group-item {
+	height: 100%;
+	text-align: center;
+	float: left;
+}
+.list-group-item:hover {
+		background-color: #dcf4ff;
+}
+
+.panel-default {
+	border-color: #fff !important;
+}
+.panel-heading:before {
+	float: right !important;
+	font-family: FontAwesome;
+	content: "\f077";
+	padding-right: 5px;
+}
+
+.panel-heading.collapsed:before {
+	float: right !important;
+	content: "\f078";
+}
+
+.panel-title b {
+	text-decoration: none !important;
+	color: #3e627c;
+}
+
+.panel-title a {
+	text-decoration: none !important;
+}
+
+.panel-title b:hover {
+	text-decoration: none;
+}
+.panel-title {
+	color: #434048;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+
+.slider.blue .ui-widget-header {
+    background: -webkit-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -webkit-gradient(linear, 0 0, 0 100%, from(#52afd0), to(#447daf));
+    background: -moz-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -moz-linear-gradient(top, #52afd0, #447daf);
+    background: -webkit-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -webkit-linear-gradient(top, #52afd0, #447daf);
+    background: -o-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -o-linear-gradient(top, #52afd0, #447daf);
+    border: 1px solid #3b7db6 !important;
+}
+
+.slider.green .ui-widget-header {
+    background: -webkit-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -webkit-gradient(linear, 0 0, 0 100%, from(#acdb71), to(#92bb5d));
+    background: -moz-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -moz-linear-gradient(top, #acdb71, #92bb5d);
+    background: -webkit-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -webkit-linear-gradient(top, #acdb71, #92bb5d);
+    background: -o-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -o-linear-gradient(top, #acdb71, #92bb5d);
+    border: 1px solid #9bc269 !important;
+}
+
+.slider.grey .ui-widget-header {
+    background: -webkit-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -webkit-gradient(linear, 0 0, 0 100%, from(#9f9f9f), to(#898989));
+    background: -moz-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -moz-linear-gradient(top, #9f9f9f, #898989);
+    background: -webkit-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -webkit-linear-gradient(top, #9f9f9f, #898989) 0 0;
+    background: -o-repeating-linear-gradient(-45deg, rgba(255,255,255,0), rgba(255,255,255,0) 2px, rgba(255,255,255,.1) 2px, rgba(255,255,255,.1) 4px), -o-linear-gradient(top, #9f9f9f, #898989);
+    border: 1px solid #7b7b7b !important;
+}
+
+.ui-widget-header {
+background: -webkit-gradient(linear, 0 0, 0 100%, from(#52afd0), to(#447daf));
+background: -moz-linear-gradient(top, #52afd0, #447daf);
+background: -webkit-linear-gradient(top, #52afd0, #447daf);
+background: -o-linear-gradient(top, #52afd0, #447daf);
+background: -webkit-linear-gradient(to bottom, #52afd0, #447daf);
+border-top: 1px solid #3978af !important;
+border-bottom: 1px solid #2a5981 !important;
+border-left: 1px solid #356c9c !important;
+border-right: 1px solid #356c9c !important;
+box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}

@@ -1,0 +1,2985 @@
+.m-content {
+    padding-bottom: 10px;
+    position: relative;
+    min-height: 500px;
+    .header {
+      position: fixed;
+      top: 55px;
+      z-index: 100;
+      width: calc(100% - 230px);
+      background: #edeaf0;
+      box-shadow: 0 1px 0 #fefefe, 0 -1px 0 rgba(255, 255, 255, 0.45), inset 0 -1px 0 #d1d1d1;
+      padding: 5px;
+      padding-left: 20px;
+      padding-right: 10px;
+      overflow: inherit;
+      .header-menu {
+        margin: 6px;
+        margin-right: 10px;
+        ul li {
+          display: inline-block;
+          margin-right: 5px;
+          .btn-header {
+            font-size: 12px;
+            padding: 8px 15px;
+          }
+          &.btn-group .dropdown-menu li {
+            display: block;
+            margin: 0;
+            margin-bottom: 5px;
+            a {
+              font-size: 13px;
+              line-height: 22px;
+              i {
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+      }
+      .breadcrumbs {
+        a {
+          color: #999593;
+        }
+        i {
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+      }
+    }
+    .panel-iscompany label {
+      width: 49%;
+      display: inline-block;
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #ccc;
+      -webkit-box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.075);
+      box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.075);
+      -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+      -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      .radioarea {
+        display: inline-block;
+        background: #ececec;
+        border-right: 1px solid #ccc;
+        padding: 4px 8px;
+        margin: 0;
+        margin-right: 7px;
+      }
+      &:first-child {
+        width: calc(50% - 5px);
+        margin-right: 4px;
+      }
+    }
+    .new-group-btn {
+      margin-top: 5px;
+      a {
+        color: #262626;
+        text-decoration: none;
+        background-color: #f5f5f5;
+      }
+      i {
+        margin-right: 4px;
+      }
+    }
+    .buyergroupSpan {
+      font-weight: bold;
+      &.buyer {
+        color: #fd0000;
+      }
+      &.seller {
+        color: #38a900;
+      }
+    }
+    .btn-search {
+      padding: 6px 10px;
+      color: #fff;
+      border-radius: 3px;
+      background: #3276b1;
+      border: 0;
+      font-size: 12px;
+    }
+    .btn-clear {
+      display: inline-block;
+      padding: 6px 10px;
+      color: #fff;
+      border-radius: 3px;
+      background: #ea0217;
+      border: 0;
+      font-size: 12px;
+    }
+    .btn-table {
+      padding: 8px 8px;
+      margin-right: 5px;
+      color: #fff;
+      border-radius: 3px;
+      &.btn-edit {
+        background: #3276b1;
+        padding-right: 7px;
+        font-size: 12px;
+      }
+      &.btn-delete {
+        background: #e11837;
+        font-size: 12px;
+      }
+      &.btn-action {
+        background: #ff8100;
+        font-size: 12px;
+      }
+    }
+    .widget-efar {
+      border-radius: 0;
+      /*overflow: hidden;*/
+      .widget-header {
+        border-radius: 0;
+        background: #454149;
+        box-shadow: none;
+        border-bottom: 0;
+        .widget-title {
+          text-shadow: none;
+          color: #fff;
+          .widget-header-buttons {
+            position: absolute;
+            right: 10px;
+            top: -1px;
+            a {
+              color: #fff;
+              font-size: 12px;
+              padding: 4px 10px;
+              background: #e11837;
+              border-radius: 2px;
+              &:hover {
+                background: #bf0622;
+              }
+            }
+          }
+        }
+      }
+    }
+    .efar-status-place {
+      margin: 4px 12px;
+      color: #fff;
+      margin-right: 35px;
+      label {
+        margin: 0;
+      }
+    }
+    .form-control {
+      border-radius: 0;
+    }
+    .efar-validation-summary {
+      background: #fea695;
+      padding: 15px;
+      color: #b0432e;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      position: relative;
+      span {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .validationClose {
+        color: #b0432e;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        font-size: 20px;
+        border: 2px solid #b0432e;
+        padding: 5px 7px;
+        border-radius: 5px;
+      }
+    }
+    .m-form {
+      .input-validation-error, .efar-jvalidate-error {
+        border-color: #b6615f;
+        background-color: rgba(255, 166, 164, 0.2);
+      }
+      #CommercialTitle-error, #Address-error {
+        display: none;
+      }
+      .form-group .efar-exchange-rate {
+        margin-right: -20px;
+      }
+    }
+    .efar-tabs {
+      background: #3d3a41;
+      padding-bottom: 0;
+      box-shadow: inset 0 1px 0 #3d3a41, 0 1px 3px rgba(0, 0, 0, 0.1);
+      ul.tabs {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        position: relative;
+        z-index: 100;
+        li {
+          background: none;
+          color: #fff;
+          display: block;
+          float: left;
+          font-size: 15px;
+          padding: 10px 30px;
+          cursor: pointer;
+          border-right: 1px solid #211f22;
+          border-bottom: 1px solid #211f22;
+          border-top: 2px solid transparent;
+          background: #3d3a41;
+          i {
+            margin-right: 5px;
+          }
+          &.current {
+            background: #fff;
+            color: #222;
+            border-bottom-color: #fff;
+            border-top-color: #e11837;
+            border-right: 0;
+            margin-top: -3px;
+            height: 46px;
+            i {
+              color: #e11837;
+            }
+          }
+        }
+      }
+      .tab-content {
+        position: relative;
+        z-index: 99;
+        display: none;
+        background: #fff;
+        padding: 15px;
+        border-top: 1px solid #211f22;
+        margin-top: -1px;
+        min-height: 350px;
+        padding-top: 25px;
+        &.current {
+          display: inherit;
+        }
+      }
+    }
+    .efar-currency-dropdown, .efar-code-dropdown {
+      position: absolute;
+      right: 25px;
+      top: 0;
+      z-index: 50;
+      border: 0;
+      background: none;
+      height: 34px;
+      border-left: 1px solid #ccc;
+      padding-left: 10px;
+    }
+    .efar-discount-dropdown {
+      position: absolute;
+      right: 25px;
+      top: 0;
+      z-index: 50;
+      border: 0;
+      background: none;
+      height: 34px;
+      border-left: 1px solid #ccc;
+      padding-left: 10px;
+      right: 0;
+    }
+    .efar-code-dropdown {
+      background: #fff;
+      height: 32px;
+      margin: 1px;
+      right: 15px;
+      padding-right: 5px;
+    }
+    .efar-currency-choose-paid .currencyValuePaid {
+      display: none;
+    }
+    .efar-currency-choose {
+      &:before {
+        background: #000;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+      .selected {
+        cursor: pointer;
+        color: #676767;
+        position: relative;
+        > span {
+          display: block;
+        }
+        &.active {
+          -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+          background-color: #d4d4d4 !important;
+          border-color: #8c8c8c !important;
+        }
+        &:hover {
+          background-color: #e6e6e6;
+          border-color: #adadad;
+        }
+        &:before {
+          content: "";
+          font-family: FontAwesome;
+          font-style: normal;
+          font-weight: normal;
+          text-decoration: inherit;
+          font-size: 12px;
+          position: absolute;
+          right: 13px;
+          top: 8px;
+        }
+      }
+      i {
+        margin-right: 5px;
+      }
+      .efar-currency-choose-content {
+        display: none;
+        position: absolute;
+        right: 15px;
+        top: 0;
+        z-index: 51;
+        width: calc(100% - 30px);
+        line-height: 20px;
+        font-size: 15px;
+        border: 1px solid #c5c4c2;
+        background-color: #fdfdfd;
+        -webkit-box-shadow: 0 3px 6px #c5c4c2;
+        -moz-box-shadow: 0 3px 6px #c5c4c2;
+        box-shadow: 0 3px 6px #c5c4c2;
+        min-height: 150px;
+        .efar-currency-choose-content-area {
+          padding-bottom: 10px;
+        }
+        h2 {
+          padding: 10px;
+          background-color: #fff4bd;
+          color: #977639;
+          margin: 0;
+          font-size: 15px;
+          border-bottom: 1px solid #eadb8d;
+          margin-bottom: 15px;
+        }
+        .currencyValue {
+          display: none;
+        }
+        .form-group.row {
+          margin: 5px;
+        }
+        .btn-efar-currency-save {
+          margin-right: 15px;
+          padding: 4px 12px;
+          font-size: 13px;
+          color: #fff;
+          border-radius: 3px;
+          border: 0;
+          background: #977639;
+        }
+      }
+    }
+    .efar-currency-choose-paid {
+      &:before {
+        background: #000;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+      .selected {
+        cursor: pointer;
+        color: #676767;
+        position: relative;
+        > span {
+          display: block;
+        }
+        &.active {
+          -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+          background-color: #d4d4d4 !important;
+          border-color: #8c8c8c !important;
+        }
+        &:hover {
+          background-color: #e6e6e6;
+          border-color: #adadad;
+        }
+        &:before {
+          content: "";
+          font-family: FontAwesome;
+          font-style: normal;
+          font-weight: normal;
+          text-decoration: inherit;
+          font-size: 12px;
+          position: absolute;
+          right: 13px;
+          top: 8px;
+        }
+      }
+      i {
+        margin-right: 5px;
+      }
+      .efar-currency-choose-paid-content {
+        display: none;
+        position: absolute;
+        right: 15px;
+        top: 0;
+        z-index: 13;
+        width: calc(100% - 30px);
+        line-height: 20px;
+        font-size: 15px;
+        border: 1px solid #c5c4c2;
+        background-color: #fdfdfd;
+        -webkit-box-shadow: 0 3px 6px #c5c4c2;
+        -moz-box-shadow: 0 3px 6px #c5c4c2;
+        box-shadow: 0 3px 6px #c5c4c2;
+        min-height: 150px;
+        .efar-currency-choose-paid-content-area {
+          padding-bottom: 10px;
+        }
+        h2 {
+          padding: 10px;
+          background-color: #fff4bd;
+          color: #977639;
+          margin: 0;
+          font-size: 15px;
+          border-bottom: 1px solid #eadb8d;
+          margin-bottom: 15px;
+        }
+        .currencyValue {
+          display: none;
+        }
+        .form-group.row {
+          margin: 5px;
+        }
+        .btn-efar-currency-save {
+          margin-right: 15px;
+          padding: 4px 12px;
+          font-size: 13px;
+          color: #fff;
+          border-radius: 3px;
+          border: 0;
+          background: #977639;
+        }
+      }
+    }
+    .efar-panel {
+      border: 1px solid #ccc;
+      h2 {
+        margin: 0;
+        font-size: 15px;
+        background: #f7f7f7;
+        border-bottom: 1px solid #ccc;
+        i {
+          border-right: 1px solid #ccc;
+          padding: 10px 15px;
+          margin-right: 10px;
+          background: #f1f1f1;
+        }
+      }
+      .efar-panel-content {
+        padding: 20px 10px;
+        .form-group.row {
+          margin: 0;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .counters .counter-item {
+      .counter-title {
+        line-height: 34px;
+      }
+      .counter-check {
+        padding: 16px 5px 0 12px;
+        border-right: 1px solid #ddd;
+        label {
+          margin: 0;
+        }
+      }
+      .counter-save .btn-counter-save {
+        width: 115px;
+        border: 0;
+        display: block;
+        padding: 0 10px 0 10px;
+        color: #fff;
+        font-size: 12px;
+        background: #454149;
+        line-height: 32px;
+        border-radius: 2px;
+        margin: 1px;
+        i {
+          margin-right: 5px;
+        }
+        &.btn-active {
+          color: #fff;
+          background-color: #5cb85c;
+          border-color: #4cae4c;
+        }
+        &.btn-danger {
+          color: #fff;
+          background-color: #c9302c;
+          border-color: #ac2925;
+        }
+      }
+    }
+    .button-checkbox .btn-efar-check {
+      padding: 0;
+      border: 0;
+      background: none;
+      line-height: normal;
+      i {
+        font-size: 20px;
+      }
+    }
+    .searchClose {
+      display: none;
+      position: absolute;
+      right: 16px;
+      top: 1px;
+      padding: 6px 8px;
+      font-size: 20px;
+      color: #c5c4c2;
+      cursor: pointer;
+      background: #eee;
+      border-left: 1px solid #ccc;
+      &:hover {
+        background: #f7f7f7;
+      }
+    }
+    .efar-invoice-product {
+      margin: 15px -30px;
+      border-top: 1px solid #e0e0e0;
+      .efar-invoice-product-table {
+        width: 100%;
+        * {
+          -moz-box-sizing: inherit;
+          -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+          -webkit-backface-visibility: initial;
+        }
+        thead {
+          background: #517e8e;
+          border-bottom: 1px solid #e0e0e0;
+          margin-bottom: 10px;
+          tr {
+            vertical-align: bottom;
+          }
+          th {
+            font-size: 12px;
+            padding: 7px 15px;
+            color: #fff;
+          }
+        }
+        tbody tr {
+          border-bottom: 1px solid #e0e0e0;
+          &:nth-child(2n) {
+            background: #f5f5f5;
+          }
+          &.collapsed {
+            height: 200px;
+          }
+          td {
+            padding: 10px;
+            vertical-align: top;
+            &.plus {
+              padding: 10px 0;
+            }
+            .StockNameInput {
+              position: relative;
+              .searchClose {
+                right: 1px;
+              }
+              .VariantChange {
+                position: absolute;
+                right: 34px;
+                top: 1px;
+                padding: 6px 8px;
+                font-size: 20px;
+                color: #c5c4c2;
+                cursor: pointer;
+                background: #eee;
+                border-left: 1px solid #ccc;
+                &:hover {
+                  background: #f7f7f7;
+                }
+              }
+              #StockName {
+                padding-right: 35px;
+              }
+            }
+            .StockVariant {
+              display: none;
+            }
+            .efar-unit-dropdown {
+              position: absolute;
+              right: 1px;
+              top: 2px;
+              font-size: 12px;
+              border: 0;
+              line-height: 35px;
+              background: none;
+            }
+            .discount-area {
+              right: 220px;
+              position: absolute;
+              margin-top: 15px;
+              &.oiv {
+                right: 0;
+                .discount {
+                  width: 200px;
+                }
+              }
+              .discount {
+                width: 220px;
+                margin-bottom: 12px;
+                .dAmount {
+                  display: none;
+                }
+              }
+            }
+            .efar-invoice-product-other {
+              left: 0;
+              position: absolute;
+              margin-top: 25px;
+              width: 270px;
+              &.other-right {
+                left: 295px;
+              }
+              ul {
+                padding: 0;
+                li {
+                  position: relative;
+                  display: block;
+                  float: left;
+                  width: calc(100% - 15px);
+                  font-size: 12px;
+                  line-height: 22px;
+                  margin-right: 15px;
+                  border-bottom: 1px solid #e6e6e6;
+                  label {
+                    margin: 0;
+                    padding: 5px 10px;
+                  }
+                  span.money {
+                    float: right;
+                    text-align: right;
+                    margin-right: 30px;
+                    line-height: 32px;
+                    font-size: 14px;
+                  }
+                }
+              }
+            }
+            .efar-invoice-product-table-plus, .efar-invoice-product-sale-table-plus {
+              width: 32px;
+              color: #a39f9d;
+              background: 0 0;
+              border: 2px solid #d2d0cf;
+              line-height: 23px;
+              border-radius: 5px;
+              i {
+                font-size: 17px;
+                margin-top: 4px;
+              }
+              &:hover {
+                color: #373636;
+                background: 0 0;
+                border-color: #a5a2a0;
+              }
+            }
+            .efar-invoice-product-table-plus-area, .efar-invoice-product-sale-table-plus-area {
+              display: none;
+            }
+            .efar-invoice-product-table-delete {
+              display: block;
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fd6041), color-stop(100%, #fd4421)) #fd5939;
+              background: -webkit-linear-gradient(top, #fd6041, #fd4421) #fd5939;
+              background: -moz-linear-gradient(top, #fd6041, #fd4421) #fd5939;
+              background: -ms-linear-gradient(top, #fd6041, #fd4421) #fd5939;
+              background: -o-linear-gradient(top, #fd6041, #fd4421) #fd5939;
+              background: linear-gradient(to bottom, #fd6041, #fd4421) #fd5939;
+              border: 0;
+              width: 32px;
+              padding: 0;
+              line-height: 32px;
+              border-radius: 5px;
+              color: #fff;
+              i {
+                font-size: 17px;
+              }
+              &:hover {
+                background: #fd5939;
+              }
+            }
+          }
+        }
+      }
+      .newProductBtn {
+        color: #a39f9d;
+        line-height: 23px;
+        border-radius: 5px;
+        padding: 4px 10px;
+        margin: 20px 15px;
+        cursor: pointer;
+        background: #333;
+        color: #fff;
+        i {
+          margin-right: 3px;
+        }
+      }
+    }
+    .efar-invoice-product-sale {
+      margin: 15px -30px;
+      border-top: 1px solid #e0e0e0;
+      .efar-invoice-product-sale-table {
+        width: 100%;
+        * {
+          -moz-box-sizing: inherit;
+          -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+          -webkit-backface-visibility: initial;
+        }
+        thead {
+          background: #517e8e;
+          border-bottom: 1px solid #e0e0e0;
+          margin-bottom: 10px;
+          tr {
+            vertical-align: bottom;
+          }
+          th {
+            font-size: 12px;
+            padding: 7px 15px;
+            color: #fff;
+          }
+        }
+        tbody tr {
+          border-bottom: 1px solid #e0e0e0;
+          &:nth-child(2n) {
+            background: #f5f5f5;
+          }
+          &.collapsed {
+            height: 200px;
+          }
+          td {
+            padding: 10px;
+            vertical-align: top;
+            &.plus {
+              padding: 10px 0;
+            }
+            .StockNameInput {
+              position: relative;
+              .searchClose {
+                right: 1px;
+              }
+              .VariantChange {
+                position: absolute;
+                right: 34px;
+                top: 1px;
+                padding: 6px 8px;
+                font-size: 20px;
+                color: #c5c4c2;
+                cursor: pointer;
+                background: #eee;
+                border-left: 1px solid #ccc;
+                &:hover {
+                  background: #f7f7f7;
+                }
+              }
+              #StockNameSale {
+                padding-right: 35px;
+              }
+            }
+            .StockVariant {
+              display: none;
+            }
+            .efar-unit-dropdown, .efar-unit-dropdown-sale {
+              position: absolute;
+              right: 1px;
+              top: 2px;
+              font-size: 12px;
+              border: 0;
+              line-height: 35px;
+              background: none;
+            }
+            .discount-area {
+              right: 220px;
+              position: absolute;
+              margin-top: 15px;
+              &.oiv {
+                right: 0;
+                .discount {
+                  width: 200px;
+                }
+              }
+              .discount {
+                width: 220px;
+                margin-bottom: 12px;
+                .dAmount {
+                  display: none;
+                }
+              }
+            }
+            .efar-invoice-product-sale-other {
+              left: 0;
+              position: absolute;
+              margin-top: 25px;
+              width: 270px;
+              &.other-right {
+                left: 295px;
+              }
+              ul {
+                padding: 0;
+                li {
+                  position: relative;
+                  display: block;
+                  float: left;
+                  width: calc(100% - 15px);
+                  font-size: 12px;
+                  line-height: 22px;
+                  margin-right: 15px;
+                  border-bottom: 1px solid #e6e6e6;
+                  label {
+                    margin: 0;
+                    padding: 5px 10px;
+                  }
+                  span.money {
+                    float: right;
+                    text-align: right;
+                    margin-right: 30px;
+                    line-height: 32px;
+                    font-size: 14px;
+                  }
+                }
+              }
+            }
+            .efar-invoice-product-sale-table-plus {
+              width: 32px;
+              color: #a39f9d;
+              background: 0 0;
+              border: 2px solid #d2d0cf;
+              line-height: 23px;
+              border-radius: 5px;
+              i {
+                font-size: 17px;
+                margin-top: 4px;
+              }
+              &:hover {
+                color: #373636;
+                background: 0 0;
+                border-color: #a5a2a0;
+              }
+            }
+            .efar-invoice-product-sale-table-plus-area {
+              display: none;
+            }
+            .efar-invoice-product-sale-table-delete {
+              display: block;
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fd6041), color-stop(100%, #fd4421)) #fd5939;
+              background: -webkit-linear-gradient(top, #fd6041, #fd4421) #fd5939;
+              background: -moz-linear-gradient(top, #fd6041, #fd4421) #fd5939;
+              background: -ms-linear-gradient(top, #fd6041, #fd4421) #fd5939;
+              background: -o-linear-gradient(top, #fd6041, #fd4421) #fd5939;
+              background: linear-gradient(to bottom, #fd6041, #fd4421) #fd5939;
+              border: 0;
+              width: 32px;
+              padding: 0;
+              line-height: 32px;
+              border-radius: 5px;
+              color: #fff;
+              i {
+                font-size: 17px;
+              }
+              &:hover {
+                background: #fd5939;
+              }
+            }
+          }
+        }
+      }
+      .newProductBtn {
+        color: #a39f9d;
+        line-height: 23px;
+        border-radius: 5px;
+        padding: 4px 10px;
+        margin: 20px 15px;
+        cursor: pointer;
+        background: #333;
+        color: #fff;
+        i {
+          margin-right: 3px;
+        }
+      }
+    }
+    .efar-invoice-product-total-area {
+      margin-top: -71px;
+      margin-right: -15px;
+      border-left: 1px solid #e0e0e0;
+      padding: 30px 50px 30px 80px;
+      background: #fbfbfb;
+      .form-group {
+        font-size: 13px;
+        margin-bottom: 0;
+        label {
+          margin-bottom: 0;
+        }
+        &.line {
+          border-top: 1px solid #e0e0e0;
+          padding: 5px 0;
+        }
+        .label-title {
+          font-weight: bold;
+          &.vat-withholding {
+            .vat-withholding-list, .withholding-list {
+              display: none;
+              position: absolute;
+              left: -35px;
+              bottom: 35px;
+              z-index: 1041;
+              width: 200px;
+              line-height: 20px;
+              font-size: 13px;
+              font-weight: normal;
+              border: 1px solid #c5c4c2;
+              background-color: #fdfdfd;
+              -webkit-border-radius: 3px;
+              -moz-border-radius: 3px;
+              border-radius: 3px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list, .withholding-list {
+              display: none;
+              position: absolute;
+              left: -35px;
+              bottom: 35px;
+              z-index: 1041;
+              width: 200px;
+              line-height: 20px;
+              font-size: 13px;
+              font-weight: normal;
+              border: 1px solid #c5c4c2;
+              background-color: #fdfdfd;
+              -webkit-border-radius: 3px;
+              -moz-border-radius: 3px;
+              border-radius: 3px;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul, .withholding-list ul {
+              padding: 0;
+              margin: 0;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul, .withholding-list ul {
+              padding: 0;
+              margin: 0;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li, .withholding-list ul li {
+              display: block;
+              padding: 7px 15px;
+              cursor: pointer;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li, .withholding-list ul li {
+              display: block;
+              padding: 7px 15px;
+              cursor: pointer;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li i, .withholding-list ul li i {
+              margin-right: 10px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li i, .withholding-list ul li i {
+              margin-right: 10px;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li:hover, .withholding-list ul li:hover {
+              background: #f6eeff;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li:hover, .withholding-list ul li:hover {
+              background: #f6eeff;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li:hover .other, .withholding-list ul li:hover .other {
+              display: block;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li:hover .other, .withholding-list ul li:hover .other {
+              display: block;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li .other, .withholding-list ul li .other {
+              display: none;
+              cursor: default;
+              position: absolute;
+              left: -200px;
+              top: 0;
+              background: #f6eeff;
+              width: 200px;
+              padding: 15px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li .other, .withholding-list ul li .other {
+              display: none;
+              cursor: default;
+              position: absolute;
+              left: -200px;
+              top: 0;
+              background: #f6eeff;
+              width: 200px;
+              padding: 15px;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li .other h2, .withholding-list ul li .other h2 {
+              font-size: 12px;
+              margin: 0;
+              padding: 0;
+              margin-bottom: 10px;
+              padding-bottom: 5px;
+              border-bottom: 1px solid #ccc;
+              line-height: 18px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li .other h2, .withholding-list ul li .other h2 {
+              font-size: 12px;
+              margin: 0;
+              padding: 0;
+              margin-bottom: 10px;
+              padding-bottom: 5px;
+              border-bottom: 1px solid #ccc;
+              line-height: 18px;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li .other input[type=text], .withholding-list ul li .other input[type=text] {
+              display: block;
+              float: left;
+              width: calc(100% - 90px);
+              height: 30px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li .other input[type=text], .withholding-list ul li .other input[type=text] {
+              display: block;
+              float: left;
+              width: calc(100% - 90px);
+              height: 30px;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li .other button, .withholding-list ul li .other button {
+              display: inline-block;
+              display: block;
+              float: right;
+              width: 80px;
+              border: 0;
+              background: #e11837;
+              color: #fff;
+              padding: 5px;
+              line-height: 20px;
+              border-radius: 3px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li .other button, .withholding-list ul li .other button {
+              display: inline-block;
+              display: block;
+              float: right;
+              width: 80px;
+              border: 0;
+              background: #e11837;
+              color: #fff;
+              padding: 5px;
+              line-height: 20px;
+              border-radius: 3px;
+            }
+          }
+          span.plus {
+            position: absolute;
+            cursor: pointer;
+            z-index: 50;
+            width: 27px;
+            color: #a39f9d;
+            background: 0 0;
+            border: 2px solid #d2d0cf;
+            line-height: 19px;
+            border-radius: 5px;
+            text-align: center;
+            left: -35px;
+            top: 3px;
+            i {
+              font-size: 15px;
+              margin-top: 4px;
+              margin-left: 1px;
+            }
+          }
+        }
+        .money-total {
+          text-align: right;
+          padding: 6px;
+          line-height: 19px;
+          .money-main {
+            font-weight: bold;
+            color: #555;
+            font-size: 17px;
+            margin-right: -2px;
+          }
+          .money-float {
+            color: #999;
+            font-size: 15px;
+          }
+        }
+      }
+      #TotalTurkishLira, #TotalTurkishLiraSale {
+        display: none;
+        border-bottom: 0;
+        color: #977639;
+        font-size: 12px;
+        margin-top: -8px;
+        .money-total {
+          .money-main {
+            font-weight: normal;
+            color: #977639;
+            font-size: 16px;
+          }
+          .money-float {
+            color: #977639;
+            font-size: 15px;
+          }
+        }
+      }
+      #TaxRateList ul {
+        padding: 0;
+        margin: 0;
+        li {
+          display: block;
+          font-size: 12px;
+          .label-title, .money-total {
+            padding: 0 7px;
+          }
+          .label-title .money-main, .money-total .money-main {
+            font-size: 15px;
+          }
+          .label-title .money-float, .money-total .money-float {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .efar-invoice-product-sale-total-area {
+      margin-top: -71px;
+      margin-right: -15px;
+      border-left: 1px solid #e0e0e0;
+      padding: 30px 50px 30px 80px;
+      background: #fbfbfb;
+      .form-group {
+        font-size: 13px;
+        margin-bottom: 0;
+        label {
+          margin-bottom: 0;
+        }
+        &.line {
+          border-top: 1px solid #e0e0e0;
+          padding: 5px 0;
+        }
+        .label-title {
+          font-weight: bold;
+          &.vat-withholding {
+            .vat-withholding-list, .withholding-list {
+              display: none;
+              position: absolute;
+              left: -35px;
+              bottom: 35px;
+              z-index: 1041;
+              width: 200px;
+              line-height: 20px;
+              font-size: 13px;
+              font-weight: normal;
+              border: 1px solid #c5c4c2;
+              background-color: #fdfdfd;
+              -webkit-border-radius: 3px;
+              -moz-border-radius: 3px;
+              border-radius: 3px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list, .withholding-list {
+              display: none;
+              position: absolute;
+              left: -35px;
+              bottom: 35px;
+              z-index: 1041;
+              width: 200px;
+              line-height: 20px;
+              font-size: 13px;
+              font-weight: normal;
+              border: 1px solid #c5c4c2;
+              background-color: #fdfdfd;
+              -webkit-border-radius: 3px;
+              -moz-border-radius: 3px;
+              border-radius: 3px;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul, .withholding-list ul {
+              padding: 0;
+              margin: 0;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul, .withholding-list ul {
+              padding: 0;
+              margin: 0;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li, .withholding-list ul li {
+              display: block;
+              padding: 7px 15px;
+              cursor: pointer;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li, .withholding-list ul li {
+              display: block;
+              padding: 7px 15px;
+              cursor: pointer;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li i, .withholding-list ul li i {
+              margin-right: 10px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li i, .withholding-list ul li i {
+              margin-right: 10px;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li:hover, .withholding-list ul li:hover {
+              background: #f6eeff;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li:hover, .withholding-list ul li:hover {
+              background: #f6eeff;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li:hover .other, .withholding-list ul li:hover .other {
+              display: block;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li:hover .other, .withholding-list ul li:hover .other {
+              display: block;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li .other, .withholding-list ul li .other {
+              display: none;
+              cursor: default;
+              position: absolute;
+              left: -200px;
+              top: 0;
+              background: #f6eeff;
+              width: 200px;
+              padding: 15px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li .other, .withholding-list ul li .other {
+              display: none;
+              cursor: default;
+              position: absolute;
+              left: -200px;
+              top: 0;
+              background: #f6eeff;
+              width: 200px;
+              padding: 15px;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li .other h2, .withholding-list ul li .other h2 {
+              font-size: 12px;
+              margin: 0;
+              padding: 0;
+              margin-bottom: 10px;
+              padding-bottom: 5px;
+              border-bottom: 1px solid #ccc;
+              line-height: 18px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li .other h2, .withholding-list ul li .other h2 {
+              font-size: 12px;
+              margin: 0;
+              padding: 0;
+              margin-bottom: 10px;
+              padding-bottom: 5px;
+              border-bottom: 1px solid #ccc;
+              line-height: 18px;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li .other input[type=text], .withholding-list ul li .other input[type=text] {
+              display: block;
+              float: left;
+              width: calc(100% - 90px);
+              height: 30px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li .other input[type=text], .withholding-list ul li .other input[type=text] {
+              display: block;
+              float: left;
+              width: calc(100% - 90px);
+              height: 30px;
+            }
+          }
+          &.vat-withholding {
+            .vat-withholding-list ul li .other button, .withholding-list ul li .other button {
+              display: inline-block;
+              display: block;
+              float: right;
+              width: 80px;
+              border: 0;
+              background: #e11837;
+              color: #fff;
+              padding: 5px;
+              line-height: 20px;
+              border-radius: 3px;
+            }
+          }
+          &.withholding {
+            .vat-withholding-list ul li .other button, .withholding-list ul li .other button {
+              display: inline-block;
+              display: block;
+              float: right;
+              width: 80px;
+              border: 0;
+              background: #e11837;
+              color: #fff;
+              padding: 5px;
+              line-height: 20px;
+              border-radius: 3px;
+            }
+          }
+          span.plus {
+            position: absolute;
+            cursor: pointer;
+            z-index: 50;
+            width: 27px;
+            color: #a39f9d;
+            background: 0 0;
+            border: 2px solid #d2d0cf;
+            line-height: 19px;
+            border-radius: 5px;
+            text-align: center;
+            left: -35px;
+            top: 3px;
+            i {
+              font-size: 15px;
+              margin-top: 4px;
+              margin-left: 1px;
+            }
+          }
+        }
+        .money-total {
+          text-align: right;
+          padding: 6px;
+          line-height: 19px;
+          .money-main {
+            font-weight: bold;
+            color: #555;
+            font-size: 17px;
+            margin-right: -2px;
+          }
+          .money-float {
+            color: #999;
+            font-size: 15px;
+          }
+        }
+      }
+      #TotalTurkishLira, #TotalTurkishLiraSale {
+        display: none;
+        border-bottom: 0;
+        color: #977639;
+        font-size: 12px;
+        margin-top: -8px;
+        .money-total {
+          .money-main {
+            font-weight: normal;
+            color: #977639;
+            font-size: 16px;
+          }
+          .money-float {
+            color: #977639;
+            font-size: 15px;
+          }
+        }
+      }
+      #TaxRateList ul {
+        padding: 0;
+        margin: 0;
+        li {
+          display: block;
+          font-size: 12px;
+          .label-title, .money-total {
+            padding: 0 7px;
+          }
+          .label-title .money-main, .money-total .money-main {
+            font-size: 15px;
+          }
+          .label-title .money-float, .money-total .money-float {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .efar-search-icon {
+      position: absolute;
+      right: 15px;
+      top: 0;
+      padding: 0 9px;
+      margin: 3px;
+      height: 28px;
+      line-height: 27px;
+      pointer-events: none;
+      color: #999593;
+      &.right-none {
+        right: 0;
+      }
+    }
+    .efar-radio-buttons {
+      padding: 5px;
+      .efar-radio-button {
+        margin-right: 10px;
+        label {
+          margin: 0;
+        }
+        &.inline {
+          display: inline-block;
+        }
+      }
+    }
+    .modal-content {
+      .modal-header {
+        background: #454149;
+        color: #fff;
+        .modal-title {
+          font-size: 15px;
+        }
+        .close {
+          color: #fff;
+          text-shadow: 0 1px 0 #fff;
+          opacity: .8;
+        }
+      }
+      .modal-footer {
+        background: #f9f9f9;
+      }
+    }
+    .stockVariant {
+      display: none;
+      min-height: 400px;
+      .btn-variant-save {
+        border: 0;
+        display: block;
+        float: left;
+        padding: 0 10px 0 10px;
+        color: #fff;
+        font-size: 12px;
+        background: #454149;
+        line-height: 32px;
+        border-radius: 2px;
+        margin: 1px;
+        width: 80px;
+        margin-left: 10px;
+        i {
+          margin-right: 5px;
+        }
+      }
+      .VariantName {
+        float: left;
+        width: calc(100% - 100px);
+      }
+      .btn-variant-remove {
+        display: none;
+        border: 0;
+        padding: 0 10px 0 10px;
+        color: #fff;
+        font-size: 15px;
+        background: #e60010;
+        line-height: 32px;
+        border-radius: 2px;
+        margin: 1px;
+        margin-left: 5px;
+        &:hover {
+          background: #fd4421;
+        }
+      }
+      .variantErrorMessage {
+        display: none;
+        position: absolute;
+        top: -28px;
+        right: 100px;
+        background: #b6615f;
+        padding: 3px 15px;
+        border-radius: 2px;
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+        &.error {
+          display: block;
+        }
+      }
+      .VariantKeys {
+        border-bottom: 1px solid #f6eeff;
+        padding: 15px 0;
+        ul {
+          margin: 0;
+          padding: 0;
+          li {
+            display: inline-block;
+            border: 1px solid #ccc;
+            position: relative;
+            cursor: pointer;
+            line-height: 28px;
+            padding-right: 15px;
+            margin-right: 10px;
+            span {
+              display: block;
+              float: left;
+              border-right: 1px solid #ccc;
+              height: 28px;
+              width: 28px;
+              margin-right: 8px;
+              background: #f6eeff;
+              font-size: 18px;
+              padding-left: 6px;
+              padding-top: 1px;
+              &:before {
+                content: "";
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+              }
+            }
+            &.active span:before {
+              content: "";
+            }
+          }
+        }
+      }
+      .VariantValues {
+        margin-left: -15px;
+        .VariantValueBox {
+          position: relative;
+          display: block;
+          float: left;
+          width: calc(33.33% - 15px);
+          border: 1px solid #ccc;
+          margin-left: 15px;
+          margin-bottom: 15px;
+          .variantValueInput {
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+            background: #f6eeff;
+            label {
+              width: 80px;
+              margin: 0;
+              line-height: 35px;
+            }
+            input {
+              width: calc(100% - 110px);
+            }
+            .efar-variant-drop {
+              position: absolute;
+              width: 25px;
+              height: 32px;
+              right: 41px;
+              top: 6px;
+              cursor: pointer;
+              &:before {
+                content: "";
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+                font-size: 12px;
+                position: absolute;
+                right: 10px;
+                top: 7px;
+              }
+            }
+            button {
+              border: 0;
+              font-size: 15px;
+              line-height: 32px;
+              background: none;
+              margin-left: 5px;
+              color: #00af0f;
+            }
+          }
+          .efar-variant-dropdown {
+            position: absolute;
+            display: none;
+            z-index: 500;
+            width: 169px;
+            right: 40px;
+            top: 43px;
+            background: #fff;
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+            border: 1px solid #ccc;
+            .efar-variant-drop-search {
+              padding: 10px;
+              font-size: 12px;
+              border-bottom: 1px solid #ccc;
+              &:before {
+                position: absolute;
+                content: "";
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+                right: 20px;
+                top: 14px;
+              }
+              input {
+                width: 100%;
+                height: auto !important;
+                min-height: 30px;
+                padding: 0 28px 0 10px;
+                margin: 0;
+                outline: 0;
+                font-size: 1em;
+                border: 1px solid #ccc;
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+                border-radius: 0;
+              }
+            }
+            ul {
+              margin: 0;
+              padding: 0;
+              max-height: 150px;
+              overflow-x: auto;
+              li {
+                display: block;
+                position: relative;
+                padding: 5px;
+                border-bottom: 1px solid #ccc;
+                cursor: pointer;
+                padding-left: 30px;
+                &:before {
+                  position: absolute;
+                  content: "";
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                  left: 8px;
+                  top: 5px;
+                  font-size: 14px;
+                }
+                &.active:before {
+                  content: "" !important;
+                }
+              }
+            }
+          }
+          .VariantValueList {
+            height: 170px;
+            overflow-x: auto;
+            width: 100%;
+            ul {
+              padding: 0;
+              li {
+                display: block;
+                margin: 0 10px;
+                padding: 5px 5px;
+                border-bottom: 1px solid #f6eeff;
+                i {
+                  float: right;
+                  cursor: pointer;
+                  font-size: 16px;
+                  &:hover {
+                    color: #e11837;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .BtnCreateVariant {
+        display: none;
+        padding-top: 15px;
+        border-top: 1px solid #f6eeff;
+        button {
+          padding: 7px 15px;
+          background: #fd4421;
+          border-radius: 3px;
+          color: #fff;
+          border: 0;
+          &:hover {
+            background: #fd5939;
+          }
+          &.BtnAllUpdate {
+            background: #0004b2;
+          }
+          &.AddVariant {
+            display: none;
+          }
+        }
+        .VariantAllUpdate {
+          display: none;
+        }
+      }
+      #VariantTable_wrapper {
+        border-top: 1px solid #ddd;
+        #VariantTable_filter {
+          float: right;
+          width: auto;
+        }
+        .crtVrnt {
+          width: 165px;
+          height: 10px;
+          display: block;
+          float: right;
+        }
+      }
+      .VariantTable {
+        display: none;
+        margin-top: 15px;
+        &.show {
+          display: block;
+        }
+        .VariantCheckTd {
+          padding: 4px 10px;
+        }
+        .VariantImageTd {
+          padding: 9px 10px;
+          text-align: center;
+          i {
+            font-size: 16px;
+          }
+        }
+        .BtnVariantImageUpload {
+          border: 0;
+          font-size: 15px;
+          border: 1px solid #ccc;
+          background: #f9f9f9;
+          padding: 3px 8px;
+          &:hover {
+            background: #fff;
+          }
+          img {
+            display: block;
+            width: 100%;
+          }
+          &.active {
+            background: #c5ffd9;
+          }
+        }
+        .variantCheck {
+          display: block;
+          width: 18px;
+          height: 25px;
+          cursor: pointer;
+          &:before {
+            content: "";
+            font-family: FontAwesome;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: inherit;
+            font-size: 20px;
+          }
+          &.active:before {
+            content: "";
+          }
+        }
+        input[type=text], select {
+          height: 30px;
+          font-size: 12px;
+        }
+        .VariantRemove {
+          border: 0;
+          border-radius: 3px;
+          padding: 5px 8px;
+          background: #e11837;
+          color: #fff;
+          &:hover {
+            background: #cb1732;
+          }
+        }
+        .VariantName {
+          padding: 4px;
+        }
+      }
+    }
+    #PopupNewVariant {
+      z-index: 5000;
+      .modal-dialog {
+        width: 400px;
+      }
+      .VariantValueArea {
+        border: 1px solid #ccc;
+        position: relative;
+        h2 {
+          margin: 0;
+          font-size: 15px;
+          padding: 10px 13px;
+          background: #f6eeff;
+          color: #454149;
+        }
+        .variantValueInput {
+          position: relative;
+          input {
+            margin: -1px;
+            width: calc(100% + 2px);
+          }
+          #BtnValueAdd {
+            position: absolute;
+            right: 1px;
+            top: 1px;
+            border: 0;
+            padding: 0 15px;
+            border-left: 1px solid #ccc;
+            background: #f5f5f5;
+            color: #454149;
+            font-size: 15px;
+            line-height: 32px;
+            &:hover {
+              background: #caffec;
+            }
+          }
+        }
+        .VariantValueList {
+          height: 200px;
+          overflow-y: auto;
+          ul {
+            margin: 0;
+            padding: 10px;
+            li {
+              display: block;
+              float: left;
+              width: calc(50% - 10px);
+              padding: 5px 10px;
+              margin: 5px;
+              border: 1px solid #ccc;
+              position: relative;
+              border-radius: 2px;
+              .remove {
+                position: absolute;
+                right: 0;
+                top: 0;
+                padding: 5px 10px;
+                line-height: 20px;
+                cursor: pointer;
+                &:hover {
+                  color: #e11837;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    #PopupNewTemplate {
+      z-index: 4000;
+      .VariantArea {
+        border: 1px solid #ccc;
+        position: relative;
+        h2 {
+          margin: 0;
+          font-size: 15px;
+          padding: 10px 13px;
+          background: #f6eeff;
+          color: #454149;
+          border-bottom: 1px solid #ccc;
+          a {
+            color: #fff;
+            font-size: 12px;
+            padding: 4px 10px;
+            background: #e11837;
+            border-radius: 2px;
+            float: right;
+            margin-top: -2px;
+            i {
+              margin-right: 4px;
+            }
+          }
+        }
+        .VariantList {
+          height: 200px;
+          overflow-y: auto;
+          ul {
+            margin: 0;
+            padding: 10px;
+            li {
+              display: block;
+              float: left;
+              width: calc(33.33% - 10px);
+              margin: 5px;
+              border: 1px solid #ccc;
+              position: relative;
+              cursor: pointer;
+              line-height: 28px;
+              span {
+                display: block;
+                float: left;
+                border-right: 1px solid #ccc;
+                height: 28px;
+                width: 28px;
+                margin-right: 8px;
+                background: #f6eeff;
+                font-size: 18px;
+                padding-left: 6px;
+                padding-top: 1px;
+                &:before {
+                  content: "";
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+              }
+              &.active span:before {
+                content: "";
+              }
+            }
+          }
+        }
+      }
+    }
+    #PopupVariantAdd {
+      .ValidError {
+        display: none;
+        float: right;
+        text-align: right;
+        font-size: 12px;
+        color: #e11837;
+      }
+      .AddVariantDropDownList {
+        padding: 0 10px;
+        label.error {
+          display: none !important;
+        }
+        select {
+          margin-right: 5px;
+          margin-bottom: 10px;
+          float: left;
+          width: auto;
+        }
+      }
+    }
+    #PopupVariantImage {
+      .modal-dialog {
+        width: 675px;
+      }
+      #variant-picture-view {
+        height: 365px;
+        width: 365px;
+        margin: 0 1%;
+        border: 2px dashed #3d3a41;
+        overflow-x: auto;
+      }
+      #variant-picture-upload {
+        width: 250px;
+        .item {
+          display: block;
+          position: relative;
+          float: left;
+          width: 74px;
+          margin: 9px;
+          border: 2px solid #000;
+          overflow: hidden;
+          cursor: pointer;
+          .itemPicture {
+            width: 70px;
+            height: 70px;
+            opacity: .5;
+            margin: 0;
+          }
+          &:hover .itemPicture {
+            opacity: 1;
+          }
+          &.active {
+            &:before {
+              position: absolute;
+              z-index: 500;
+              content: "";
+              font-family: FontAwesome;
+              font-style: normal;
+              font-weight: normal;
+              text-decoration: inherit;
+              font-size: 30px;
+              left: calc(50% - 15px);
+              top: calc(50% - 10px);
+            }
+            .itemPicture {
+              opacity: .2;
+            }
+          }
+        }
+      }
+    }
+    #PopupVariantSelect {
+      #VariantList_wrapper {
+        border-top: 1px solid #ddd;
+      }
+      #VariantList {
+        width: 100% !important;
+        thead td {
+          width: 100% !important;
+          &.input {
+            width: 20%;
+          }
+        }
+        tbody td .form-control {
+          padding: 0 10px;
+          height: 26px;
+          font-size: 12px;
+        }
+      }
+    }
+    #PopupSettings {
+      .efar-popup-panel {
+        h2 {
+          text-align: left;
+          font-size: 14px;
+          border-bottom: 1px solid #e5e5e5;
+          border-top: 1px solid #e5e5e5;
+          background: #f9f9f9;
+          padding: 10px;
+          margin: 0;
+          margin: 0 -15px;
+          padding-left: 20px;
+          margin-bottom: 10px;
+          i {
+            margin-right: 10px;
+          }
+        }
+        p {
+          font-size: 12px;
+          line-height: 20px;
+          padding: 5px;
+        }
+        .prop-inner {
+          position: absolute;
+          right: 17px;
+          top: 2px;
+          padding: 0 9px;
+          height: 30px;
+          line-height: 30px;
+          pointer-events: none;
+          font-size: 12px;
+        }
+      }
+      .btn-efar-upload {
+        display: block;
+        width: 100%;
+        height: 34px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        -webkit-box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        cursor: pointer;
+        i {
+          border-right: 1px solid #ccc;
+          padding: 6px 12px;
+          line-height: 20px;
+          margin-right: 10px;
+          background: #f7f7f7;
+        }
+        &:hover {
+          background: #f7f7f7;
+        }
+        &.remove {
+          display: none;
+        }
+      }
+      #image-preview {
+        width: 120px;
+        height: 120px;
+        position: relative;
+        background-color: #fff;
+        color: #ecf0f1;
+        cursor: pointer;
+        position: absolute;
+        z-index: 50;
+        opacity: .3;
+        input {
+          position: absolute;
+          opacity: 0;
+          z-index: 10;
+          width: 100%;
+          height: 100%;
+        }
+        label {
+          position: absolute;
+          z-index: 5;
+          cursor: pointer;
+          margin: auto;
+          line-height: 20px;
+          text-align: center;
+          top: -30px;
+        }
+      }
+      #PreviewCanvas {
+        position: absolute;
+        z-index: 60;
+      }
+    }
+    #PopupPrint {
+      .PdfRule {
+        ul {
+          margin: 20px;
+          padding: 0;
+          li {
+            list-style: decimal;
+            font-size: 13px;
+            line-height: 25px;
+          }
+        }
+        p {
+          padding: 10px;
+        }
+      }
+      .PdfRuleNote {
+        padding: 10px;
+        background: #fff4bd;
+        color: #977639;
+        border-top: 1px solid #dedddc;
+        margin: -15px;
+        margin-top: 10px;
+        font-size: 12px;
+        text-align: center;
+        &.NoteTop {
+          margin-top: 0;
+          border-top: 0;
+          margin-bottom: 10px;
+          border-bottom: 1px solid #dedddc;
+        }
+      }
+      .TemplateList {
+        width: calc(100% - 180px);
+        margin-top: 10px;
+        h2 {
+          margin: 0;
+          padding: 0;
+          font-size: 14px;
+          background: #454149;
+          color: #fff;
+          padding: 8px;
+        }
+        ul {
+          margin: 0;
+          padding: 0;
+          li {
+            display: block;
+            position: relative;
+            cursor: pointer;
+            padding: 5px;
+            padding-left: 30px;
+            &:before {
+              content: "";
+              font-family: FontAwesome;
+              font-style: normal;
+              font-weight: normal;
+              text-decoration: inherit;
+              position: absolute;
+              left: 8px;
+              top: calc(50% - 10px);
+              font-size: 15px;
+              line-height: 20px;
+            }
+            div span {
+              float: right;
+              font-size: 11px;
+            }
+            &:hover {
+              background: #f6eeff;
+            }
+            &.active {
+              background: #f6eeff;
+              &:before {
+                content: "";
+              }
+            }
+          }
+        }
+      }
+      .Canvas {
+        width: 150px;
+        height: 150px;
+        margin: 0 10px;
+        padding: 10px;
+        margin-bottom: 15px;
+      }
+    }
+    #PopupTool .modal-dialog, #PopupItem .modal-dialog {
+      width: 400px;
+    }
+    #PopupTool .modal-dialog .efar-jvalidate-error.error, #PopupItem .modal-dialog .efar-jvalidate-error.error {
+      border-color: #b6615f;
+      background-color: rgba(255, 166, 164, 0.2);
+    }
+    #PopupTool .modal-dialog .grid6, #PopupItem .modal-dialog .grid6 {
+      display: inline-block;
+      width: 48%;
+    }
+    #PopupTool .modal-dialog .grid10, #PopupItem .modal-dialog .grid10 {
+      display: inline-block;
+      width: calc(100% - 40px);
+    }
+    #PopupTool .modal-dialog span.grid2, #PopupItem .modal-dialog span.grid2 {
+      float: right;
+      background: #f7f7f7;
+      padding: 6px 0;
+      text-align: center;
+      border: 1px solid #ccc;
+      width: 35px;
+      height: 34px;
+    }
+    #PopupTool .modal-dialog .TemplateSelect, #PopupItem .modal-dialog .TemplateSelect {
+      position: relative;
+      width: 100%;
+    }
+    #PopupTool .modal-dialog .TemplateSelect > span, #PopupItem .modal-dialog .TemplateSelect > span {
+      display: block;
+      width: 100%;
+      height: 34px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      -webkit-box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.075);
+      box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.075);
+      -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+      -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      cursor: pointer;
+      color: #555;
+    }
+    #PopupTool .modal-dialog .TemplateSelect > span:after, #PopupItem .modal-dialog .TemplateSelect > span:after {
+      position: absolute;
+      right: 15px;
+      content: "";
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+    }
+    #PopupTool .modal-dialog .TemplateSelect > ul, #PopupItem .modal-dialog .TemplateSelect > ul {
+      display: none;
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      width: 100%;
+      max-height: 200px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      z-index: 500;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-width: 0 1px 1px 1px;
+    }
+    #PopupTool .modal-dialog .TemplateSelect > ul li, #PopupItem .modal-dialog .TemplateSelect > ul li {
+      display: block;
+      padding: 5px 10px;
+      font-size: 13px;
+      border-bottom: 1px solid #f7f7f7;
+      cursor: pointer;
+    }
+    #PopupTool .modal-dialog .TemplateSelect > ul li:hover, #PopupItem .modal-dialog .TemplateSelect > ul li:hover {
+      background: #f7f7f7;
+    }
+    #PopupTool .modal-dialog .TemplateSelect > ul li span, #PopupItem .modal-dialog .TemplateSelect > ul li span {
+      font-size: 10px;
+      padding: 0 5px;
+      background: #454149;
+      width: 55px;
+      text-align: center;
+      border-radius: 3px;
+      color: #fff;
+    }
+    #PopupTool .modal-dialog .TemplateSelect > ul li span.Model, #PopupItem .modal-dialog .TemplateSelect > ul li span.Model {
+      background: #1eb931;
+    }
+    #PopupTool .modal-dialog .TemplateSelect > ul li span.Liste, #PopupItem .modal-dialog .TemplateSelect > ul li span.Liste {
+      background: #ad0c04;
+    }
+    #PopupTool .modal-dialog .TemplateSelect > ul li span.Enum, #PopupItem .modal-dialog .TemplateSelect > ul li span.Enum {
+      background: #ada704;
+    }
+    #PopupTool .modal-dialog .TemplateSelect > ul li:after, #PopupItem .modal-dialog .TemplateSelect > ul li:after {
+      content: '';
+      clear: both;
+      display: block;
+    }
+    .isVariant {
+      cursor: pointer;
+      line-height: 25px;
+      &:hover {
+        background: #f1f1f1;
+      }
+      i:before {
+        content: "";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: inherit;
+      }
+      &.active i:before {
+        content: "";
+      }
+    }
+    .m-Template {
+      position: relative;
+      width: calc(100% + 40px);
+      margin: -20px;
+      height: calc(100% + 40px);
+      .m-Template-Prop {
+        position: fixed;
+        top: 113px;
+        z-index: 500;
+        width: calc(100% - 230px);
+        background: #f7f7f7;
+        box-shadow: 0 1px 0 #fefefe, 0 -1px 0 rgba(255, 255, 255, 0.45), inset 0 -1px 0 #d1d1d1;
+        .Prop-Area {
+          border-right: 1px solid #ccc;
+          border-bottom: 1px solid #ccc;
+          position: relative;
+          color: #999593;
+          height: 45px;
+          .Title {
+            width: 150px;
+            padding: 10px 15px;
+            line-height: 25px;
+            font-size: 12px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .FontFamily {
+            width: 162px;
+            &:hover {
+              background: #fdfdfd;
+            }
+            span {
+              display: block;
+              cursor: pointer;
+              padding: 7px 15px;
+              padding-right: 30px;
+              line-height: 30px;
+              &:before {
+                position: absolute;
+                content: "";
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+                right: 10px;
+              }
+            }
+            ul {
+              display: none;
+              padding: 0;
+              position: relative;
+              left: -1px;
+              z-index: 13;
+              width: calc(100% + 2px);
+              padding: 10px 0;
+              line-height: 20px;
+              font-size: 15px;
+              border: 1px solid #c5c4c2;
+              border-top: 0;
+              background-color: #fdfdfd;
+              li {
+                display: block;
+                a {
+                  display: block;
+                  padding: 5px 15px;
+                  color: #999593;
+                  &:hover {
+                    color: #e11837;
+                    background-color: #f2f1f1;
+                  }
+                }
+              }
+            }
+          }
+          .FontSize {
+            position: relative;
+            padding: 7px 15px;
+            input[type=text] {
+              width: 60px;
+            }
+          }
+          select {
+            height: 30px;
+          }
+          input[type=text] {
+            width: 80px;
+            height: 30px;
+            padding: 6px 8px;
+          }
+          .prop-inner {
+            position: absolute;
+            right: 15px;
+            top: 7px;
+            padding: 0 9px;
+            height: 30px;
+            line-height: 30px;
+            pointer-events: none;
+            font-size: 12px;
+          }
+          &.Prop-Group-Area {
+            display: none;
+            .Prop-Group {
+              position: relative;
+              padding: 7px 15px;
+              label {
+                font-size: 12px;
+                display: inline-block;
+                margin-right: 5px;
+              }
+              input {
+                display: inline-block;
+              }
+              &:first-child {
+                padding-right: 0;
+                .prop-inner {
+                  right: 0;
+                }
+              }
+            }
+            .Prop-Group-Buttons {
+              padding: 7px 15px;
+              button {
+                display: block;
+                float: left;
+                margin: 0;
+                background: #fff;
+                border: 1px solid #ccc;
+                font-size: 14px;
+                padding: 0 7px;
+                i {
+                  line-height: 26px;
+                }
+                &:first-child {
+                  border-right: 0;
+                }
+                &:nth-child(3) {
+                  border-left: 0;
+                }
+                &:hover {
+                  background: #f6eeff;
+                }
+                &.active {
+                  background: #f6eeff;
+                  color: #e11837;
+                }
+              }
+            }
+          }
+        }
+      }
+      .m-Template-Canvas {
+        position: fixed;
+        width: calc(100% - 560px);
+        height: calc(100% - 158px);
+        background: #d2d0cf;
+        overflow: auto;
+        border-right: 1px solid #ccc;
+        text-align: center;
+        overflow: auto;
+        overflow-y: scroll;
+        top: 5em;
+        left: 5em;
+        .m-Ruler-Top {
+          position: absolute;
+          z-index: 700;
+          background: #edeaf0;
+          border-bottom: 1px solid #a9a9a9;
+          min-width: 788px;
+          overflow: hidden;
+          height: 18px;
+          ul {
+            padding: 0;
+            margin: 0 auto;
+            margin-left: 30px;
+            li {
+              display: block;
+              float: left;
+              width: 31.5px;
+              font-size: 8px;
+              border-left: 1px solid #a9a9a9;
+              line-height: 17px;
+              span {
+                display: block;
+              }
+            }
+          }
+        }
+        .m-Ruler-Left {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 20px;
+          background: #edeaf0;
+          border-right: 1px solid #a9a9a9;
+          min-height: 500px;
+          ul {
+            padding: 0;
+            margin: 0;
+            margin-top: 30px;
+            li {
+              display: block;
+              height: 31.6px;
+              font-size: 8px;
+              border-bottom: 1px solid #a9a9a9;
+              line-height: 17px;
+              &:first-child {
+                border-top: 1px solid #a9a9a9;
+              }
+            }
+          }
+        }
+        .m-Template-Page {
+          position: absolute;
+          background: #fdfdfd;
+          border: 1px solid #ccc;
+          margin: 30px;
+          left: 0;
+          .m-Template-Page-Background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 500;
+            img {
+              width: 100%;
+              height: 100%;
+              opacity: .3;
+            }
+          }
+          .m-Template-Page-Area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: transparent;
+            z-index: 600;
+            width: 100%;
+            height: 100%;
+            border: 1px solid transparent;
+            font-size: 16px;
+            &.active {
+              border-color: #ca4b53;
+            }
+            .efar-field {
+              position: absolute !important;
+              overflow: hidden;
+              border: 1px solid #e8e7e7;
+              cursor: move;
+              width: auto;
+              text-align: start;
+              color: #000;
+              line-height: normal;
+              z-index: 100;
+              &.active {
+                border-width: 2px;
+                border-color: #ca4b53;
+                background-color: transparent;
+              }
+              &:hover {
+                border-color: #ca4b53;
+                i {
+                  &.Remove, &.Edit, &.Upload {
+                    display: block;
+                  }
+                }
+                table tr td {
+                  border-color: #f6eeff !important;
+                }
+                .JColResizer {
+                  border-color: #ca4b53 !important;
+                }
+              }
+              &.ui-draggable-dragging {
+                color: #000;
+              }
+              i {
+                &.Remove {
+                  display: none;
+                  position: absolute;
+                  top: 0;
+                  right: 0;
+                  padding: 4px 5px 5px 6px;
+                  background-color: #e8e7e7;
+                  cursor: pointer;
+                  font-size: 16px;
+                  &:hover {
+                    color: #ca4b53;
+                  }
+                }
+                &.Edit, &.Upload {
+                  display: none;
+                  position: absolute;
+                  top: 0;
+                  right: 25px;
+                  padding: 4px 5px 5px 6px;
+                  background-color: #e8e7e7;
+                  cursor: pointer;
+                  font-size: 16px;
+                  &:hover {
+                    color: #ca4b53;
+                  }
+                }
+              }
+              .JCLRgrips .JCLRgrip {
+                width: 5px;
+                position: absolute;
+                margin-left: -5px;
+                top: 0;
+                height: 100%;
+                .JColResizer {
+                  width: 5px;
+                  height: 100%;
+                  margin: 0 auto;
+                  background-color: transparent;
+                  opacity: 1;
+                  border-left: 1px solid transparent;
+                }
+              }
+              table.efar-table-stocks {
+                width: 100%;
+                border-collapse: initial;
+                border: 0;
+                thead tr th {
+                  border: 0;
+                  padding: 0;
+                }
+                tbody tr {
+                  &:first-child td {
+                    border: 0;
+                  }
+                  td {
+                    border-color: transparent;
+                    padding: 0;
+                  }
+                }
+              }
+              .efar-field-textarea {
+                display: none;
+                width: 100%;
+                height: 100%;
+              }
+              .efar-field-image {
+                width: 100%;
+                height: 100%;
+              }
+              .field-file {
+                display: none;
+              }
+            }
+            &.ui-droppable-hover {
+              border-color: #e11837 !important;
+            }
+          }
+        }
+      }
+      .m-Template-Tools {
+        position: relative;
+        width: 325px;
+        float: right;
+        height: calc(100% - 115px);
+        padding-bottom: 15px;
+        top: 50px;
+        .Tool-Setting {
+          margin: 15px;
+          background: #fff;
+          box-shadow: 0 0 8px #d7d5d4;
+          h2 {
+            margin: 0;
+            padding: 0;
+            font-size: 17px;
+            padding: 15px;
+            line-height: 15px;
+            background: #45424a;
+            color: #fff;
+            i {
+              float: right;
+              font-size: 14px;
+            }
+          }
+          > ul {
+            padding: 0;
+            > li {
+              display: block;
+              padding: 10px;
+              .Settings {
+                margin: -10px;
+                ul {
+                  padding: 0;
+                  li {
+                    display: block;
+                    border-top: 1px solid #edeaf0;
+                    a {
+                      display: block;
+                      font-size: 14px;
+                      color: #000;
+                      padding: 10px;
+                      padding-left: 15px;
+                      i {
+                        padding-right: 5px;
+                      }
+                      &:hover {
+                        background: #f7f7f7;
+                        color: #e11837;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        .m-Tool {
+          margin: 15px;
+          background: #fff;
+          box-shadow: 0 0 8px #d7d5d4;
+          h2 {
+            margin: 0;
+            padding: 0;
+            font-size: 17px;
+            cursor: pointer;
+            padding: 15px;
+            line-height: 15px;
+            background: #45424a;
+            color: #fff;
+            i {
+              float: right;
+              font-size: 14px;
+            }
+          }
+          ul {
+            display: none;
+            padding: 0;
+            li {
+              display: block;
+              cursor: -webkit-grab;
+              padding: 10px 20px;
+              border-top: 1px solid #dedddc;
+              i.fa {
+                display: inline-block;
+                zoom: 1;
+                width: 14px;
+                margin-right: 10px;
+              }
+              &:hover {
+                background-color: #f7f7f7;
+              }
+              &.ui-draggable-dragging {
+                z-index: 6000;
+                background-color: #f7f7f7;
+                width: calc(100% - 30px);
+                border: 0;
+                box-shadow: 0 0 8px #d7d5d4;
+              }
+            }
+            &.sortable li[data-type='TableField'] {
+              position: relative;
+              display: none;
+              cursor: pointer;
+              padding-left: 35px;
+              &.active span:before {
+                content: "";
+              }
+              &.select {
+                background-color: #e8e7e7;
+              }
+              span {
+                width: 15px;
+                height: 17px;
+                display: block;
+                position: absolute;
+                left: 12px;
+                &:before {
+                  position: absolute;
+                  left: 0;
+                  font-size: 15px;
+                  content: "";
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+              }
+              i {
+                margin: 0;
+                width: auto;
+                position: absolute;
+                right: 0;
+                top: 0;
+                padding: 10px 15px;
+                line-height: 20px;
+                color: #ccc;
+              }
+              &:hover i {
+                color: #000;
+              }
+              &.ui-sortable-helper {
+                z-index: 6000;
+                background-color: #f7f7f7;
+                width: calc(100% - 30px);
+                border: 0;
+                box-shadow: 0 0 8px #d7d5d4;
+              }
+            }
+          }
+        }
+      }
+    }
+    .Efar-Template-Creator {
+      .BtncreateTool {
+        border: 1px solid #545258;
+        background: #454149;
+        color: #fff;
+        padding: 7px 15px;
+        border-radius: 5px;
+        i {
+          margin-right: 5px;
+        }
+      }
+      .Efar-Template-Creator-Place {
+        display: none;
+        .Tools .Tool {
+          background: #fff;
+          box-shadow: 0 0 8px #d7d5d4;
+          width: calc(33% - 10px);
+          display: block;
+          float: left;
+          margin: 10px;
+          margin-left: 0;
+          &:nth-child(3n) {
+            margin-right: 0;
+          }
+          h2 {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            padding: 15px;
+            padding-right: 10px;
+            line-height: 15px;
+            background: #45424a;
+            color: #fff;
+            cursor: move;
+            button {
+              background: #2d2c2d;
+              color: #fff;
+              border: 0;
+              padding: 5px 8px;
+              display: inline-block;
+              margin-top: -5px;
+              opacity: .5;
+              &:hover {
+                opacity: 1;
+              }
+            }
+          }
+          ul {
+            padding: 0;
+            li {
+              display: block;
+              padding: 10px 20px;
+              cursor: -webkit-grab;
+              padding-right: 10px;
+              border-top: 1px solid #dedddc;
+              > i.fa {
+                display: inline-block;
+                zoom: 1;
+                width: 14px;
+                margin-right: 10px;
+              }
+              button {
+                background: #45424a;
+                color: #fff;
+                border: 0;
+                padding: 2px 7px;
+                display: inline-block;
+                border-radius: 3px;
+                margin-top: -5px;
+                font-size: 13px;
+                &.remove:hover {
+                  background-color: #e11837;
+                }
+                &.edit:hover {
+                  background-color: #185ae1;
+                }
+              }
+              &:hover {
+                background-color: #f7f7f7;
+              }
+              ul {
+                margin-left: -20px;
+                margin-right: -10px;
+                margin-bottom: -10px;
+                padding: 0;
+                margin-top: 10px;
+                li {
+                  padding-left: 50px;
+                  position: relative;
+                  span.check {
+                    width: 15px;
+                    height: 17px;
+                    display: block;
+                    position: absolute;
+                    left: 20px;
+                    &:before {
+                      position: absolute;
+                      left: 0;
+                      font-size: 15px;
+                      content: "";
+                      font-family: FontAwesome;
+                      font-style: normal;
+                      font-weight: normal;
+                      text-decoration: inherit;
+                    }
+                    &.active:before {
+                      content: "";
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

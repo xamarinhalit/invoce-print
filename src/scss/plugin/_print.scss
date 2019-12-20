@@ -1,0 +1,221 @@
+@mixin mprint {
+  @media print {
+    border: none;
+  }
+  @media screen {
+    border-right-color: black;
+    border-right-style: solid;
+    border-right-width: 1px;
+  }
+}
+@mixin mRemove {
+  @media print {
+    i.Remove {
+      display: none;
+    }
+    #dragui:parent {
+      margin: 0;
+      padding: 0;
+    }
+    #dragui{
+      margin: 0;
+      padding: 0;
+    }
+  }
+  @media screen {
+    .p-column.p-field{
+        border-right-color: black!important;
+        border-right-style: solid!important;
+        border-right-width: 1px!important;
+    }
+    .p-field {
+      position: initial;
+      border: 1px solid #e8e7e7!important;
+      cursor: move;
+      color: #000;
+      &.active {
+        border-style: outset;
+        border-width: 2px!important;
+        border-color: #3d3a3a!important;
+        background-color: transparent!important;
+      }
+      &:hover {
+        border-color: #ca4b53!important;
+        i {
+          &.Remove, &.Edit, &.Upload {
+            display: block;
+          }
+        }
+      }
+      &.ui-draggable-dragging {
+        color: #000;
+      }
+      i {
+        &.Remove {
+          display: none;
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 4px 5px 5px 6px;
+          background-color: #e8e7e7;
+          cursor: pointer;
+          font-size: 16px;
+          &:hover {
+            color: #ca4b53;
+          }
+        }
+      }
+      .p-field-textarea {
+        display: none;
+        width: 100%;
+        height: 100%;
+      }
+      .p-field-image {
+        width: 100%;
+        height: 100%;
+      }
+      .field-file {
+        display: none;
+      }
+    }
+
+  }
+}
+@include mRemove();
+.p-main {
+  width: 100vw;
+  i.Remove {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px 5px 5px 6px;
+    background-color: #e8e7e7;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  &:hover {
+    i.Remove {
+      display: block;
+      color: black;
+    }
+  }
+  &:hover {
+    i.Remove:hover {
+      color: #ca4b53;
+      display: block;
+    }
+  }
+  .p-row {
+    display: inline-flex;
+    .p-column {
+      @include mprint();
+    }
+  }
+}
+.p-text-content{
+    position: fixed;
+    width: calc(100% - 560px);
+    // background:    #d2d0cf;
+    border-right: 1px solid
+    #ccc;
+    text-align: center;
+    top: 1em;
+    left: 5em;
+    .p-text-fontsize {
+      margin: 15px;
+      background: #fff;
+      box-shadow: 0 0 8px #d7d5d4;
+    }
+}
+.p-font-block{
+  &{
+    display: flex;
+    opacity:0;
+    transition: opacity 0.1s ease-in-out;
+    pointer-events:none;
+  } 
+  &.p-active{
+    opacity: 1;
+    pointer-events:all;
+  }
+}
+.p-font-ul{
+  list-style: none;
+  display: flex;
+   li{
+     padding: 4px;
+     margin: 5px;
+     transition: 1s opacity;
+     opacity: 0.5;
+     &.active{
+      border: 1px gray dotted;
+      margin: 5px;
+      padding: 3px;
+      opacity: 1;
+     }
+     i{
+       width: 14px;
+       height: 14px;
+     }
+     
+   }
+}
+.p-ul{
+  list-style: none;
+  display: flex;
+   li{
+    padding: 4px;
+    margin: 5px;
+    opacity: 0.5;
+    transition: 1s opacity;
+    &.active{
+     border: 1px gray dotted;
+     margin: 5px;
+     padding: 3px;
+     opacity: 1;
+    }
+    i{
+      width: 14px;
+      height: 14px;
+    }
+   }
+}
+.m-Template-Tools{
+  pointer-events: none;
+  &.active{
+    pointer-events: fill;
+  }
+}
+select[name="loadname"]{
+  width: 100%;
+  height: 45px;
+  position: relative;
+}
+select[name="loadname"]::after{
+  content: '\f0d7';
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  color: #a8310d;
+  font-size: 45px;
+  z-index: 2;
+
+}
+select[name="loadname"]{
+  -webkit-appearance: button;
+     -moz-appearance: button;
+          appearance: button;
+          height: 45px;
+          width: 100%;
+      outline: none;
+      border: none;
+      border-bottom: 2px solid #ca3305;
+      font-size: 20px;
+      background-color: #91035115;
+      box-sizing: border-box;
+      padding-left: 10px;
+      padding-right: 10px;
+}
