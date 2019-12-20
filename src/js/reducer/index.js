@@ -3,6 +3,7 @@ import InitialState from './state'
 import { actionTypes } from './const'
 import { SetGroupItem, AddCloneItemAsync, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,  PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
 import { JsonToHtmlPrint } from './actions/html/new-html'
+import { CalC_Table } from './actions/convert'
 const SetInit = (state,payload)=>{
     const {fieldclass,target,dragclass,accordion,
         tablerowclass,tablecolumnclass,tablemainclass,FontSelects ,data} = payload
@@ -12,19 +13,26 @@ const SetInit = (state,payload)=>{
     }else if(data && typeof data === 'object' && data.constructor === Object){
         _value=data
     }
-    //state.Clone.Items.StaticItems=_value
-    state.UI.$CONTENT = $(target)
-    state.UI.FontSelects=FontSelects
+    state.UI={
+        ...state.UI,
+        $CONTENT : $(target),
+        FontSelects:FontSelects,
+
+    }
     for (let i = 0; i < FontSelects.length; i++) {
         StyleParamClick(FontSelects[i])
     }
-    state.UI.DROPID=target
-    state.UI.DRAGCLASS=dragclass
-    state.UI.ACCORDIONID=accordion
-    state.UI.TABLEROWCLASS=tablerowclass
-    state.UI.TABLECOLUMNCLASS=tablecolumnclass
-    state.UI.TABLEMAINCLASS=tablemainclass
-    state.UI.FIELDCLASS=fieldclass
+    state.UI={
+        ...state.UI,
+        DROPID:target,
+        DRAGCLASS:dragclass,
+        ACCORDIONID:accordion,
+        TABLEROWCLASS:tablerowclass,
+        TABLECOLUMNCLASS:tablecolumnclass,
+        TABLEMAINCLASS:tablemainclass,
+        FIELDCLASS:fieldclass
+    }
+    
     SetConfig(state)
     SetGroupItem(state,_value)
 }
@@ -36,6 +44,8 @@ const dispatch = (action,state=InitialState)=>{
     case actionTypes.CLONE.JSON_HTMLTOPRINT:
         JsonToHtmlPrint(action.payload).then((_data)=>{
             sendReducer(action.type,_data,state)
+        }).catch(()=>{
+            sendReducer(action.type,undefined,state)
         })
         break
     case actionTypes.INIT.OVERRIDE_TYPE:
@@ -102,6 +112,9 @@ const dispatch = (action,state=InitialState)=>{
                 sendReducer(action.type,{data:action.payload.data},state)
             })
         }
+        break
+    case actionTypes.CLONE.CALCTABLE:
+        CalC_Table(state.UI.SELECT.$font.parentNode.parentNode,state)
         break
     default:
         break

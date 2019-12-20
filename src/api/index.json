@@ -1,4 +1,84 @@
 {
+  "new": {
+    "TemplateItemValues": [
+      {
+        "id": "0",
+        "ToolValue": "Fatura Bilgileri",
+        "value": {
+          "MenuRowIndex": 0,
+          "TableKey": null,
+          "ItemKey": "OrderDate",
+          "ItemTitle": "Fatura Tarihi",
+          "ItemValue": "20.11.2019 14:43:15",
+          "Icon": "fa fa-user",
+          "Width": "120",
+          "Height": "50",
+          "ItemType": "Field",
+          "Format": "dd.MM.yyyy",
+          "Style": null,
+          "ColumnIndex": 0,
+          "RowIndex": 1
+        }
+      },
+      {
+        "id": "1",
+        "ToolValue": "Müşteri Bilgileri",
+        "value": {
+          "MenuRowIndex": 1,
+          "TableKey": null,
+          "ItemKey": "InvoiceCommercialTitle",
+          "ItemTitle": "Ticari Ünvanı",
+          "ItemValue": "Abc Ticaret Ltd.Şti",
+          "Icon": "fa fa-user",
+          "Width": "120",
+          "Height": "50",
+          "ItemType": "Field",
+          "Format": "",
+          "Style": null,
+          "ColumnIndex": 0,
+          "RowIndex": 1
+        }
+      },
+      {
+        "id": "3",
+        "ToolValue": "Ürün Bilgileri",
+        "value": {
+          "MenuRowIndex": 2,
+          "TableKey": "InvoiceLine",
+          "ItemKey": "LineStockCode",
+          "ItemTitle": "Stok Kodu",
+          "ItemValue": "Mg001",
+          "Icon": "fa fa-user",
+          "Width": "120",
+          "Height": "50",
+          "ItemType": "TableField",
+          "Format": "",
+          "Style": null,
+          "ColumnIndex": 100,
+          "RowIndex": 1
+        }
+      },
+      {
+        "id": "4",
+        "ToolValue": "Ürün Bilgileri",
+        "value": {
+          "MenuRowIndex": 2,
+          "TableKey": "InvoiceLine",
+          "ItemKey": "LineProductName",
+          "ItemTitle": "Ürün Adı",
+          "ItemValue": "Test Ürünü",
+          "Icon": "fa fa-user",
+          "Width": "120",
+          "Height": "50",
+          "ItemType": "TableField",
+          "Format": "",
+          "Style": null,
+          "ColumnIndex": 101,
+          "RowIndex": 1
+        }
+      }
+    ]
+  },
   "Test": {
     "Tools": [
       {
@@ -882,18 +962,17 @@
   },
   "SaveLoad": [
     {
-      "PageName": "Sayfa",
+      "PageName": "Dikey Altalta Ürün Sayısı3 Kopya Sayısı 1",
       "Print": {
         "PageCopy": "1",
         "PageSize": "A4",
-        "CopyDirection": "Yanyana",
+        "CopyDirection": "Altalta",
         "PageType": "Dikey",
-        "PageWidth": 21,
-        "PageHeight": 29.7,
-        "PageProduct": "1",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "3",
         "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
-        "DefaultRow": true,
-        "image": ""
+        "DefaultRow": "true"
       },
       "Clons": [
         {
@@ -901,17 +980,45 @@
           "ToolValue": "Ürün Bilgileri",
           "value": {
             "TableKey": "InvoiceLine",
-            "ItemType": 1,
+            "ItemType": "Table",
             "Style": {
               "position": "absolute",
-              "top": "493px",
-              "left": "132px",
-              "width": "507px"
+              "top": "952px",
+              "left": "533px",
+              "width": "240px",
+              "height": "150px"
             }
           }
         },
         {
-          "id": "20",
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
           "ToolValue": "Ürün Bilgileri",
           "value": {
             "MenuRowIndex": 2,
@@ -922,194 +1029,36 @@
             "Icon": "fa fa-user",
             "Width": "120",
             "Height": "50",
-            "ItemType": 2,
+            "ItemType": "TableField",
             "Format": "",
             "Style": {
-              "font-size": "15pt",
-              "font-style": "normal",
-              "font-weight": "normal",
-              "width": "185px",
+              "width": "120px",
               "height": "50px",
-              "order": "2",
+              "order": "101",
               "transition-duration": "1s",
               "transition-timing-function": "ease",
               "transition-delay": "0s",
               "transition-property": "order"
             },
-            "ColumnIndex": 2,
+            "ColumnIndex": 101,
             "RowIndex": 0
-          }
-        },
-        {
-          "id": "19",
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "MenuRowIndex": 2,
-            "TableKey": "InvoiceLine",
-            "ItemKey": "LineStockCode",
-            "ItemTitle": "Stok Kodu",
-            "ItemValue": "Mg001",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 2,
-            "Format": "",
-            "Style": {
-              "font-size": "10pt",
-              "font-style": "normal",
-              "font-weight": "bold",
-              "width": "192px",
-              "height": "50px",
-              "order": "3",
-              "transition-duration": "1s",
-              "transition-timing-function": "ease",
-              "transition-delay": "0s",
-              "transition-property": "order",
-              "text-align": "right"
-            },
-            "ColumnIndex": 3,
-            "RowIndex": 0
-          }
-        },
-        {
-          "id": "21",
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "MenuRowIndex": 2,
-            "TableKey": "InvoiceLine",
-            "ItemKey": "LineQuantity",
-            "ItemTitle": "Ürün Miktarı",
-            "ItemValue": "10 Ad",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 2,
-            "Format": "",
-            "Style": {
-              "font-size": "10pt",
-              "font-style": "normal",
-              "font-weight": "normal",
-              "width": "120px",
-              "height": "50px",
-              "order": "4",
-              "transition-duration": "1s",
-              "transition-timing-function": "ease",
-              "transition-delay": "0s",
-              "transition-property": "order",
-              "text-align": "left",
-              "text-decoration-line": "underline",
-              "text-decoration-style": "initial",
-              "text-decoration-color": "initial"
-            },
-            "ColumnIndex": 4,
-            "RowIndex": 0
-          }
-        },
-        {
-          "id": "0",
-          "ToolValue": "Fatura Bilgileri",
-          "value": {
-            "MenuRowIndex": 0,
-            "TableKey": null,
-            "ItemKey": "OrderDate",
-            "ItemTitle": "Fatura Tarihi",
-            "ItemValue": "20.10.2019 10:13:28",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 0,
-            "Format": "dd.MM.yyyy",
-            "Style": {
-              "position": "absolute",
-              "width": "208px",
-              "height": "50px",
-              "top": "319px",
-              "left": "86px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
-              "border-top-style": "none",
-              "border-right-style": "none",
-              "border-bottom-style": "none",
-              "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial",
-              "text-align": "left",
-              "font-size": "15pt"
-            },
-            "ColumnIndex": null,
-            "RowIndex": "01"
-          }
-        },
-        {
-          "id": "5",
-          "ToolValue": "Fatura Bilgileri",
-          "value": {
-            "MenuRowIndex": 0,
-            "TableKey": null,
-            "ItemKey": "InvoiceDiscountTotal",
-            "ItemTitle": "Fatura İndirim toplamı",
-            "ItemValue": "20.00",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 0,
-            "Format": "",
-            "Style": {
-              "position": "absolute",
-              "width": "122px",
-              "height": "52px",
-              "top": "311px",
-              "left": "613px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
-              "border-top-style": "none",
-              "border-right-style": "none",
-              "border-bottom-style": "none",
-              "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial",
-              "text-align": "right",
-              "font-weight": "bold",
-              "font-size": "14pt"
-            },
-            "ColumnIndex": null,
-            "RowIndex": "06"
           }
         }
       ],
-      "id": 0
+      "id": 1
     },
     {
-      "PageName": "Sayfa",
+      "PageName": "Dikey Altalta Ürün Sayısı1 Kopya Sayısı 1",
       "Print": {
         "PageCopy": "1",
         "PageSize": "A4",
-        "CopyDirection": "Yanyana",
+        "CopyDirection": "Altalta",
         "PageType": "Dikey",
-        "PageWidth": 21,
-        "PageHeight": 29.7,
-        "PageProduct": "3",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "1",
         "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
-        "DefaultRow": "true",
-        "image": ""
+        "DefaultRow": "true"
       },
       "Clons": [
         {
@@ -1117,48 +1066,45 @@
           "ToolValue": "Ürün Bilgileri",
           "value": {
             "TableKey": "InvoiceLine",
-            "ItemType": 1,
+            "ItemType": "Table",
             "Style": {
               "position": "absolute",
-              "top": "525px",
-              "left": "191px",
-              "width": "390px"
+              "top": "1052px",
+              "left": "533px",
+              "width": "240px",
+              "height": "50px"
             }
           }
         },
         {
-          "id": "23",
+          "id": "4",
           "ToolValue": "Ürün Bilgileri",
           "value": {
             "MenuRowIndex": 2,
             "TableKey": "InvoiceLine",
-            "ItemKey": "LineDiscountedPrice",
-            "ItemTitle": "Ürün İndirimli Fiyatı",
-            "ItemValue": "10 Ad",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
             "Icon": "fa fa-user",
             "Width": "120",
             "Height": "50",
-            "ItemType": 2,
+            "ItemType": "TableField",
             "Format": "",
             "Style": {
-              "font-size": "12pt",
-              "font-style": "normal",
-              "font-weight": "normal",
               "width": "120px",
               "height": "50px",
-              "order": "2",
+              "order": "1",
               "transition-duration": "1s",
               "transition-timing-function": "ease",
               "transition-delay": "0s",
-              "transition-property": "order",
-              "text-align": "right"
+              "transition-property": "order"
             },
-            "ColumnIndex": 2,
+            "ColumnIndex": 1,
             "RowIndex": 0
           }
         },
         {
-          "id": "19",
+          "id": "3",
           "ToolValue": "Ürün Bilgileri",
           "value": {
             "MenuRowIndex": 2,
@@ -1169,308 +1115,1901 @@
             "Icon": "fa fa-user",
             "Width": "120",
             "Height": "50",
-            "ItemType": 2,
+            "ItemType": "TableField",
             "Format": "",
             "Style": {
-              "font-size": "15pt",
-              "font-style": "normal",
-              "font-weight": "normal",
               "width": "120px",
               "height": "50px",
-              "order": "3",
+              "order": "0",
               "transition-duration": "1s",
               "transition-timing-function": "ease",
               "transition-delay": "0s",
-              "transition-property": "order",
-              "text-align": "right",
-              "text-decoration-line": "underline",
-              "text-decoration-style": "initial",
-              "text-decoration-color": "initial"
+              "transition-property": "order"
             },
-            "ColumnIndex": 3,
+            "ColumnIndex": 0,
             "RowIndex": 0
-          }
-        },
-        {
-          "id": "22",
-          "ToolValue": "Ürün Bilgileri",
-          "value": {
-            "MenuRowIndex": 2,
-            "TableKey": "InvoiceLine",
-            "ItemKey": "LinePrice",
-            "ItemTitle": "Ürün Fiyatı",
-            "ItemValue": "10 Ad",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 2,
-            "Format": "",
-            "Style": {
-              "font-size": "15pt",
-              "font-style": "normal",
-              "font-weight": "bold",
-              "width": "120px",
-              "height": "50px",
-              "order": "4",
-              "transition-duration": "1s",
-              "transition-timing-function": "ease",
-              "transition-delay": "0s",
-              "transition-property": "order",
-              "text-decoration-line": "underline",
-              "text-decoration-style": "initial",
-              "text-decoration-color": "initial",
-              "text-align": "center"
-            },
-            "ColumnIndex": 4,
-            "RowIndex": 0
-          }
-        },
-        {
-          "id": "0",
-          "ToolValue": "Fatura Bilgileri",
-          "value": {
-            "MenuRowIndex": 0,
-            "TableKey": null,
-            "ItemKey": "OrderDate",
-            "ItemTitle": "Fatura Tarihi",
-            "ItemValue": "20.10.2019 10:13:28",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 0,
-            "Format": "dd.MM.yyyy",
-            "Style": {
-              "position": "absolute",
-              "width": "122px",
-              "height": "52px",
-              "top": "313px",
-              "left": "107px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
-              "border-top-style": "none",
-              "border-right-style": "none",
-              "border-bottom-style": "none",
-              "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial"
-            },
-            "ColumnIndex": null,
-            "RowIndex": "01"
-          }
-        },
-        {
-          "id": "6",
-          "ToolValue": "Fatura Bilgileri",
-          "value": {
-            "MenuRowIndex": 0,
-            "TableKey": null,
-            "ItemKey": "InvoiceGrossTotal",
-            "ItemTitle": "Fatura Ara Toplam",
-            "ItemValue": "100,00",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 0,
-            "Format": "",
-            "Style": {
-              "position": "absolute",
-              "width": "122px",
-              "height": "52px",
-              "top": "324px",
-              "left": "477px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
-              "border-top-style": "none",
-              "border-right-style": "none",
-              "border-bottom-style": "none",
-              "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial"
-            },
-            "ColumnIndex": null,
-            "RowIndex": "07"
-          }
-        }
-      ],
-      "id": 1
-    },
-    {
-      "PageName": "Sayfa",
-      "Print": {
-        "PageCopy": "1",
-        "PageSize": "A4",
-        "CopyDirection": "Yanyana",
-        "PageType": "Dikey",
-        "PageWidth": 21,
-        "PageHeight": 29.7,
-        "PageProduct": "1",
-        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
-        "DefaultRow": "true"
-      },
-      "Clons": [
-        {
-          "id": "0",
-          "ToolValue": "Fatura Bilgileri",
-          "value": {
-            "MenuRowIndex": 0,
-            "TableKey": null,
-            "ItemKey": "OrderDate",
-            "ItemTitle": "Fatura Tarihi",
-            "ItemValue": "asdasdasd dasdas8",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 3,
-            "Format": "dd.MM.yyyy",
-            "Style": {
-              "position": "absolute",
-              "width": "122px",
-              "height": "52px",
-              "top": "461px",
-              "left": "63px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
-              "border-top-style": "none",
-              "border-right-style": "none",
-              "border-bottom-style": "none",
-              "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial"
-            },
-            "ColumnIndex": null,
-            "RowIndex": "01"
-          }
-        },
-        {
-          "id": "4",
-          "ToolValue": "Fatura Bilgileri",
-          "value": {
-            "MenuRowIndex": 0,
-            "TableKey": null,
-            "ItemKey": "InvoiceSubTotal",
-            "ItemTitle": "Fatura İndirimsiz Toplam",
-            "ItemValue": "100,00",
-            "Icon": "fa fa-user",
-            "Width": "120",
-            "Height": "50",
-            "ItemType": 0,
-            "Format": "",
-            "Style": {
-              "position": "absolute",
-              "width": "122px",
-              "height": "52px",
-              "top": "453px",
-              "left": "261px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
-              "border-top-style": "none",
-              "border-right-style": "none",
-              "border-bottom-style": "none",
-              "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial"
-            },
-            "ColumnIndex": null,
-            "RowIndex": "05"
           }
         }
       ],
       "id": 2
     },
     {
-      "PageName": "Sayfa",
+      "PageName": "Dikey Altalta Ürün Sayısı3 Kopya Sayısı 1",
       "Print": {
         "PageCopy": "1",
         "PageSize": "A4",
-        "CopyDirection": "Yanyana",
+        "CopyDirection": "Altalta",
         "PageType": "Dikey",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "3",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "952px",
+              "left": "533px",
+              "width": "240px",
+              "height": "150px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "101",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 101,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 3
+    },
+    {
+      "PageName": "Dikey Altalta Ürün Sayısı4 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Dikey",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "4",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "902px",
+              "left": "533px",
+              "width": "240px",
+              "height": "200px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "101",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 101,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 4
+    },
+    {
+      "PageName": "Dikey Yanyana Ürün Sayısı1 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": 1,
+        "PageProduct": 1,
+        "PageSize": "A4",
+        "PageType": "Dikey",
+        "CopyDirection": "Yanyana",
         "PageWidth": 21,
         "PageHeight": 29.7,
+        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
+        "DefaultRow": true
+      },
+      "Clons": [],
+      "id": 5
+    },
+    {
+      "PageName": "Dikey Yanyana Ürün Sayısı1 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": 1,
+        "PageProduct": 1,
+        "PageSize": "A4",
+        "PageType": "Dikey",
+        "CopyDirection": "Yanyana",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
+        "DefaultRow": true
+      },
+      "Clons": [],
+      "id": 6
+    },
+    {
+      "PageName": "Dikey Altalta Ürün Sayısı3 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Dikey",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "3",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "952px",
+              "left": "0px",
+              "width": "240px",
+              "height": "150px"
+            }
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "120px",
+              "height": "50px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 7
+    },
+    {
+      "PageName": "Dikey Altalta Ürün Sayısı2 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Dikey",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "1002px",
+              "left": "0px",
+              "width": "240px",
+              "height": "100px"
+            }
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 8
+    },
+    {
+      "PageName": "Dikey Altalta Ürün Sayısı3 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Dikey",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "3",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "952px",
+              "left": "0px",
+              "width": "240px",
+              "height": "150px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "101",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 101,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 9
+    },
+    {
+      "PageName": "Dikey Yanyana Ürün Sayısı1 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": 1,
+        "PageProduct": 1,
+        "PageSize": "A4",
+        "PageType": "Dikey",
+        "CopyDirection": "Yanyana",
+        "PageWidth": 21,
+        "PageHeight": 29.7,
+        "ImageUrl": "https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg",
+        "DefaultRow": true
+      },
+      "Clons": [],
+      "id": 10
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı2 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "723px",
+              "left": "862px",
+              "width": "240px",
+              "height": "50px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "25px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "25px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 11
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı3 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "3",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "698px",
+              "left": "862px",
+              "width": "240px",
+              "height": "75px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "120px",
+              "height": "25px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "25px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 12
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı1 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
         "PageProduct": "1",
         "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
         "DefaultRow": "true"
       },
       "Clons": [
         {
-          "id": "0",
-          "ToolValue": "Fatura Bilgileri",
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
           "value": {
-            "MenuRowIndex": 0,
-            "TableKey": null,
-            "ItemKey": "OrderDate",
-            "ItemTitle": "Fatura Tarihi",
-            "ItemValue": "vvvvvvvvvv",
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "723px",
+              "left": "862px",
+              "width": "240px",
+              "height": "50px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
             "Icon": "fa fa-user",
             "Width": "120",
             "Height": "50",
-            "ItemType": 3,
-            "Format": "dd.MM.yyyy",
+            "ItemType": "TableField",
+            "Format": "",
             "Style": {
-              "position": "absolute",
-              "width": "122px",
-              "height": "52px",
-              "top": "427px",
-              "left": "222px",
-              "border-top-width": "initial",
-              "border-right-width": "initial",
-              "border-bottom-width": "initial",
-              "border-left-width": "initial",
-              "border-top-style": "none",
-              "border-right-style": "none",
-              "border-bottom-style": "none",
-              "border-left-style": "none",
-              "border-top-color": "initial",
-              "border-right-color": "initial",
-              "border-bottom-color": "initial",
-              "border-left-color": "initial",
-              "border-image-source": "initial",
-              "border-image-slice": "initial",
-              "border-image-width": "initial",
-              "border-image-outset": "initial",
-              "border-image-repeat": "initial"
+              "width": "120px",
+              "height": "50px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
             },
-            "ColumnIndex": null,
-            "RowIndex": "01"
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "101",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 101,
+            "RowIndex": 0
           }
         }
       ],
-      "id": 3
+      "id": 13
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı2 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "673px",
+              "left": "862px",
+              "width": "240px",
+              "height": "100px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "101",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 101,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 14
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı2 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "723px",
+              "left": "738px",
+              "width": "364px",
+              "height": "50px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "190px",
+              "height": "25px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "174px",
+              "height": "25px",
+              "order": "101",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 101,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 15
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı3 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "3",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "698px",
+              "left": "659px",
+              "width": "443px",
+              "height": "75px"
+            }
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "216px",
+              "height": "25px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "227px",
+              "height": "25px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 16
+    },
+    {
+      "PageName": "Dikey Altalta Ürün Sayısı3 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Dikey",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "3",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "1021px",
+              "left": "259px",
+              "width": "514px",
+              "height": "75px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "226px",
+              "height": "25px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "288px",
+              "height": "25px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 17
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı3 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "3",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "683px",
+              "left": "0px",
+              "width": "240px",
+              "height": "90px"
+            }
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "30px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "120px",
+              "height": "30px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 18
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı2 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "713px",
+              "left": "860px",
+              "width": "240px",
+              "height": "60px"
+            }
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "30px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "30px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 19
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı2 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "713px",
+              "left": "860px",
+              "width": "240px",
+              "height": "60px"
+            }
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "30px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "30px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 20
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı2 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "723px",
+              "left": "862px",
+              "width": "240px",
+              "height": "50px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "25px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "25px",
+              "order": "101",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 101,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 21
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı2 Kopya Sayısı 4",
+      "Print": {
+        "PageCopy": "4",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "143px",
+              "left": "634px",
+              "width": "468px",
+              "height": "50px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "231px",
+              "height": "25px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "237px",
+              "height": "25px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 22
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı2 Kopya Sayısı 4",
+      "Print": {
+        "PageCopy": "4",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "143px",
+              "left": "634px",
+              "width": "468px",
+              "height": "50px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "231px",
+              "height": "25px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "237px",
+              "height": "25px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 23
+    },
+    {
+      "PageName": "Yatay Altalta Ürün Sayısı2 Kopya Sayısı 1",
+      "Print": {
+        "PageCopy": "1",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Yatay",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "723px",
+              "left": "862px",
+              "width": "240px",
+              "height": "50px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "120px",
+              "height": "25px",
+              "order": "0",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 0,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "25px",
+              "order": "1",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 1,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 24
+    },
+    {
+      "PageName": "Dikey Altalta Ürün Sayısı2 Kopya Sayısı 3",
+      "Print": {
+        "PageCopy": "3",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Dikey",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "2",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "267px",
+              "left": "533px",
+              "width": "240px",
+              "height": "100px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "101",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 101,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 25
+    },
+    {
+      "PageName": "Dikey Altalta Ürün Sayısı1 Kopya Sayısı 4",
+      "Print": {
+        "PageCopy": "4",
+        "PageSize": "A4",
+        "CopyDirection": "Altalta",
+        "PageType": "Dikey",
+        "PageWidth": "21",
+        "PageHeight": "29.7",
+        "PageProduct": "1",
+        "ImageUrl": "http://localhost:8080/src/img/fatura.jpg",
+        "DefaultRow": "true"
+      },
+      "Clons": [
+        {
+          "id": -1,
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "TableKey": "InvoiceLine",
+            "ItemType": "Table",
+            "Style": {
+              "position": "absolute",
+              "top": "225px",
+              "left": "533px",
+              "width": "240px",
+              "height": "50px"
+            }
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "width": "120px",
+              "height": "50px",
+              "order": "100",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 100,
+            "RowIndex": 0
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": {
+              "font-size": "10pt",
+              "font-style": "normal",
+              "font-weight": "normal",
+              "width": "120px",
+              "height": "50px",
+              "order": "101",
+              "transition-duration": "1s",
+              "transition-timing-function": "ease",
+              "transition-delay": "0s",
+              "transition-property": "order"
+            },
+            "ColumnIndex": 101,
+            "RowIndex": 0
+          }
+        }
+      ],
+      "id": 26
     }
   ],
   "Tools": [

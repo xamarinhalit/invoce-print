@@ -13,7 +13,7 @@ import '../scss/index.scss'
 // import '../_plugin/js/used/bootstrap.min.js'
 
 (function () {
-    const { subscribe, dispatch , actionTypes, Init,JsonToHtml } =require('./module')
+    const { subscribe, dispatch , actionTypes, Init } =require('./module')
     const GetFormat =(element)=>{
 
         let deger =element.ItemValue
@@ -62,13 +62,13 @@ import '../scss/index.scss'
             PageProduct: 1,
             PageSize: 'A4',
             PageType: 'Dikey',
-            CopyDirection: 'Yanyana',
+            CopyDirection: 'Altalta',
             PageWidth: 21.00,
             PageHeight: 29.70,
             ImageUrl:'http://localhost:8080/src/img/fatura.jpg',
-            // ImageUrl: 'https://content.hesap365.com/content/891ebe11-0b0f-4609-84f6-15ba1143ed09/InvoiceTemplates/dbd01ae142e441d39826b47153f8c8c0.jpg',
             DefaultRow:true
         },
+        LoadFromJson:true, /// for developer
         SetPrint : (_Print)=> {
             const forms =  document.forms.PanelPaperSetting
             for (let i = 0; i < forms.length; i++) {
@@ -85,15 +85,54 @@ import '../scss/index.scss'
                 }
             }
         },
-        $FONTSIZE:document.querySelector('input[name="fontsize"]'),
+        Elements:{
+            $PageSize:$('select[name="PageSize"]'),
+            $PageCopy:$('select[name="PageCopy"]'),
+            $LeftCor:document.querySelector('[name="xfontLeft"]'),
+            $TopCor:document.querySelector('[name="xfontTop"]'),
+            $heightCor:document.querySelector('[name="xfontheight"]'),
+            $FONTSIZE:document.querySelector('input[name="fontsize"]')
+        },
         Event:{
+            AddRemoveListener:(el,eventname,val,add)=>{
+                if(el!=undefined){
+                    el.removeEventListener(eventname,null)
+                    if(el.classList.contains(App.InitConfig.tablecolumnclass)==true){
+                        debugger
+                        $(el).hide()
+                    }else{
+                        $(el).show()
+                        el.value=(val==undefined || val==null || val=='')?0:parseInt(val)
+                        el.addEventListener(eventname,add)
+                        $(el).trigger(eventname)
+                    }
+
+                }
+            },
+            ChangeLeftCor:(e)=>{
+                const value=e.currentTarget.value+'px'
+                dispatch({type:actionTypes.CLONE.FONT_CHANGE,
+                    payload:{ font:'left',style:null,defaultvalue:value,input:value}})
+            },
+            ChangeTopCor:(e)=>{
+                const value=e.currentTarget.value+'px'
+                dispatch({type:actionTypes.CLONE.FONT_CHANGE,
+                    payload:{ font:'top',style:null,defaultvalue:value,input:value}})
+            },
+            ChangeHeightCor:(e,state)=>{
+                const value=e.currentTarget.value+'px'
+                dispatch({type:actionTypes.CLONE.FONT_CHANGE,
+                    payload:{ font:'height',style:null,defaultvalue:value,input:value}})
+                let isTable = state.UI.SELECT.$font.dataset.columnIndex
+                if(isTable!=undefined)
+                    dispatch({type:actionTypes.CLONE.CALCTABLE})
+            },
             FontSize:()=>{
-                App.$FONTSIZE.addEventListener('keyup',(e)=>{
+                App.Elements.$FONTSIZE.addEventListener('keyup',(e)=>{
                     const _target =e.currentTarget
                     if(_target !=undefined && _target!=null && _target.value!=''){
-                        dispatch(
-                            {type:actionTypes.CLONE.FONT_CHANGE,
-                                payload:{ font:'font-size',style:null,defaultvalue:'10pt',input:_target.value+'pt'}})
+                        dispatch({type:actionTypes.CLONE.FONT_CHANGE,
+                            payload:{ font:'font-size',style:null,defaultvalue:'10pt',input:_target.value+'pt'}})
                     }
                 })
             },
@@ -110,21 +149,49 @@ import '../scss/index.scss'
                 const fsize=selectedelemet.style.fontSize
                 if(fsize!=''){
                     if(fsize.indexOf('pt')>-1){
-                        App.$FONTSIZE.value=fsize.replace('pt','')
+                        App.Elements.$FONTSIZE.value=fsize.replace('pt','')
                     }
                 }else{
-                    App.$FONTSIZE.value='' 
+                    App.Elements.$FONTSIZE.value=''
                 }
-
+                const fheight=selectedelemet.style.height
+                if(fheight!=''){
+                    if(fheight.indexOf('pt')>-1){
+                        App.Elements.$heightCor.value=fheight.replace('pt','')
+                    }
+                }else{
+                    App.Elements.$heightCor.value=''
+                }
+                const fleft=selectedelemet.style.left
+                if(fleft!=''){
+                    if(fleft.indexOf('pt')>-1){
+                        App.Elements.$LeftCor.value=fleft.replace('pt','')
+                    }
+                }else{
+                    App.Elements.$LeftCor.value=''
+                }
+                const ftop=selectedelemet.style.top
+                if(ftop!=''){
+                    if(ftop.indexOf('pt')>-1){
+                        App.Elements.$TopCor.value=ftop.replace('pt','')
+                    }
+                }else{
+                    App.Elements.$TopCor.value=''
+                }
             },
             ItemSelect:()=>{
                 subscribe(actionTypes.CLONE.FONT_ITEM_SELECT,(state,data)=>{
                     const selectedelemet = data.element
-                    App.Event.DefaultFontTools(selectedelemet,state,data.value)
+                    const { AddRemoveListener,DefaultFontTools,ChangeTopCor,ChangeLeftCor,ChangeHeightCor} =App.Event
+                    const {$LeftCor,$TopCor,$heightCor} = App.Elements
+                    DefaultFontTools(selectedelemet,state,data.value)
                     const $ffsize =$('.p-font-block')
                     if(!$ffsize.hasClass('p-active')){
                         $ffsize.addClass('p-active')
                     }
+                    AddRemoveListener($LeftCor,'keyup',selectedelemet.style.left.replace('px',''),(e)=>ChangeLeftCor(e))
+                    AddRemoveListener($TopCor,'keyup',selectedelemet.style.top.replace('px',''),(e)=>ChangeTopCor(e))
+                    AddRemoveListener($heightCor,'keyup',selectedelemet.style.height.replace('px',''),(e)=>ChangeHeightCor(e,state))
                     $( state.UI.SELECT.$font).trigger('change')
                 })
             },
@@ -132,7 +199,6 @@ import '../scss/index.scss'
                 LoadJson:()=>{
                     $('#loadJson').click(function(e){
                         e.preventDefault()
-    
                         $('#loadFormSetting').modal({ backdrop: 'static', keyboard: false })
                     })
                 },
@@ -159,7 +225,29 @@ import '../scss/index.scss'
                             alert(message)
                         }else{
                             App.Event.$HTTP({url:'http://localhost:3000/SaveLoad?id='+formEl.loadname,type:'GET'}).then((_sonuc)=>{
-                                dispatch({type:actionTypes.HTTP.JSON_CONFIG_LOAD,payload: {data:_sonuc}})
+                                if(App.LoadFromJson==true){
+                                    const config ={
+                                        TABLE:{
+                                            FIELD:'TableField',
+                                            DEFAULT:'Table'
+                                        },
+                                        TEXT:{
+                                            FIELD:'Field',
+                                            ITEMKEY:'ItemKey',
+                                            CUSTOMTEXT:'CustomText',
+                                            CUSTOMIMAGE:'CustomImage'
+                                        },
+                                        UI:{
+                                            TABLEROWCLASS:'p-row',
+                                            TABLECOLUMNCLASS:'p-column',
+                                            TABLEMAINCLASS:'p-main',
+                                        }
+                    
+                                    }
+                                    App.Event.JsonToHtmlPrint(undefined,config,{..._sonuc[0],data:_sonuc[0].Clons})
+                                }else{
+                                    dispatch({type:actionTypes.HTTP.JSON_CONFIG_LOAD,payload: {data:_sonuc}})
+                                }
                             })
                             
                         }
@@ -169,16 +257,10 @@ import '../scss/index.scss'
                 PrintSettings:()=>{
                     $('#PrintSettings').click((e)=>{
                         e.preventDefault()
-                        const $ps =$('select[name="PageSize"]')
-                        let v1 = $ps.val()
-                        $ps.val('A4')
-                        $ps.val(v1)
-                        $ps.trigger('change')
-                        const $pc =$('select[name="PageCopy"]')
-                        let v2 = $pc.val()
-                        $pc.val('1')
-                        $pc.val(v2)
-                        $pc.trigger('change')
+                        let v1 = App.Elements.$PageSize.val()
+                        App.Elements.$PageSize.val('A4').val(v1).trigger('change')
+                        let v2 = App.Elements.$PageCopy.val()
+                        App.Elements.$PageCopy.val('1').val(v2).trigger('change')
                         $('#PopupSettings').modal({ backdrop: 'static', keyboard: false })
                     })
                 },
@@ -210,6 +292,7 @@ import '../scss/index.scss'
                     e.preventDefault()
                     subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE,(_state,_data)=>{
                         if(_data!=undefined && _data.data!=undefined){
+                            _data.data.PageName=_data.data.Print.PageType+' '+_data.data.Print.CopyDirection+ ' Ürün Sayısı'+ _data.data.Print.PageProduct + (_data.data.Print.PageCopy!=''?' Kopya Sayısı '+_data.data.Print.PageCopy : '')
                             App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',data:_data.data}).then((_sonuc)=>{
                             })
                         }
@@ -261,7 +344,6 @@ import '../scss/index.scss'
                     return await response.json() // parses JSON response into native JavaScript objects
                 }
                 else{
-                        
                     const response = await fetch(url, {
                         method:type, // *GET, POST, PUT, DELETE, etc.
                         mode: 'cors', // no-cors, *cors, same-origin
@@ -278,37 +360,23 @@ import '../scss/index.scss'
                 }
                 
             },
-            JsonToHtmlPrint:(e)=>{
+            JsonToHtmlPrint:async (e,config=null,sonuc)=>{
                 if(e!=undefined)
                     e.preventDefault()
-
-                App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',type:'GET'}).then((_sonuc)=>{
-                    const {Print,Clons} = _sonuc[1]
-                    const config ={
-                        TABLE:{
-                            FIELD:2,
-                            DEFAULT:1
-                        },
-                        TEXT:{
-                            FIELD:0,
-                            ITEMKEY:'ItemKey'
-                        },
-                        UI:{
-                            TABLEROWCLASS:'p-row',
-                            TABLECOLUMNCLASS:'p-column',
-                            TABLEMAINCLASS:'p-main',
-                        }
-
-                    }
-                    subscribe(actionTypes.CLONE.JSON_HTMLTOPRINT,(_state,_data)=>{
+                let _sonucx=null,_sonuc=null
+                if(sonuc==null){
+                    _sonucx =await App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',type:'GET'})
+                    _sonuc = _sonucx[0]
+                }else{
+                    _sonuc=sonuc
+                }
+                const {Print,Clons,data} = _sonuc
+                subscribe(actionTypes.CLONE.JSON_HTMLTOPRINT,(_state,_data)=>{
+                    if(_data==undefined){
+                        alert('Tasklak Yanlış')
+                    }else{
                         const {pagestyle,hbodystyle,element } =_data
-                        var vn = window.open('','')
-                        vn.document.head.innerHTML=hbodystyle
-                        vn.document.body.innerHTML=element.innerHTML
-                        vn.focus()
-                        // document.head.innerHTML=hbodystyle
-                        // document.body.innerHTML=element.innerHTML
-                        $(element).printThis({
+                        $(element.outerHTML).printThis({
                             debug: false, // show the iframe for debugging
                             importCSS: true, // import parent page css
                             importStyle: true, // import style tags
@@ -328,42 +396,130 @@ import '../scss/index.scss'
                             beforePrint: null, // function called before iframe is filled
                             afterPrint: null // function called before iframe is removed
                         })
-                    })
-                    dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config}})
+                    }
+                  
+                    // var vn = window.open('','',`resizable,scrollbars,
+                    // titlebar=no,
+                    //  left=200,
+                    //  top=200,
+                    //  width=768,
+                    //  height=600`)
+                    // vn.document.head.innerHTML=hbodystyle
+                    // vn.document.body.innerHTML=element.innerHTML
                 })
+                dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config,data:[
+                    {
+                        'id': '100',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineStockCode',
+                            'ItemValue': 'LineStockCode -0',
+                            'ItemType': 'TableField',
+                            'RowIndex': 0,
+                            'ColumnIndex': 100
+                    },
+                    {
+                        'id': '101',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineProductName',
+                            'ItemValue': 'LineProductName -0',
+                            'ItemType': 'TableField',
+                            'RowIndex': 0,
+                            'ColumnIndex': 101
+                    },
+                    {
+                        'id': '102',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineStockCode',
+                            'ItemValue': 'LineStockCode -1',
+                            'ItemType': 'TableField',
+                            'RowIndex': 1,
+                            'ColumnIndex': 100
+                    },
+                    {
+                        'id': '103',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineProductName',
+                            'ItemValue': 'LineProductName -1',
+                            'ItemType': 'TableField',
+                            'RowIndex': 1,
+                            'ColumnIndex': 101
+                    },{
+                        'id': '105',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineStockCode',
+                            'ItemValue': 'LineStockCode -2',
+                            'ItemType': 'TableField',
+                            'RowIndex': 2,
+                            'ColumnIndex': 100
+                    },
+                    {
+                        'id': '106',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineProductName',
+                            'ItemValue': 'LineProductName -2',
+                            'ItemType': 'TableField',
+                            'RowIndex': 2,
+                            'ColumnIndex': 101
+                    },{
+                        'id': '107',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineStockCode',
+                            'ItemValue': 'LineStockCode -3',
+                            'ItemType': 'TableField',
+                            'RowIndex': 3,
+                            'ColumnIndex': 100
+                    },
+                    {
+                        'id': '108',
+                            'TableKey': 'InvoiceLine',
+                            'ItemKey': 'LineProductName',
+                            'ItemValue': 'LineProductName -3',
+                            'ItemType': 'TableField',
+                            'RowIndex': 3,
+                            'ColumnIndex': 101
+                    }
+                    
+                    
+                ]}})
             }
 
         },
         PageInit:()=>{
             App.SetPrint(App.DefaultPrint)
-            App.Event.FormatChange()
-            App.Event.FontSize()
-            App.Event.ItemSelect()
-            App.Event.Modal.LoadJson()
-            App.Event.Modal.LoadJsonBtn()
-            App.Event.SaveConfig()
-            App.Event.Print()
-            App.Event.Modal.PrintSettings()
-            App.Event.Modal.PrintSettingsClick()
-            App.Event.LoadConfigHttp()
+            const {FormatChange,FontSize,ItemSelect,SaveConfig,LoadConfigHttp,Print:Prints} = App.Event
+            const {LoadJson,LoadJsonBtn,PrintSettings,PrintSettingsClick}=App.Event.Modal
+            FormatChange()
+            FontSize()
+            ItemSelect()
+            LoadJson()
+            LoadJsonBtn()
+            SaveConfig()
+            Prints()
+            PrintSettings()
+            PrintSettingsClick()
+            LoadConfigHttp()
         }
     }
 
     $(document).ready(function () {
-       // App.Event.JsonToHtmlPrint()
+        
         subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{
-            state.Clone.Type.TEXT.FIELD=0
-            state.Clone.Type.TEXT.CUSTOMTEXT=3
-            state.Clone.Type.TEXT.CUSTOMIMAGE=4
-            state.Clone.Type.TABLE.FIELD=2
-            state.Clone.Type.TABLE.DEFAULT=1
-            App.Event.$HTTP({url:'http://localhost:3000/menu',type:'GET'}).then((data)=>{
-                App.InitConfig.data=data.Menu
+            state.Clone.Type.TEXT.FIELD='Field'
+            state.Clone.Type.TEXT.CUSTOMTEXT='CustomText'
+            state.Clone.Type.TEXT.CUSTOMIMAGE='CustomImage'
+            state.Clone.Type.TABLE.FIELD='TableField'
+            state.Clone.Type.TABLE.DEFAULT='Table'
+            App.Event.$HTTP({url:'http://localhost:3000/new',type:'GET'}).then((data)=>{
+              
+                App.InitConfig.data=data.TemplateItemValues
                 Init(App.InitConfig)
                 App.PageInit()
-                //App.OnlyLoadJson(state)
+                
+               
             })
+            
         })
         dispatch({type:actionTypes.INIT.OVERRIDE_TYPE})
+
     })
 })()

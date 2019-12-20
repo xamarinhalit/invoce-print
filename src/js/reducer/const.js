@@ -20,7 +20,8 @@ export const actionTypes={
         DRAG_STOP:'DRAG-STOP',
         FONT_CHANGE:'FONT-CHANGE',
         FONT_ITEM_SELECT:'FONT-ITEM-SELECT',
-        FORMAT_CHANGE:'FORMAT-CHANGE'
+        FORMAT_CHANGE:'FORMAT-CHANGE',
+        CALCTABLE:'CALC-TABLE'
     },
     UI:{
         UI_PRINT:'UI-PRINT'
