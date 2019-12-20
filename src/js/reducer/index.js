@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, AddCloneItemAsync, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,  PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
-import { JsonToHtmlPrint } from './actions/html/new-html'
+import { SetGroupItem,SetConfig,AddCloneItemAsync, RemoveCloneItem,RemoveTableItem,RemoveTable, GetPrintInit,SetJsonData, PrintSetting,LoadJson,ChangeFontEvent,StyleParamClick ,CalC_Table ,JsonToHtmlPrint} from './actions'
+
+
 const SetInit = (state,payload)=>{
     const {fieldclass,target,dragclass,accordion,
         tablerowclass,tablecolumnclass,tablemainclass,FontSelects ,data} = payload
@@ -12,30 +13,40 @@ const SetInit = (state,payload)=>{
     }else if(data && typeof data === 'object' && data.constructor === Object){
         _value=data
     }
-    //state.Clone.Items.StaticItems=_value
-    state.UI.$CONTENT = $(target)
-    state.UI.FontSelects=FontSelects
+    state.UI={
+        ...state.UI,
+        $CONTENT : $(target),
+        FontSelects:FontSelects,
+
+    }
     for (let i = 0; i < FontSelects.length; i++) {
         StyleParamClick(FontSelects[i])
     }
-    state.UI.DROPID=target
-    state.UI.DRAGCLASS=dragclass
-    state.UI.ACCORDIONID=accordion
-    state.UI.TABLEROWCLASS=tablerowclass
-    state.UI.TABLECOLUMNCLASS=tablecolumnclass
-    state.UI.TABLEMAINCLASS=tablemainclass
-    state.UI.FIELDCLASS=fieldclass
-    SetConfig(state)
-    SetGroupItem(state,_value)
+    state.UI={
+        ...state.UI,
+        DROPID:target,
+        DRAGCLASS:dragclass,
+        ACCORDIONID:accordion,
+        TABLEROWCLASS:tablerowclass,
+        TABLECOLUMNCLASS:tablecolumnclass,
+        TABLEMAINCLASS:tablemainclass,
+        FIELDCLASS:fieldclass
+    }
+    
+    SetConfig(state,_value,()=>{
+        SetGroupItem(state,_value)
+    })
+    
 }
 const observers= []
-
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
     case actionTypes.CLONE.JSON_HTMLTOPRINT:
         JsonToHtmlPrint(action.payload).then((_data)=>{
             sendReducer(action.type,_data,state)
+        }).catch(()=>{
+            sendReducer(action.type,undefined,state)
         })
         break
     case actionTypes.INIT.OVERRIDE_TYPE:
@@ -103,6 +114,9 @@ const dispatch = (action,state=InitialState)=>{
             })
         }
         break
+    case actionTypes.CLONE.CALCTABLE:
+        CalC_Table(state.UI.SELECT.$font.parentNode.parentNode,state)
+        break
     default:
         break
     }
@@ -113,7 +127,6 @@ const sendReducer= (type,data,state)=> {// {type:actionTypes, payload:{}}
     for (let i = observers.length - 1; i >= 0; i--) {
         if(type==undefined || type==null){
             observers[i].fn()
-            //addReducer.unSubscribe(observers[i])
         }else{
             const item=observers[i]
             if(item.type==type){
@@ -129,13 +142,11 @@ const sendReducers= (type,data,state)=> {// {type:actionTypes, payload:{}}
     for (let i = observers.length - 1; i >= 0; i--) {
         if(type==undefined || type==null){
             observers[i].fn()
-            //addReducer.unSubscribe(observers[i])
         }else{
             const item=observers[i]
             if(item.type==type){
                 if(item.fn!=undefined)
                     item.fn(state,data)
-                //addReducer.unSubscribe(item)
             }
         }
         
@@ -169,4 +180,5 @@ const reducer_pipe=(c,...ops)=>{
     })
     delete reducer_ListFn.objects[reducer_ListFn.index]
 }
-export { addReducer,dispatch,reducer_pipe ,sendReducers,StyleParamClick}
+const { subscribe} =addReducer
+export { subscribe,dispatch,reducer_pipe ,sendReducers,StyleParamClick}

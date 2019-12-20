@@ -140,6 +140,7 @@ export const RemoveTableItem = (table,state,success)=>{
 }
 export const RemoveCloneItem=(cloneId,state,success) =>{
     const { Clone:_Clons }=state
+    const TEXT  =state.Clone.Type.TEXT
     let removeItem = null
     let removedItem=null
     // eslint-disable-next-line no-unused-vars
@@ -148,6 +149,9 @@ export const RemoveCloneItem=(cloneId,state,success) =>{
             if (value.Index != cloneId) {
                 return true
             } else {
+                if(value.value[TEXT.ITEMTYPE]==TEXT.CUSTOMTEXT){
+                    value.element.removeEventListener('input',null)
+                }
                 const reelement=value.element.cloneNode(true)
                 const style = styleToObject(value.element)
                 removeItem = value.element

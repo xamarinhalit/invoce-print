@@ -5,10 +5,9 @@
 
 
 (function () {
-     const {subscribe,dispatch,actionTypes,Init} = $_FATURA || window.$_FATURA
-    // require('js/bootstrap.min.js')
-    // require('js/printThis.js')
-    //  const {subscribe,dispatch,actionTypes,Init} =require('./module/index')
+     require('js/bootstrap.min.js')
+     require('js/printThis.js')
+     const {subscribe,dispatch,actionTypes,Init} =require('./module/index')
     const getBase64= (file,resolve,reject) =>{
         const reader = new FileReader();
         reader.readAsDataURL(file);

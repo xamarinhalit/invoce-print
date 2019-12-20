@@ -4,9 +4,40 @@
 import { dispatch} from '..'
 import { actionTypes } from '../const'
 import { styleToObject,  CalcLeftTop, NullCheck, CalC_Table } from './convert'
-import {  ChangeFontSize, DefaultFontSize } from './font'
+const DefaultFontSize= (element,style)=>{
+    if(NullCheck(style)){
+        element.style.fontSize='10pt'
+        element.style.fontStyle='normal'
+        element.style.fontWeight='normal'
+    }
+}
+const ChangeFontSize=(state,e,value)=>{
+    $('.'+state.UI.FIELDCLASS+'.active').removeClass('active')
+    state.UI.SELECT.$font=e.currentTarget
+    if(NullCheck(state.UI.SELECT.$font))
+        state.UI.SELECT.$font.classList.add('active')
+    state.UI.FontSelects.forEach((v,i)=>{
+        const d = $('li[data-'+v.selector+']')
+        const v2=state.UI.SELECT.$font.style[v.selector]
+        d.each((ii,ix)=>{
+            if(ix!=undefined){
+                const $ix=$(ix)
+                const v1=$ix.data(v.readselector)
+                if(v2==v1){
+                    if(!$ix.hasClass('active'))
+                        $ix.addClass('active')
+                }else{
+                    if($ix.hasClass('active'))
+                        $ix.removeClass('active')
+                }
+            }
+        })
+    })
+    dispatch({type:actionTypes.CLONE.FONT_ITEM_SELECT,payload:{element:state.UI.SELECT.$font,value:value}})
+}
 
-export const SetConfig = (state, _data) => {
+
+export const SetConfig = (state, _data,success=undefined) => {
     state.UI.$CONTENT
         .droppable({
             accept: '.' + state.UI.DRAGCLASS + '>li',
@@ -57,12 +88,25 @@ export const SetConfig = (state, _data) => {
             $hcopy.parentNode.parentNode.style.display='none'
         }
     }
-  
+    if(success!=undefined){
+        success()
+    }
 }
-
+const getBase64= (file,resolve,reject) =>{
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+        if ((encoded.length % 4) > 0) {
+          encoded += '='.repeat(4 - (encoded.length % 4));
+        }
+        resolve(encoded);
+      };
+      reader.onerror = error => reject(error);
+}
 const UICloneText = (state,menuitem,payload)=>{
     return new Promise((resolve,reject)=>{
-        const {value,element,ToolValue,id:Index } =menuitem
+        const {value,ToolValue,id:Index } =menuitem
         const TYPE_TEXT = state.Clone.Type.TEXT
         const _Clone_Index = state.Clone.Index
         _Clone_Index.Index++
@@ -79,29 +123,58 @@ const UICloneText = (state,menuitem,payload)=>{
                 payload: cloneId
             })
         }
-        if(NullCheck(value.Format)){
-            textclone.innerHTML=value[TYPE_TEXT.VALUE]
-            dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:value}})
-        }else{
-            textclone.innerHTML=value[TYPE_TEXT.VALUE]
+        if(value[TYPE_TEXT.ITEMTYPE]!=TYPE_TEXT.CUSTOMTEXT){
+            if(NullCheck(value.Format)){
+                textclone.innerHTML=value[TYPE_TEXT.VALUE]
+                dispatch({type:actionTypes.CLONE.FORMAT_CHANGE,payload:{element:textclone,value:value}})
+            }else{
+                textclone.innerHTML=value[TYPE_TEXT.VALUE]
+            }
         }
+        const tempdiv = document.createElement('div')
+        if(value[TYPE_TEXT.ITEMTYPE]==TYPE_TEXT.CUSTOMIMAGE){
+             textclone.innerHTML=''
+             tempdiv.innerHTML=value[TYPE_TEXT.VALUE]
+             tempdiv.style.width='100%'
+             tempdiv.style.height='100%'
+             tempdiv.style.display='block'
+             tempdiv.dataset.childcloneId=textclone.dataset.cloneId
+             textclone.appendChild(tempdiv)
+         }
         textclone.appendChild(textremove)
         DefaultFontSize(textclone,value.Style)
         
         textclone.onclick=(e)=>ChangeFontSize(state,e,value)
-
+      
         const cloneItem = {
             Index: _Clone_Index.Index,
             element: textclone,
-            value,
+            value:{...value},
             ToolValue,
-            id:Index,
+            id:Index
+        }
+        if(value[TYPE_TEXT.ITEMTYPE]==TYPE_TEXT.CUSTOMTEXT){
+            const textbox = document.createElement('textarea')
+            textbox.style.width='100%'
+            textbox.style.height='100%'
+            textbox.value=value[TYPE_TEXT.VALUE]
+            textclone.appendChild(textbox)
+            textbox.addEventListener('input',()=>{
+                    cloneItem.value[TYPE_TEXT.VALUE]=textbox.value
+            })
         }
         state.Clone.Items.Clons.push(cloneItem)
-       
-        const extractCss=()=>{
+            
+        const extractCss=(eventname='drag')=>{
             const style =styleToObject(cloneItem.element)
             // eslint-disable-next-line require-atomic-updates
+            if(eventname=='resize' && cloneItem.value.ItemType==TYPE_TEXT.CUSTOMTEXT){
+                const textarea=cloneItem.element.querySelector('textarea')
+                if(textarea!=null){
+                    cloneItem.element.width=textarea.width
+                    cloneItem.element.height=textarea.height
+                }
+            }
             cloneItem.value.Style = style
         }
         const { left,top} = payload
@@ -126,7 +199,7 @@ const UICloneText = (state,menuitem,payload)=>{
                 minHeight: cloneItem.value.Height,
                 minWidth:cloneItem.value.Width
             })
-            .on('resize', extractCss)
+            .on('resize',()=> extractCss('resize'))
             .css({ border: 'none', left: left + 'px', top: top + 'px' })
             .disableSelection()
         if(NullCheck(payload.text) && NullCheck(payload.text.style)){
@@ -140,6 +213,31 @@ const UICloneText = (state,menuitem,payload)=>{
         }
         extractCss()
         resolve(cloneItem)
+        if(value[TYPE_TEXT.ITEMTYPE]==TYPE_TEXT.CUSTOMIMAGE){
+            $('<input type="file" accept="image/png,image/jpg,image/jpeg" />').click().on('change',(event)=>{
+                const tfile = event.target || event.srcElement;
+                const ChildImg= document.createElement('img')
+                ChildImg.style.width='100%'
+                ChildImg.style.height='100%'
+                ChildImg.style.aspect='fit'
+                ChildImg.alt='NO-IMAGE'
+                if (tfile.value.length>0) {
+                    let ffile = tfile.files[0]
+                    getBase64(ffile,(resolvedata)=>{
+                        ChildImg.src='data:'+ffile.type+';base64,'+resolvedata
+                        tempdiv.innerHTML=''
+                        tempdiv.appendChild(ChildImg)
+                        cloneItem.value[TYPE_TEXT.VALUE]=tempdiv.outerHTML
+                    },(ejectdata)=>{
+                        tempdiv.innerHTML=''
+                        tempdiv.appendChild(ChildImg)
+                        cloneItem.value[TYPE_TEXT.VALUE]=tempdiv.outerHTML
+                    })
+                    
+                }
+            })
+
+        }
     })
 }
 const UICloneCreateTable = (state,menuitem,payload,Items)=>{
@@ -150,14 +248,17 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
         const { ToolValue,value,id}=menuitem
         const { DROPID } = state.UI
         const { Index } = state.Clone
-        let $_table = state.UI.$CONTENT.find('#table-'+value.TableKey)
+        // let $_table = state.UI.$CONTENT.find('#table-'+value.TableKey)
+        let $_table = state.UI.$CONTENT.find('.table-'+value.TableKey)
         if($_table.length==0){
+            const {clientHeight, clientWidth } = state.UI.$CONTENT[0]
             Index.Index++
             const _div = document.createElement('div')
             _div.classList.add(state.UI.TABLEMAINCLASS)
             _div.style.position='absolute'
             const $div =$(_div)
-            $div.prop('id','table-'+value.TableKey).data('cloneId',Index.Index)
+            $div.addClass('table-'+value.TableKey)
+            $div.data('cloneId',Index.Index)
             const button = document.createElement('i')
             button.className='fa fa-times Remove'
             button.style.right='-15px'
@@ -193,7 +294,15 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
             }else if(NullCheck(payload.Table) && NullCheck(payload.Table.Style)){
                 $div.css(payload.Table.Style)
             }else{
-                $div.css({ top:'500px', left: '20px' })
+                if(clientHeight!=undefined&& clientWidth!=undefined){
+                    if(clientHeight>=clientWidth){
+                        $div.css({ top:parseInt(clientHeight/2) + 'px', left: '20px' })    
+                    }else{
+                        $div.css({ top:'0px', left:parseInt(clientWidth/2)+'px'  })
+                    }
+                }else{
+                    $div.css({ top:'500px', left: '20px' })
+                }
             }
            
             _table.value.Style=extractCss($div)
@@ -213,11 +322,11 @@ const UICloneCreateTable = (state,menuitem,payload,Items)=>{
 
 const UICloneTable = (state,menuitem,payload)=>{
     return new Promise((resolve,_reject)=>{
-        const {value,element,ToolValue,id } =menuitem
+        const {value,ToolValue,id } =menuitem
         UICloneCreateTable(state,menuitem,payload,state.Clone.Items).then((_divtable)=>{
             const TYPE_TABLE = state.Clone.Type.TABLE
             const _Clone_Index = state.Clone.Index
-            if(state.Print.DefaultRow==true || state.Print.DefaultRow=="true"){
+            if(state.Print.DefaultRow==true || state.Print.DefaultRow=='true'){
                 value.RowIndex=0
             }
             let rowQuery='div[data--row-index="'+value.RowIndex+'"]'
@@ -293,7 +402,7 @@ const UICloneTable = (state,menuitem,payload)=>{
             _divcolumn.removeChild(_divcolumn.querySelector('.ui-resizable-se'))
             CalC_Table(_divtable,state)
             elements.value.Style=styleToObject (_divcolumn)
-            if(state.Print.DefaultRow==true || state.Print.DefaultRow=="true"){//DEFAULT
+            if(state.Print.DefaultRow==true || state.Print.DefaultRow=='true'){//DEFAULT
                 const ccopySize =parseInt(state.Print.PageProduct)
                 const dchildren=_divtable[0].querySelectorAll('div[class="'+state.UI.TABLEROWCLASS+'"]')
                 for (let i = 1; i < dchildren.length; i++) {
