@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { dispatch, addReducer } from '..'
+import { dispatch, subscribe} from '..'
+import { NullCheck, styleToObject } from './convert'
 import { actionTypes } from '../const'
 const TableCreate = (litarget)=>{
     const $el =litarget
@@ -11,10 +12,10 @@ const TableCreate = (litarget)=>{
         $el.prepend(elinput)
         const status={status:true}
         $el.onclick=(_e)=>{
-            addReducer.subscribe(actionTypes.CLONE.DRAG_START,()=>{
+            subscribe(actionTypes.CLONE.DRAG_START,()=>{
                 status.status=false
             })
-            addReducer.subscribe(actionTypes.CLONE.DRAG_STOP,()=>{
+            subscribe(actionTypes.CLONE.DRAG_STOP,()=>{
                 status.status=true
             })
             if(status.status==true){
@@ -22,13 +23,13 @@ const TableCreate = (litarget)=>{
                 $el.classList.toggle('active')
                 if ($el.classList.contains('active')) {
                     // eslint-disable-next-line no-unused-vars
-                    addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
+                    subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
                         $el.querySelector('input').checked=true
                     })
                     dispatch({type:actionTypes.CLONE.ADD_CLONEITEM,payload:{Index}})
                 } else {
                     // eslint-disable-next-line no-unused-vars
-                    addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
+                    subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
                         $el.querySelector('input').checked=false
                     })
                     dispatch({type:actionTypes.CLONE.REMOVE_TABLEITEM,payload:{table:{Index}}})
@@ -37,8 +38,6 @@ const TableCreate = (litarget)=>{
         }
     }
 }
-
-
 const SetGroupItem=(state,_Menu)=> {
     const { TEXT, TABLE } = state.Clone.Type
     _Menu.forEach(function(item) {
@@ -191,10 +190,10 @@ const GetMenuValue = ($chilren,j,{Menu},state,success)=>{
             }
         }
         if ($el.classList.contains('active')) {
-            addReducer.subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
+            subscribe(actionTypes.CLONE.REMOVE_TABLEITEM,(_state,_xdata)=>{
                 if(_xdata!=null){
                     // eslint-disable-next-line no-unused-vars
-                    addReducer.subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
+                    subscribe(actionTypes.CLONE.ADD_CLONEITEM,(_xstate,_cloneitem)=>{
                         j++
                         if($chilren.length>j){
                             GetMenuValue ($chilren,j,{Menu},state,success)
@@ -217,6 +216,66 @@ const GetMenuValue = ($chilren,j,{Menu},state,success)=>{
         }
         
        
+    }
+}
+export const StyleParamClick = ({selector,readselector,defaultvalue})=>{
+    $('li[data-'+selector+']').click((e)=>{
+        $('li[data-'+selector+']').each((i,ele)=>{
+            if(ele!=undefined && e.currentTarget!= ele){
+                if(ele.classList.contains('active')){
+                    ele.classList.remove('active')
+                }
+            }
+        })
+        e.currentTarget.classList.toggle('active')
+        const elactive = e.currentTarget.classList.contains('active')
+        dispatch({type:actionTypes.CLONE.FONT_CHANGE,payload:{ font:selector,style:e.currentTarget.dataset[readselector],status:elactive,defaultvalue}})
+    })
+}
+const GetCloneItem = (state,cloneId)=>{
+    const _item ={
+        item:null
+    }
+    for (let i = 0; i < state.Clone.Items.Clons.length; i++) {
+        const item = state.Clone.Items.Clons[i]
+        if(item!=undefined && item.Index==cloneId){
+            _item.item=item
+            break
+        }
+        
+    }
+    return _item
+}
+export const ChangeFontEvent = (state,payload)=>{
+    if(NullCheck(payload.font)){
+        if(!NullCheck(payload.status)){
+            state.UI.SELECT.$font.style[payload.font]=payload.input
+        }else if(payload.status==true && NullCheck(payload.style))
+            state.UI.SELECT.$font.style[payload.font]=payload.style
+        else 
+            state.UI.SELECT.$font.style[payload.font]=payload.defaultvalue
+        if( NullCheck(state.UI.SELECT.$font)){
+            const parent =$(state.UI.SELECT.$font).parents('.'+state.UI.TABLEMAINCLASS)
+            if(parent.length==0){
+                const { cloneId } =  state.UI.SELECT.$font.dataset
+                const { item } = GetCloneItem(state,cloneId)
+                item.value.Style=styleToObject( state.UI.SELECT.$font)
+            }else{
+                const className='.'+ state.UI.SELECT.$font.className
+                    .replace(' '+state.UI.FIELDCLASS,'').replace(' '+state.UI.TABLECOLUMNCLASS,' ')
+                    .replace(' ui-resizable active','').replace(' ','.')
+                parent.find(className).each((ii,ix)=>{
+                    if(ix!=undefined){
+                        const { cloneId } = ix.dataset
+                        const { item } = GetCloneItem(state,cloneId)
+                        ix.style.cssText=state.UI.SELECT.$font.style.cssText
+                        item.value.Style=styleToObject(ix)
+                    }
+                })
+            }
+          
+
+        }
     }
 }
 

@@ -4,11 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "s": "webpack-dev-server --mode development",
+    "start": "webpack-dev-server --mode development --config webpack.dev.js",
     "api": "json-server ./src/api/index.json",
-    "build": "webpack --mode production",
-    "apilist": "json-server ./src/api/list.json",
-    "_start1": "webpack-dev-server --mode development --open firefox.exe"
+    "build": "webpack --mode production --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -24,25 +22,12 @@
     "expose-loader": "^0.7.5",
     "file-loader": "^4.2.0",
     "jquery": "^3.4.1",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^7.3.1",
     "style-loader": "^1.0.0",
-    "tslint": "^5.20.0",
     "uglify-es-webpack-plugin": "^0.10.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.8.1",
     "webpack-jquery-ui": "^2.0.1"
-  },
-  "quokka": {
-    "babel": {
-      "presets": [
-        "react-app"
-      ]
-    },
-    "plugins": [
-      "jsdom-quokka-plugin"
-    ]
   }
 }
