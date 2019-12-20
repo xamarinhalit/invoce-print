@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 import InitialState from './state'
 import { actionTypes } from './const'
-import { SetGroupItem, AddCloneItemAsync, RemoveCloneItem,RemoveTableItem, GetPrintInit,RemoveTable ,SetConfig,  PrintSetting, SetJsonData,ChangeFontEvent,StyleParamClick, LoadJson } from './actions'
-import { JsonToHtmlPrint } from './actions/html/new-html'
-import { CalC_Table } from './actions/convert'
+import { SetGroupItem,SetConfig,AddCloneItemAsync, RemoveCloneItem,RemoveTableItem,RemoveTable, GetPrintInit,SetJsonData, PrintSetting,LoadJson,ChangeFontEvent,StyleParamClick ,CalC_Table ,JsonToHtmlPrint} from './actions'
+
+
 const SetInit = (state,payload)=>{
     const {fieldclass,target,dragclass,accordion,
         tablerowclass,tablecolumnclass,tablemainclass,FontSelects ,data} = payload
@@ -33,26 +33,15 @@ const SetInit = (state,payload)=>{
         FIELDCLASS:fieldclass
     }
     
-    SetConfig(state)
-    SetGroupItem(state,_value)
+    SetConfig(state,_value,()=>{
+        SetGroupItem(state,_value)
+    })
+    
 }
 const observers= []
-const dispatchForFormat =(action,state=InitialState)=>{
-    switch (action.type) {
-        case actionTypes.CLONE.FORMAT_CHANGE:
-            sendReducers(action.type,action.payload,state)
-            return;
-    }
-}
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
-    case actionTypes.CLONE.IMAGE_FILE_UPLOAD:
-            sendReducers(action.type,action.payload,state)
-        break;
-    case actionTypes.CLONE.IMAGE_FILE_COMPLETED:
-            sendReducers(action.type,action.payload,state)
-        break;
     case actionTypes.CLONE.JSON_HTMLTOPRINT:
         JsonToHtmlPrint(action.payload).then((_data)=>{
             sendReducer(action.type,_data,state)
@@ -138,7 +127,6 @@ const sendReducer= (type,data,state)=> {// {type:actionTypes, payload:{}}
     for (let i = observers.length - 1; i >= 0; i--) {
         if(type==undefined || type==null){
             observers[i].fn()
-            //addReducer.unSubscribe(observers[i])
         }else{
             const item=observers[i]
             if(item.type==type){
@@ -154,13 +142,11 @@ const sendReducers= (type,data,state)=> {// {type:actionTypes, payload:{}}
     for (let i = observers.length - 1; i >= 0; i--) {
         if(type==undefined || type==null){
             observers[i].fn()
-            //addReducer.unSubscribe(observers[i])
         }else{
             const item=observers[i]
             if(item.type==type){
                 if(item.fn!=undefined)
                     item.fn(state,data)
-                //addReducer.unSubscribe(item)
             }
         }
         
@@ -194,4 +180,5 @@ const reducer_pipe=(c,...ops)=>{
     })
     delete reducer_ListFn.objects[reducer_ListFn.index]
 }
-export { addReducer,dispatch,reducer_pipe ,sendReducers,StyleParamClick,dispatchForFormat}
+const { subscribe} =addReducer
+export { subscribe,dispatch,reducer_pipe ,sendReducers,StyleParamClick}
