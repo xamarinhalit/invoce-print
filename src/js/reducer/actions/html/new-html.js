@@ -274,7 +274,7 @@ const SetTableRow = ({Clons,Print,config,data},indexParam=null)=>{
             let cloneid= clone.id
             if(clone!=undefined){
                 if(clone.value.ItemType==config.TABLE.FIELD && clone.value.RowIndex==0){
-                        for (var j = startindex; j < endindex; j++) {
+                    for (var j = startindex; j < endindex; j++) {
                         data.filter(x=>{
                             if(x.ItemType==config.TABLE.FIELD && x.RowIndex==j && clone.value.ItemKey==x.ItemKey){
                                 const dt = {
@@ -297,7 +297,29 @@ const SetTableRow = ({Clons,Print,config,data},indexParam=null)=>{
                         })
                     }
                     Clons =Clons.filter(x=>x.id!=cloneid)
-                    }
+                }else if(clone.value.ItemType!=config.TABLE.DEFAULT){
+                    data.filter(x=>{
+                        if(x.ItemType!=config.TABLE.FIELD && x.ItemType!=config.TABLE.DEFAULT && clone.value.ItemKey==x.ItemKey){
+                            const dt = {
+                                id:''+StartId,
+                                value:{}
+                            }
+                            for (const key in clone.value) {
+                                if (clone.value.hasOwnProperty(key)) {
+                                    const el = clone.value[key]
+                                    if(x[key]!=undefined){
+                                        dt.value[key]=x[key]
+                                    }else{
+                                        dt.value[key]=el
+                                    }
+                                }
+                            }
+                            newAddClone.push(dt)
+                            StartId++
+                            Clons =Clons.filter(x=>x.id!=cloneid)
+                        }
+                    })
+                }
             }
         }
         for (let i = 0; i < newAddClone.length; i++) {
