@@ -37,10 +37,22 @@ const SetInit = (state,payload)=>{
     SetGroupItem(state,_value)
 }
 const observers= []
-
+const dispatchForFormat =(action,state=InitialState)=>{
+    switch (action.type) {
+        case actionTypes.CLONE.FORMAT_CHANGE:
+            sendReducers(action.type,action.payload,state)
+            return;
+    }
+}
 const dispatch = (action,state=InitialState)=>{
 
     switch (action.type) {
+    case actionTypes.CLONE.IMAGE_FILE_UPLOAD:
+            sendReducers(action.type,action.payload,state)
+        break;
+    case actionTypes.CLONE.IMAGE_FILE_COMPLETED:
+            sendReducers(action.type,action.payload,state)
+        break;
     case actionTypes.CLONE.JSON_HTMLTOPRINT:
         JsonToHtmlPrint(action.payload).then((_data)=>{
             sendReducer(action.type,_data,state)
@@ -182,4 +194,4 @@ const reducer_pipe=(c,...ops)=>{
     })
     delete reducer_ListFn.objects[reducer_ListFn.index]
 }
-export { addReducer,dispatch,reducer_pipe ,sendReducers,StyleParamClick}
+export { addReducer,dispatch,reducer_pipe ,sendReducers,StyleParamClick,dispatchForFormat}
