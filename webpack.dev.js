@@ -6,7 +6,7 @@ var webpack = require('webpack')
 
 module.exports = {
     devtool: 'eval-source-map',              //dev-mode only,
-    entry: './src/js/app.js',
+    entry: './src/js/app.dev.js',
     //   entry: './src/js/module/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),

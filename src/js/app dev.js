@@ -4,10 +4,9 @@
 
 
 
-// const {subscribe,dispatch,actionTypes,Init} = $_FATURA || window.$_FATURA
 (function () {
-    // require('js/bootstrap.min.js')
-    // require('js/printThis.js')
+     require('js/bootstrap.min.js')
+     require('js/printThis.js')
      const {subscribe,dispatch,actionTypes,Init} =require('./module/index')
     const getBase64= (file,resolve,reject) =>{
         const reader = new FileReader();
@@ -42,6 +41,7 @@
             $input.type='text'
             $input.value=el.value
             $input.name=el.name
+            $input.onchange=el.onchange
             $input.style.width='100%'
             $input.style.height='100%'
             $li.appendChild($input)
@@ -98,6 +98,19 @@
     }
     const App= {
         PageName:'Sayfa',
+        PageConfig: {
+            TemplateName: 'Sayfa',
+            TemplateKey: 1,
+            TemplateJsonData: {}
+        },
+        HostConfig: {
+            host: 'http://localhost:22049/',
+            save: 'Settings/AddTemplate',
+            loadlist: 'SaveLoad',
+            menu: 'shareddata/GetTemlateDefaultTools/1',
+            load: 'settings/GetTemplate',
+            getdata: 'order/GetinvoiceJsonData'
+        },
         InitConfig :{ 
             target:'.m-Template-Page-Area',
             dragclass:'m-drag-ul',
@@ -121,10 +134,9 @@
             CopyDirection: 'Altalta',
             PageWidth: 21.00,
             PageHeight: 29.70,
-            ImageUrl:'http://localhost:8080/src/plugin/img/fatura.jpg',
+            ImageUrl:'http://localhost:22049/src/plugin/img/fatura.jpg',
             DefaultRow:true
         },
-        LoadFromJson:true, /// for developer
         SetPrint : (_Print)=> {
             const forms =  document.forms.PanelPaperSetting
             for (let i = 0; i < forms.length; i++) {
@@ -168,7 +180,6 @@
                 }
             },
             ImageChangeEvent:()=>{
-               
                 App.Elements.$BtnUploadRemove.addEventListener('click',function(e){
                     const tempimg=document.querySelector('#tempimage')
                     tempimg.src=''
@@ -278,7 +289,6 @@
             ItemSelect:()=>{
                 subscribe(actionTypes.CLONE.FONT_ITEM_SELECT,(state,data)=>{
                     const selectedelemet = data.element
-                    App.Elements.$SelectedElement =selectedelemet
                     const { AddRemoveListener,DefaultFontTools,ChangeTopCor,ChangeLeftCor,ChangeHeightCor} =App.Event
                     const {$LeftCor,$TopCor,$heightCor} = App.Elements
                     DefaultFontTools(selectedelemet,state,data.value)
@@ -293,109 +303,194 @@
                 })
             },
             Modal:{
-                LoadJson:()=>{
-                    $('#loadJson').click(function(e){
-                        e.preventDefault()
-                        $('#loadFormSetting').modal({ backdrop: 'static', keyboard: false })
-                    })
-                },
-                LoadJsonBtn:()=>{
-                    $('[name=loadFormSettingBtn]').click((e)=>{
-                        e.preventDefault()
-                        subscribe(actionTypes.HTTP.JSON_CONFIG_LOAD,(_state,_data)=>{
-                            // eslint-disable-next-line no-empty-pattern
-                            App.SetPrint(_data.Print)
-                        })
-                        const forms =  document.forms.loadFormSetting
-                        let message = ''
-                        let formEl ={}
-                        for (let i = 0; i < forms.length; i++) {
-                            const element = forms[i]
-                            const {name,value,type} =element
-                            if(name != '' && type!='button')
-                                formEl[name]=value
-                            if (!element.checkValidity()) {
-                                message+=element.validationMessage + ' , '
-                            }
+                JsonHtmlToPrint: function JsonHtmlToPrint() {
+                        subscribe(actionTypes.HTTP.JSON_CONFIG_LOAD, function (_state, _data) {
+                        
+                        // eslint-disable-next-line no-empty-pattern
+                        App.SetPrint(_data.Print);
+                    });
+                    App.Event.$HTTP({
+                        url: App.HostConfig.host + App.HostConfig.load,
+                        type: 'POST',
+                        data: { TemplateKey: App.PageConfig.TemplateKey } 
+                    }).then(function (_sonuc) {
+                        var config = {
+                        TABLE: {
+                            FIELD: 'TableField',
+                            DEFAULT: 'Table'
+                        },
+                        TEXT: {
+                            FIELD: 'Field',
+                            ITEMKEY: 'ItemKey',
+                            CUSTOMTEXT: 'CustomText',
+                            CUSTOMIMAGE: 'CustomImage'
+                        },
+                        UI: {
+                            TABLEROWCLASS: 'p-row',
+                            TABLECOLUMNCLASS: 'p-column',
+                            TABLEMAINCLASS: 'p-main'
                         }
-                        if(message!=''){
-                            alert(message)
-                        }else{
-                            App.Event.$HTTP({url:'http://localhost:3000/SaveLoad?id='+formEl.loadname,type:'GET'}).then((_sonuc)=>{
-                                if(App.LoadFromJson==true){
-                                    const config ={
-                                        TABLE:{
-                                            FIELD:'TableField',
-                                            DEFAULT:'Table'
-                                        },
-                                        TEXT:{
-                                            FIELD:'Field',
-                                            ITEMKEY:'ItemKey',
-                                            CUSTOMTEXT:'CustomText',
-                                            CUSTOMIMAGE:'CustomImage'
-                                        },
-                                        UI:{
-                                            TABLEROWCLASS:'p-row',
-                                            TABLECOLUMNCLASS:'p-column',
-                                            TABLEMAINCLASS:'p-main',
-                                        }
-                    
+                        };
+                        var _sonuc$ = _sonuc[0],
+                            Print = _sonuc$.Print,
+                            Clons = _sonuc$.Clons;
+                        subscribe(actionTypes.CLONE.JSON_HTMLTOPRINT, function (_state, header_Element) {
+                        if (header_Element == undefined) {
+                            alert('Tasklak Yanlış');
+                        } else {
+                            var pagestyle = header_Element.pagestyle,
+                                hbodystyle = header_Element.hbodystyle,
+                                element = header_Element.element;
+                            $(element.outerHTML).printThis({
+                            debug: false,
+                            // show the iframe for debugging
+                            importCSS: true,
+                            // import parent page css
+                            importStyle: true,
+                            // import style tags
+                            printContainer: true,
+                            // print outer container/$.selector
+                            pageTitle: '',
+                            // add title to print page
+                            removeInline: false,
+                            // remove inline styles from print elements
+                            removeInlineSelector: '*',
+                            // custom selectors to filter inline styles. removeInline must be true
+                            printDelay: 0,
+                            // variable print delay
+                            header: pagestyle,
+                            // prefix to html
+                            footer: null,
+                            // postfix to html
+                            base: false,
+                            // preserve the BASE tag or accept a string for the URL
+                            formValues: true,
+                            // preserve input/form values
+                            canvas: false,
+                            // copy canvas content
+                            removeScripts: false,
+                            // remove script tags from print content
+                            copyTagClasses: true,
+                            // copy classes from the html & body tag
+                            beforePrintEvent: null,
+                            // function for printEvent in iframe
+                            beforePrint: null,
+                            // function called before iframe is filled
+                            afterPrint: null // function called before iframe is removed
+
+                            });
+                        } // var vn = window.open('','',`resizable,scrollbars,
+                        // titlebar=no,
+                        //  left=200,
+                        //  top=200,
+                        //  width=768,
+                        //  height=600`)
+                        // vn.document.head.innerHTML=hbodystyle
+                        // vn.document.body.innerHTML=element.innerHTML
+
+                        });
+                        App.Event.$HTTP({
+                        url: App.HostConfig.host + App.HostConfig.getdata,
+                        type: 'GET'
+                        }).then(function (_realdata) {
+                        dispatch({
+                            type: actionTypes.CLONE.JSON_HTMLTOPRINT,
+                            payload: {
+                            Print: Print,
+                            Clons: Clons,
+                            config: config,
+                            data: _realdata
+                            }
+                        });
+                        });
+                    });
+                    },
+                    TaskToPrint: function TaskToPrint() {
+                    subscribe(actionTypes.HTTP.JSON_CONFIG_LOAD, function (_state, _data) {
+                        // eslint-disable-next-line no-empty-pattern
+                        App.SetPrint(_data.Print);
+                    });
+                        App.Event.$HTTP({
+                            url: App.HostConfig.host + App.HostConfig.load,
+                            type: 'POST',
+                            data: { TemplateKey: App.PageConfig.TemplateKey } 
+                        }).then(function (_sonuc) {
+                            if (_sonuc.IsSuccess == true) {
+                                App.PageConfig.TemplateId = _sonuc.Result.TemplateId;
+                                App.PageConfig.TemplateName = _sonuc.Result.TemplateName;
+                                App.PageConfig.TemplateKey = _sonuc.Result.TemplateKey;
+                                dispatch({
+                                    type: actionTypes.HTTP.JSON_CONFIG_LOAD,
+                                    payload: {
+                                        data: JSON.parse(_sonuc.Result.TemplateJsonData)
                                     }
-                                    App.Event.JsonToHtmlPrint(undefined,config,_sonuc[0])
-                                }else{
-                                    dispatch({type:actionTypes.HTTP.JSON_CONFIG_LOAD,payload: {data:_sonuc}})
-                                }
-                            })
-                            
-                        }
-                      
-                    })
-                },
-                PrintSettings:()=>{
-                    $('#PrintSettings').click((e)=>{
-                        e.preventDefault()
-                        let v1 = App.Elements.$PageSize.val()
-                        App.Elements.$PageSize.val('A4').val(v1).trigger('change')
-                        let v2 = App.Elements.$PageCopy.val()
-                        App.Elements.$PageCopy.val('1').val(v2).trigger('change')
-                        $('#PopupSettings').modal({ backdrop: 'static', keyboard: false })
-                    })
-                },
-                PrintSettingsClick:()=>{
-                    $('[name="BtnSettingSave"]').click(function(e){
-                        e.preventDefault()
-                        const forms =  document.forms.PanelPaperSetting
-                        let message = ''
-                        let Print ={}
-                        for (let i = 0; i < forms.length; i++) {
-                            const element = forms[i]
-                            const {name,value,type} =element
-                            if(name != '' && type!='button')
-                                Print[name]=value
-                            if (!element.checkValidity()) {
-                                message+=element.validationMessage + ' , '
+                                });
                             }
+                        
+                    });
+                    },
+                    PrintSettings: function PrintSettings() {
+                    $('#PrintSettings').click(function (e) {
+                        e.preventDefault();
+                        var v1 = App.Elements.$PageSize.val();
+                        App.Elements.$PageSize.val('A4').val(v1).trigger('change');
+                        var v2 = App.Elements.$PageCopy.val();
+                        App.Elements.$PageCopy.val('1').val(v2).trigger('change');
+                        $('#PopupSettings').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                        });
+                    });
+                    },
+                    PrintSettingsClick: function PrintSettingsClick() {
+                    $('[name="BtnSettingSave"]').click(function (e) {
+                        e.preventDefault();
+                        var forms = document.forms.PanelPaperSetting;
+                        var message = '';
+                        var Print = {};
+
+                        for (var i = 0; i < forms.length; i++) {
+                        var element = forms[i];
+                        var name = element.name,
+                            value = element.value,
+                            type = element.type;
+                        if (name != '' && type != 'button') Print[name] = value;
+
+                        if (!element.checkValidity()) {
+                            message += element.validationMessage + ' , ';
                         }
-                        if(message!=''){
-                            alert(message)
-                        }else{
-                            dispatch({type:actionTypes.INIT.PRINT,payload:Print})
                         }
-                    })
-                }
+
+                        if (message != '') {
+                        alert(message);
+                        } else {
+                        dispatch({
+                            type: actionTypes.INIT.PRINT,
+                            payload: Print
+                        });
+                        }
+                    });
+                    }
             },
-            SaveConfig:()=>{
-                $('#JsonConfig').click(function(e) {
-                    e.preventDefault()
-                    subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE,(_state,_data)=>{
-                        if(_data!=undefined && _data.data!=undefined){
-                            _data.data.PageName=_data.data.Print.PageType+' '+_data.data.Print.CopyDirection+ ' Ürün Sayısı'+ _data.data.Print.PageProduct + (_data.data.Print.PageCopy!=''?' Kopya Sayısı '+_data.data.Print.PageCopy : '')
-                            App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',data:_data.data}).then((_sonuc)=>{
-                            })
-                        }
-                    })
-                    dispatch({type:actionTypes.HTTP.JSON_CONFIG_SAVE,payload:{data:{PageName:App.PageName}}})
-                }) 
+            SaveConfig: function SaveConfig() {
+                $('#JsonConfig').click(function (e) {
+                e.preventDefault();
+                subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE, function (_state, _jsonconfig) {
+                    if (_jsonconfig != undefined && _jsonconfig.data != undefined) {
+                    var jsondata = {};
+                    jsondata.TemplateKey = App.PageConfig.TemplateKey;
+                        jsondata.TemplateName = App.PageConfig.TemplateName;
+                        jsondata.TemplateJsonData = JSON.stringify(_jsonconfig.data);
+                        App.Event.$HTTP({
+                            url: App.HostConfig.host + App.HostConfig.save,
+                            data:  jsondata 
+                    }).then(function (_sonuc) {});
+                    }
+                });
+                dispatch({
+                    type: actionTypes.HTTP.JSON_CONFIG_SAVE
+                });
+                });
             },
             Print:()=>{
                 $('#newPrint').click(function(e){
@@ -407,203 +502,39 @@
                 
                 })
             },
-            LoadConfigHttp:()=>{
-                App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',type:'GET'}).then((data)=>{
-                    if(data!=undefined && data.length>0){
-                        // const selectload=document.forms.loadFormSetting.elements.loadname
-                        // selectload.innerHTML=''
-                        // for (let i = 0; i < data.length; i++) {
-                        //     const item = data[i]
-                        //     const opti = document.createElement('option')
-                        //     opti.text=item.PageName +' - ' +item.id
-                        //     opti.value=item.id
-                        //     selectload.appendChild(opti)
-                        // }
-                    }
-                })
-            },
             $HTTP:async ({url = '', data = {},type='POST'})=> {
                 //  data = JSON.stringify(data, getCircularReplacer())
                 if(type=='POST'){
-                    const response = await fetch(url, {
-                        method:type, // *GET, POST, PUT, DELETE, etc.
-                        mode: 'cors', // no-cors, *cors, same-origin
-                        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                        credentials: 'same-origin', // include, *same-origin, omit
-                        headers: {
-                            'Content-Type': 'application/json'
-                            // 'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        redirect: 'follow', // manual, *follow, error
-                        referrer: 'no-referrer', // no-referrer, *client
-                        body:JSON.stringify(data) // body data type must match "Content-Type" header
-                    })
-                    return await response.json() // parses JSON response into native JavaScript objects
+                      return $.ajax({
+                                url: url,
+                                type: "POST",
+                                data: data 
+                        }).promise();
                 }
                 else{
-                    const response = await fetch(url, {
-                        method:type, // *GET, POST, PUT, DELETE, etc.
-                        mode: 'cors', // no-cors, *cors, same-origin
-                        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                        credentials: 'same-origin', // include, *same-origin, omit
-                        headers: {
-                            'Content-Type': 'application/json'
-                            // 'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        redirect: 'follow', // manual, *follow, error
-                        referrer: 'no-referrer', // no-referrer, *client
-                    })
-                    return await response.json() // parses JSON response into native JavaScript objects
-                }
-                
-            },
-            JsonToHtmlPrint:async (e,config=null,sonuc)=>{
-                if(e!=undefined)
-                    e.preventDefault()
-                let _sonucx=null,_sonuc=null
-                if(sonuc==null){
-                    _sonucx =await App.Event.$HTTP({url:'http://localhost:3000/SaveLoad',type:'GET'})
-                    _sonuc = _sonucx[0]
-                }else{
-                    _sonuc=sonuc
-                }
-                const {Print,Clons,data} = _sonuc
-                subscribe(actionTypes.CLONE.JSON_HTMLTOPRINT,(_state,_data)=>{
-                    if(_data==undefined){
-                        alert('Tasklak Yanlış')
-                    }else{
-                        const {pagestyle,hbodystyle,element } =_data
-                        $(element.outerHTML).printThis({
-                            debug: false, // show the iframe for debugging
-                            importCSS: true, // import parent page css
-                            importStyle: true, // import style tags
-                            printContainer: true, // print outer container/$.selector
-                            pageTitle: '', // add title to print page
-                            removeInline: false, // remove inline styles from print elements
-                            removeInlineSelector: '*', // custom selectors to filter inline styles. removeInline must be true
-                            printDelay: 0, // variable print delay
-                            header:pagestyle, // prefix to html
-                            footer: null, // postfix to html
-                            base: false, // preserve the BASE tag or accept a string for the URL
-                            formValues: true, // preserve input/form values
-                            canvas: false, // copy canvas content
-                            removeScripts: false, // remove script tags from print content
-                            copyTagClasses: true, // copy classes from the html & body tag
-                            beforePrintEvent: null, // function for printEvent in iframe
-                            beforePrint: null, // function called before iframe is filled
-                            afterPrint: null // function called before iframe is removed
-                        })
-                    }
-                  
-                    // var vn = window.open('','',`resizable,scrollbars,
-                    // titlebar=no,
-                    //  left=200,
-                    //  top=200,
-                    //  width=768,
-                    //  height=600`)
-                    // vn.document.head.innerHTML=hbodystyle
-                    // vn.document.body.innerHTML=element.innerHTML
-                })
-                dispatch({type:actionTypes.CLONE.JSON_HTMLTOPRINT,payload:{Print,Clons,config,data:[
-                    {
-                        'id': '100',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineStockCode',
-                            'ItemValue': 'LineStockCode -0',
-                            'ItemType': 'TableField',
-                            'RowIndex': 0
-                    },
-                    {
-                        'id': '101',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineProductName',
-                            'ItemValue': 'LineProductName -0',
-                            'ItemType': 'TableField',
-                            'RowIndex': 0
-                    },
-                    {
-                        'id': '102',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineStockCode',
-                            'ItemValue': 'LineStockCode -1',
-                            'ItemType': 'TableField',
-                            'RowIndex': 1
-                    },
-                    {
-                        'id': '103',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineProductName',
-                            'ItemValue': 'LineProductName -1',
-                            'ItemType': 'TableField',
-                            'RowIndex': 1
-                    },{
-                        'id': '105',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineStockCode',
-                            'ItemValue': 'LineStockCode -2',
-                            'ItemType': 'TableField',
-                            'RowIndex': 2
-                    },
-                    {
-                        'id': '106',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineProductName',
-                            'ItemValue': 'LineProductName -2',
-                            'ItemType': 'TableField',
-                            'RowIndex': 2
-                    },{
-                        'id': '107',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineStockCode',
-                            'ItemValue': 'LineStockCode -3',
-                            'ItemType': 'TableField',
-                            'RowIndex': 3
-                    },
-                    {
-                        'id': '108',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineProductName',
-                            'ItemValue': 'LineProductName -3',
-                            'ItemType': 'TableField',
-                            'RowIndex': 3
-                    },
-                    {
-                        'id': '109',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineStockCode',
-                            'ItemValue': 'LineStockCode -4',
-                            'ItemType': 'TableField',
-                            'RowIndex': 4
-                    },
-                    {
-                        'id': '110',
-                            'TableKey': 'InvoiceLine',
-                            'ItemKey': 'LineProductName',
-                            'ItemValue': 'LineProductName -4',
-                            'ItemType': 'TableField',
-                            'RowIndex': 4
-                    }
+                    return $.ajax({
+                        url:url, 
+                        type: "GET", 
                     
-                    
-                ]}})
+                    }).promise();
+                }
             }
-
         },
         PageInit:()=>{
             App.SetPrint(App.DefaultPrint)
-            const {FormatChange,FontSize,ItemSelect,SaveConfig,LoadConfigHttp,Print:Prints,ImageChangeEvent} = App.Event
-            const {LoadJson,LoadJsonBtn,PrintSettings,PrintSettingsClick}=App.Event.Modal
+            const {FormatChange,FontSize,ItemSelect,SaveConfig,Print:Prints,ImageChangeEvent} = App.Event
+            const {PrintSettings,PrintSettingsClick}=App.Event.Modal
             FormatChange()
             FontSize()
             ItemSelect()
-            LoadJson()
-            LoadJsonBtn()
             SaveConfig()
             Prints()
             PrintSettings()
             PrintSettingsClick()
-            LoadConfigHttp()
             ImageChangeEvent()
+            $('#loadFromJson').click(() => {
+                App.Event.Modal.TaskToPrint()
+            });
         }
     }
 
@@ -615,22 +546,41 @@
             state.Clone.Type.TEXT.CUSTOMIMAGE='CustomImage'
             state.Clone.Type.TABLE.FIELD='TableField'
             state.Clone.Type.TABLE.DEFAULT='Table'
-            App.Event.$HTTP({url:'http://localhost:3000/new',type:'GET'}).then((data)=>{
+           App.Event.$HTTP({
+                url: App.HostConfig.host + App.HostConfig.menu,
+                type: 'GET'
+            }).then((data)=>{
                 AddToolSetting([{
                     name:'TemplateKey',
-                    value:'...'
+                    value:App.PageConfig.TemplateKey,
+                    onchange:(e)=>{
+                        if(e!=undefined){
+                            App.PageConfig.TemplateKey=e.currentTarget.value
+                        }
+                    }
                 },{
                     name:'TemplateName',
-                    value:'...'
+                    value:App.PageConfig.TemplateName,
+                    onchange:(e)=>{
+                        if(e!=undefined){
+                            App.PageConfig.TemplateName=e.currentTarget.value
+                        }
+                    }
                 }])
                 App.InitConfig.data=data.TemplateItemValues
                 Init(App.InitConfig)
                 App.PageInit()
-               
-               
             })
             
         })
+              // sadece json to html print icin
+        // subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{
+        //     state.Clone.Type.TEXT.FIELD='Field'
+        //     state.Clone.Type.TEXT.CUSTOMTEXT='CustomText'
+        //     state.Clone.Type.TEXT.CUSTOMIMAGE='CustomImage'
+        //     state.Clone.Type.TABLE.FIELD='TableField'
+        //     state.Clone.Type.TABLE.DEFAULT='Table'
+        // })
         dispatch({type:actionTypes.INIT.OVERRIDE_TYPE})
 
     })
