@@ -60,8 +60,8 @@ module.exports = {
     resolve: {
         alias: {
             'uikit-util': path.resolve(__dirname, 'node_modules/uikit/src/js/util'),
-            'css': path.resolve(__dirname, 'src/plugin/css'),
-            'js': path.resolve(__dirname, 'src/plugin/js')
+            'css': path.resolve(__dirname, 'src/js/plugin/css'),
+            'js': path.resolve(__dirname, 'src/js/plugin/js')
         }
     },
     performance: {
