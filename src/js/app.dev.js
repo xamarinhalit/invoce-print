@@ -134,7 +134,7 @@
            CopyDirection: 'Altalta',
            PageWidth: 21.00,
            PageHeight: 29.70,
-           ImageUrl:'http://localhost:3000/src/js/plugin/img/fatura.jpg',
+           ImageUrl:'http://localhost:8080/src/js/plugin/img/fatura.jpg',
            DefaultRow:true
        },
        SetPrint : (_Print)=> {
