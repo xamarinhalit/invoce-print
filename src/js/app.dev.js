@@ -104,11 +104,11 @@
            TemplateJsonData: {}
        },
        HostConfig: {
-           host: 'http://localhost:22049/',
-           save: 'Settings/AddTemplate',
+           host: 'http://localhost:3000/',
+           save: 'SaveLoad',
            loadlist: 'SaveLoad',
-           menu: 'shareddata/GetTemlateDefaultTools/1',
-           load: 'settings/GetTemplate',
+           menu: 'menu',
+           load: 'SaveLoad',
            getdata: 'order/GetinvoiceJsonData'
        },
        InitConfig :{ 
@@ -134,7 +134,7 @@
            CopyDirection: 'Altalta',
            PageWidth: 21.00,
            PageHeight: 29.70,
-           ImageUrl:'http://localhost:22049/src/plugin/img/fatura.jpg',
+           ImageUrl:'http://localhost:3000/src/js/plugin/img/fatura.jpg',
            DefaultRow:true
        },
        SetPrint : (_Print)=> {
