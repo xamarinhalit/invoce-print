@@ -1,0 +1,148 @@
+{
+   "data":[
+    {
+        "id": null,
+        "TableKey": null,
+        "ItemKey": "InvoiceCommercialTitle",
+        "ItemValue": "Name Surname",
+        "ItemType": "Field",
+        "Format": "",
+        "RowIndex": 1
+    },
+    {
+        "id": null,
+        "TableKey": null,
+        "ItemKey": "InvoiceName",
+        "ItemValue": "Name",
+        "ItemType": "Field",
+        "Format": "",
+        "RowIndex": 2
+    },
+    {
+        "id": null,
+        "TableKey": null,
+        "ItemKey": "InvoiceSurname",
+        "ItemValue": "Surname",
+        "ItemType": "Field",
+        "Format": "",
+        "RowIndex": 2
+    },
+    {
+        "id": null,
+        "TableKey": null,
+        "ItemKey": "InvoiceAdress",
+        "ItemValue": "Example adress No:Zero Expample ... ....  .....",
+        "ItemType": "Field",
+        "Format": "",
+        "RowIndex": 2
+    },
+    {
+        "id": null,
+        "TableKey": null,
+        "ItemKey": "InvoiceTaxOffice",
+        "ItemValue": null,
+        "ItemType": "Field",
+        "Format": "",
+        "RowIndex": 2
+    },
+    {
+        "id": null,
+        "TableKey": null,
+        "ItemKey": "InvoiceTaxNumber",
+        "ItemValue": "",
+        "ItemType": "Field",
+        "Format": "",
+        "RowIndex": 2
+    },
+    {
+        "id": null,
+        "TableKey": null,
+        "ItemKey": "InvoiceDate",
+        "ItemValue": "12.12.2019 10:50:43",
+        "ItemType": "Field",
+        "Format": "ddMMyyyy",
+        "RowIndex": 2
+    },
+    {
+        "id": null,
+        "TableKey": "InvoiceLine",
+        "ItemKey": "LineStockCode",
+        "ItemValue": "609636",
+        "ItemType": "TableField",
+        "Format": "",
+        "RowIndex": 0
+    },
+    {
+        "id": null,
+        "TableKey": "InvoiceLine",
+        "ItemKey": "LineStockProductName",
+        "ItemValue": "Example Store",
+        "ItemType": "TableField",
+        "Format": "",
+        "RowIndex": 0
+    },
+    {
+        "id": null,
+        "TableKey": "InvoiceLine",
+        "ItemKey": "LineStockQuantity",
+        "ItemValue": "1",
+        "ItemType": "TableField",
+        "Format": "",
+        "RowIndex": 0
+    },
+    {
+        "id": null,
+        "TableKey": "InvoiceLine",
+        "ItemKey": "LineStockPrice",
+        "ItemValue": "28,5600",
+        "ItemType": "TableField",
+        "Format": "0,00",
+        "RowIndex": 0
+    },
+    {
+        "id": null,
+        "TableKey": "InvoiceLine",
+        "ItemKey": "LineStockDiscountedPrice",
+        "ItemValue": "28,5600",
+        "ItemType": "TableField",
+        "Format": "0,00",
+        "RowIndex": 0
+    },
+    {
+        "id": null,
+        "TableKey": "InvoiceLine",
+        "ItemKey": "LineStockTotal",
+        "ItemValue": "28,5600",
+        "ItemType": "TableField",
+        "Format": "0,00",
+        "RowIndex": 0
+    },
+    {
+        "id": null,
+        "TableKey": null,
+        "ItemKey": "InvoiceSellTotal",
+        "ItemValue": "28,5600",
+        "ItemType": "Field",
+        "Format": "0,00",
+        "RowIndex": 1
+    },
+    {
+        "id": null,
+        "TableKey": null,
+        "ItemKey": "InvoiceDiscountTotal",
+        "ItemValue": "0",
+        "ItemType": "Field",
+        "Format": "0,00",
+        "RowIndex": 1
+    },
+    {
+        "id": null,
+        "TableKey": null,
+        "ItemKey": "InvoiceGrandTotal",
+        "ItemValue": "28,5600",
+        "ItemType": "Field",
+        "Format": "0,00",
+        "RowIndex": 1
+    }
+]
+}

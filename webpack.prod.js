@@ -2,8 +2,8 @@ const { resolve } = require('path')
 var webpack = require('webpack')
 const UglifyEsPlugin = require('uglify-es-webpack-plugin')
 module.exports = {
-    entry: './src/js/app.js',
-    // entry: './src/js/module/index.js',
+    //entry: './src/js/app.js',
+     entry: './src/js/module/index.js',
     output: {
         path: resolve(__dirname, 'dist'),
         filename: 'index.js',

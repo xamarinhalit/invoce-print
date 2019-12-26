@@ -1,0 +1,351 @@
+{
+    "Menu": {
+      "TemplateItemValues": [
+        {
+          "id": "2",
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "OrderDate",
+            "ItemTitle": "Fatura Tarihi",
+            "ItemValue": "12.12.2019 14:18:09",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "dd.MM.yyyy",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "3",
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "InvoiceCommercialTitle",
+            "ItemTitle": "Ticari Ünvanı",
+            "ItemValue": "Abc Ticaret Ltd.Şti",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "4",
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "InvoiceName",
+            "ItemTitle": "Fatura Adı",
+            "ItemValue": "Abc Adı",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "5",
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "InvoiceSurname",
+            "ItemTitle": "Fatura Soyad",
+            "ItemValue": "Abc Soyadı",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "6",
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "InvoiceAdress",
+            "ItemTitle": "Fatura Adresi",
+            "ItemValue": "Abc mh. Abc İlçesi Antalya",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "80",
+            "ItemType": "Field",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "7",
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "InvoiceTaxOffice",
+            "ItemTitle": "Fatura Vergi Dairesi",
+            "ItemValue": "Abc Vergi Dairesi",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "80",
+            "ItemType": "Field",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "8",
+          "ToolValue": "Müşteri Bilgileri",
+          "value": {
+            "MenuRowIndex": 1,
+            "TableKey": null,
+            "ItemKey": "InvoiceTaxNumber",
+            "ItemTitle": "Fatura Vergi No",
+            "ItemValue": "1-1234567-1",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "80",
+            "ItemType": "Field",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "9",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockCode",
+            "ItemTitle": "Stok Kodu",
+            "ItemValue": "Mg001",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 100,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "10",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockProductName",
+            "ItemTitle": "Ürün Adı",
+            "ItemValue": "Test Ürünü",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 102,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "11",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockQuantity",
+            "ItemTitle": "Miktar",
+            "ItemValue": "23",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 103,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "12",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockPrice",
+            "ItemTitle": "Ürün Fiyatı",
+            "ItemValue": "25,00",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 104,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "13",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockDiscountedPrice",
+            "ItemTitle": "Ürün İndirimli fiyatı",
+            "ItemValue": "15,00",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 105,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "14",
+          "ToolValue": "Ürün Bilgileri",
+          "value": {
+            "MenuRowIndex": 2,
+            "TableKey": "InvoiceLine",
+            "ItemKey": "LineStockTotal",
+            "ItemTitle": "Ürün Toplam Fiyat",
+            "ItemValue": "15,00",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "TableField",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 106,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "15",
+          "ToolValue": "Fatura Toplamları",
+          "value": {
+            "MenuRowIndex": 3,
+            "TableKey": null,
+            "ItemKey": "InvoiceSellTotal",
+            "ItemTitle": "Fatura alttoplam",
+            "ItemValue": "200,00",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "0,00",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "16",
+          "ToolValue": "Fatura Toplamları",
+          "value": {
+            "MenuRowIndex": 3,
+            "TableKey": null,
+            "ItemKey": "InvoiceDiscountTotal",
+            "ItemTitle": "Fatura alttoplam",
+            "ItemValue": "15,00",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "0,00",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "17",
+          "ToolValue": "Fatura Toplamları",
+          "value": {
+            "MenuRowIndex": 3,
+            "TableKey": null,
+            "ItemKey": "InvoiceGrandTotal",
+            "ItemTitle": "Fatura Genel toplam",
+            "ItemValue": "236,00",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "Field",
+            "Format": "0,00",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "18",
+          "ToolValue": "Sabit Alanlar",
+          "value": {
+            "MenuRowIndex": 4,
+            "TableKey": null,
+            "ItemKey": "CustomText",
+            "ItemTitle": "Değiştirilebilir İsim",
+            "ItemValue": "Serbest Yazı alanı",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "CustomText",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        },
+        {
+          "id": "19",
+          "ToolValue": "Sabit Alanlar",
+          "value": {
+            "MenuRowIndex": 4,
+            "TableKey": null,
+            "ItemKey": "CustomImage",
+            "ItemTitle": "Dinamik Resim",
+            "ItemValue": "Dinamik resim",
+            "Icon": "fa fa-user",
+            "Width": "120",
+            "Height": "50",
+            "ItemType": "CustomImage",
+            "Format": "",
+            "Style": null,
+            "ColumnIndex": 0,
+            "RowIndex": 1
+          }
+        }
+      ]
+    },
+    "SaveLoad": [
+  
+    ]
+  }
