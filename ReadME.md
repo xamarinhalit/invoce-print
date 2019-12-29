@@ -1,4 +1,4 @@
-[https://xamarinhalit.github.io/invoce-print/](Example Site)
+[Example Site](https://xamarinhalit.github.io/invoce-print example site)
 # Production
         npm run build
 * copy src/plugin/\*.\*  to dist/
