@@ -4,11 +4,11 @@
 import { dispatch} from '..'
 import { actionTypes } from '../const'
 import { styleToObject,  CalcLeftTop, NullCheck, CalC_Table } from './convert'
-const DefaultFontSize= (element,style)=>{
+const DefaultFontSize= (e,style)=>{
     if(NullCheck(style)){
-        element.style.fontSize='10pt'
-        element.style.fontStyle='normal'
-        element.style.fontWeight='normal'
+        e.style.fontSize='10pt'
+        e.style.fontStyle='normal'
+        e.style.fontWeight='normal'
     }
 }
 const ChangeFontSize=(state,e,value)=>{

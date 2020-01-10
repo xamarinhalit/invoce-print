@@ -97,6 +97,9 @@
        return deger
    }
    const App= {
+       Example:{
+        Load:null
+       },
        PageName:'Sayfa',
        PageConfig: {
            TemplateName: 'Sayfa',
@@ -410,24 +413,33 @@
                        // eslint-disable-next-line no-empty-pattern
                        App.SetPrint(_data.Print);
                    });
-                       App.Event.$HTTP({
-                           url: App.HostConfig.host + App.HostConfig.load,
-                           type: 'POST',
-                           data: { TemplateKey: App.PageConfig.TemplateKey } 
-                       }).then(function (_sonuc) {
-                           if (_sonuc.IsSuccess == true) {
-                               App.PageConfig.TemplateId = _sonuc.Result.TemplateId;
-                               App.PageConfig.TemplateName = _sonuc.Result.TemplateName;
-                               App.PageConfig.TemplateKey = _sonuc.Result.TemplateKey;
-                               dispatch({
-                                   type: actionTypes.HTTP.JSON_CONFIG_LOAD,
-                                   payload: {
-                                       data: JSON.parse(_sonuc.Result.TemplateJsonData)
-                                   }
-                               });
-                           }
+                   App.PageConfig.TemplateId = App.Example.Load.TemplateId;
+                    App.PageConfig.TemplateName = App.Example.Load.TemplateName;
+                    App.PageConfig.TemplateKey = App.Example.Load.TemplateKey;
+                    dispatch({
+                        type: actionTypes.HTTP.JSON_CONFIG_LOAD,
+                        payload: {
+                        data: JSON.parse(App.Example.Load.TemplateJsonData)
+                        }
+                    });
+                //        App.Event.$HTTP({
+                //            url: App.HostConfig.host + App.HostConfig.load,
+                //            type: 'POST',
+                //            data: { TemplateKey: App.PageConfig.TemplateKey } 
+                //        }).then(function (_sonuc) {
+                //            if (_sonuc.IsSuccess == true) {
+                //                App.PageConfig.TemplateId = _sonuc.Result.TemplateId;
+                //                App.PageConfig.TemplateName = _sonuc.Result.TemplateName;
+                //                App.PageConfig.TemplateKey = _sonuc.Result.TemplateKey;
+                //                dispatch({
+                //                    type: actionTypes.HTTP.JSON_CONFIG_LOAD,
+                //                    payload: {
+                //                        data: JSON.parse(_sonuc.Result.TemplateJsonData)
+                //                    }
+                //                });
+                //            }
                        
-                   });
+                //    });
                    },
                    PrintSettings: function PrintSettings() {
                    $('#PrintSettings').click(function (e) {
@@ -478,13 +490,16 @@
                subscribe(actionTypes.HTTP.JSON_CONFIG_SAVE, function (_state, _jsonconfig) {
                    if (_jsonconfig != undefined && _jsonconfig.data != undefined) {
                    var jsondata = {};
-                   jsondata.TemplateKey = App.PageConfig.TemplateKey;
+                       jsondata.TemplateKey = App.PageConfig.TemplateKey
                        jsondata.TemplateName = App.PageConfig.TemplateName;
                        jsondata.TemplateJsonData = JSON.stringify(_jsonconfig.data);
-                       App.Event.$HTTP({
-                           url: App.HostConfig.host + App.HostConfig.save,
-                           data:  jsondata 
-                   }).then(function (_sonuc) {});
+                       App.Example.Load=jsondata;
+                       console.log(App.Example.Load);
+                       alert('Task -> '+App.Example.Load.TemplateName+' - '+ App.Example.Load.TemplateKey+' Kayıt Edildi..')
+                //        App.Event.$HTTP({
+                //            url: App.HostConfig.host + App.HostConfig.save,
+                //            data:  jsondata 
+                //    }).then(function (_sonuc) {});
                    }
                });
                dispatch({
@@ -532,8 +547,9 @@
            PrintSettings()
            PrintSettingsClick()
            ImageChangeEvent()
-           $('#loadFromJson').click(() => {
-               App.Event.Modal.TaskToPrint()
+           $('#loadJson').click(() => {
+               App.Event.Modal.TaskToPrint();
+                alert('Task -> '+App.Example.Load.TemplateName+' - '+ App.Example.Load.TemplateKey+' Yüklendi..')
            });
        }
    }
@@ -546,32 +562,60 @@
            state.Clone.Type.TEXT.CUSTOMIMAGE='CustomImage'
            state.Clone.Type.TABLE.FIELD='TableField'
            state.Clone.Type.TABLE.DEFAULT='Table'
-          App.Event.$HTTP({
-               url: App.HostConfig.host + App.HostConfig.menu,
-               type: 'GET'
-           }).then((data)=>{
-               AddToolSetting([{
-                   name:'TemplateKey',
-                   value:App.PageConfig.TemplateKey,
-                   onchange:(e)=>{
-                       if(e!=undefined){
-                           App.PageConfig.TemplateKey=e.currentTarget.value
-                       }
-                   }
-               },{
-                   name:'TemplateName',
-                   value:App.PageConfig.TemplateName,
-                   onchange:(e)=>{
-                       if(e!=undefined){
-                           App.PageConfig.TemplateName=e.currentTarget.value
-                       }
-                   }
-               }])
-               App.InitConfig.data=data.TemplateItemValues
-               Init(App.InitConfig)
-               App.PageInit()
-           })
-           
+        //   App.Event.$HTTP({
+        //        url: App.HostConfig.host + App.HostConfig.menu,
+        //        type: 'GET'
+        //    }).then((data)=>{
+        //        AddToolSetting([{
+        //            name:'TemplateKey',
+        //            value:App.PageConfig.TemplateKey,
+        //            onchange:(e)=>{
+        //                if(e!=undefined){
+        //                    App.PageConfig.TemplateKey=e.currentTarget.value
+        //                }
+        //            }
+        //        },{
+        //            name:'TemplateName',
+        //            value:App.PageConfig.TemplateName,
+        //            onchange:(e)=>{
+        //                if(e!=undefined){
+        //                    App.PageConfig.TemplateName=e.currentTarget.value
+        //                }
+        //            }
+        //        }])
+        //        App.InitConfig.data=data.TemplateItemValues
+        //        Init(App.InitConfig)
+        //        App.PageInit()
+        //    })
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var dataM = JSON.parse(this.responseText);
+            var data=dataM.Menu;
+            AddToolSetting([{
+              name: 'TemplateKey',
+              value: App.PageConfig.TemplateKey,
+              onchange: function onchange(e) {
+                if (e != undefined) {
+                  App.PageConfig.TemplateKey = e.currentTarget.value;
+                }
+              }
+            }, {
+              name: 'TemplateName',
+              value: App.PageConfig.TemplateName,
+              onchange: function onchange(e) {
+                if (e != undefined) {
+                  App.PageConfig.TemplateName = e.currentTarget.value;
+                }
+              }
+            }]);
+            App.InitConfig.data = data.TemplateItemValues;
+            Init(App.InitConfig);
+            App.PageInit();
+          }
+        };
+        xmlhttp.open("GET", "api/index.json");
+        xmlhttp.send();
        })
              // sadece json to html print icin
        // subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{

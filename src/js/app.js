@@ -574,7 +574,7 @@
             })
             
         })
-              // sadece json to html print icin
+        // sadece json to html print icin
         // subscribe(actionTypes.INIT.OVERRIDE_TYPE,(state,_data)=>{
         //     state.Clone.Type.TEXT.FIELD='Field'
         //     state.Clone.Type.TEXT.CUSTOMTEXT='CustomText'
